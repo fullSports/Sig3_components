@@ -6,7 +6,7 @@ import TwitterIcone from "../../assets/images/twitter.png"
 import InstagramIcone from "../../assets/images/instagram.png"
 import WhatsappIcone from "../../assets/images/whatsapp.png"
 
-import { corPrimaria } from "../UI/variaveis";
+import { corPrimaria } from "../UI/variaveis"; 
 //header
 const Topo = styled.header`
   width: 100%;
