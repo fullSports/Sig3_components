@@ -12,8 +12,6 @@ const Topo = styled.header`
   width: 100%;
   height: auto;
   background-color: #ebebeb;
-  margin: 0;
-  padding: 0;
 `
 
 //barra de acessiblidade
@@ -25,21 +23,28 @@ const Acessibilidade = styled.div`
   font-size: 14px;
   height: auto;
   margin: auto;
+  
+  ul li{
+    margin-left: 20px;
+  }
+
+  a {
+    text-decoration: none;
+    color: #2e2e2e;
+  }
+  a:hover {
+    text-decoration: underline;
+  } 
+
+  li{
+    display: inline;
+  }
 `;
 //links na barra de acessibilidade
 const Atalhos = styled.ul`
   margin-left: 105px;
   float: left;
   list-style: none;
-`;
-const Li = styled.li`
-  display: inline;
-  margin-left: 20px;
-`;
-const A = styled.a`
-  text-decoration: none;
-  color: #2e2e2e;
-  text-decoration: underline;
 `;
 const Atalhos2 =styled.ul`
   margin-right: 105px;
@@ -84,61 +89,93 @@ const LogoImg = styled.img`
 const ConjuntoIcones = styled.div`
   margin-top: 12%;
   float: right;
-`;
-const ConjuntoIconesImg = styled.img`
-  height: 24px;
-`;
-const ConjuntoIconesUl = styled.ul`
-
-`;
-const ConjuntoIconesLi = styled.li`
-  float: right;
-  display: inline;
-  color: rgb(255, 255, 255);
-`;
-const ConjuntoIconesA = styled.a`
-  text-decoration: none;
+  img{
+    height: 24px;
+  }
+  li{
+    margin-left: 5px;
+    display: inline;
+    color: rgb(255, 255, 255);
+  }
+  a {
+    text-decoration: none;
+  }
 `;
 
+//Menu
+const Menu = styled.nav`
+  background-color: #a6e65a;
+  ul{
+    text-align: center;
+  list-style:none;
+  }
+  li{
+    display: inline;
+  }
+  a{
+    padding: 2px 10px;
+    display: inline-block;
+    border: 10px solid #a6e65a;
+    /* visual do link */
+    background-color: #a6e65a;
+    color: #2e2e2e;
+    text-decoration: none;
+  }
+  ul li a {
+    padding: 2px 10px;
+    display: inline-block;
+    border: 10px solid #a6e65a;
+    /* visual do link */
+    background-color: #a6e65a;
+    color: #2e2e2e;
+    text-decoration: none;
+  }
+  ul a:hover {
+    /* height: 35px; */
+    background-color:#ebebeb;
+    border: 10px solid #ebebeb;
+    color: #2e2e2e;
+}
+  `;
 
 const Cabecalho = () =>{
   return(
     <Topo id="topo">
       <Acessibilidade id="acessibilidade">
         <Atalhos id="atalhos">
-      <Li>
-					<A  href="#conteudo" accesskey="1" title="Ir diretamente para o conteúdo">Ir para o conteudo [1]</A >
-				</Li>
+      <li>
+					<a  href="#conteudo" accesskey="1" title="Ir diretamente para o conteúdo">Ir para o conteudo [1]</a>
+				</li>
 
-				<Li>
-					<A  href="#menu" accesskey="2" title="Ir diretamente para o menu">Ir para o menu [2]</A >
-				</Li>
+				<li>
+					<a  href="#menu" accesskey="2" title="Ir diretamente para o menu">Ir para o menu [2]</a>
+				</li>
 
-				<Li>
-					<A  href="#rodape" accesskey="3" title="Ir diretamente para o rodapé">Ir para o rodape [3]</A >
-				</Li>
+				<li>
+					<a  href="#rodape" accesskey="3" title="Ir diretamente para o rodapé">Ir para o rodape [3]</a>
+				</li>
         </Atalhos>
 
         <Atalhos2 id="atalhos2">
-        <Li>
-					<A href="#" title="Ir para pagina de acessabilidade">Acessibilidade</A >
-				</Li>
+        <li>
+					<a href="#" title="Ir para pagina de acessabilidade">Acessibilidade</a>
+				</li>
 
-				<Li>
-					<A href="#" title="Contraste preto" id="modoEscuro">Modo escuro</A >
-				</Li>
+				<li>
+					<a href="#" title="Contraste preto" id="modoEscuro">Modo escuro</a>
+				</li>
 
-				<Li>
-					<A href="#" title="sem Contraste" id="modoClaro">Modo Claro</A >
-				</Li>
+				<li>
+					<a href="#" title="sem Contraste" id="modoClaro">Modo Claro</a>
+				</li>
 					
-				<Li>
-					<A href="#" title="Aumentar a fonte(Ctrl +)" id="aumentaFonte">A+</A >
-				</Li>
+				<li>
+					<a href="#" title="Aumentar a fonte(Ctrl +)" id="aumentaFonte">A+</a>
+				</li>
 
-				<Li>
-					<A href="#" title="Diminuir a fonte(Ctrl -)" id="diminuiFonte">A-</A >
-				</Li>
+				<li>
+					<a href="#" title="Diminuir a fonte(Ctrl -)" id="diminuiFonte">A-</a>
+				</li>
 
         </Atalhos2>
       </Acessibilidade>
@@ -149,38 +186,48 @@ const Cabecalho = () =>{
         </BarraPesquisa>
 
         <Logo class="logo"> 
-          <A href="#" ><LogoImg  src={logo_loja} alt="Logo da Loja"></LogoImg ></A>
+          <a href="#" ><LogoImg  src={logo_loja} alt="Logo da Loja"></LogoImg ></a>
         </Logo>
 
         <ConjuntoIcones id="conjuntoIcones">
-          <ConjuntoIconesUl>
-            <ConjuntoIconesLi>
-                <ConjuntoIconesA href="https://www.facebook.com">
-                    <ConjuntoIconesImg src = {FacebookIcone} alt="Facebook"></ConjuntoIconesImg>
-                </ConjuntoIconesA>
-            </ConjuntoIconesLi>
+          <ul>
+            <li>
+                <a href="https://www.facebook.com">
+                    <img src = {FacebookIcone} alt="Facebook"/>
+                </a>
+            </li>
 
-            <ConjuntoIconesLi>
-                <ConjuntoIconesA href="https://twitter.com">
-                    <ConjuntoIconesImg src = {TwitterIcone} alt="Twitter"></ConjuntoIconesImg>
-                </ConjuntoIconesA>
-            </ConjuntoIconesLi>
+            <li>
+                <a href="https://twitter.com">
+                    <img src = {TwitterIcone} alt="Twitter"/>
+                </a>
+            </li>
 
-            <ConjuntoIconesLi>
-              <ConjuntoIconesA href="https://www.instagram.com/">
-                <ConjuntoIconesImg src= {InstagramIcone} alt="Instagram"></ConjuntoIconesImg>
-              </ConjuntoIconesA>
-            </ConjuntoIconesLi>
+            <li>
+              <a href="https://www.instagram.com/">
+                <img src= {InstagramIcone} alt="Instagram"/>
+              </a>
+            </li>
 
-            <ConjuntoIconesLi>
-              <ConjuntoIconesA href="https://www.whatsapp.com">
-                <ConjuntoIconesImg src= {WhatsappIcone} alt="Whatspp"></ConjuntoIconesImg>
-              </ConjuntoIconesA>
-            </ConjuntoIconesLi>
-         </ConjuntoIconesUl>
+            <li>
+              <a href="https://www.whatsapp.com">
+                <img src= {WhatsappIcone} alt="Whatspp"/>
+              </a>
+            </li>
+         </ul>
         </ConjuntoIcones>
 
       </NavGrid>
+
+      <Menu id="menu">
+        <ul>
+          <li><a href="">Clientes</a> </li>
+          <li><a href="">Produtos</a> </li>
+          <li><a href="">Pedidos</a> </li>
+          <li><a href="">Equipamentos</a> </li>
+          <li><a href="">Logout</a> </li>
+        </ul>
+      </Menu>
 
     </Topo>
   );
