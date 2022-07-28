@@ -12,7 +12,7 @@ const Topo = styled.header`
   width: 100%;
   height: auto;
   background-color: #ebebeb;
-`
+`;
 
 //barra de acessiblidade
 const Acessibilidade = styled.div`
