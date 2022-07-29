@@ -41,11 +41,13 @@ const Acessibilidade = styled.div`
   }
   @media screen and (max-width: 1144px) {
     display:flex;
-    
-
     ul li{
     margin:5px;
+    
     }
+    @media screen and (max-width: 450px) {
+      display:grid;
+      }  
   }
 `;
 //links na barra de acessibilidade
@@ -79,14 +81,19 @@ const NavGrid =styled.div`
   justify-content: center;
   display: grid;
   grid-template-columns: repeat(3, 350px);
+  margin-bottom:1%;
   justify-items: end;
   align-items: end;
+
   @media screen and (max-width: 1144px) {
   justify-items: start;  
-  justify-content: center;
+  justify-content: space-between;
   display: grid;
   grid-template-columns: repeat(3, 160px);
-  
+  }
+  @media screen and (max-width: 450px) {
+    justify-items: flex-end;
+    grid-template-columns: repeat(3, 30%);
   }
 `;
 
@@ -105,7 +112,12 @@ const BarraPesquisaInpult = styled.input`
 
   @media screen and (max-width: 1144px) {
     padding: 4px;
-    width: 100px;
+    width: 150px;
+  }
+  @media screen and (max-width: 450px) {
+    margin-left:2%;
+    padding: 1px;
+    width: 90%;
   }
 `;
 //Logo 
@@ -135,7 +147,6 @@ const ConjuntoIcones = styled.div`
     text-decoration: none;
   }
   
-  @media screen and (max-width: 1144px) {
   
   }
 `;
@@ -178,9 +189,9 @@ const Menu = styled.nav`
 
 const Cabecalho = () =>{
   return(
-    <Topo id="topo">
-      <Acessibilidade id="acessibilidade">
-        <Atalhos id="atalhos">
+    <Topo id="topo" className="topo">
+      <Acessibilidade id="acessibilidade" className="aacessibilidade">
+        <Atalhos id="atalhos" className="atalhos">
       <li>
 					<a  href="#conteudo" accesskey="1" title="Ir diretamente para o conteúdo">Ir para o conteudo [1]</a>
 				</li>
@@ -194,7 +205,7 @@ const Cabecalho = () =>{
 				</li>
         </Atalhos>
 
-        <Atalhos2 id="atalhos2">
+        <Atalhos2 id="atalhos2" className="atalhos2">
         <li>
 					<a href="#" title="Ir para pagina de acessabilidade">Acessibilidade</a>
 				</li>
@@ -218,16 +229,16 @@ const Cabecalho = () =>{
         </Atalhos2>
       </Acessibilidade>
 
-      <NavGrid class="navGrid">
+      <NavGrid id="navGrid" className="navGrid">
         <BarraPesquisa id="barraPesquisa">
           <BarraPesquisaInpult class="Buscar" type="text" name="buscar" placeholder="Buscar..."></BarraPesquisaInpult>
         </BarraPesquisa>
 
-        <Logo class="logo"> 
+        <Logo id="logo"className="logo"> 
           <a href="#" ><LogoImg  src={logo_loja} alt="Logo da Loja"></LogoImg ></a>
         </Logo>
 
-        <ConjuntoIcones id="conjuntoIcones">
+        <ConjuntoIcones id="conjuntoIcones" className="conjuntoIcones">
           <ul>
             <li>
                 <a href="https://www.facebook.com">
@@ -257,7 +268,7 @@ const Cabecalho = () =>{
 
       </NavGrid>
 
-      <Menu id="menu">
+      <Menu id="menu" className="menu">
         <ul>
           <li><a href="">Clientes</a> </li>
           <li><a href="">Produtos</a> </li>
