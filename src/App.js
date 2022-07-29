@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 
 import Cabecalho from "./Components/Cabecalho/index";
@@ -12,7 +12,5 @@ function App() {
     <Footer/>
       </>
   );
-
 }
-
 export default App;

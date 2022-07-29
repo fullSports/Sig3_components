@@ -207,7 +207,7 @@ const Cabecalho = () =>{
 
         <Atalhos2 id="atalhos2" className="atalhos2">
         <li>
-					<a href="#" title="Ir para pagina de acessabilidade">Acessibilidade</a>
+					<a href="" title="Ir para pagina de acessabilidade">Acessibilidade</a>
 				</li>
 
 				<li>
