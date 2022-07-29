@@ -9,9 +9,10 @@ const Rodape = styled.footer`
     padding: 20px 0 30px 0;
     grid-template-columns: auto;
     grid-auto-columns: auto;
+    border-radius: 4%;
+    margin-top: 1%;
+    margin-bottom: 1%;
     @media screen and (max-width: 1144px) {
-        width: 100%;
-        height: 300px;
         background-color: #fff;
         color: #313131;
         text-align: center;
@@ -52,9 +53,9 @@ const TituloFoot = styled.p`
 `;
 const DrtsFooter = styled.p`
     text-align: center;
+    align-items: center;
     padding: 20px 0 20px 0;
     @media screen and (max-width: 1144px) {
-        text-align: center;
         padding: 10px 0 10px 0;
     }
 `;
@@ -89,8 +90,8 @@ const Footer = () =>{
 					<img  src="http://jigsaw.w3.org/css-validator/images/vcss" alt="CSS válido!" />
 				</a>
             </SelosFoot>
-            <DrtsFooter id="drtsFooter" className="drtsFooter">Todos os direitos reservados &copy; 2022.</DrtsFooter>
         </GridFooter>
+        <DrtsFooter id="drtsFooter" className="drtsFooter">Todos os direitos reservados &copy; 2022.</DrtsFooter>
     </Rodape> 
     );
 }

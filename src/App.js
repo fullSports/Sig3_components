@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { ThemeProvider } from "styled-components";
-import { temaClaro, temaEscuro } from "./Components/UI/temas";
 
-import Cabecalho from "./Components/Cabecalho";
-import Conteudo from "./Components/Conteudo";
+
+import Cabecalho from "./Components/Cabecalho/index";
+import Conteudo from "./Components/Conteudo/index";
 import Footer from "./Components/Footer";
 function App() {
   return(
