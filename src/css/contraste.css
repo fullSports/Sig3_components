@@ -33,14 +33,3 @@ body::-webkit-scrollbar-thumb {
     max-height: 5px;
     border: 1px solid #fefefe42; 
 }
-
-#topo{
-    background-color: #2e2e31;
-    font-family: 'Open Sans', sans-serif;
-    color: #efefef;
-}
-#acessibilidade{
-    background-color: #2e2e31;
-    font-family: 'Open Sans', sans-serif;
-    color: #efefef;
-}
