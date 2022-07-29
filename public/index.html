@@ -21,8 +21,15 @@
     <link rel="icon" href="%PUBLIC_URL%/Favicon.ico" />
     <title>Full Sports - O Melhor Dos Artigos Esportivos Para Você</title>
 </head>
-  <body id="root">
-   
+  <body>
+    <!-- Vlibras -->
+	<div vw class="enabled">
+		<div vw-access-button class="active"></div>
+		<div vw-plugin-wrapper>
+			<div class="vw-plugin-top-wrapper"></div>
+		</div>
+	</div>
+  <div id="root"></div>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     
     <!--
@@ -36,4 +43,9 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
   </body>
+  
 </html>
+<script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+<script>
+	new window.VLibras.Widget('https://vlibras.gov.br/app');
+</script>
