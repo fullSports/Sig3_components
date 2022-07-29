@@ -9,7 +9,7 @@ import WhatsappIcone from "../../assets/images/whatsapp.png"
 import { corPrimaria } from "../UI/variaveis"; 
 //header
 const Topo = styled.header`
-  width: 100%;
+  min-width:100%
   height: auto;
   background-color: #ebebeb;
 `;
@@ -39,32 +39,61 @@ const Acessibilidade = styled.div`
   li{
     display: inline;
   }
+  @media screen and (max-width: 1144px) {
+    display:flex;
+    
+
+    ul li{
+    margin:5px;
+    }
+  }
 `;
 //links na barra de acessibilidade
 const Atalhos = styled.ul`
   margin-left: 105px;
   float: left;
   list-style: none;
+  @media screen and (max-width: 1144px) {
+    display:flex;
+  }
+  @media screen and (max-width: 1144px) {
+    margin-left: 5px;
+  }
 `;
 const Atalhos2 =styled.ul`
   margin-right: 105px;
   float: right;
   list-style: none;
   margin-left: 20px;
+  @media screen and (max-width: 1144px) {
+    display:flex;
+  }
+  @media screen and (max-width: 1144px) {
+    margin-right: 5px;
+  }
 `;
 
 //Bloco do cabeçalho
 const NavGrid =styled.div`
   justify-content: center;
   display: grid;
-  grid-template-columns: repeat(3, 430px);
-  grid-auto-rows: minmax(120px,auto);
+  grid-template-columns: repeat(3, 350px);
+  grid-auto-rows: minmax(110px,auto);
+  justify-items: end;
+
+  @media screen and (max-width: 1144px) {
+  justify-items: start;  
+  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(3, 160px);
+  grid-auto-rows: minmax(60px,auto);
+  }
 `;
 
 //Barra de pesquisa
 const BarraPesquisa = styled.div`
   margin-top: 12%;
-  float: left;
+  
 `;
 const BarraPesquisaInpult = styled.input`
   padding: 8px;
@@ -73,6 +102,11 @@ const BarraPesquisaInpult = styled.input`
   border: 1px solid #fff;
   border-radius: 20px;
   background-color: #fff;
+
+  @media screen and (max-width: 1144px) {
+    padding: 4px;
+    width: 100px;
+  }
 `;
 //Logo 
 const Logo = styled.div`
@@ -88,7 +122,7 @@ const LogoImg = styled.img`
 //iconesRedesSociais
 const ConjuntoIcones = styled.div`
   margin-top: 12%;
-  float: right;
+ display: flex;
   img{
     height: 24px;
   }
@@ -99,6 +133,10 @@ const ConjuntoIcones = styled.div`
   }
   a {
     text-decoration: none;
+  }
+  
+  @media screen and (max-width: 1144px) {
+   
   }
 `;
 
