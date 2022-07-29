@@ -69,7 +69,8 @@ const Atalhos2 =styled.ul`
     display:flex;
   }
   @media screen and (max-width: 1144px) {
-    margin-right: 5px;
+    margin-right: 2px;
+    margin-left: 3px;
   }
 `;
 
@@ -78,15 +79,14 @@ const NavGrid =styled.div`
   justify-content: center;
   display: grid;
   grid-template-columns: repeat(3, 350px);
-  grid-auto-rows: minmax(110px,auto);
   justify-items: end;
-
+  align-items: end;
   @media screen and (max-width: 1144px) {
   justify-items: start;  
   justify-content: center;
   display: grid;
   grid-template-columns: repeat(3, 160px);
-  grid-auto-rows: minmax(60px,auto);
+  
   }
 `;
 
@@ -121,7 +121,7 @@ const LogoImg = styled.img`
 
 //iconesRedesSociais
 const ConjuntoIcones = styled.div`
-  margin-top: 12%;
+  margin-top: 10%;
  display: flex;
   img{
     height: 24px;
@@ -136,7 +136,7 @@ const ConjuntoIcones = styled.div`
   }
   
   @media screen and (max-width: 1144px) {
-   
+  
   }
 `;
 
