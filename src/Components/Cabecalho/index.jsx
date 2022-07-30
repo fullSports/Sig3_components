@@ -5,16 +5,13 @@ import FacebookIcone from "../../assets/images/facebook.png";
 import TwitterIcone from "../../assets/images/twitter.png"
 import InstagramIcone from "../../assets/images/instagram.png"
 import WhatsappIcone from "../../assets/images/whatsapp.png"
-
+import AcessibilidadePage from "./../Conteudo/acessibilidade"
 import { corPrimaria } from "../UI/variaveis"; 
-//header
 const Topo = styled.header`
   min-width:100%
   height: auto;
   background-color: #ebebeb;
 `;
-
-//barra de acessiblidade
 const Acessibilidade = styled.div`
   background-color: #ebebeb;
   padding: 15px 0 0 0;
@@ -50,7 +47,6 @@ const Acessibilidade = styled.div`
       }  
   }
 `;
-//links na barra de acessibilidade
 const Atalhos = styled.ul`
   margin-left: 105px;
   float: left;
@@ -75,8 +71,6 @@ const Atalhos2 =styled.ul`
     margin-left: 3px;
   }
 `;
-
-//Bloco do cabeçalho
 const NavGrid =styled.div`
   justify-content: center;
   display: grid;
@@ -96,8 +90,6 @@ const NavGrid =styled.div`
     grid-template-columns: repeat(3, 30%);
   }
 `;
-
-//Barra de pesquisa
 const BarraPesquisa = styled.div`
   margin-top: 12%;
   
@@ -120,7 +112,6 @@ const BarraPesquisaInpult = styled.input`
     width: 90%;
   }
 `;
-//Logo 
 const Logo = styled.div`
   margin-left: auto;
   margin-right: auto;
@@ -130,8 +121,6 @@ const LogoImg = styled.img`
   width: 100%;
   height: 100px;
 `;
-
-//iconesRedesSociais
 const ConjuntoIcones = styled.div`
   margin-top: 10%;
  display: flex;
@@ -150,8 +139,6 @@ const ConjuntoIcones = styled.div`
   
   }
 `;
-
-//Menu
 const Menu = styled.nav`
   background-color: #a6e65a;
   ul{
@@ -186,7 +173,6 @@ const Menu = styled.nav`
     color: #2e2e2e;
 }
   `;
-
 const Cabecalho = () =>{
   return(
     <Topo id="topo" className="topo">
@@ -207,7 +193,7 @@ const Cabecalho = () =>{
 
         <Atalhos2 id="atalhos2" className="atalhos2">
         <li>
-					<a href="" title="Ir para pagina de acessabilidade">Acessibilidade</a>
+					<a href={AcessibilidadePage} title="Ir para pagina de acessabilidade">Acessibilidade</a>
 				</li>
 
 				<li>
@@ -281,5 +267,4 @@ const Cabecalho = () =>{
     </Topo>
   );
 }
-
 export default Cabecalho;
