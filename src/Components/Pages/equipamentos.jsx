@@ -298,7 +298,7 @@ const Equipamentos = () =>{
 										src={ChuteiraPuma1} alt=""/></a>
                                 </ImgTenisFTZ>
                                 <CorpoCard id="corpoCard" className="corpoCard">
-                                    <TituloCard id="tituloCard" className="tituloCard">Meia Gone</TituloCard>
+                                    <TituloCard id="tituloCard" className="tituloCard">Chuteira Puma One 5.4 F</TituloCard>
                                     <FrtGrtsCard id="frtGrtsCard" className="frtGrtsCard">Frete Grátis</FrtGrtsCard>
                                     <PrecoAnterior id="precoAnterior" className="precoAnterior">R$ 232,30</PrecoAnterior>
                                     <PrecoAtual id="precoAnterior" className="precoAnterior">R$ 202,30</PrecoAtual>
@@ -310,17 +310,17 @@ const Equipamentos = () =>{
 
                             <CardFTZ id="card-FTZ" className="card-FTZ">
                                 <ImgTenisFTZ id="imgTenisFTZ" className="imgTenisFTZ">
-                                <a href="/tenis"><img
+                                <a href=""><img
 										src={JaquetaHering1} alt=""/></a>
                                 </ImgTenisFTZ>
                                 <CorpoCard id="corpoCard" className="corpoCard">
-                                    <TituloCard id="tituloCard" className="tituloCard">Meia Gone</TituloCard>
+                                    <TituloCard id="tituloCard" className="tituloCard">Jaqueta Hering Básica Feminina</TituloCard>
                                     <FrtGrtsCard id="frtGrtsCard" className="frtGrtsCard">Frete Grátis</FrtGrtsCard>
-                                    <PrecoAnterior id="precoAnterior" className="precoAnterior">R$ 232,30</PrecoAnterior>
-                                    <PrecoAtual id="precoAnterior" className="precoAnterior">R$ 202,30</PrecoAtual>
+                                    <PrecoAnterior id="precoAnterior" className="precoAnterior">R$ 169,30</PrecoAnterior>
+                                    <PrecoAtual id="precoAnterior" className="precoAnterior">R$ 139,99</PrecoAtual>
                                 </CorpoCard>
                                 <DescCard id="descCard" className="descCard">
-                                    <p>em até 12x de R$ 16,85</p>
+                                    <p>em até 12x de R$ 11,66</p>
                                 </DescCard>
                             </CardFTZ>
                             
@@ -330,13 +330,13 @@ const Equipamentos = () =>{
 										src={ChuteiraSocietyFutureZ} alt=""/></a>
                                 </ImgTenisFTZ>
                                 <CorpoCard id="corpoCard" className="corpoCard">
-                                    <TituloCard id="tituloCard" className="tituloCard">Meia Gone</TituloCard>
+                                    <TituloCard id="tituloCard" className="tituloCard">Chuteira Future Z 3.1 Society</TituloCard>
                                     <FrtGrtsCard id="frtGrtsCard" className="frtGrtsCard">Frete Grátis</FrtGrtsCard>
-                                    <PrecoAnterior id="precoAnterior" className="precoAnterior">R$ 232,30</PrecoAnterior>
-                                    <PrecoAtual id="precoAnterior" className="precoAnterior">R$ 202,30</PrecoAtual>
+                                    <PrecoAnterior id="precoAnterior" className="precoAnterior">R$ 449,90</PrecoAnterior>
+                                    <PrecoAtual id="precoAnterior" className="precoAnterior">R$ 429,90</PrecoAtual>
                                 </CorpoCard>
                                 <DescCard id="descCard" className="descCard">
-                                    <p>em até 12x de R$ 16,85</p>
+                                    <p>em até 12x de R$ 35,82</p>
                                 </DescCard>
                             </CardFTZ>
 
@@ -346,13 +346,13 @@ const Equipamentos = () =>{
 										src={CuteiraFutsalKidsFuture} alt=""/></a>
                                 </ImgTenisFTZ>
                                 <CorpoCard id="corpoCard" className="corpoCard">
-                                    <TituloCard id="tituloCard" className="tituloCard">Meia Gone</TituloCard>
+                                    <TituloCard id="tituloCard" className="tituloCard">Chuteira Future Z 4.1 V Furtsal Kids</TituloCard>
                                     <FrtGrtsCard id="frtGrtsCard" className="frtGrtsCard">Frete Grátis</FrtGrtsCard>
-                                    <PrecoAnterior id="precoAnterior" className="precoAnterior">R$ 232,30</PrecoAnterior>
-                                    <PrecoAtual id="precoAnterior" className="precoAnterior">R$ 202,30</PrecoAtual>
+                                    <PrecoAnterior id="precoAnterior" className="precoAnterior">R$ 279,90</PrecoAnterior>
+                                    <PrecoAtual id="precoAnterior" className="precoAnterior">R$ 259,30</PrecoAtual>
                                 </CorpoCard>
                                 <DescCard id="descCard" className="descCard">
-                                    <p>em até 12x de R$ 16,85</p>
+                                    <p>em até 12x de R$ 21,60</p>
                                 </DescCard>
                             </CardFTZ>
 
@@ -362,13 +362,13 @@ const Equipamentos = () =>{
 										src={MeiaGone} alt=""/></a>
                                 </ImgTenisFTZ>
                                 <CorpoCard id="corpoCard" className="corpoCard">
-                                    <TituloCard id="tituloCard" className="tituloCard">Meia Gone</TituloCard>
+                                    <TituloCard id="tituloCard" className="tituloCard">Chuteira Future Z 1.1 Campo</TituloCard>
                                     <FrtGrtsCard id="frtGrtsCard" className="frtGrtsCard">Frete Grátis</FrtGrtsCard>
-                                    <PrecoAnterior id="precoAnterior" className="precoAnterior">R$ 232,30</PrecoAnterior>
-                                    <PrecoAtual id="precoAnterior" className="precoAnterior">R$ 202,30</PrecoAtual>
+                                    <PrecoAnterior id="precoAnterior" className="precoAnterior">R$ 1.199.90</PrecoAnterior>
+                                    <PrecoAtual id="precoAnterior" className="precoAnterior">R$ 1.090,90</PrecoAtual>
                                 </CorpoCard>
                                 <DescCard id="descCard" className="descCard">
-                                    <p>em até 12x de R$ 16,85</p>
+                                    <p>em até 12x de R$ 90,90</p>
                                 </DescCard>
                             </CardFTZ>
 
@@ -378,13 +378,13 @@ const Equipamentos = () =>{
 										src={CuteiraCampoFutureZ} alt=""/></a>
                                 </ImgTenisFTZ>
                                 <CorpoCard id="corpoCard" className="corpoCard">
-                                    <TituloCard id="tituloCard" className="tituloCard">Meia Gone</TituloCard>
+                                    <TituloCard id="tituloCard" className="tituloCard">Jaqueta Zafina Sport Masculina</TituloCard>
                                     <FrtGrtsCard id="frtGrtsCard" className="frtGrtsCard">Frete Grátis</FrtGrtsCard>
                                     <PrecoAnterior id="precoAnterior" className="precoAnterior">R$ 232,30</PrecoAnterior>
-                                    <PrecoAtual id="precoAnterior" className="precoAnterior">R$ 202,30</PrecoAtual>
+                                    <PrecoAtual id="precoAnterior" className="precoAnterior">R$ 174,90</PrecoAtual>
                                 </CorpoCard>
                                 <DescCard id="descCard" className="descCard">
-                                    <p>em até 12x de R$ 16,85</p>
+                                    <p>em até 12x de R$ 14,57</p>
                                 </DescCard>
                             </CardFTZ>
 

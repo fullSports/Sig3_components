@@ -113,15 +113,15 @@ const Equipamentos = () =>{
                     </button>
 
                     <button id="opcImg2" className="opcImg2">
-                        <ImgPrd2  src={BtnChuteira2} alt="imagem da chuteira" id="imgPrd1" className="imgPrd1"/>
+                        <ImgPrd2  src={BtnChuteira2} alt="imagem da chuteira" id="imgPrd2" className="imgPrd2"/>
                     </button>
 
                     <button id="opcImg3" className="opcImg3">
-                        <ImgPrd3  src={BtnChuteira3} alt="imagem da chuteira" id="imgPrd1" className="imgPrd1"/>
+                        <ImgPrd3  src={BtnChuteira3} alt="imagem da chuteira" id="imgPrd3" className="imgPrd3"/>
                     </button>
                     
                     <button id="opcImg4" className="opcImg4">
-                        <ImgPrd4 src={BtnChuteira4} alt="imagem da chuteira"id="imgPrd1" className="imgPrd1"/>
+                        <ImgPrd4 src={BtnChuteira4} alt="imagem da chuteira"id="imgPrd4" className="imgPrd4"/>
                     </button>
                 </FotosAdcPrd>
                 

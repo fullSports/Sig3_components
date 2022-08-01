@@ -17,10 +17,10 @@
   />
 	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet"> 
 	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
-    <link rel="icon" href="%PUBLIC_URL%/Favicon.ico" />
+    <link rel="icon" href="%PUBLIC_URL%/Favicon.ico"  href="%PUBLIC_URL%/../../src//css/estiloLoja.css"/>
     <title>Full Sports - O Melhor Dos Artigos Esportivos Para Você</title>
 </head>
-  <body>
+  
     <!-- Vlibras -->
 	<div vw class="enabled">
 		<div vw-access-button class="active"></div>
@@ -41,10 +41,53 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-  </body>
-  
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+      new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+    integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+    <script>
+      var fonte = 16;
+
+$(document).ready(function(){
+    $('#aumentaFonte').click(function(){
+        if(fonte<20){
+            fonte=fonte+1;
+            $('body').css({'font-size': fonte+ 'px'});
+            $('p').css({'font-size': fonte+ 'px'});
+            $('h3').css({'font-size': fonte+ 'px'});
+            $('label').css({'font-size': fonte+ 'px'});
+            $('input').css({'font-size': fonte+ 'px'});
+            $('a').css({'font-size': fonte+ 'px'});
+            $('header').css({'font-size': fonte+ 'px'});
+            $('option').css({'font-size': fonte+ 'px'});
+            $('select').css({'font-size': fonte+ 'px'});
+            // $('#acessibilidade').css({'font-size': fonte+'px'});
+            // $('#desenvolvedoresFoot').css({'font-size': fonte+'px'});
+        }
+    });
+
+    $('#diminuiFonte').click(function(){
+        if(fonte>12){
+            fonte=fonte-1;
+            $('body').css({'font-size': fonte+'px'});
+            $('p').css({'font-size': fonte+'px'});
+            $('h3').css({'font-size': fonte+ 'px'});
+            $('label').css({'font-size': fonte+ 'px'});
+            $('input').css({'font-size': fonte+ 'px'});
+            $('a').css({'font-size': fonte+ 'px'});
+            $('header').css({'font-size': fonte+ 'px'});
+            $('option').css({'font-size': fonte+ 'px'});
+            $('select').css({'font-size': fonte+ 'px'});
+            // $('#acessibilidade').css({'font-size': fonte+'px'});
+            // $('#desenvolvedoresFoot', 'p').css({'font-size': fonte+'px'});
+        }
+    });
+
+});
+// $('body').css({'font-size': fonte+'pt'});
+    </script>
+    
 </html>
-<script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-<script>
-	new window.VLibras.Widget('https://vlibras.gov.br/app');
-</script>

@@ -1,4 +1,4 @@
-$(document).ready(function(){
+(document).ready(function(){
 
     $('#opcImg1').click(function(){
 

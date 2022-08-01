@@ -1,5 +1,5 @@
 import React from "react";
-import "./css/estiloLoja.css"
+//import "./css/estiloLoja.css"
 import Home from "./Components/Pages/index";
 import Acessibilidade from "./Components/Pages/acessibilidade";
 import Equipamentos from "./Components/Pages/equipamentos";
@@ -19,7 +19,7 @@ function App() {
   if(location==='/tenis'){
     return <Tenis/>
   }
-
+  
   return(
     <body>
       <Home/>

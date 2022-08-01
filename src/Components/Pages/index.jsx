@@ -2,28 +2,29 @@ import React from "react";
 import styled from "styled-components";
 import Footer from "../Footer";
 import Cabecalho from "../Cabecalho";
-import Banner from "./../../assets/images/banner1.png"
-import Cardvan1 from "./../../assets/images/card-van-1.png"
-import Cardvan2 from "./../../assets/images/card-van-2.png"
-import Cardvan3 from "./../../assets/images/card-van-3.png"
-import Cardvan4 from "./../../assets/images/card-van-4.png"
-import Meiagonew from "./../../assets/images/meia-gonew.jpg"
+import Banner from "./../../assets/images/banner1.png";
+import Cardvan1 from "./../../assets/images/card-van-1.png";
+import Cardvan2 from "./../../assets/images/card-van-2.png";
+import Cardvan3 from "./../../assets/images/card-van-3.png";
+import Cardvan4 from "./../../assets/images/card-van-4.png";
+import Meiagonew from "./../../assets/images/meia-gonew.jpg";
 import JaquetaHering1 from "./../../assets/images/jaqueta-hering1.jpg"
 import Chuteiracampofuture from "./../../assets/images/produtos/chuteira-campo-future-3.1-z.png"
 import JaquetaZafina from "./../../assets/images/jaqueta-zafina.jpg"
-import TenisAdidas from "./../../assets/images/tenis-adidas.jpg"
-import MeiaGone from "./../../assets/images/meia-gonew.jpg"
-import FutureZanuncio from "./../../assets/images/future-z-anuncio.png"
-import ChuteiraCampoFuture from "./../../assets/images/produtos/chuteira-campo-future-3.1-z.png"
-import AdidasLogo from "./../../assets/images/adidas-logo.png"
-import PumaLogo from "./../../assets/images/puma-logo.png"
-import Olympikus from "./../../assets/images/olympikus.png"
-import ConverseLogo from "./../../assets/images/converse-logo.png"
-import AsicsLogo from "./../../assets/images/asics-logo.png"
-import CardCat1 from "./../../assets/images/card-cat-1.png"
-import CardCat2 from "./../../assets/images/card-cat-2.png"
-import CardCat3 from "./../../assets/images/card-cat-3.png"
-import CardCat4 from "./../../assets/images/card-cat-4.png"
+import TenisAdidas from "./../../assets/images/tenis-adidas.jpg";
+import MeiaGone from "./../../assets/images/meia-gonew.jpg";
+import FutureZanuncio from "./../../assets/images/future-z-anuncio.png";
+import ChuteiraCampoFuture from "./../../assets/images/produtos/chuteira-campo-future-3.1-z.png";
+import AdidasLogo from "./../../assets/images/adidas-logo.png";
+import PumaLogo from "./../../assets/images/puma-logo.png";
+import Olympikus from "./../../assets/images/olympikus.png";
+import ConverseLogo from "./../../assets/images/converse-logo.png";
+import AsicsLogo from "./../../assets/images/asics-logo.png";
+import CardCat1 from "./../../assets/images/card-cat-1.png";
+import CardCat2 from "./../../assets/images/card-cat-2.png";
+import CardCat3 from "./../../assets/images/card-cat-3.png";
+import CardCat4 from "./../../assets/images/card-cat-4.png";
+import "./../../js/rolagemProdutos";
 const Main = styled.main`
     width: 100%;
     min-height: 600px;
@@ -634,10 +635,10 @@ const Conteudo = () =>{
 
             </ConjuntoCard>
             <GrpBtn id="grpBtn" className="grpBtn">
-                <button class="material-symbols-outlined btnSides btnBef">
+                <button class="material-symbols-outlined btnSides btnBef"id="material-symbols-outlined btnSides btnBef">
                     chevron_left
                 </button>
-                <button class="material-symbols-outlined btnSides btnAft">
+                <button class="material-symbols-outlined btnSides btnAft" id="material-symbols-outlined btnSides btnAft">
                     chevron_right
                 </button>
             </GrpBtn>
