@@ -145,7 +145,6 @@ const Equipamentos = () =>{
             </GridVisuPrd>
 
         </VisualizacaoPrd>
-   
         <Footer />
         </>
     );

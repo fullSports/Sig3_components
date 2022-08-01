@@ -772,23 +772,23 @@ const Conteudo = () =>{
             <TituloSec id="tituloSec" className="tituloSec">categorias mais procuradas</TituloSec>
             <CategoriasGrid id="categorias-grid" className="categorias-grid">
                 <Zoom id="Zoom" className="Zoom">
-                    <a>
-                        <img src={CardCat1} alt="link para os tenis" />
+                    <a> 
+                        <img src={CardCat1} alt="" />
+                    </a>
+                </Zoom>
+                <Zoom id="Zoom" className="Zoom">
+                    <a href="/tenis">
+                        <img src={CardCat2} alt="" />
                     </a>
                 </Zoom>
                 <Zoom id="Zoom" className="Zoom">
                     <a>
-                        <img src={CardCat2} alt="link para os tenis" />
+                        <img src={CardCat3} alt="" />
                     </a>
                 </Zoom>
                 <Zoom id="Zoom" className="Zoom">
                     <a>
-                        <img src={CardCat3} alt="link para os tenis" />
-                    </a>
-                </Zoom>
-                <Zoom id="Zoom" className="Zoom">
-                    <a>
-                        <img src={CardCat4} alt="link para os tenis" />
+                        <img src={CardCat4} alt="" />
                     </a>
                 </Zoom>
 
