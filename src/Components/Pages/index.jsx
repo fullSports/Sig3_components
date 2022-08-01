@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import Footer from "../Footer";
+import Cabecalho from "../Cabecalho";
 import Banner from "./../../assets/images/banner1.png"
 import Cardvan1 from "./../../assets/images/card-van-1.png"
 import Cardvan2 from "./../../assets/images/card-van-2.png"
@@ -153,7 +155,6 @@ const PrecoAnterior =styled.p`
 `;
 const PrecoAtual = styled.h3`
     color: #262626;
-    text-decoration: line-through;
     h3.precoAtual{
         text-align: left;
     }
@@ -369,6 +370,8 @@ const Zoom = styled.div`
 `;
 const Conteudo = () =>{
     return(
+    <>
+    <Cabecalho /> 
     <Main id="conteudo" className="conteudo">
         <Propaganda id="propaganda" className="propaganda">
             <a href="#">
@@ -792,7 +795,8 @@ const Conteudo = () =>{
             </CategoriasGrid>
         </Categorias>
     </Main>
-
+    <Footer/>
+    </>  
     );
 }
 export default Conteudo;

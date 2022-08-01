@@ -1,16 +1,31 @@
 import React from "react";
 import "./css/estiloLoja.css"
-
-import Cabecalho from "./Components/Cabecalho/index";
-import Conteudo from "./Components/Conteudo/index";
-import Footer from "./Components/Footer";
-
+import Home from "./Components/Pages/index";
+import Acessibilidade from "./Components/Pages/acessibilidade";
+import Equipamentos from "./Components/Pages/equipamentos";
+import Tenis from "./Components/Pages/tenis"
 function App() {
+  //Mapeamento de rotas
+  const location = window.location.pathname
+  if(location==='/'){
+    return <Home />
+  }
+  if(location==='/acessibilidade'){
+    return <Acessibilidade />
+  }
+  if(location==='/equipamentos'){
+    return <Equipamentos />
+  }
+  if(location==='/tenis'){
+    return <Tenis/>
+  }
+
   return(
     <body>
-      <Cabecalho/>
-      <Conteudo/>
-      <Footer/>
+      <Home/>
+      <Acessibilidade />
+      <Equipamentos />
+      <Tenis/>
     </body>
   );
 }

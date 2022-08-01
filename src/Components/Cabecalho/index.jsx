@@ -5,7 +5,6 @@ import FacebookIcone from "../../assets/images/facebook.png";
 import TwitterIcone from "../../assets/images/twitter.png"
 import InstagramIcone from "../../assets/images/instagram.png"
 import WhatsappIcone from "../../assets/images/whatsapp.png"
-import AcessibilidadePage from "./../Conteudo/acessibilidade"
 import { corPrimaria } from "../UI/variaveis"; 
 const Topo = styled.header`
   min-width:100%
@@ -193,7 +192,7 @@ const Cabecalho = () =>{
 
         <Atalhos2 id="atalhos2" className="atalhos2">
         <li>
-					<a href={AcessibilidadePage} title="Ir para pagina de acessabilidade">Acessibilidade</a>
+					<a href="/acessibilidade" title="Ir para pagina de acessabilidade">Acessibilidade</a>
 				</li>
 
 				<li>
@@ -221,7 +220,7 @@ const Cabecalho = () =>{
         </BarraPesquisa>
 
         <Logo id="logo"className="logo"> 
-          <a href="#" ><LogoImg  src={logo_loja} alt="Logo da Loja"></LogoImg ></a>
+          <a href="/" ><LogoImg  src={logo_loja} alt="Logo da Loja"></LogoImg ></a>
         </Logo>
 
         <ConjuntoIcones id="conjuntoIcones" className="conjuntoIcones">
@@ -259,7 +258,7 @@ const Cabecalho = () =>{
           <li><a href="">Clientes</a> </li>
           <li><a href="">Produtos</a> </li>
           <li><a href="">Pedidos</a> </li>
-          <li><a href="">Equipamentos</a> </li>
+          <li><a href="/equipamentos">Equipamentos</a> </li>
           <li><a href="">Logout</a> </li>
         </ul>
       </Menu>
