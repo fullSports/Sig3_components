@@ -285,8 +285,8 @@ const Equipamentos = () =>{
                     </NovidadeImg>
                     <div>
                         <GridProdutosEqui id="grid-produtos-equi" className="grid-produtos-equi">
-
-                            <CardFTZ id="card-FTZ" className="card-FTZ">
+            
+                            <CardFTZ id="cardFTZ" className="cardFTZ">
                                 <ImgTenisFTZ id="imgTenisFTZ" className="imgTenisFTZ">
                                 <a href="/tenis"><img
 										src={ChuteiraPuma1} alt=""/></a>
@@ -302,7 +302,7 @@ const Equipamentos = () =>{
                                 </DescCard>
                             </CardFTZ>
 
-                            <CardFTZ id="card-FTZ" className="card-FTZ">
+                            <CardFTZ id="cardFTZ" className="cardFTZ">
                                 <ImgTenisFTZ id="imgTenisFTZ" className="imgTenisFTZ">
                                 <a href=""><img
 										src={JaquetaHering1} alt=""/></a>
@@ -318,7 +318,7 @@ const Equipamentos = () =>{
                                 </DescCard>
                             </CardFTZ>
                             
-                            <CardFTZ id="card-FTZ" className="card-FTZ">
+                            <CardFTZ id="cardFTZ" className="cardFTZ">
                                 <ImgTenisFTZ id="imgTenisFTZ" className="imgTenisFTZ">
                                 <a href="/tenis"><img
 										src={ChuteiraSocietyFutureZ} alt=""/></a>
@@ -334,7 +334,7 @@ const Equipamentos = () =>{
                                 </DescCard>
                             </CardFTZ>
 
-                            <CardFTZ id="card-FTZ" className="card-FTZ">
+                            <CardFTZ id="cardFTZ" className="cardFTZ">
                                 <ImgTenisFTZ id="imgTenisFTZ" className="imgTenisFTZ">
                                 <a href="/tenis"><img
 										src={CuteiraFutsalKidsFuture} alt=""/></a>
@@ -350,7 +350,7 @@ const Equipamentos = () =>{
                                 </DescCard>
                             </CardFTZ>
 
-                            <CardFTZ id="card-FTZ" className="card-FTZ">
+                            <CardFTZ id="cardFTZ" className="cardFTZ">
                                 <ImgTenisFTZ id="imgTenisFTZ" className="imgTenisFTZ">
                                 <a href="/tenis"><img
 										src={MeiaGone} alt=""/></a>
@@ -366,7 +366,7 @@ const Equipamentos = () =>{
                                 </DescCard>
                             </CardFTZ>
 
-                            <CardFTZ id="card-FTZ" className="card-FTZ">
+                            <CardFTZ id="cardFTZ" className="cardFTZ">
                                 <ImgTenisFTZ id="imgTenisFTZ" className="imgTenisFTZ">
                                 <a href="/tenis"><img
 										src={CuteiraCampoFutureZ} alt=""/></a>
@@ -382,7 +382,7 @@ const Equipamentos = () =>{
                                 </DescCard>
                             </CardFTZ>
 
-                            <CardFTZ id="card-FTZ" className="card-FTZ">
+                            <CardFTZ id="cardFTZ" className="cardFTZ">
                                 <ImgTenisFTZ id="imgTenisFTZ" className="imgTenisFTZ">
                                 <a href="/tenis"><img
 										src={JaquetaZafina} alt=""/></a>
@@ -398,7 +398,7 @@ const Equipamentos = () =>{
                                 </DescCard>
                             </CardFTZ>
 
-                            <CardFTZ id="card-FTZ" className="card-FTZ">
+                            <CardFTZ id="cardFTZ" className="cardFTZ">
                                 <ImgTenisFTZ id="imgTenisFTZ" className="imgTenisFTZ">
                                 <a href="/tenis"><img
 										src={TenisAdidas} alt=""/></a>
@@ -414,7 +414,7 @@ const Equipamentos = () =>{
                                 </DescCard>
                             </CardFTZ>
 
-                            <CardFTZ id="card-FTZ" className="card-FTZ">
+                            <CardFTZ id="cardFTZ" className="cardFTZ">
                                 <ImgTenisFTZ id="imgTenisFTZ" className="imgTenisFTZ">
                                 <a href="/tenis"><img
 										src={ChuteiraCampoFuture31Z} alt=""/></a>
@@ -430,7 +430,7 @@ const Equipamentos = () =>{
                                 </DescCard>
                             </CardFTZ>
 
-                            <CardFTZ id="card-FTZ" className="card-FTZ">
+                            <CardFTZ id="cardFTZ" className="cardFTZ">
                                 <ImgTenisFTZ id="imgTenisFTZ" className="imgTenisFTZ">
                                 <a href="/tenis"><img
 										src={ChuteiraCampoFuture41Z} alt=""/></a>
@@ -446,7 +446,7 @@ const Equipamentos = () =>{
                                 </DescCard>
                             </CardFTZ>
 
-                            <CardFTZ id="card-FTZ" className="card-FTZ">
+                            <CardFTZ id="cardFTZ" className="cardFTZ">
                                 <ImgTenisFTZ id="imgTenisFTZ" className="imgTenisFTZ">
                                 <a href="/tenis"><img
 										src={CalcaEsportiva1} alt=""/></a>
@@ -462,7 +462,7 @@ const Equipamentos = () =>{
                                 </DescCard>
                             </CardFTZ>
 
-                            <CardFTZ id="card-FTZ" className="card-FTZ">
+                            <CardFTZ id="cardFTZ" className="cardFTZ">
                                 <ImgTenisFTZ id="imgTenisFTZ" className="imgTenisFTZ">
                                 <a href="/tenis"><img
 										src={ChuteiraFutsalFutureZ} alt=""/></a>

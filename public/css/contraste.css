@@ -93,21 +93,31 @@ header * {
 #card{
     background-color: #3d3d3e;
 }
-#descCard{
+#descCard p{
+    background-color: #3d3d3e;
     color: #e3e3e3;
 }
 #corpoCard h3{
     color: #e3e3e3;
+}
+#corpoCard{
     background-color: #3d3d3e;
 }
 #tituloCard{
     color: #e3e3e3;
+    background-color: #3d3d3e;
 }
 #precoAnterior{
     color: #a4a4a4;
+    background-color: #3d3d3e;
+}
+#frtGrtsCard{
+    color: #62aa0b;
+    background-color: #3d3d3e;
 }
 #precoAnterior{
     color: #a4a4a4;
+    background-color: #3d3d3e;
 }
 #gridVisuPrd *{
     background-color: #3d3d3e;

@@ -90,7 +90,12 @@ body::-webkit-scrollbar-thumb {
     background-color: #fff;
 }
 #descCard{
+    
     color: #1b1b1b;
+}
+#frtGrtsCard{
+    color: #62aa0b;
+    background-color: #fff;
 }
 #corpoCard h3{
     color: #1b1b1b;
