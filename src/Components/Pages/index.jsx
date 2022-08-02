@@ -750,7 +750,7 @@ const Conteudo = () =>{
             <TituloSec id="tituloSec" className="tituloSec">categorias mais procuradas</TituloSec>
             <CategoriasGrid id="categorias-grid" className="categorias-grid">
                 <Zoom id="Zoom" className="Zoom">
-                    <a> 
+                    <a href="/equipamentos"> 
                         <img src={CardCat1} alt="" />
                     </a>
                 </Zoom>

@@ -4,8 +4,6 @@
     font-family: 'Open Sans', sans-serif;
     color: #e3e3e3;
 }
-
-
 body{
     width: 100%;
     grid-template-columns: auto;
@@ -17,7 +15,6 @@ body{
 header{
     background-color: #262627;
 }
-
 body::-webkit-scrollbar {
     max-width: auto;
     max-height: 50px;
@@ -26,7 +23,6 @@ body::-webkit-scrollbar-track {
     background: #37373a;
     border-radius: 20px;
 }
-  
 body::-webkit-scrollbar-thumb {
     display: block;
     background-color: #19191c;
@@ -51,7 +47,6 @@ header * {
     border: 1px solid rgb(45, 45, 45);
     color: #e3e3e3;
 }
-
 #barraPesquisa input:active{
     border: 1px solid rgb(45, 45, 45);
 }
@@ -77,7 +72,6 @@ header * {
     background: rgba(253, 254, 255, 0.5);
     border-radius: 20px;
 }
-  
 #conjuntoMarcas::-webkit-scrollbar-thumb {
     display: block;
     background-color: rgba(153, 153, 153, 0.3);

@@ -4,8 +4,6 @@
     font-family: 'Open Sans', sans-serif;
     color: #2e2e2e;
 }
-
-
 body{
     width: 100%;
     grid-template-columns: auto;
@@ -35,7 +33,7 @@ body::-webkit-scrollbar-thumb {
     border: 1px solid transparent; 
 }
 #acessibilidade * {
-    background-color: #ebebeb;
+    background-color: #efefef;
 }
 #acessibilidade a {
     color: #2e2e2e;
@@ -68,12 +66,10 @@ body::-webkit-scrollbar-thumb {
     max-width: auto;
     height: auto;
 }
-  
 #conjuntoMarcas::-webkit-scrollbar-track {
     background: rgba(253, 254, 255, 0.5);
     border-radius: 20px;
 }
-  
 #conjuntoMarcas::-webkit-scrollbar-thumb {
     display: block;
     background-color: rgba(153, 153, 153, 0.3);

@@ -72,7 +72,7 @@ const NavGrid =styled.div`
   justify-content: center;
   display: grid;
   grid-template-columns: repeat(3, 350px);
-  margin-bottom:3%;
+  margin-bottom:4px;
   justify-items: end;
   align-items: end;
 
@@ -84,7 +84,7 @@ const NavGrid =styled.div`
   }
   @media screen and (max-width: 450px) {
     justify-items: flex-end;
-    grid-template-columns: repeat(3, 30%);
+    grid-template-columns: repeat(3, 27%);
   }
 `;
 const BarraPesquisa = styled.div`
