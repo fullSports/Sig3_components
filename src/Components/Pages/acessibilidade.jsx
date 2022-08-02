@@ -12,7 +12,6 @@ const TxtAcess = styled.div`
     h1{
         text-align: center;
         font-size: 22px;
-        color: black;
         margin: 0 0 20px;
     }
     h2{
@@ -24,7 +23,6 @@ const TxtAcess = styled.div`
     txtAcess p{
         text-align: center;
         font-size: 16px;
-        color: black;
         line-height: 25px;
     }
 `;

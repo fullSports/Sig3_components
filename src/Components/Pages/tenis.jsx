@@ -15,9 +15,6 @@ const GridVisuPrd = styled.div`
     margin: 40px 0;
     margin-left: auto;
     margin-right: auto;
-    *{ 
-    background-color: rgb(255, 255, 255);
-    }
     justify-content: center;
     /* POSSIVEL MUDANÇA PARA 1200PX */
     width: 90%;

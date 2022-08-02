@@ -135,27 +135,21 @@ const ImgCard = styled.div`
 const CorpoCard = styled.div`
     margin: 5px 0;
     h3{
-        color: #1b1b1b;
-        background-color: #fff;
         font-size: 19px;
     }
     @media screen and (max-width: 1144px) {
         h3{
-        color: #1b1b1b;
         font-size: 19px;
         }
     }
 `;
 const TituloCard = styled.p`
     font-size: 16px;
-    color: #1b1b1b;
 `;
 const PrecoAnterior =styled.p`
-    color: #262626;
     text-decoration: line-through;
 `;
 const PrecoAtual = styled.h3`
-    color: #262626;
     h3.precoAtual{
         text-align: left;
     }
@@ -165,19 +159,17 @@ const FrtGrtsCard = styled.p`
     font-weight: 600;
     font-size: 13px;
     /* width: max-content; */
-    color: #62aa0b;
     /* background-color: #a6e65a; */
 `;
 const DescCard = styled.div`
     font-size: 13px;
-    color: #1b1b1b;
 `;
 const StarsFeedback =styled.div`
     margin: 10px 0;
 `;
 const StarFeed = styled.i`
-    font-size: 14px;
     color: #f7bd00;
+    font-size: 14px;
 `;
 const GrpBtn = styled.div`
     padding: 25px 0;
@@ -240,7 +232,6 @@ const ConjuntoTenisFZ = styled.div`
     }
 `;
 const CardFTZ = styled.div`
-    background-color: #fff;
     line-height: 25px;
     padding: 10px;
     box-shadow: 0 0 5px rgba(0, 0, 0, .2);
@@ -281,20 +272,6 @@ const ConjuntoMarcas = styled.div`
     img{
         height: 64px;
     }
-    ::-webkit-scrollbar {
-        max-width: auto;
-        height: auto;
-    }
-    ::-webkit-scrollbar-track {
-        background: rgba(253, 254, 255, 0.5);
-        border-radius: 20px;
-    }
-    ::-webkit-scrollbar-thumb {
-        display: block;
-        background-color: rgba(153, 153, 153, 0.3);
-        border-radius: 20px;
-        border: 1px solid transparent; 
-      }
       @media screen and (max-width: 1144px) {
             display: flex;
             overflow-x: auto;

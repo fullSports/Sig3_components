@@ -17,7 +17,7 @@
   />
 	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet"> 
 	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
-    <link rel="icon" href="%PUBLIC_URL%/Favicon.ico"  href="%PUBLIC_URL%/../../src//css/estiloLoja.css"/>
+    <link rel="icon" href="%PUBLIC_URL%/Favicon.ico"/>
     <title>Full Sports - O Melhor Dos Artigos Esportivos Para Você</title>
 </head>
   
@@ -48,10 +48,9 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js"
     integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
     crossorigin="anonymous"></script>
-    <script>
-      var fonte = 16;
-
-$(document).ready(function(){
+  <script>
+    var fonte = 16;
+  $(document).ready(function(){
     $('#aumentaFonte').click(function(){
         if(fonte<20){
             fonte=fonte+1;
@@ -88,6 +87,79 @@ $(document).ready(function(){
 
 });
 // $('body').css({'font-size': fonte+'pt'});
-    </script>
+  </script>
+  
+  <script>
+    var link_css = "%PUBLIC_URL%/css/estiloLoja.css";
+
+				
+if(getCookie2() == "contraste"){
+    link_css = "%PUBLIC_URL%/css/contraste.css";
+}
+else if(getCookie() == "default"){
+    link_css = "%PUBLIC_URL%/css/estiloLoja.css";
+}
+
+$(document).ready(function(){
     
+    $("#modoEscuro").click(function(){
+        setCookie("contraste");
+        location.reload();				
+    });
+    
+    $("#modoClaro").click(function(){
+        setCookie("default")
+        location.reload();									
+    });
+    
+});
+
+$("head").append("<link rel=stylesheet href="+ " "+ link_css +" " +"type=text/css>");
+
+function setCookie(value){
+    var data = new Date();
+    data.setTime(data.getTime() + 600000);
+    
+    //cookies structure
+    document.cookie = "contraste="+value+"; expires="+data.toUTCString()+
+        "; path=/";
+    
+}
+
+function getCookie(){
+    var cookie = document.cookie.split("=");
+    
+    return cookie[1];
+}
+
+function getCookie2(){
+    var nameEQ = "contraste=";
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+    }
+    return undefined;
+
+}
+
+//BOTOES ROLAGEM CARROSSEL
+const groupCards = [...document.querySelectorAll('#conjuntoCard')];
+const btnAft = [...document.querySelectorAll('#btnAft')];
+const btnBef = [...document.querySelectorAll('#btnBef')]
+
+groupCards.forEach((item, i ) =>{
+    let groupCardsDimen = item.getBoundingClientRect();
+    let groupCardsLength = groupCardsDimen.width;
+
+    btnAft[i].addEventListener('click', () =>{
+        item.scrollLeft += groupCardsLength;
+    })
+
+    btnBef[i].addEventListener('click', () => {
+        item.scrollLeft -= groupCardsLength;
+    })
+})
+  </script>
 </html>

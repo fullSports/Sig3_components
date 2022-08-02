@@ -38,8 +38,6 @@ img{
 const FiltragemNovi = styled.div`
     padding-bottom: 10px;
     margin: 15px 0;
-    border-bottom: 1px solid rgba(0, 0, 0,.1);
-    color: #2e2e2e;
     p {
         margin: 5px 0 ;
     }
@@ -113,7 +111,6 @@ const CategoFiltra = styled.div`
     }
     li label{
         margin-left: 10px;
-        color: #1b1b1b;
     }
 `;
 const GridProdutosEqui = styled.div`
@@ -181,12 +178,10 @@ const TituloCard = styled.p`
     color: #1b1b1b;
 `;
 const PrecoAnterior =styled.p`
-    color: #262626;
     text-decoration: line-through;
 `;
 const PrecoAtual = styled.h3`
-    color: #262626;
-    h3.precoAtual{
+    h3{
         text-align: left;
     }
 `;
@@ -195,7 +190,6 @@ const FrtGrtsCard = styled.p`
     font-weight: 600;
     font-size: 13px;
     /* width: max-content; */
-    color: #62aa0b;
     /* background-color: #a6e65a; */
 `;
 const DescCard = styled.div`

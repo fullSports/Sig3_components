@@ -1,0 +1,117 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans', sans-serif;
+    color: #2e2e2e;
+}
+
+
+body{
+    width: 100%;
+    grid-template-columns: auto;
+    grid-auto-columns: auto;
+    background-color: #efefef;
+    overflow-x: hidden;
+    color: #2e2e2e;
+}
+header{
+    background-color: #efefef;
+}
+
+body::-webkit-scrollbar {
+    max-width: auto;
+    max-height: 50px;
+}
+body::-webkit-scrollbar-track {
+    background: #fbfbfb;
+    border-radius: 20px;
+}
+  
+body::-webkit-scrollbar-thumb {
+    display: block;
+    background-color: rgba(5, 5, 5, 0.178);
+    border-radius: 20px;
+    max-height: 5px;
+    border: 1px solid transparent; 
+}
+#acessibilidade * {
+    background-color: #ebebeb;
+}
+#acessibilidade a {
+    color: #2e2e2e;
+}
+#conjuntoIcones li{
+    color: rgb(255, 255, 255);
+}
+#barraPesquisa input{
+    background-color: #f0f0f0; 
+    border: 1px solid rgba(60, 60, 60, 0.807);
+}
+#barraPesquisa input:active{
+    border: 1px solid rgba(60, 60, 60);
+    outline: none;
+}
+#rodape *{  
+    background-color: #fff;
+}
+#rodape{
+    background-color: #fff;
+    color: #313131;
+}
+#txtAcess h1 h2 p{
+    color: black;
+}
+#cardFTZ {
+    background-color: #fff;
+}
+#conjuntoMarcas::-webkit-scrollbar {
+    max-width: auto;
+    height: auto;
+}
+  
+#conjuntoMarcas::-webkit-scrollbar-track {
+    background: rgba(253, 254, 255, 0.5);
+    border-radius: 20px;
+}
+  
+#conjuntoMarcas::-webkit-scrollbar-thumb {
+    display: block;
+    background-color: rgba(153, 153, 153, 0.3);
+    border-radius: 20px;
+    border: 1px solid transparent; 
+  }
+#tituloSec{
+    color: rgb(49, 49, 49);
+}
+#btnSides{
+    color: #1b1b1b;
+}
+#card{
+    background-color: #fff;
+}
+#descCard{
+    color: #1b1b1b;
+}
+#corpoCard h3{
+    color: #1b1b1b;
+    background-color: #fff;
+}
+#tituloCard{
+    color: #1b1b1b;
+}
+#precoAnterior{
+    color: #262626;
+}
+#filtragem-novi , #precoFiltra, #dispoFiltra, #colorPick, #categoFiltra{
+    border-bottom: 1px solid rgba(0, 0, 0,.1);
+    color: #2e2e2e;
+}
+#precoFiltra select, option{
+    background-color: #fff;
+}
+#categoFiltra li label{
+    color: #1b1b1b;
+}
+#gridVisuPrd *{
+    background-color: rgb(255, 255, 255);
+}

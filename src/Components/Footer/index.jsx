@@ -3,8 +3,6 @@ import styled from "styled-components";
 const Rodape = styled.footer`
     width: 100%;
     height: auto;
-    background-color: #fff;
-    color: #313131;
     text-align: center;
     padding: 20px 0 30px 0;
     grid-template-columns: auto;
@@ -13,8 +11,6 @@ const Rodape = styled.footer`
     margin-top: 1%;
     margin-bottom: 1%;
     @media screen and (max-width: 1144px) {
-        background-color: #fff;
-        color: #313131;
         text-align: center;
         padding: 20px 0 30px 0;
         grid-template-columns: repeat(3, 100px);

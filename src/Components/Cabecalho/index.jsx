@@ -6,13 +6,12 @@ import TwitterIcone from "../../assets/images/twitter.png"
 import InstagramIcone from "../../assets/images/instagram.png"
 import WhatsappIcone from "../../assets/images/whatsapp.png"
 import { corPrimaria } from "../UI/variaveis"; 
+
 const Topo = styled.header`
   min-width:100%
   height: auto;
-  background-color: #ebebeb;
 `;
 const Acessibilidade = styled.div`
-  background-color: #ebebeb;
   padding: 15px 0 0 0;
   min-height: 35px;
   font-weight: 450;
@@ -26,7 +25,6 @@ const Acessibilidade = styled.div`
 
   a {
     text-decoration: none;
-    color: #2e2e2e;
   }
   a:hover {
     text-decoration: underline;
@@ -74,7 +72,7 @@ const NavGrid =styled.div`
   justify-content: center;
   display: grid;
   grid-template-columns: repeat(3, 350px);
-  margin-bottom:1%;
+  margin-bottom:3%;
   justify-items: end;
   align-items: end;
 
@@ -97,9 +95,7 @@ const BarraPesquisaInpult = styled.input`
   padding: 8px;
   width: 350px;
   height: 25px;
-  border: 1px solid #fff;
   border-radius: 20px;
-  background-color: #fff;
 
   @media screen and (max-width: 1144px) {
     padding: 4px;
@@ -129,7 +125,6 @@ const ConjuntoIcones = styled.div`
   li{
     margin-left: 5px;
     display: inline;
-    color: rgb(255, 255, 255);
   }
   a {
     text-decoration: none;
@@ -139,12 +134,14 @@ const ConjuntoIcones = styled.div`
   }
 `;
 const Menu = styled.nav`
-  background-color: #a6e65a;
+  *{
+    background-color: #a6e65a;
+  }
   ul{
-    text-align: center;
+  text-align: center;
   list-style:none;
   }
-  li{
+  ul li{
     display: inline;
   }
   a{

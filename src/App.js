@@ -3,18 +3,18 @@ import React from "react";
 import Home from "./Components/Pages/index";
 import Acessibilidade from "./Components/Pages/acessibilidade";
 import Equipamentos from "./Components/Pages/equipamentos";
-import Tenis from "./Components/Pages/tenis"
+import Tenis from "./Components/Pages/tenis";
 function App() {
   //Mapeamento de rotas
   const location = window.location.pathname
   if(location==='/'){
-    return <Home />
+    return <Home/>
   }
   if(location==='/acessibilidade'){
-    return <Acessibilidade />
+    return <Acessibilidade/>
   }
   if(location==='/equipamentos'){
-    return <Equipamentos />
+    return <Equipamentos/>
   }
   if(location==='/tenis'){
     return <Tenis/>
