@@ -70,9 +70,8 @@ const Atalhos2 =styled.ul`
 const NavGrid =styled.div`
   justify-content: center;
   display: grid;
-  padding-bottom: 3px;
   grid-template-columns: repeat(3, 350px);
-  margin-bottom:4px;
+  margin-bottom:10px;
   justify-items: end;
   align-items: end;
 
@@ -82,9 +81,8 @@ const NavGrid =styled.div`
   display: grid;
   grid-template-columns: repeat(3, 160px);
   }
-  @media screen and (max-width: 450px) {
-    justify-items: flex-end;
-    grid-template-columns: repeat(3, 27%);
+  @media screen and (max-width: 450px) {  
+    grid-template-columns: repeat(3,100px);
   }
 `;
 const BarraPesquisa = styled.div`
@@ -110,12 +108,19 @@ const BarraPesquisaInpult = styled.input`
 const Logo = styled.div`
   margin-left: auto;
   margin-right: auto;
+  
   height: 100px;
-`;
-const LogoImg = styled.img`
+  img{
   width: 100%;
   height: 100px;
+  }
+  @media screen and (max-width: 450px) {
+    width: 120px;
+    height: 100px;
+    
+  }
 `;
+
 const ConjuntoIcones = styled.div`
   margin-top: 10%;
  display: flex;
@@ -131,7 +136,11 @@ const ConjuntoIcones = styled.div`
   }
   
   
-  }
+  @media screen and (max-width: 450px) {
+    ul{
+      width:80%
+    }
+  
 `;
 const Menu = styled.nav`
   *{
@@ -217,7 +226,7 @@ const Cabecalho = () =>{
         </BarraPesquisa>
 
         <Logo id="logo"className="logo"> 
-          <a href="/" ><LogoImg  src={logo_loja} alt="Logo da Loja"></LogoImg ></a>
+          <a href="/" ><img src={logo_loja} alt="Logo da Loja"/></a>
         </Logo>
 
         <ConjuntoIcones id="conjuntoIcones" className="conjuntoIcones">

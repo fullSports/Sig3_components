@@ -34,6 +34,9 @@ const NovidadeImg = styled.div`
 img{
     height: 384px;
 }
+@media screen and (max-width: 1144px) {
+    display:none;
+}
 `;
 const FiltragemNovi = styled.div`
     padding-bottom: 10px;
@@ -115,11 +118,17 @@ const CategoFiltra = styled.div`
 `;
 const GridProdutosEqui = styled.div`
     justify-content: center;
-
     display: grid;
     grid-template-columns: repeat(4, auto);
     grid-auto-rows: minmax(auto, auto);
     grid-gap: 25px;
+    @media screen and (max-width: 1144px) {
+        grid-template-columns: repeat(2, auto);
+    }
+    @media screen and (max-width: 550px) {
+        grid-template-columns: repeat(1, auto);
+    }
+
 `;
 const CardFTZ = styled.div`
     line-height: 25px;

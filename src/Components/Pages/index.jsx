@@ -24,7 +24,6 @@ import CardCat1 from "./../../assets/images/card-cat-1.png";
 import CardCat2 from "./../../assets/images/card-cat-2.png";
 import CardCat3 from "./../../assets/images/card-cat-3.png";
 import CardCat4 from "./../../assets/images/card-cat-4.png";
-import "./../../js/rolagemProdutos";
 const Main = styled.main`
     width: 100%;
     min-height: 600px;
@@ -197,7 +196,7 @@ const DoubleGrid =styled.div`
     @media screen and (max-width: 1144px) {
         align-items: center;
         margin: 2px 0px 0 2px;
-        width: 80%;
+        width: 65%;
         height: auto;
         justify-content: center;
         grid-template-columns: repeat(1, auto);
