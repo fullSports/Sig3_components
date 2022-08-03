@@ -48,6 +48,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js"
     integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
     crossorigin="anonymous"></script>
+
   <script>
     var fonte = 16;
   $(document).ready(function(){
@@ -143,8 +144,10 @@ function getCookie2(){
     return undefined;
 
 }
-
-//BOTOES ROLAGEM CARROSSEL
+  </script>
+  
+  <script>
+    //BOTOES ROLAGEM CARROSSEL
 const groupCards = [...document.querySelectorAll('#conjuntoCard')];
 const btnAft = [...document.querySelectorAll('#btnAft')];
 const btnBef = [...document.querySelectorAll('#btnBef')]
@@ -161,5 +164,46 @@ groupCards.forEach((item, i ) =>{
         item.scrollLeft -= groupCardsLength;
     })
 })
+  </script>
+
+  <script>
+    //visualização do produto
+    (document).ready(function(){
+
+$('#opcImg1').click(function(){
+
+    document.getElementById('imgPrd1').style.display = "block";
+    document.getElementById('imgPrd2').style.display = "none";
+    document.getElementById('imgPrd3').style.display = "none";
+    document.getElementById('imgPrd4').style.display = "none";
+});
+
+$('#opcImg2').click(function(){
+
+    document.getElementById('imgPrd1').style.display = "none";
+    document.getElementById('imgPrd2').style.display = "block";
+    document.getElementById('imgPrd3').style.display = "none";
+    document.getElementById('imgPrd4').style.display = "none";
+});
+
+$('#opcImg3').click(function(){
+
+    document.getElementById('imgPrd1').style.display = "none";
+    document.getElementById('imgPrd2').style.display = "none";
+    document.getElementById('imgPrd3').style.display = "block";
+    document.getElementById('imgPrd4').style.display = "none";
+});
+
+$('#opcImg4').click(function(){
+
+    document.getElementById('imgPrd1').style.display = "none";
+    document.getElementById('imgPrd2').style.display = "none";
+    document.getElementById('imgPrd3').style.display = "none";
+    document.getElementById('imgPrd4').style.display = "block";
+});
+
+
+});
+
   </script>
 </html>

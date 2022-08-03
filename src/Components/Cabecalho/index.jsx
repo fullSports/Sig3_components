@@ -5,7 +5,6 @@ import FacebookIcone from "../../assets/images/facebook.png";
 import TwitterIcone from "../../assets/images/twitter.png"
 import InstagramIcone from "../../assets/images/instagram.png"
 import WhatsappIcone from "../../assets/images/whatsapp.png"
-import { corPrimaria } from "../UI/variaveis"; 
 
 const Topo = styled.header`
   min-width:100%
@@ -71,6 +70,7 @@ const Atalhos2 =styled.ul`
 const NavGrid =styled.div`
   justify-content: center;
   display: grid;
+  padding-bottom: 3px;
   grid-template-columns: repeat(3, 350px);
   margin-bottom:4px;
   justify-items: end;

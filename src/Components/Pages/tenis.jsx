@@ -56,16 +56,16 @@ const FotoPrd = styled.div`
     }
 `;
 const ImgPrd1 = styled.img`
-display: block;
+display:block;
 `;
 const ImgPrd2 = styled.img`
 display: none;
 `;
 const ImgPrd3 = styled.img`
-display: none;
+display:none;
 `;
 const ImgPrd4 = styled.img`
-display: none;
+display:none;
 `;
 const DescAnunPrd =styled.div`
     color: #313131;
@@ -98,6 +98,7 @@ const FrtGrtsCard = styled.p`
         /* background-color: #a6e65a; */
     }
 `;
+
 const Equipamentos = () =>{
     return(
         <>
@@ -106,19 +107,19 @@ const Equipamentos = () =>{
             <GridVisuPrd id="gridVisuPrd" className="gridVisuPrd">
                 <FotosAdcPrd id="fotosAdcPrd" className="fotosAdcPrd">
                     <button id="opcImg1" className="opcImg1">
-                        <ImgPrd1  src={BtnChuteira1} alt="imagem da chuteira" id="imgPrd1" className="mgPrd1 "/>
+                        <ImgPrd1  src={BtnChuteira1} alt="imagem da chuteira"/>
                     </button>
 
                     <button id="opcImg2" className="opcImg2">
-                        <ImgPrd2  src={BtnChuteira2} alt="imagem da chuteira" id="imgPrd2" className="imgPrd2"/>
+                        <ImgPrd2  src={BtnChuteira2} alt="imagem da chuteira"/>
                     </button>
 
                     <button id="opcImg3" className="opcImg3">
-                        <ImgPrd3  src={BtnChuteira3} alt="imagem da chuteira" id="imgPrd3" className="imgPrd3"/>
+                        <ImgPrd3  src={BtnChuteira3} alt="imagem da chuteira"/>
                     </button>
                     
                     <button id="opcImg4" className="opcImg4">
-                        <ImgPrd4 src={BtnChuteira4} alt="imagem da chuteira"id="imgPrd4" className="imgPrd4"/>
+                        <ImgPrd4 src={BtnChuteira4} alt="imagem da chuteira"/>
                     </button>
                 </FotosAdcPrd>
                 
