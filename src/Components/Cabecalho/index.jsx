@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import logo_loja from "../../assets/images/fullSportLogo.png";
+import logo_loja from "../../assets/images/fullSportLogo.svg";
 import FacebookIcone from "../../assets/images/facebook.png";
 import TwitterIcone from "../../assets/images/twitter.png"
 import InstagramIcone from "../../assets/images/instagram.png"
@@ -112,13 +112,9 @@ const Logo = styled.div`
   height: 100px;
   img{
   width: 100%;
-  height: 100px;
+  height: 100%;
   }
-  @media screen and (max-width: 450px) {
-    width: 120px;
-    height: 100px;
-    
-  }
+ 
 `;
 
 const ConjuntoIcones = styled.div`
