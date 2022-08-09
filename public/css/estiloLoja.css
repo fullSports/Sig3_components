@@ -116,3 +116,20 @@ body::-webkit-scrollbar-thumb {
 #gridVisuPrd *{
     background-color: rgb(255, 255, 255);
 }
+#form-cadastro-cliente{
+    background-color: rgb(255, 255, 255);
+}
+#dataNacismento {
+    background-color: rgb(234, 234, 234);
+	border: 1px solid rgb(175, 175, 175);
+    color: rgb(58, 58, 58);
+}
+.txt-form{
+	background-color: rgb(234, 234, 234);
+	border: 1px solid rgb(175, 175, 175);
+    color: rgb(58, 58, 58);
+}
+#btn-cad-cliente{
+    background-color: #313131;
+    color: rgb(243, 243, 243);
+}
