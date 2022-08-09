@@ -3,6 +3,7 @@ import Home from "./Components/Pages/index";
 import Acessibilidade from "./Components/Pages/acessibilidade";
 import Equipamentos from "./Components/Pages/equipamentos";
 import Tenis from "./Components/Pages/tenis";
+import CadastrarCliente from "./Components/Pages/cadastrarCliente";
 
 function App() {
   const location = window.location.pathname
@@ -17,6 +18,9 @@ function App() {
   }
   if(location==='/tenis'){
     return <Tenis/>;
+  }
+  if(location==='/sig/cadastro-cliente'){
+    return <CadastrarCliente/>;
   }
 }
 

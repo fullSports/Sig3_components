@@ -177,7 +177,7 @@ const Menu = styled.nav`
 const Cabecalho = () =>{
   return(
     <Topo id="topo" className="topo">
-      <Acessibilidade id="acessibilidade" className="aacessibilidade">
+      <Acessibilidade id="acessibilidade" className="acessibilidade">
         <Atalhos id="atalhos" className="atalhos">
       <li>
 					<a  href="#conteudo" accesskey="1" title="Ir diretamente para o conteúdo">Ir para o conteudo [1]</a>
@@ -257,7 +257,7 @@ const Cabecalho = () =>{
 
       <Menu id="menu" className="menu">
         <ul>
-          <li><a href="">Clientes</a> </li>
+          <li><a href="/sig/cadastro-cliente">Clientes</a> </li>
           <li><a href="">Produtos</a> </li>
           <li><a href="">Pedidos</a> </li>
           <li><a href="/equipamentos">Equipamentos</a> </li>
