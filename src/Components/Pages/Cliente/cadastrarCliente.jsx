@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import Footer from "./../Footer/index";
-import Cabecalho from "./../Cabecalho/index";
+import Footer from "./../../Footer/index";
+import Cabecalho from "./../../Cabecalho/index";
 
 const Main = styled.main`
-    wid 100%;
+    width: 100%;
     min-height: 600px;
 `;
 const ExibeTitulo = styled.h3`
@@ -172,7 +172,7 @@ return(
                 </Row1grid>  
                 <BttCadClienteGrid id="btt-cad-cliente-grid" className="btt-cad-cliente-grid">
                 <BtnCadCliente type="submit" id="btn-cad-cliente" class="btn-cad-cliente" value="Cadastrar cliente "/>
-				<a href="/sig/consulta-clientes">
+				<a href="/sig/consulta-de-cliente">
                 <BtnCadCliente type="button" id="btn-cad-cliente" class="btn-cad-cliente" value="Consultar cliente"/></a>
                 </BttCadClienteGrid>   
                      

@@ -3,7 +3,8 @@ import Home from "./Components/Pages/index";
 import Acessibilidade from "./Components/Pages/acessibilidade";
 import Equipamentos from "./Components/Pages/equipamentos";
 import Tenis from "./Components/Pages/tenis";
-import CadastrarCliente from "./Components/Pages/cadastrarCliente";
+import CadastrarCliente from "./Components/Pages/Cliente/cadastrarCliente";
+import ConsultaCliente from "./Components/Pages/Cliente/consultaCliente";
 
 function App() {
   const location = window.location.pathname
@@ -19,8 +20,11 @@ function App() {
   if(location==='/tenis'){
     return <Tenis/>;
   }
-  if(location==='/sig/cadastro-cliente'){
+  if(location==='/sig/cadastro-de-cliente'){
     return <CadastrarCliente/>;
+  }
+  if(location==='/sig/consulta-de-cliente'){
+    return <ConsultaCliente />
   }
 }
 

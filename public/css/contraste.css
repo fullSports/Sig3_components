@@ -30,6 +30,9 @@ body::-webkit-scrollbar-thumb {
     max-height: 5px;
     border: 1px solid #fefefe42; 
 }
+#modoEscuro{
+    display: none;
+}
 header * {
     background-color: #262627;
 }
@@ -136,4 +139,8 @@ form input {
 #btn-cad-cliente{
     background-color: #222;
     color: #e3e3e3;
+}
+#table-exibe td {
+	color: #e3e3e3;
+	background-color: #3d3d3e;
 }

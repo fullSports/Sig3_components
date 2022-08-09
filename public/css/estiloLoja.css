@@ -32,6 +32,9 @@ body::-webkit-scrollbar-thumb {
     max-height: 5px;
     border: 1px solid transparent; 
 }
+#modoClaro{
+    display: none;
+}
 #acessibilidade * {
     background-color: #efefef;
 }
@@ -132,4 +135,8 @@ body::-webkit-scrollbar-thumb {
 #btn-cad-cliente{
     background-color: #313131;
     color: rgb(243, 243, 243);
+}
+#table-exibe td {
+	font-size: 12pt;
+	background-color: rgb(254, 254, 250);
 }

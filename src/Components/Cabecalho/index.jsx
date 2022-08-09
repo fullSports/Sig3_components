@@ -257,7 +257,7 @@ const Cabecalho = () =>{
 
       <Menu id="menu" className="menu">
         <ul>
-          <li><a href="/sig/cadastro-cliente">Clientes</a> </li>
+          <li><a href="/sig/cadastro-de-cliente">Clientes</a> </li>
           <li><a href="">Produtos</a> </li>
           <li><a href="">Pedidos</a> </li>
           <li><a href="/equipamentos">Equipamentos</a> </li>
