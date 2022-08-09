@@ -20,7 +20,7 @@ const TxtAcess = styled.div`
         font-size: 20px;
         margin: 20px 0 20px;
     }
-    txtAcess p{
+    p{
         text-align: center;
         font-size: 16px;
         line-height: 25px;
