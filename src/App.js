@@ -15,7 +15,7 @@ function App() {
   if(location==='/acessibilidade'){
     return <Acessibilidade/>
   }
-  if(location==='/equipamentos'){
+  if(location==='/equipamentos'){ 
     return <Equipamentos/>;
   }
   if(location==='/tenis'){
