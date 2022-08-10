@@ -183,10 +183,10 @@ const CadastrarProduto = ()=>{
 
                     <BttCadPrdutoGrid id="btt-cad-cliente-grid" className="btt-cad-cliente-grid">
                         <BtnCadPrduto type="submit" id="btn-cad-forms" class="btn-cad-forms" 
-                        value="Cadastrar cliente "/>
+                        value="Cadastrar Produto"/>
                         <a href="/sig/consulta-de-produtos">
                         <BtnCadPrduto type="button" id="btn-cad-forms" class="btn-cad-forms" 
-                        value="Consultar cliente"/></a>
+                        value="Consultar Produtos"/></a>
                     </BttCadPrdutoGrid>   
                 </form>
             </FormCadastroDeProduto>

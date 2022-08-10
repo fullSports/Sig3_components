@@ -71,10 +71,12 @@ const Footer = () =>{
         <Rodape id="rodape" className="rodape">
         <GridFooter id="grid-footer" className="grid-footer">
             <DesenvolvedoresFoot id="desenvolvedoresFoot" className="desenvolvedoresFoot">
-                <TituloFoot id="tituloFoot" className="tituloFoot">Desenvolvido pelo Grupo 4 - Fatec Zona Leste</TituloFoot>
+                <TituloFoot id="tituloFoot" className="tituloFoot">Desenvolvido pelo Grupo 3 - Fatec Zona Leste</TituloFoot>
                 <p>Renan Figueiredo</p>
 				<p>Lisandra Ferraz</p>
 				<p>Gabriel Gozzi</p>
+                <p>Daniela Lemmo Houck</p>
+                <p>PAULO Henrique Cardoso De Jeus</p>
             </DesenvolvedoresFoot>
             <SelosFoot id="selosFoot" className="selosFoot">
                 <TituloFoot id="tituloFoot" className="tituloFoot">Site verificado por</TituloFoot>
