@@ -26,7 +26,7 @@ const FormCadastroCliente = styled.div`
     form select {
         font-family: "Roboto", sans-serif;
         outline: 0;
-        width 100%;
+        width :100%;
         height: 25px;
         border: 0;
         margin: 0 0 15px;
@@ -34,6 +34,7 @@ const FormCadastroCliente = styled.div`
         font-size: 14px;
     }
     form input {
+        border-radius: 5px;
         font-family: "Roboto", sans-serif;
         outline: 0;
         width: 100%;
@@ -78,7 +79,7 @@ const Row1grid = styled.div`
     grid-gap: 5px;
 
     border-radius: 20px;
-    wid auto;
+    width: auto;
     height: auto;
     margin: 1px;  
 `;
@@ -170,10 +171,13 @@ return(
                             placeholder="Complemento numero/apto"/>
                     </div>
                 </Row1grid>  
+
                 <BttCadClienteGrid id="btt-cad-cliente-grid" className="btt-cad-cliente-grid">
-                <BtnCadCliente type="submit" id="btn-cad-cliente" class="btn-cad-cliente" value="Cadastrar cliente "/>
-				<a href="/sig/consulta-de-cliente">
-                <BtnCadCliente type="button" id="btn-cad-cliente" class="btn-cad-cliente" value="Consultar cliente"/></a>
+                    <BtnCadCliente type="submit" id="btn-cad-forms" class="btn-cad-forms" 
+                    value="Cadastrar cliente "/>
+                    <a href="/sig/consulta-de-cliente">
+                    <BtnCadCliente type="button" id="btn-cad-forms" class="btn-cad-forms" 
+                    value="Consultar cliente"/></a>
                 </BttCadClienteGrid>   
                      
             </form>

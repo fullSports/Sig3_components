@@ -8,8 +8,8 @@ import WhatsappIcone from "../../assets/images/whatsapp.png"
 
 const Topo = styled.header`
   min-width:100%
-  height: auto;
-`;
+  height auto;
+`
 const Acessibilidade = styled.div`
   padding: 15px 0 0 0;
   min-height: 35px;
@@ -87,7 +87,6 @@ const NavGrid =styled.div`
 `;
 const BarraPesquisa = styled.div`
   margin-top: 12%;
-  
 `;
 const BarraPesquisaInpult = styled.input`
   padding: 8px;
@@ -136,7 +135,8 @@ const ConjuntoIcones = styled.div`
     ul{
       width:80%
     }
-  
+
+  }
 `;
 const Menu = styled.nav`
   *{
@@ -173,7 +173,7 @@ const Menu = styled.nav`
     border: 10px solid #ebebeb;
     color: #2e2e2e;
 }
-  `;
+`;
 const Cabecalho = () =>{
   return(
     <Topo id="topo" className="topo">
@@ -258,7 +258,7 @@ const Cabecalho = () =>{
       <Menu id="menu" className="menu">
         <ul>
           <li><a href="/sig/cadastro-de-cliente">Clientes</a> </li>
-          <li><a href="">Produtos</a> </li>
+          <li><a href="/sig/cadastro-de-produto">Produtos</a> </li>
           <li><a href="">Pedidos</a> </li>
           <li><a href="/equipamentos">Equipamentos</a> </li>
           <li><a href="">Logout</a> </li>
