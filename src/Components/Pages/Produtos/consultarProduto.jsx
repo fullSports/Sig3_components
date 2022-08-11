@@ -17,7 +17,6 @@ const ConsultaProduto = ()=>{
         <Cabecalho />
         <Main>
         <ExibeTitulo id="exibe-titulo" className="exibe-titulo">Lista de Produtos</ExibeTitulo>
-
         
         </Main>
         <Footer />
