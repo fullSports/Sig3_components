@@ -259,7 +259,6 @@ const Cabecalho = () =>{
         <ul>
           <li><a href="/sig/cadastro-de-cliente">Clientes</a> </li>
           <li><a href="/sig/cadastro-de-produto">Produtos</a> </li>
-          <li><a href="">Pedidos</a> </li>
           <li><a href="/equipamentos">Equipamentos</a> </li>
           <li><a href="">Logout</a> </li>
         </ul>
