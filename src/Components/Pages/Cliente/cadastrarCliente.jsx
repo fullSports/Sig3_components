@@ -11,6 +11,7 @@ const ExibeTitulo = styled.h3`
     margin: 2%;
     text-align: center;
 `;
+
 const FormCadastroCliente = styled.div`
     margin-left: auto;
     margin-right: auto;
