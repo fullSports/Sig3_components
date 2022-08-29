@@ -151,3 +151,10 @@ form input {
 	color: #e3e3e3;
 	background-color: #3d3d3e;
 }
+#descAnunPrd{
+    color: #e3e3e3;
+    border: 2px solid rgba(0, 0, 0, 0.123);
+}
+#btnLinkPrd a{
+    color: #e3e3e3;
+}
