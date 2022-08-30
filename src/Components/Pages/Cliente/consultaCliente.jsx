@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Footer from "./../../Footer/index";
 import Cabecalho from "./../../Cabecalho/index";
 const Main = styled.main`
-    wid 100%;
+    width: 100%;
     min-height: 600px;
 `;
 const ExibeTitulo = styled.h3`
@@ -16,7 +16,7 @@ const TableExibe = styled.table`
     border-color: rgb(174, 174, 174);
 	margin-right: auto;
 	margin-left: auto;
-	wid 80%;
+	width: 80%;
 	box-shadow: 1px 1px 8px rgb(70, 70, 70, 0.2);
 	border-collapse: separate;
 	border-spacing: 5px 0;

@@ -9,6 +9,8 @@ import ConsultaCliente from "./Components/Pages/Cliente/consultaCliente";
 import CadastrarProduto from "./Components/Pages/Produtos/cadastrarProduto";
 import ConsultaProduto from "./Components/Pages/Produtos/consultarProduto";
 import PageErro404 from "./Components/Erro404/index";
+import AtualizaCliente from "./Components/Pages/Cliente/atualizarCliente";
+import AtualizaProdutos from "./Components/Pages/Produtos/atualizarProduto";
 function App() {
     return( 
       <BrowserRouter>
@@ -29,8 +31,12 @@ function App() {
   
         <Route path='/sig/consulta-de-produtos' element={<ConsultaProduto />}/>
 
+        <Route path='/sig/atualizar-cliente' element={<AtualizaCliente />} />
+
+        <Route path='/sig/atualizar-produto' element={<AtualizaProdutos/>}/>
+
         <Route  path="*" element={<PageErro404/>}/>
       </Routes>
   </BrowserRouter>
-  )}
+)}
 export default App;
