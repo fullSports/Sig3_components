@@ -76,7 +76,7 @@ const Footer = () =>{
 				<p>Lisandra Ferraz</p>
 				<p>Gabriel Gozzi</p>
                 <p>Daniela Lemmo Houck</p>
-                <p>PAULO Henrique Cardoso De Jeus</p>
+                <p>Paulo Henrique Cardoso De Jesus</p>
             </DesenvolvedoresFoot>
             <SelosFoot id="selosFoot" className="selosFoot">
                 <TituloFoot id="tituloFoot" className="tituloFoot">Site verificado por</TituloFoot>
