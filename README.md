@@ -8,4 +8,4 @@
 
 > npm i react-router-dom
 
-> npm start
+> npm run dev
