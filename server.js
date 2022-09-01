@@ -14,6 +14,5 @@ app.use('/sig/atualizar-cliente',express.static(resolve(__dirname,"./build")))
 app.use('/sig/atualizar-produto',express.static(resolve(__dirname,"./build")))
 app.listen(process.env.PORT || 3000, (err) => {
     if (err) { return console.log(err) }
-
     console.log('Tudo funcionando certinho')
   })
