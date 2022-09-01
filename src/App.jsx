@@ -26,7 +26,8 @@ function App() {
         <Route path='/sig/cadastro-de-cliente' element={<CadastrarCliente/>}/>
   
         <Route path='/sig/consulta-de-cliente' element={<ConsultaCliente />}/>
-  
+
+
         <Route path='/sig/cadastro-de-produto' element={<CadastrarProduto />}/>
   
         <Route path='/sig/consulta-de-produtos' element={<ConsultaProduto />}/>
