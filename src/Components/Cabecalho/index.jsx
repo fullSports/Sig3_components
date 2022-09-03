@@ -5,7 +5,7 @@ import FacebookIcone from "../../assets/images/facebook.png";
 import TwitterIcone from "../../assets/images/twitter.png"
 import InstagramIcone from "../../assets/images/instagram.png"
 import WhatsappIcone from "../../assets/images/whatsapp.png"
-
+import ImgBotaoMenu from "./../../assets/images/botao-de-menu-de-tres-linhas-horizontais.png"
 const Topo = styled.header`
   min-width:100%
   height auto;
@@ -54,7 +54,7 @@ const Atalhos = styled.ul`
     margin-left: 5px;
   }
 `;
-const Atalhos2 =styled.ul`
+const Atalhos2 = styled.ul`
   margin-right: 105px;
   float: right;
   list-style: none;
@@ -67,7 +67,7 @@ const Atalhos2 =styled.ul`
     margin-left: 3px;
   }
 `;
-const NavGrid =styled.div`
+const NavGrid = styled.div`
   justify-content: center;
   display: grid;
   grid-template-columns: repeat(3, 350px);
@@ -115,7 +115,6 @@ const Logo = styled.div`
   }
  
 `;
-
 const ConjuntoIcones = styled.div`
   margin-top: 10%;
  display: flex;
@@ -173,45 +172,119 @@ const Menu = styled.nav`
     border: 10px solid #ebebeb;
     color: #2e2e2e;
 }
+@media screen and (max-width: 460px) {
+    display: none;
+  }
 `;
-const Cabecalho = () =>{
-  return(
+const BarraMenu = styled.nav`
+  background-color: #a6e65a;
+`;
+const TituloCabecalho = styled.h1`
+  @media screen and (min-width: 460px) {
+    display: none;
+  }
+`;
+const CabecalhoMenu = styled.button`
+  @media screen and (min-width: 460px) {
+    display: none;
+  }
+  i::before{
+    content: url(${ImgBotaoMenu});
+  }
+  @media screen and (max-width:459px) {
+    width: 20px;
+    background-color: #a6e65a;
+  }
+  ::before{
+    width: 20px;
+    background-color: #a6e65a;
+  }
+`;
+const MenuLateral = styled.nav`
+  @media screen and (min-width: 460px) {
+    display: none;
+  }
+  @media screen and (max-width:459px) {
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+    background-size: auto;
+    background-color:#a6e65a;
+    width: 90%;
+    height: 100%;
+    cursor: pointer;
+    transition: .100s;
+    left: -90000vh;
+    border-radius: 19px;
+
+    a:hover {
+    background-color:#ebebeb;
+    border: 10px solid #ebebeb;
+    color: #2e2e2e;
+    }
+    ul {
+    text-align: center;
+    list-style:none;
+    }
+    ul li {
+    display: inline;
+    }
+    ul li a {
+    padding: 2px 10px;
+    display: inline-block;
+    border: 10px solid #a6e65a;
+    /* visual do link */
+    background-color: #a6e65a;
+    color: #2e2e2e;
+    text-decoration: none;
+  }
+  ul a:hover {
+  /* height: 35px; */
+  background-color:#a6e65a;
+  border: 10px solid #a7e65ab4;
+  color: #000000;
+  }
+                    
+  }
+`;
+const Cabecalho = () => {
+  return (
     <Topo id="topo" className="topo">
       <Acessibilidade id="acessibilidade" className="acessibilidade">
         <Atalhos id="atalhos" className="atalhos">
-      <li>
-					<a  href="#conteudo" accesskey="1" title="Ir diretamente para o conteúdo">Ir para o conteudo [1]</a>
-				</li>
+          <li>
+            <a href="#conteudo" accesskey="1" title="Ir diretamente para o conteúdo">Ir para o conteudo [1]</a>
+          </li>
 
-				<li>
-					<a  href="#menu" accesskey="2" title="Ir diretamente para o menu">Ir para o menu [2]</a>
-				</li>
+          <li>
+            <a href="#menu" accesskey="2" title="Ir diretamente para o menu">Ir para o menu [2]</a>
+          </li>
 
-				<li>
-					<a  href="#rodape" accesskey="3" title="Ir diretamente para o rodapé">Ir para o rodape [3]</a>
-				</li>
+          <li>
+            <a href="#rodape" accesskey="3" title="Ir diretamente para o rodapé">Ir para o rodape [3]</a>
+          </li>
         </Atalhos>
 
         <Atalhos2 id="atalhos2" className="atalhos2">
-        <li>
-					<a href="/acessibilidade" title="Ir para pagina de acessabilidade">Acessibilidade</a>
-				</li>
+          <li>
+            <a href="/acessibilidade" title="Ir para pagina de acessabilidade">Acessibilidade</a>
+          </li>
 
-				<li>
-					<a href="#" title="Contraste preto" id="modoEscuro">Modo escuro</a>
-				</li>
+          <li>
+            <a href="#" title="Contraste preto" id="modoEscuro">Modo escuro</a>
+          </li>
 
-				<li>
-					<a href="#" title="sem Contraste" id="modoClaro">Modo Claro</a>
-				</li>
-					
-				<li>
-					<a href="#" title="Aumentar a fonte(Ctrl +)" id="aumentaFonte">A+</a>
-				</li>
+          <li>
+            <a href="#" title="sem Contraste" id="modoClaro">Modo Claro</a>
+          </li>
 
-				<li>
-					<a href="#" title="Diminuir a fonte(Ctrl -)" id="diminuiFonte">A-</a>
-				</li>
+          <li>
+            <a href="#" title="Aumentar a fonte(Ctrl +)" id="aumentaFonte">A+</a>
+          </li>
+
+          <li>
+            <a href="#" title="Diminuir a fonte(Ctrl -)" id="diminuiFonte">A-</a>
+          </li>
 
         </Atalhos2>
       </Acessibilidade>
@@ -221,36 +294,36 @@ const Cabecalho = () =>{
           <BarraPesquisaInpult class="Buscar" type="text" name="buscar" placeholder="Buscar..."></BarraPesquisaInpult>
         </BarraPesquisa>
 
-        <Logo id="logo"className="logo"> 
-          <a href="/" ><img src={logo_loja} alt="Logo da Loja"/></a>
+        <Logo id="logo" className="logo">
+          <a href="/" ><img src={logo_loja} alt="Logo da Loja" /></a>
         </Logo>
 
         <ConjuntoIcones id="conjuntoIcones" className="conjuntoIcones">
           <ul>
             <li>
-                <a href="https://www.facebook.com">
-                    <img src = {FacebookIcone} alt="Facebook"/>
-                </a>
+              <a href="https://www.facebook.com">
+                <img src={FacebookIcone} alt="Facebook" />
+              </a>
             </li>
 
             <li>
-                <a href="https://twitter.com">
-                    <img src = {TwitterIcone} alt="Twitter"/>
-                </a>
+              <a href="https://twitter.com">
+                <img src={TwitterIcone} alt="Twitter" />
+              </a>
             </li>
 
             <li>
               <a href="https://www.instagram.com/">
-                <img src= {InstagramIcone} alt="Instagram"/>
+                <img src={InstagramIcone} alt="Instagram" />
               </a>
             </li>
 
             <li>
               <a href="https://www.whatsapp.com">
-                <img src= {WhatsappIcone} alt="Whatspp"/>
+                <img src={WhatsappIcone} alt="Whatspp" />
               </a>
             </li>
-         </ul>
+          </ul>
         </ConjuntoIcones>
 
       </NavGrid>
@@ -263,6 +336,28 @@ const Cabecalho = () =>{
           <li><a href="">Logout</a> </li>
         </ul>
       </Menu>
+
+      <BarraMenu id="barra__menu" className="barra__menu">
+        <TituloCabecalho id="titulo__cabecalho" className="titulo__cabecalho">
+          <CabecalhoMenu id="cabecalho__munu"className="cabecalho__munu" aria-label="Menu">
+          <i></i>
+
+          </CabecalhoMenu>
+          Menu
+        </TituloCabecalho>
+      </BarraMenu>
+
+      <MenuLateral id="menu-lateral" className="menu-lateral">
+      <ul>
+          <li><a href="/sig/cadastro-de-cliente" id="menu-lateral__link" className="menu-lateral__link">Clientes</a> </li>
+          <li><a href="/sig/cadastro-de-produto" id="menu-lateral__link" className="menu-lateral__link">Produtos</a> </li>
+          <li><a href="/equipamentos" id="menu-lateral__link" className="menu-lateral__link">Equipamentos</a> </li>
+          <li><a href="" id="menu-lateral__link" className="menu-lateral__link">Logout</a> </li>
+        </ul>
+      </MenuLateral>
+
+
+
 
     </Topo>
   );
