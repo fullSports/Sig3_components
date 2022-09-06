@@ -61,65 +61,69 @@ const BtnExibe = styled.button`
         transform:translate(0.3s);
     }
 `;
-const ConsultaCliente = () =>{
-    return(
-    <>
-    <Cabecalho />
-    <Main>
-    <ExibeTitulo id="exibe-titulo" className="exibe-titulo">Lista de Cliente</ExibeTitulo>
-        <PainelBody id="panel-body" className="panel-name" switch="${clientes}">
-        
-        <div case="*">
-            <TableExibe id="table-exibe" className="table-exibe">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>CPF</th>
-                        <th>Nome</th>
-                        <th>Dt. Nascimento</th>
-                        <th>Sexo</th>
-                        <th>CEP</th>
-                        <th>Endereço</th>
-                        <th>Complemento</th>
-                        <th>Dt. Cadastro</th>
+const ConsultaCliente = () => {
+    return (
+        <>
+            <Cabecalho />
+            <Main>
+                <ExibeTitulo id="exibe-titulo" className="exibe-titulo">Lista de Cliente</ExibeTitulo>
+                <PainelBody id="panel-body" className="panel-name" switch="${clientes}">
 
-                    </tr>
-				</thead>
+                    <div case="*">
+                        <TableExibe id="table-exibe" className="table-exibe">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>CPF</th>
+                                    <th>Nome</th>
+                                    <th>Dt. Nascimento</th>
+                                    <th>Sexo</th>
+                                    <th>CEP</th>
+                                    <th>Rua</th>
+                                    <th>Bairro</th>
+                                    <th>Cidade</th>
+                                    <th>Complemento</th>
+                                    <th>Dt. Cadastro</th>
 
-                <tbody>
-                    <tr each="cliente : ${clientes}">
-                        <td text="${cliente.id}"></td>
-                        <td text="${cliente.cpf}"></td>
-                        <td text="${cliente.nome}"></td>
-                        <td text="${cliente.dataNascimento}"></td>
-                        <td text="${cliente.sexo}"></td>
-                        <td text="${cliente.cep}"></td>
-                        <td text="${cliente.endereco}"></td>
-                        <td text="${cliente.complemento}"></td>
-                        <td text="${cliente.dataCadastro}"></td>
+                                </tr>
+                            </thead>
 
-                        <td>
-                            <BtnExibeGroup id="btn-exibe-group" className="btn-exibe-group">
-                                <a href="@{/sig/clientes/{cpf}(cpf=${cliente.cpf})}" >
-                                    <BtnExibe id="btn-exibe" class="btn-exibe"> Editar </BtnExibe></a>
-                                <a href="@{/sig/clientes/id/{id}(id=${cliente.id})}">
-                                    <BtnExibe id="btn-exibe" class="btn-exibe">Excluir</BtnExibe></a>
-                            </BtnExibeGroup>
-                        </td>
-                    </tr>
-				</tbody>
-            </TableExibe>
+                            <tbody>
+                                <tr each="cliente : ${clientes}">
+                                    <td text="${cliente.id}"></td>
+                                    <td text="${cliente.cpf}"></td>
+                                    <td text="${cliente.nome}"></td>
+                                    <td text="${cliente.dataNascimento}"></td>
+                                    <td text="${cliente.sexo}"></td>
+                                    <td text="${cliente.cep}"></td>
+                                    <td text="${cliente.rua}"></td>
+                                    <td text="${cliente.bairro}"></td>
+                                    <td text="${cliente.cidade}"></td>
+                                    <td text="${cliente.complemento}"></td>
+                                    <td text="${cliente.dataCadastro}"></td>
 
-        </div>
+                                    <td>
+                                        <BtnExibeGroup id="btn-exibe-group" className="btn-exibe-group">
+                                            <a href="@{/sig/clientes/{cpf}(cpf=${cliente.cpf})}" >
+                                                <BtnExibe id="btn-exibe" class="btn-exibe"> Editar </BtnExibe></a>
+                                            <a href="@{/sig/clientes/id/{id}(id=${cliente.id})}">
+                                                <BtnExibe id="btn-exibe" class="btn-exibe">Excluir</BtnExibe></a>
+                                        </BtnExibeGroup>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </TableExibe>
+
+                    </div>
 
 
-        </PainelBody>
+                </PainelBody>
 
 
-    </Main>
+            </Main>
 
-    <Footer />
-    </>
+            <Footer />
+        </>
     );
 }
 export default ConsultaCliente;

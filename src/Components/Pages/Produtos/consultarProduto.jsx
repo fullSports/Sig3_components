@@ -92,7 +92,7 @@ const ConsultaProduto = () => {
                                     <td text="${produto.nome}"></td>
                                     <td text="${produto.tipo}"></td>
                                     <td text="${produto.cor}"></td>
-                                    <td text="${produto.preco}"></td>
+                                    <td text="${produto.preco}"></td>z
                                     <td text="${produto.dataCadastro}"></td>
                                     <td text="${produto.qtdEstoque}"></td>
                                     <td >

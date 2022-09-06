@@ -97,36 +97,36 @@ const BtnCadCliente = styled.input`
 function FormsCliente(){
     return(
         <FormCadastroCliente id="form-cadastro-cliente" className="form-cadastro-cliente">
-            <form action="#" object="${}" method="post">
+            <form action="#"  method="post">
                 <Row1grid id="row-1-grid" className="row-1-grid">
-                    <label for="cpf" class="col-form-label">CPF</label>
+                    <label for="cpf" className="col-form-label">CPF</label>
                     <div>
-                        <span if="${#fields.hasErrors('cpf')}" errors="*{cpf}" class="txt-aviso">
+                        <span if="${#fields.hasErrors('cpf')}" errors="*{cpf}" className="txt-aviso">
                         </span>
-                        <input type="text" field="*{cpf}" class="txt-form" id="cpf" placeholder="CPF"/>
+                        <input type="text" field="*{cpf}" className="txt-form" id="cpf" placeholder="CPF"/>
                     </div>
 
-                    <label for="nome" class="col-form-label">Nome</label>
+                    <label for="nome" className="col-form-label">Nome</label>
                     <div>
-                        <span if="${#fields.hasErrors('nome')}" errors="*{nome}" class="txt-aviso">
+                        <span if="${#fields.hasErrors('nome')}" errors="*{nome}" className="txt-aviso">
                         </span>
-                        <input type="text" field="*{nome}" class="txt-form" id="nome" placeholder="Nome"/>
+                        <input type="text" field="*{nome}" className="txt-form" id="nome" placeholder="Nome"/>
                     </div>
 
-                    <label for="dataNascimento" class="col-form-label">Data Nascimento</label>
+                    <label for="dataNascimento" className="col-form-label">Data Nascimento</label>
                     <div>
                         <span if="${#fields.hasErrors('dataNascimento')}" errors="*{dataNascimento}"
-                            class="txt-aviso"></span>
-                        <input  type="text" field="*{dataNascimento}" class="txt-form" id="dataNascimento"
+                            className="txt-aviso"></span>
+                        <input  type="text" field="*{dataNascimento}" className="txt-form" id="dataNascimento"
                             placeholder="Data Nascimento"/>
 
                     </div>
 
-                    <label for="dataNascimento" class="col-form-label">Sexo</label>
+                    <label for="dataNascimento" className="col-form-label">Sexo</label>
                     <div>
-                        <span if="${#fields.hasErrors('sexo')}" errors="*{sexo}" class="txt-aviso">
+                        <span if="${#fields.hasErrors('sexo')}" errors="*{sexo}" className="txt-aviso">
                         </span>
-                        <select name="sexo"  type="text" field="*{sexo}" class="txt-form" id="sexo" placeholder="M/F/O/Prefiro Não Dizer">
+                        <select name="sexo"  type="text" field="*{sexo}" className="txt-form" id="sexo" placeholder="M/F/O/Prefiro Não Dizer">
                             <option value="#"></option>
                             <option value="M">Masculino</option>
                             <option value="F">Feminino</option>
@@ -135,32 +135,51 @@ function FormsCliente(){
                         </select>
                     </div>
 
-                    <label for="cep" class="col-form-label">CEP</label>
+                    <label for="cep" className="col-form-label">CEP</label>
                     <div>
-                        <span if="${#fields.hasErrors('cep')}" errors="*{cep}" class="txt-aviso"></span>
-                        <input type="text" field="*{cep}" class="txt-form" id="cep" placeholder="CEP"/>
+                        <span if="${#fields.hasErrors('cep')}" errors="*{cep}" className="txt-aviso"></span>
+                        <input type="text" field="*{cep}" className="txt-form" onblur="pesquisacep(this.value);"
+                         name="cep" id="cep" placeholder="00000-000"/>
                     </div>
                     
-                    <label for="endereco" class="col-form-label">Endereço</label>
+                    <label for="rua" className="col-form-label">Rua</label>
                     <div>
-                        <span if="${#fields.hasErrors('endereco')}" errors="*{endereco}" class="txt-aviso"></span>
-                        <input type="text" field="*{endereco}" class="txt-form" id="endereco" placeholder="Endereço"/>
+                        <span if="${#fields.hasErrors('rua')}" errors="*{rua}" className="txt-aviso"></span>
+                        <input type="text" field="*{rua}" className="txt-form" id="rua" size="60" placeholder="rua" name="rua"/>
                     </div>
 
-                    <label for="complemento" class="col-form-label">Complemento</label>
+                    <label for="bairro" className="col-form-label">Bairro</label>
+                    <div>
+                        <span if="${#fields.hasErrors('bairro')}" errors="*{bairro}" className="txt-aviso"></span>
+                        <input type="text" field="*{bairro}" className="txt-form" id="bairro" placeholder="bairro" name="bairro"/>
+                    </div>
+
+                    <label for="cidade" className="col-form-label">Cidade</label>
+                    <div>
+                        <span if="${#fields.hasErrors('cidade')}" errors="*{cidade}" className="txt-aviso"></span>
+                        <input type="text" field="*{cidade}" className="txt-form" id="cidade" placeholder="cidade" name="cidade"/>
+                    </div>
+
+                    <label for="estado" className="col-form-label">Estado</label>
+                    <div>
+                        <span if="${#fields.hasErrors('estado')}" errors="*{estado}" className="txt-aviso"></span>
+                        <input type="text" field="*{estado}" className="txt-form" id="estado" placeholder="estado" name="estado"/>
+                    </div>
+
+                    <label for="complemento" className="col-form-label">Complemento</label>
                     <div>
                         <span if="${#fields.hasErrors('complemento')}" errors="*{complemento}"
-                            class="txt-aviso"></span>
-                        <input type="text" field="*{complemento}" class="txt-form" id="complemento"
-                            placeholder="Complemento numero/apto"/>
+                            className="txt-aviso"></span>
+                        <input type="text" field="*{complemento}" className="txt-form" id="complemento"
+                            placeholder="Complemento numero/apto" name="complemento"/>
                     </div>
                 </Row1grid>  
 
                 <BttCadClienteGrid id="btt-cad-cliente-grid" className="btt-cad-cliente-grid">
-                    <BtnCadCliente type="submit" id="btn-cad-forms" class="btn-cad-forms" 
+                    <BtnCadCliente type="submit" id="btn-cad-forms" className="btn-cad-forms" 
                     value="Enviar"/>
                     <a href="/sig/consulta-de-cliente">
-                    <BtnCadCliente type="button" id="btn-cad-forms" class="btn-cad-forms" 
+                    <BtnCadCliente type="button" id="btn-cad-forms" className="btn-cad-forms" 
                     value="Consultar cliente"/></a>
                 </BttCadClienteGrid>   
                      

@@ -13,6 +13,7 @@ import AtualizaCliente from "./Components/Pages/Cliente/atualizarCliente";
 import AtualizaProdutos from "./Components/Pages/Produtos/atualizarProduto";
 function App() {
     return( 
+      <>
       <BrowserRouter>
       <Routes>
         <Route exact path='/'  element={<Home/>} />
@@ -39,5 +40,7 @@ function App() {
         <Route  path="*" element={<PageErro404/>}/>
       </Routes>
   </BrowserRouter>
+ 
+  </>
 )}
 export default App;
