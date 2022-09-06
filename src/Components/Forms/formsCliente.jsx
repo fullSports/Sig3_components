@@ -103,7 +103,7 @@ function FormsCliente(){
                     <div>
                         <span if="${#fields.hasErrors('cpf')}" errors="*{cpf}" className="txt-aviso">
                         </span>
-                        <input type="text" field="*{cpf}" className="txt-form" id="cpf" placeholder="CPF"/>
+                        <input type="text" field="*{cpf}" className="txt-form" id="cpf" placeholder="000.000.000-00"/>
                     </div>
 
                     <label for="nome" className="col-form-label">Nome</label>
@@ -117,8 +117,8 @@ function FormsCliente(){
                     <div>
                         <span if="${#fields.hasErrors('dataNascimento')}" errors="*{dataNascimento}"
                             className="txt-aviso"></span>
-                        <input  type="text" field="*{dataNascimento}" className="txt-form" id="dataNascimento"
-                            placeholder="Data Nascimento"/>
+                        <input  type="text" field="*{dataNascimento}" className="txt-form" id="data"
+                            placeholder="__/__/____"/>
 
                     </div>
 

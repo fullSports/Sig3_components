@@ -156,7 +156,7 @@ function FormsProduto(){
                             <span if="${#fields.hasErrors('cnpj')}" errors="*{cnpj}" class="txt-aviso">
                             </span>
                             <input type="text" field="*{cnpj}" id="cnpj" class="txt-form"
-                                placeholder="Informe o CPNJ do fornecedor"/>
+                                placeholder="00.000.000./0000-00"/>
                         </div>
 
                         <label for="nomeImagem">fotos do produto:</label> 
