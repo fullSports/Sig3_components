@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import Inpults from "../Inpults";
+import Selects from "../Selects";
 const FormCadastroCliente = styled.div`
     margin-left: auto;
     margin-right: auto;
@@ -11,54 +13,11 @@ const FormCadastroCliente = styled.div`
     height: auto;
     font-size: 12pt;
     border-radius: 10px;
-
-    form select {
-        font-family: "Roboto", sans-serif;
-        outline: 0;
-        width :100%;
-        height: 25px;
-        border: 0;
-        margin: 0 0 15px;
-        box-sizing: border-box;
-        font-size: 14px;
-    }
-    form input {
-        border-radius: 5px;
-        font-family: "Roboto", sans-serif;
-        outline: 0;
-        width: 100%;
-        border: 0;
-        margin: 0 0 15px;
-        padding: 15px;
-        box-sizing: border-box;
-        font-size: 14px;
-       }
     @media screen and (max-width: 1144px) {
         width: 90%;
         height: auto;
         font-size: 12px;
         border-radius: 10px;
-
-         form select {
-                width: 90%;
-                font-family: "Roboto", sans-serif;
-                outline: 0;
-                height: 25px;
-                border: 0;
-                margin: 0 0 15px;
-                box-sizing: border-box;
-                font-size: 14px;
-            }
-
-        form input {
-            font-family: "Roboto", sans-serif;
-            outline: 0;
-            border: 0;
-            margin: 0 0 15px;
-            padding: 15px;
-            box-sizing: border-box;
-            font-size: 14px;
-        }
     }
 `;
 const Row1grid = styled.div`
@@ -85,8 +44,9 @@ const BtnCadCliente = styled.input`
     display: block;
     border: none;
     font-size: 14px;
-    width: 160px;
+    width: 100%;
     height: 44px;
+    border-radius: 5px;
     :hover{
         text-decoration: none;
         background-color: rgb(0, 0, 0);
@@ -94,86 +54,46 @@ const BtnCadCliente = styled.input`
         color: #fff;
     }
 `;
-function FormsCliente(){
-    return(
+function FormsCliente() {
+    return (
         <FormCadastroCliente id="form-cadastro-cliente" className="form-cadastro-cliente">
-            <form action="#"  method="post">
+            <form action="#" method="post">
                 <Row1grid id="row-1-grid" className="row-1-grid">
-                    <label for="cpf" className="col-form-label">CPF</label>
-                    <div>
-                        <span if="${#fields.hasErrors('cpf')}" errors="*{cpf}" className="txt-aviso">
-                        </span>
-                        <input type="text" field="*{cpf}" className="txt-form" id="cpf" placeholder="000.000.000-00"/>
-                    </div>
+                    <Inpults label="CPF" for="cpf" if="${#fields.hasErrors('cpf')}" erros="*{cpf}"
+                        type="text" field="*{nome}" id="cpf" placeholder="00.000.000-00"
+                    />
 
-                    <label for="nome" className="col-form-label">Nome</label>
-                    <div>
-                        <span if="${#fields.hasErrors('nome')}" errors="*{nome}" className="txt-aviso">
-                        </span>
-                        <input type="text" field="*{nome}" className="txt-form" id="nome" placeholder="Nome"/>
-                    </div>
+                    <Inpults label="Nome do produto" for="nomeProduto" if="${#fields.hasErrors('nome')}"
+                        erros="*{nome}" type="text" field="*{nome}" id="nome" placeholder="Nome do Produto"
+                    />
 
-                    <label for="dataNascimento" className="col-form-label">Data Nascimento</label>
-                    <div>
-                        <span if="${#fields.hasErrors('dataNascimento')}" errors="*{dataNascimento}"
-                            className="txt-aviso"></span>
-                        <input  type="text" field="*{dataNascimento}" className="txt-form" id="data"
-                            placeholder="__/__/____"/>
+                    <Inpults label="Data de Nascimento" for="dataNascimento" if="${#fields.hasErrors('dataNascimento')}"
+                        erros="*{dataNascimento}" field="*{dataNascimento}" id="data" placeholder="__/__/____"
+                    />
 
-                    </div>
+                    <Selects label="Sexo" name="sexo" type="text" field="*{sexo}" class="txt-form" id="sexo"
+                        placeholder="M/F/O/Prefiro Não Dizer" />
 
-                    <label for="dataNascimento" className="col-form-label">Sexo</label>
-                    <div>
-                        <span if="${#fields.hasErrors('sexo')}" errors="*{sexo}" className="txt-aviso">
-                        </span>
-                        <select name="sexo"  type="text" field="*{sexo}" className="txt-form" id="sexo" placeholder="M/F/O/Prefiro Não Dizer">
-                            <option value="#"></option>
-                            <option value="M">Masculino</option>
-                            <option value="F">Feminino</option>
-                            <option value="O">Outros</option>
-                            <option value="*">Prefiro Não Dizer</option>
-                        </select>
-                    </div>
+                    <Inpults label="CEP" for="cep" if="${#fields.hasErrors('cep')}"
+                        erros="*{cep}" field="*{cep}" id="cep" placeholder="00000-00"
+                    />
 
-                    <label for="cep" className="col-form-label">CEP</label>
-                    <div>
-                        <span if="${#fields.hasErrors('cep')}" errors="*{cep}" className="txt-aviso"></span>
-                        <input type="text" field="*{cep}" className="txt-form" onblur="pesquisacep(this.value);"
-                         name="cep" id="cep" placeholder="00000-000"/>
-                    </div>
-                    
-                    <label for="rua" className="col-form-label">Rua</label>
-                    <div>
-                        <span if="${#fields.hasErrors('rua')}" errors="*{rua}" className="txt-aviso"></span>
-                        <input type="text" field="*{rua}" className="txt-form" id="rua" size="60" placeholder="rua" name="rua"/>
-                    </div>
+                    <Inpults label="Rua" for="rua" if="${#fields.hasErrors('rua')}"
+                        erros="*{rua}" field="*{rua}" id="rua" placeholder="rua"
+                    />
 
-                    <label for="bairro" className="col-form-label">Bairro</label>
-                    <div>
-                        <span if="${#fields.hasErrors('bairro')}" errors="*{bairro}" className="txt-aviso"></span>
-                        <input type="text" field="*{bairro}" className="txt-form" id="bairro" placeholder="bairro" name="bairro"/>
-                    </div>
+                    <Inpults label="Bairro" for="bairro" if="${#fields.hasErrors('bairro')}"
+                        erros="*{bairro}" field="*{bairro}" id="bairro" placeholder="bairro"
+                    />
 
-                    <label for="cidade" className="col-form-label">Cidade</label>
-                    <div>
-                        <span if="${#fields.hasErrors('cidade')}" errors="*{cidade}" className="txt-aviso"></span>
-                        <input type="text" field="*{cidade}" className="txt-form" id="cidade" placeholder="cidade" name="cidade"/>
-                    </div>
+                    <Inpults label="Estado" for="estado" if="${#fields.hasErrors('estado')}"
+                        erros="*{estado}" field="*{estado}" id="estado" placeholder="estado"
+                    />
 
-                    <label for="estado" className="col-form-label">Estado</label>
-                    <div>
-                        <span if="${#fields.hasErrors('estado')}" errors="*{estado}" className="txt-aviso"></span>
-                        <input type="text" field="*{estado}" className="txt-form" id="estado" placeholder="estado" name="estado"/>
-                    </div>
-
-                    <label for="complemento" className="col-form-label">Complemento</label>
-                    <div>
-                        <span if="${#fields.hasErrors('complemento')}" errors="*{complemento}"
-                            className="txt-aviso"></span>
-                        <input type="text" field="*{complemento}" className="txt-form" id="complemento"
-                            placeholder="Complemento numero/apto" name="complemento"/>
-                    </div>
-                </Row1grid>  
+                    <Inpults label="Complemento" for="complemento" if="${#fields.hasErrors('complemento')}"
+                        erros="*{complemento}" field="*{complemento}" id="complemento" placeholder="casa/apartamento"
+                    />
+                </Row1grid>
 
                 <BttCadClienteGrid id="btt-cad-cliente-grid" className="btt-cad-cliente-grid">
                     <BtnCadCliente type="submit" id="btn-cad-forms" className="btn-cad-forms" 
@@ -182,8 +102,9 @@ function FormsCliente(){
                     <BtnCadCliente type="button" id="btn-cad-forms" className="btn-cad-forms" 
                     value="Consultar cliente"/></a>
                 </BttCadClienteGrid>   
-                     
+
             </form>
         </FormCadastroCliente>
-)};
+    )
+};
 export default FormsCliente;

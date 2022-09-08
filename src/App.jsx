@@ -8,7 +8,7 @@ import CadastrarCliente from "./Components/Pages/Cliente/cadastrarCliente";
 import ConsultaCliente from "./Components/Pages/Cliente/consultaCliente";
 import CadastrarProduto from "./Components/Pages/Produtos/cadastrarProduto";
 import ConsultaProduto from "./Components/Pages/Produtos/consultarProduto";
-import PageErro404 from "./Components/Erro404/index";
+import PageErro404 from './Components/Pages/Erro404'
 import AtualizaCliente from "./Components/Pages/Cliente/atualizarCliente";
 import AtualizaProdutos from "./Components/Pages/Produtos/atualizarProduto";
 function App() {

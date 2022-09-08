@@ -140,6 +140,11 @@ body::-webkit-scrollbar-thumb {
 	border: 1px solid rgb(175, 175, 175);
     color: rgb(58, 58, 58);
 }
+.option-form{
+    background-color: rgb(234, 234, 234);
+	border: 1px solid rgb(175, 175, 175);
+    color: rgb(58, 58, 58);
+}
 #btn-cad-forms{
     background-color: #313131;
     color: rgb(243, 243, 243);
