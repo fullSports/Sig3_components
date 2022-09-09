@@ -26,7 +26,6 @@ const local = window.location.href;
                 }
             }
         }
-
         window.onload = function () {
             let txtcep = document.getElementById("cep");
             txtcep.addEventListener("blur", buscaCep);
