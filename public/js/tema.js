@@ -1,11 +1,11 @@
-link_css = "/css/estiloLoja.css";
+link_css = "../css/estiloLoja.css";
 
 				
 if(getCookie2() == "contraste"){
-    link_css = "/css/estiloEscuro.css";
+    link_css = "../css/estiloEscuro.css";
 }
 else if(getCookie() == "default"){
-    link_css = "/css/estiloLoja.css";
+    link_css = "../css/estiloLoja.css";
 }
 
 $(document).ready(function(){
