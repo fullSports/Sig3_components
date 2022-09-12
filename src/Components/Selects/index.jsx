@@ -14,7 +14,6 @@ const Select = styled.select`
 `;
 function Selects(props){
     const local = window.location.href;
-
     if (local.search('/sig/cadastro-de-cliente')!== -1) {
         return(
             <>
@@ -25,14 +24,8 @@ function Selects(props){
                 <span if={props.if} errors={props.errors} className="txt-aviso" />
                 <Select name={props.name} type={props.type} field={props.field}
                 className="txt-form" id={props.id} placeholder={props.placeholder}>
-                    <option className="option-form" value="#"></option>
-                    <option className="option-form" value="M">Masculino</option>
-                    <option className="option-form" value="F">Feminino</option>
-                    <option className="option-form" value="O">Outros</option>
-                    <option className="option-form" value="-">Prefiro Não Dizer</option>
+                    {props.itens.map(item=> <option>{item}</option>)}
                 </Select>
-                
-
             </div>
             </>
         )

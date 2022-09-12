@@ -55,6 +55,7 @@ const BtnCadCliente = styled.input`
     }
 `;
 function FormsCliente() {
+    const sexo = ['','M','F','O','Prefiro não dizer']
     return (
         <FormCadastroCliente id="form-cadastro-cliente" className="form-cadastro-cliente">
             <form action="#" method="post">
@@ -72,7 +73,7 @@ function FormsCliente() {
                     />
 
                     <Selects label="Sexo" name="sexo" type="text" field="*{sexo}" class="txt-form" id="sexo"
-                        placeholder="M/F/O/Prefiro Não Dizer" />
+                        placeholder="M/F/O/Prefiro Não Dizer" itens={sexo}/>
 
                     <Inpults label="CEP" for="cep" if="${#fields.hasErrors('cep')}"
                         erros="*{cep}" field="*{cep}" id="cep" placeholder="00000-00"
