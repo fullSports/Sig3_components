@@ -6,12 +6,12 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
     "react-router-dom": "^6.3.0",
     "react-script-tag": "^1.1.2",
     "react-scripts": "3.4.1",
-    "styled-components": "^5.2.0"
+    "styled-components": "^5.3.5"
   },
   "scripts": {
     "start": "node server.js",
