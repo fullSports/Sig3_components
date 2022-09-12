@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import Button from "../Button";
 import Inpults from "../Inpults";
 import Selects from "../Selects";
 const FormCadastroCliente = styled.div`
@@ -37,28 +38,16 @@ const BttCadClienteGrid = styled.div`
     grid-auto-rows: minmax(auto, auto);
     grid-gap: 2px;
 `;
-const BtnCadCliente = styled.input`
-    justify-content: center;
-	margin-right: auto;
-	margin-left: auto;
-    display: block;
-    border: none;
-    font-size: 14px;
-    width: 100%;
-    height: 44px;
-    border-radius: 5px;
-    :hover{
-        text-decoration: none;
-        background-color: rgb(0, 0, 0);
-        transform:translate(0.3s);
-        color: #fff;
-    }
-`;
+
 function FormsCliente() {
-    const sexo = ['','M','F','O','Prefiro não dizer']
+    const sexo = ['', 'M', 'F', 'O', 'Prefiro não dizer']
+    const aoSalvar = (evento) => {
+        evento.preventDefault()
+        alert('e')
+    }
     return (
         <FormCadastroCliente id="form-cadastro-cliente" className="form-cadastro-cliente">
-            <form action="#" method="post">
+            <form action="#" method="post" >
                 <Row1grid id="row-1-grid" className="row-1-grid">
                     <Inpults label="CPF" for="cpf" if="${#fields.hasErrors('cpf')}" erros="*{cpf}"
                         type="text" field="*{nome}" id="cpf" placeholder="00.000.000-00"
@@ -73,7 +62,7 @@ function FormsCliente() {
                     />
 
                     <Selects label="Sexo" name="sexo" type="text" field="*{sexo}" class="txt-form" id="sexo"
-                        placeholder="M/F/O/Prefiro Não Dizer" itens={sexo}/>
+                        placeholder="M/F/O/Prefiro Não Dizer" itens={sexo} />
 
                     <Inpults label="CEP" for="cep" if="${#fields.hasErrors('cep')}"
                         erros="*{cep}" field="*{cep}" id="cep" placeholder="00000-00"
@@ -97,12 +86,15 @@ function FormsCliente() {
                 </Row1grid>
 
                 <BttCadClienteGrid id="btt-cad-cliente-grid" className="btt-cad-cliente-grid">
-                    <BtnCadCliente type="submit" id="btn-cad-forms" className="btn-cad-forms" 
-                    value="Enviar"/>
+                    <Button type="submit" id="btn-cad-forms" className="btn-cad-forms">
+                        Cadastrar Cliente
+                    </Button>
                     <a href="/sig/consulta-de-cliente">
-                    <BtnCadCliente type="button" id="btn-cad-forms" className="btn-cad-forms" 
-                    value="Consultar cliente"/></a>
-                </BttCadClienteGrid>   
+                        <Button type="button" id="btn-cad-forms" className="btn-cad-forms" >
+                            Consultar Cliente
+                        </Button>
+                    </a>
+                </BttCadClienteGrid>
 
             </form>
         </FormCadastroCliente>
