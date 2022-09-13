@@ -74,6 +74,9 @@ function FormsCliente() {
                     <Inpults label="Estado" for="estado"  type="text" id="estado" placeholder="estado"
                     />
 
+                    <Inpults label="Cidade" for="cidade"  type="text" id="cidade" placeholder="cidade"
+                    />
+
                     <Inpults label="Complemento" for="complemento"  type="text" 
                         id="complemento" placeholder="casa/apartamento"
                     />
