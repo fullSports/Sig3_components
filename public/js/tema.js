@@ -1,6 +1,6 @@
-link_css = "/css/estiloLoja.css";
-    
-                    
+var link_css = "/css/estiloLoja.css";
+
+				
 if(getCookie2() == "contraste"){
     link_css = "/css/estiloEscuro.css";
 }

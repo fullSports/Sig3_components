@@ -1,5 +1,5 @@
- //visualização do produto
- $(document).ready(function(){
+//visualização do produto
+$(document).ready(function(){
 
     $('#opcImg1').click(function(){
     
@@ -36,20 +36,20 @@
     
     });
 
-        //BOTOES ROLAGEM CARROSSEL
-const groupCards = [...document.querySelectorAll('#conjuntoCard')];
-const btnAft = [...document.querySelectorAll('#btnAft')];
-const btnBef = [...document.querySelectorAll('#btnBef')]
-
-groupCards.forEach((item, i ) =>{
-    let groupCardsDimen = item.getBoundingClientRect();
-    let groupCardsLength = groupCardsDimen.width;
-
-    btnAft[i].addEventListener('click', () =>{
-        item.scrollLeft += groupCardsLength;
-    })
-
-    btnBef[i].addEventListener('click', () => {
-        item.scrollLeft -= groupCardsLength;
-    })
-})
+ //BOTOES ROLAGEM CARROSSEL
+ const groupCards = [...document.querySelectorAll('#conjuntoCard')];
+ const btnAft = [...document.querySelectorAll('#btnAft')];
+ const btnBef = [...document.querySelectorAll('#btnBef')]
+ 
+ groupCards.forEach((item, i ) =>{
+     let groupCardsDimen = item.getBoundingClientRect();
+     let groupCardsLength = groupCardsDimen.width;
+ 
+     btnAft[i].addEventListener('click', () =>{
+         item.scrollLeft += groupCardsLength;
+     })
+ 
+     btnBef[i].addEventListener('click', () => {
+         item.scrollLeft -= groupCardsLength;
+     })
+ })
