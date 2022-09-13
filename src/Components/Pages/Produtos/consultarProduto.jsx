@@ -62,12 +62,13 @@ const BtnExibe = styled.button`
     }
 `;
 const ConsultaProduto = () => {
+    const link = "#"
     return (
         <>
             <Cabecalho />
             <Main>
                 <ExibeTitulo id="exibe-titulo" className="exibe-titulo">Lista de Produtos</ExibeTitulo>
-                <PainelBody id="panel-body" className="panel-name" switch="${clientes}">
+                <PainelBody id="panel-body" className="panel-name" >
 
                     <div case="*">
                         <TableExibe id="table-exibe" className="table-exibe">
@@ -86,25 +87,25 @@ const ConsultaProduto = () => {
                             </thead>
 
                             <tbody>
-                                <tr each="produto : ${produtos}">
-                                    <td text="${produto.id}"></td>
-                                    <td text="${produto.cnpj}"></td>
-                                    <td text="${produto.nome}"></td>
-                                    <td text="${produto.tipo}"></td>
-                                    <td text="${produto.cor}"></td>
-                                    <td text="${produto.preco}"></td>z
-                                    <td text="${produto.dataCadastro}"></td>
-                                    <td text="${produto.qtdEstoque}"></td>
+                                <tr>
+                                    <td text=""></td>
+                                    <td text=""></td>
+                                    <td text=""></td>
+                                    <td text=""></td>
+                                    <td text=""></td>
+                                    <td text=""></td>
+                                    <td text=""></td>
+                                    <td text=""></td>
                                     <td >
-                                        <img src="@{/sig/produtos/mostrarImagem/{imagem}(imagem=${produto.nomeImagem})}" width="100" />
+                                        {/* <img src="@{/sig/produtos/mostrarImagem/{imagem}(imagem=${produto.nomeImagem})}" width="100" /> */}
                                     </td>
 
                                     <td>
                                         <BtnExibeGroup id="btn-exibe-group" className="btn-exibe-group">
-                                            <a href="@{/sig/clientes/{cpf}(cpf=${cliente.cpf})}" >
-                                                <BtnExibe id="btn-exibe" class="btn-exibe"> Editar </BtnExibe></a>
-                                            <a href="@{/sig/clientes/id/{id}(id=${cliente.id})}">
-                                                <BtnExibe id="btn-exibe" class="btn-exibe">Excluir</BtnExibe></a>
+                                            
+                                                <BtnExibe id="btn-exibe" class="btn-exibe"><a href={link} > Editar </a></BtnExibe>
+                                            
+                                                <BtnExibe id="btn-exibe" class="btn-exibe"> <a href={link}>Excluir</a></BtnExibe>
                                         </BtnExibeGroup>
                                     </td>
                                 </tr>

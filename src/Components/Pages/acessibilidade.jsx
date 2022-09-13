@@ -79,8 +79,7 @@ const Acessibilidade = () =>{
 			<p>Observação: leia no manual do leitor de telas sobre a melhor forma de navegação em páginas web.</p><br/>
 
 			<h2>LIBRAS - Língua Brasileira de Sinais</h2>
-			<p>Este site é acessível em LIBRAS através do <a href="http://www.vlibras.gov.br/"
-					target="_blank">VLibras</a>.</p>
+			<p>Este site é acessível em LIBRAS através do <a href="http://www.vlibras.gov.br/">VLibras</a>.</p>
 			<p>-Do lado direito de cada página do site existe o ícone de um Widget informando que o site é acessível em
 				LIBRAS.</p>
 			<p>-Para traduzir, basta clicar sobre o ícone e selecionar o texto que deseja traduzir.</p>

@@ -41,47 +41,41 @@ const BttCadClienteGrid = styled.div`
 
 function FormsCliente() {
     const sexo = ['', 'M', 'F', 'O', 'Prefiro não dizer']
-    const aoSalvar = (evento) => {
-        evento.preventDefault()
-        alert('e')
-    }
+    // const aoSalvar = (evento) => {
+    //     evento.preventDefault()
+    //     alert('e')
+    // }
     return (
         <FormCadastroCliente id="form-cadastro-cliente" className="form-cadastro-cliente">
             <form action="#" method="post" >
                 <Row1grid id="row-1-grid" className="row-1-grid">
-                    <Inpults label="CPF" for="cpf" if="${#fields.hasErrors('cpf')}" erros="*{cpf}"
-                        type="text" field="*{nome}" id="cpf" placeholder="00.000.000-00"
+                    <Inpults label="CPF" for="cpf"
+                        type="text"  id="cpf" placeholder="00.000.000-00"
                     />
 
-                    <Inpults label="Nome do produto" for="nomeProduto" if="${#fields.hasErrors('nome')}"
-                        erros="*{nome}" type="text" field="*{nome}" id="nome" placeholder="Nome do Produto"
+                    <Inpults label="Nome do produto" for="nomeProduto"
+                        type="text"  id="nome" placeholder="Nome do Produto"
                     />
-
-                    <Inpults label="Data de Nascimento" for="dataNascimento" if="${#fields.hasErrors('dataNascimento')}"
-                        erros="*{dataNascimento}" field="*{dataNascimento}" id="data" placeholder="__/__/____"
+                    <Inpults label="Data de Nascimento" for="dataNascimento"
+                         id="data" placeholder="__/__/____"
                     />
-
                     <Selects label="Sexo" name="sexo" type="text" field="*{sexo}" class="txt-form" id="sexo"
                         placeholder="M/F/O/Prefiro Não Dizer" itens={sexo} />
 
-                    <Inpults label="CEP" for="cep" if="${#fields.hasErrors('cep')}"
-                        erros="*{cep}" field="*{cep}" id="cep" placeholder="00000-00"
+                    <Inpults label="CEP" for="cep"  type="text" id="cep" placeholder="00000-00"
                     />
 
-                    <Inpults label="Rua" for="rua" if="${#fields.hasErrors('rua')}"
-                        erros="*{rua}" field="*{rua}" id="rua" placeholder="rua"
+                    <Inpults label="Rua" for="rua"  type="text" id="rua" placeholder="rua"
                     />
 
-                    <Inpults label="Bairro" for="bairro" if="${#fields.hasErrors('bairro')}"
-                        erros="*{bairro}" field="*{bairro}" id="bairro" placeholder="bairro"
+                    <Inpults label="Bairro" for="bairro"  type="text" id="bairro" placeholder="bairro"
                     />
 
-                    <Inpults label="Estado" for="estado" if="${#fields.hasErrors('estado')}"
-                        erros="*{estado}" field="*{estado}" id="estado" placeholder="estado"
+                    <Inpults label="Estado" for="estado"  type="text" id="estado" placeholder="estado"
                     />
 
-                    <Inpults label="Complemento" for="complemento" if="${#fields.hasErrors('complemento')}"
-                        erros="*{complemento}" field="*{complemento}" id="complemento" placeholder="casa/apartamento"
+                    <Inpults label="Complemento" for="complemento"  type="text" 
+                        id="complemento" placeholder="casa/apartamento"
                     />
                 </Row1grid>
 

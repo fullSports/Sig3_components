@@ -248,20 +248,21 @@ const MenuLateral = styled.nav`
   }
 `;
 const Cabecalho = () => {
+  const link = '#'
   return (
     <Topo id="topo" className="topo">
       <Acessibilidade id="acessibilidade" className="acessibilidade">
         <Atalhos id="atalhos" className="atalhos">
           <li>
-            <a href="#conteudo" accesskey="1" title="Ir diretamente para o conteúdo">Ir para o conteudo [1]</a>
+            <a href="#conteudo"  title="Ir diretamente para o conteúdo">Ir para o conteudo [1]</a>
           </li>
 
           <li>
-            <a href="#menu" accesskey="2" title="Ir diretamente para o menu">Ir para o menu [2]</a>
+            <a href="#menu"  title="Ir diretamente para o menu">Ir para o menu [2]</a>
           </li>
 
           <li>
-            <a href="#rodape" accesskey="3" title="Ir diretamente para o rodapé">Ir para o rodape [3]</a>
+            <a href="#rodape"  title="Ir diretamente para o rodapé">Ir para o rodape [3]</a>
           </li>
         </Atalhos>
 
@@ -271,19 +272,19 @@ const Cabecalho = () => {
           </li>
 
           <li>
-            <a href="#" title="Contraste preto" id="modoEscuro">Modo escuro</a>
+            <a href={link} title="Contraste preto" id="modoEscuro">Modo escuro</a>
           </li>
 
           <li>
-            <a href="#" title="sem Contraste" id="modoClaro">Modo Claro</a>
+            <a href={link} title="sem Contraste" id="modoClaro">Modo Claro</a>
           </li>
 
           <li>
-            <a href="#" title="Aumentar a fonte(Ctrl +)" id="aumentaFonte">A+</a>
+            <a href={link} title="Aumentar a fonte(Ctrl +)" id="aumentaFonte">A+</a>
           </li>
 
           <li>
-            <a href="#" title="Diminuir a fonte(Ctrl -)" id="diminuiFonte">A-</a>
+            <a href={link} title="Diminuir a fonte(Ctrl -)" id="diminuiFonte">A-</a>
           </li>
 
         </Atalhos2>
@@ -291,7 +292,7 @@ const Cabecalho = () => {
 
       <NavGrid id="navGrid" className="navGrid">
         <BarraPesquisa id="barraPesquisa">
-          <BarraPesquisaInpult class="Buscar" type="text" name="buscar" placeholder="Buscar..."></BarraPesquisaInpult>
+          <BarraPesquisaInpult className="Buscar" type="text" name="buscar" placeholder="Buscar..."></BarraPesquisaInpult>
         </BarraPesquisa>
 
         <Logo id="logo" className="logo">
@@ -332,8 +333,8 @@ const Cabecalho = () => {
         <ul>
           <li><a href="/sig/cadastro-de-cliente">Clientes</a> </li>
           <li><a href="/sig/cadastro-de-produto">Produtos</a> </li>
-          <li><a href="/equipamentos">Equipamentos</a> </li>
-          <li><a href="">Logout</a> </li>
+          <li><a href='/equipamentos'>Equipamentos</a> </li>
+          <li><a href={link}>Logout</a> </li>
         </ul>
       </Menu>
 
@@ -352,7 +353,7 @@ const Cabecalho = () => {
           <li><a href="/sig/cadastro-de-cliente" id="menu-lateral__link" className="menu-lateral__link">Clientes</a> </li>
           <li><a href="/sig/cadastro-de-produto" id="menu-lateral__link" className="menu-lateral__link">Produtos</a> </li>
           <li><a href="/equipamentos" id="menu-lateral__link" className="menu-lateral__link">Equipamentos</a> </li>
-          <li><a href="" id="menu-lateral__link" className="menu-lateral__link">Logout</a> </li>
+          <li><a href={link} id="menu-lateral__link" className="menu-lateral__link">Logout</a> </li>
         </ul>
       </MenuLateral>
 

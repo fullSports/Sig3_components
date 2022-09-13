@@ -130,7 +130,6 @@ const ImgCard = styled.div`
         object-fit: cover;
     }
 `;
-
 const CorpoCard = styled.div`
     margin: 5px 0;
     h3{
@@ -351,7 +350,7 @@ const Conteudo = () =>{
     <Cabecalho /> 
     <Main id="conteudo" className="conteudo">
         <Propaganda id="propaganda" className="propaganda">
-            <a href="#">
+            <a href="/">
 				<img src={Banner} alt="imagem propaganda das roupas femininas" />
 			</a>
         </Propaganda>
@@ -611,10 +610,10 @@ const Conteudo = () =>{
 
             </ConjuntoCard>
             <GrpBtn id="grpBtn" className="grpBtn">
-                <button class="material-symbols-outlined btnSides btnBef"id="material-symbols-outlined btnSides btnBef">
+                <button className="material-symbols-outlined btnSides btnBef"id="material-symbols-outlined btnSides btnBef">
                     chevron_left
                 </button>
-                <button class="material-symbols-outlined btnSides btnAft" id="material-symbols-outlined btnSides btnAft">
+                <button className="material-symbols-outlined btnSides btnAft" id="material-symbols-outlined btnSides btnAft">
                     chevron_right
                 </button>
             </GrpBtn>
@@ -627,7 +626,7 @@ const Conteudo = () =>{
             
             <DoubleGrid id="doubleGrid" className="DoubleGrid">
                 <AnuncioFutureZ>
-                    <a href=""><img src={FutureZanuncio} alt=""/></a>
+                    <a href="*"><img src={FutureZanuncio} alt=""/></a>
                 </AnuncioFutureZ>
 
                 <ConjuntoTenisFZ id="conjuntoTenisFZ" className="conjuntoTenisFZ">
@@ -728,19 +727,19 @@ const Conteudo = () =>{
             <TituloSec id="tituloSec" className="tituloSec">descubra as marcas</TituloSec>
             <ConjuntoMarcas id="conjuntoMarcas" className="conjuntoMarcas">
                 <Zoom1 id="zomm1" className="zomm1">
-                    <a href=""><img src={AdidasLogo}/></a>
+                    <a href=" "><img src={AdidasLogo} alt="imagem do logo da adidas"/></a>
                 </Zoom1>
                 <Zoom1 id="zomm1" className="zomm1">
-                    <a href=""><img src={PumaLogo}/></a>
+                    <a href=" "><img src={PumaLogo} alt="imagem do logo da Puma"/></a>
                 </Zoom1>
                 <Zoom1 id="zomm1" className="zomm1">
-                    <a href=""><img src={Olympikus}/></a>
+                    <a href=" "><img src={Olympikus} alt="imagem do logo da Olympikus"/></a>
                 </Zoom1>
                 <Zoom1 id="zomm1" className="zomm1">
-                    <a href=""><img src={ConverseLogo}/></a>
+                    <a href=" "><img src={ConverseLogo} alt="imamge do Logo da Converse"/></a>
                 </Zoom1>
                 <Zoom1 id="zomm1" className="zomm1">
-                    <a href=""><img src={AsicsLogo}/></a>
+                    <a href=" "><img src={AsicsLogo} alt="imagem do logo da Asics" /></a>
                 </Zoom1>
             </ConjuntoMarcas>
         </Marcas>
@@ -759,13 +758,13 @@ const Conteudo = () =>{
                     </a>
                 </Zoom>
                 <Zoom id="Zoom" className="Zoom">
-                    <a>
-                        <img src={CardCat3} alt="" />
+                    <a href=" ">
+                        <img src={CardCat3} alt="imagem do card" />
                     </a>
                 </Zoom>
                 <Zoom id="Zoom" className="Zoom">
-                    <a>
-                        <img src={CardCat4} alt="" />
+                    <a href=" ">
+                        <img src={CardCat4} alt="imagem do card" />
                     </a>
                 </Zoom>
 

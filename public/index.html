@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="utf-8">
     <meta name="description" content="Inicio">
@@ -25,66 +24,13 @@
 </div>
 <div id="root"></div>
 <noscript>You need to enable JavaScript to run this app.</noscript>
+</html>
 <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
     new window.VLibras.Widget('https://vlibras.gov.br/app');
 </script>
-<script>
-    link_css = "/css/estiloLoja.css";
-    
-                    
-    if(getCookie2() == "contraste"){
-        link_css = "/css/estiloEscuro.css";
-    }
-    else if(getCookie() == "default"){
-        link_css = "/css/estiloLoja.css";
-    }
-    
-    $(document).ready(function(){
-        
-        $("#modoEscuro").click(function(){
-            setCookie("contraste");
-            location.reload();				
-        });
-        
-        $("#modoClaro").click(function(){
-            setCookie("default")
-            location.reload();									
-        });
-        
-    });
-    
-    $("head").append("<link rel=stylesheet href="+ " "+ link_css +" " +"type=text/css>");
-    
-    function setCookie(value){
-        var data = new Date();
-        data.setTime(data.getTime() + 600000);
-        
-        //cookies structure
-        document.cookie = "contraste="+value+"; expires="+data.toUTCString()+
-            "; path=/";
-        
-    }
-    
-    function getCookie(){
-        var cookie = document.cookie.split("=");
-        
-        return cookie[1];
-    }
-    
-    function getCookie2(){
-        var nameEQ = "contraste=";
-        var ca = document.cookie.split(';');
-        for (var i = 0; i < ca.length; i++) {
-            var c = ca[i];
-            while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
-        }
-        return undefined;
-    
-    }
-    </script>
+<script type="text/javascript" src="/js/tema.js"></script>
 <script type="text/javascript" src="/js/fonte.js"></script>
 <script typ vare="text/javascript" src="/js/tema.js"></script>
 <script type="text/javascript" src="/js/visualizacaoProduto.js"></script>
@@ -101,4 +47,3 @@
     });
 </script>
 
-</html>

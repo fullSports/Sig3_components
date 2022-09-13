@@ -205,6 +205,7 @@ const DescCard = styled.div`
 `;
 
 const Equipamentos = () =>{
+    const link = '#'
     return(
         <>
         <Cabecalho />
@@ -232,31 +233,31 @@ const Equipamentos = () =>{
 
                                     <ColorPick id="colorPick" className="colorPick">
                                         <p>Cor</p>
-                                        <a href="">
+                                        <a href={link}>
                                             <Pink id="pink" className="pink"/>
                                         </a>
-                                        <a href="">
+                                        <a href={link}>
                                             <Blue id="blue" className="blue"/>
                                         </a>
-                                        <a href="">
+                                        <a href={link}>
                                             <Green id="green" className="green"/>
                                         </a>
-                                        <a href="">
+                                        <a href={link}>
                                             <Red id="red" className="red"/>
                                         </a>
-                                        <a href="">
+                                        <a href={link}>
                                             <Purple id="purple" className="purple"/>
                                         </a>
-                                        <a href="">
+                                        <a href={link}>
                                             <Yellow id="yellow" className="yellow"/>
                                         </a>
-                                        <a href="">
+                                        <a href={link}>
                                             <White id="white" className="white"/>
                                         </a>
-                                        <a href="">
+                                        <a href={link}>
                                             <Black id="black" className="blcak"/>
                                         </a>
-                                        <a href="">
+                                        <a href={link}>
                                             <Gray id="gray" className="gray"/>
                                         </a>
                                     </ColorPick>
@@ -311,7 +312,7 @@ const Equipamentos = () =>{
 
                             <CardFTZ id="cardFTZ" className="cardFTZ">
                                 <ImgTenisFTZ id="imgTenisFTZ" className="imgTenisFTZ">
-                                <a href=""><img
+                                <a href={link}><img
 										src={JaquetaHering1} alt=""/></a>
                                 </ImgTenisFTZ>
                                 <CorpoCard id="corpoCard" className="corpoCard">

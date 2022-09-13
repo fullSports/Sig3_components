@@ -62,12 +62,13 @@ const BtnExibe = styled.button`
     }
 `;
 const ConsultaCliente = () => {
+    const link="#"
     return (
         <>
             <Cabecalho />
             <Main>
                 <ExibeTitulo id="exibe-titulo" className="exibe-titulo">Lista de Cliente</ExibeTitulo>
-                <PainelBody id="panel-body" className="panel-name" switch="${clientes}">
+                <PainelBody id="panel-body" className="panel-name">
 
                     <div case="*">
                         <TableExibe id="table-exibe" className="table-exibe">
@@ -89,24 +90,24 @@ const ConsultaCliente = () => {
                             </thead>
 
                             <tbody>
-                                <tr each="cliente : ${clientes}">
-                                    <td text="${cliente.id}"></td>
-                                    <td text="${cliente.cpf}"></td>
-                                    <td text="${cliente.nome}"></td>
-                                    <td text="${cliente.dataNascimento}"></td>
-                                    <td text="${cliente.sexo}"></td>
-                                    <td text="${cliente.cep}"></td>
-                                    <td text="${cliente.rua}"></td>
-                                    <td text="${cliente.bairro}"></td>
-                                    <td text="${cliente.cidade}"></td>
-                                    <td text="${cliente.complemento}"></td>
-                                    <td text="${cliente.dataCadastro}"></td>
+                                <tr >
+                                    <td text=""></td>
+                                    <td text=""></td>
+                                    <td text=""></td>
+                                    <td text=""></td>
+                                    <td text=""></td>
+                                    <td text=""></td>
+                                    <td text=""></td>
+                                    <td text=""></td>
+                                    <td text=""></td>
+                                    <td text=""></td>
+                                    <td text=""></td>
 
                                     <td>
                                         <BtnExibeGroup id="btn-exibe-group" className="btn-exibe-group">
-                                            <a href="@{/sig/clientes/{cpf}(cpf=${cliente.cpf})}" >
+                                            <a href={link} >
                                                 <BtnExibe id="btn-exibe" class="btn-exibe"> Editar </BtnExibe></a>
-                                            <a href="@{/sig/clientes/id/{id}(id=${cliente.id})}">
+                                            <a href={link}>
                                                 <BtnExibe id="btn-exibe" class="btn-exibe">Excluir</BtnExibe></a>
                                         </BtnExibeGroup>
                                     </td>

@@ -163,6 +163,7 @@ const FrtGrtsCard = styled.p`
 `;
 
 const Equipamentos = () =>{
+    const link = "#"
     return(
         <>
         <Cabecalho />
@@ -216,7 +217,7 @@ const Equipamentos = () =>{
                         </div> 
                         <div id="btnLinkPrd" className="btnLinkPrd">
                             <a href="/carrinhoDeCompra"><input type="button" value="Comprar"/></a>
-                            <a href="#">Calcular frete</a>
+                            <a href={link}>Calcular frete</a>
                         </div>
  
                     </ConteudoDescAnunPrd>
