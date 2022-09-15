@@ -1,16 +1,16 @@
 import React from "react";
 import { BrowserRouter, Route , Routes } from 'react-router-dom'
-import Home from "./Components/Pages/index";
-import Acessibilidade from "./Components/Pages/acessibilidade";
-import Equipamentos from "./Components/Pages/equipamentos";
-import Tenis from "./Components/Pages/tenis";
-import CadastrarCliente from "./Components/Pages/Cliente/cadastrarCliente";
-import ConsultaCliente from "./Components/Pages/Cliente/consultaCliente";
-import CadastrarProduto from "./Components/Pages/Produtos/cadastrarProduto";
-import ConsultaProduto from "./Components/Pages/Produtos/consultarProduto";
-import PageErro404 from './Components/Pages/Erro404'
-import AtualizaCliente from "./Components/Pages/Cliente/atualizarCliente";
-import AtualizaProdutos from "./Components/Pages/Produtos/atualizarProduto";
+import Home from "./Pages/index";
+import Acessibilidade from "./Pages/acessibilidade";
+import Equipamentos from "./Pages/equipamentos";
+import Tenis from "./Pages/tenis";
+import CadastrarCliente from "./Pages/Cliente/cadastrarCliente";
+import ConsultaCliente from "./Pages/Cliente/consultaCliente";
+import CadastrarProduto from "./Pages/Produtos/cadastrarProduto";
+import ConsultaProduto from "./Pages/Produtos/consultarProduto";
+import PageErro404 from "./Pages/Erro404"
+import AtualizaCliente from "./Pages/Cliente/atualizarCliente";
+import AtualizaProdutos from "./Pages/Produtos/atualizarProduto";
 function App() {
     return( 
       <>

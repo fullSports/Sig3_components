@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import Cabecalho from "../../Cabecalho";
-import FormsCliente from "../../Forms/formsCliente";
+import Cabecalho from "../../Components/Cabecalho";
+import FormsCliente from "../../Components/Forms/formsCliente";
 
 const Main = styled.main`
     width: 100%;

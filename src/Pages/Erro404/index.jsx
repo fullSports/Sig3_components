@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Img404 from './../../../assets/images/5680361.png';
+import Img404 from './../../assets/images/5680361.png';
 const DivImg = styled.div`
 img{
     padding-left: 32%;

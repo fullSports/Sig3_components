@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import Cabecalho from "../../Cabecalho";
-import Footer from "../../Footer";
-import FormsProduto from "../../Forms/formsProduto";
+import Cabecalho from "../../Components/Cabecalho";
+import Footer from "../../Components/Footer";
+import FormsProduto from "../../Components/Forms/formsProduto";
 const Main = styled.main`
     width: 100%;
     min-height: 600px;

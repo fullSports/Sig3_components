@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import Footer from "../Footer";
-import Cabecalho from "../Cabecalho";
-
+import Footer from "../Components/Footer";
+import Cabecalho from "../Components/Cabecalho";
 const Main = styled.main`
     width: 100%;
     min-height: 600px;

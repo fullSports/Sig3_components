@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import Footer from "../Footer";
-import Cabecalho from "../Cabecalho";
-import BtnChuteira1 from "./../../assets/images/produtos/btnchuteira-campo-puma-one-2.png"
-import BtnChuteira2 from "./../../assets/images/produtos/chuteira-campo-puma-one-2.jpg"
-import BtnChuteira3 from "./../../assets/images/produtos/chuteira-campo-puma-one-3.jpg"
-import BtnChuteira4 from "./../../assets/images/produtos/chuteira-campo-puma-one-4.jpg"
+import Footer from "../Components/Footer";
+import Cabecalho from "../Components/Cabecalho";
+import BtnChuteira1 from "./../assets/images/produtos/btnchuteira-campo-puma-one-2.png"
+import BtnChuteira2 from "./../assets/images/produtos/chuteira-campo-puma-one-2.jpg"
+import BtnChuteira3 from "./../assets/images/produtos/chuteira-campo-puma-one-3.jpg"
+import BtnChuteira4 from "./../assets/images/produtos/chuteira-campo-puma-one-4.jpg"
 const VisualizacaoPrd = styled.section`
     margin: 40px 0;
     margin-left: auto;
