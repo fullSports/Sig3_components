@@ -24,6 +24,8 @@ import CardCat1 from "./../assets/images/card-cat-1.png";
 import CardCat2 from "./../assets/images/card-cat-2.png";
 import CardCat3 from "./../assets/images/card-cat-3.png";
 import CardCat4 from "./../assets/images/card-cat-4.png";
+import Cards from "../Components/Card";
+import CardsFTZ from "../Components/CardsFTZ";
 const Main = styled.main`
     width: 100%;
     min-height: 600px;
@@ -101,74 +103,6 @@ const ConjuntoCard = styled.div`
         grid-gap: 12px;
 }
 `;
-const Card = styled.div`
-    background-color: #fff;
-    line-height: 25px;
-    padding: 10px;
-    width: auto;
-    margin: 0 10px;
-    border-radius: 10px;
-    :hover{
-        transition: .3s;
-        box-shadow: 0 0 6px rgba(143, 106, 106, .6);
-    }
-    @media screen and (max-width: 1144px) {
-        line-height: 25px;
-        padding: 10px;
-        /* box-shadow: -5px 5px 5px rgba(0, 0, 0, .1); */
-        width: fit-content;
-        background-color: #fff;
-    }
-`;
-const ImgCard = styled.div`
-    width: 220px;
-    height: 220px;
-    margin: 10px 0;
-    img{
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-`;
-const CorpoCard = styled.div`
-    margin: 5px 0;
-    h3{
-        font-size: 19px;
-    }
-    @media screen and (max-width: 1144px) {
-        h3{
-        font-size: 19px;
-        }
-    }
-`;
-const TituloCard = styled.p`
-    font-size: 16px;
-`;
-const PrecoAnterior =styled.p`
-    text-decoration: line-through;
-`;
-const PrecoAtual = styled.h3`
-    h3.precoAtual{
-        text-align: left;
-    }
-`;
-const FrtGrtsCard = styled.p`
-    text-transform: uppercase;
-    font-weight: 600;
-    font-size: 13px;
-    /* width: max-content; */
-    /* background-color: #a6e65a; */
-`;
-const DescCard = styled.div`
-    font-size: 13px;
-`;
-const StarsFeedback =styled.div`
-    margin: 10px 0;
-`;
-const StarFeed = styled.i`
-    color: #f7bd00;
-    font-size: 14px;
-`;
 const GrpBtn = styled.div`
     padding: 25px 0;
     text-align: center;
@@ -184,7 +118,7 @@ const GrpBtn = styled.div`
 `;
 const FuturZbBrazilAnuncio = styled.section`
 `;
-const DoubleGrid =styled.div`
+const DoubleGrid = styled.div`
     justify-content: center;
     margin: 0 40px 0 40px;
     display: grid;
@@ -228,30 +162,6 @@ const ConjuntoTenisFZ = styled.div`
         grid-gap: 5px;
         margin: 2%;
     }
-`;
-const CardFTZ = styled.div`
-    line-height: 25px;
-    padding: 10px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, .2);
-    width: 220px;
-    img{
-        height: 190px;
-    }
-    :hover{
-        transition: .3s;
-        box-shadow: 0 0 6px rgba(143, 106, 106, .6);
-    }
-
-    @media screen and (max-width: 1144px) {
-        width: fit-content;
-        :hover{
-            transition: .3s;
-            box-shadow: 0 0 6px rgba(143, 106, 106, .6);
-        }
-    }
-`;
-const ImgTenisFTZ = styled.div`
-    text-align: center;
 `;
 const Marcas = styled.section`
     margin: 80px 0 0 0;
@@ -344,435 +254,171 @@ const Zoom = styled.div`
     }
 
 `;
-const Conteudo = () =>{
-    return(
-    <>
-    <Cabecalho /> 
-    <Main id="conteudo" className="conteudo">
-        <Propaganda id="propaganda" className="propaganda">
-            <a href="/">
-				<img src={Banner} alt="imagem propaganda das roupas femininas" />
-			</a>
-        </Propaganda>
-        <section>
-            <ConjuntoNovidades id="conjuntoNovidades" className="conjuntoNovidades">
-                <CardNov id="cardNov" className="cardNov">
-                    <img src={Cardvan1} alt="imagem do card de novidades"/>
-                </CardNov>
-
-                <CardNov id="cardNov" className="cardNov">
-                    <img src={Cardvan2} alt="imagem do card de novidades"/>
-                </CardNov>
-
-                <CardNov id="cardNov" className="cardNov">
-                    <img src={Cardvan3} alt="imagem do card de novidades"/>
-                </CardNov>
-
-                <CardNov id="cardNov" className="cardNov">
-                    <img src={Cardvan4} alt="imagem do card de novidades"/>
-                </CardNov>
-            </ConjuntoNovidades>
-        </section>
-        
-        <ProdutosProcurados id="produtosProcurados" className="produtosProcurados">
-            <TituloSec id="tituloSec" className="tituloSec">Produto Mais Procurados</TituloSec>
-
-            <ConjuntoCard id="conjuntoCard" className="conjuntoCard">
-                <Card id="card" className="card">
-                    <ImgCard id="imgCard" className="imgCard">
-                        <img src={Meiagonew} alt="imagem de um card de produto"/>
-                    </ImgCard>
-                        <CorpoCard id="corpoCard" className="corpoCard">
-                            <TituloCard id="tituloCard" className="tituloCard">Meia Gone</TituloCard>
-                            <PrecoAnterior id="precoAnterior" className="precoAnterior">R$ 80,30</PrecoAnterior>
-                            <PrecoAtual id="precoAnterior" className="precoAnterior">R$ 75,30</PrecoAtual>
-                        </CorpoCard>
-
-                            <DescCard id="descCard" className="descCard">
-                                <p>em até 12x de 6,27</p>
-                            </DescCard>
-
-                        <StarsFeedback id="starsFeedback" className="starsFeedback">
-                        <StarFeed id="fa-solid fa-star" className="fa-solid fa-star"></StarFeed>
-                        <StarFeed id="fa-solid fa-star" className="fa-solid fa-star"></StarFeed>
-                        <StarFeed id="fa-solid fa-star" className="fa-solid fa-star"></StarFeed>
-                        <StarFeed id="fa-solid fa-star" className="fa-solid fa-star"></StarFeed>
-                        <StarFeed id="fa-regular fa-star " className="fa-regular fa-star "></StarFeed>
-                        </StarsFeedback>
-                </Card>
-
-                <Card id="card" className="card">
-                    <ImgCard id="imgCard" className="imgCard">
-                        <img src={JaquetaHering1} alt="imagem de um card de produto"/>
-                    </ImgCard>
-                        <CorpoCard id="corpoCard" className="corpoCard">
-                            <TituloCard id="tituloCard" className="tituloCard">Jaqueta Hering Básica Feminina</TituloCard>
-                            <PrecoAnterior id="precoAnterior" className="precoAnterior">R$ 169,30</PrecoAnterior>
-                            <PrecoAtual id="precoAnterior" className="precoAnterior">R$ 139,99</PrecoAtual>
-                        </CorpoCard>
-
-                            <DescCard id="descCard" className="descCard">
-                                <p>em até 12x de R$ 11,66</p>
-                            </DescCard>
-                            
-                        <StarsFeedback id="starsFeedback" className="starsFeedback">
-                        <StarFeed id="fa-solid fa-star" className="fa-solid fa-star"></StarFeed>
-                        <StarFeed id="fa-solid fa-star" className="fa-solid fa-star"></StarFeed>
-                        <StarFeed id="fa-solid fa-star" className="fa-solid fa-star"></StarFeed>
-                        <StarFeed id="fa-solid fa-star" className="fa-solid fa-star"></StarFeed>
-                        <StarFeed id="fa-regular fa-star " className="fa-regular fa-star "></StarFeed>
-                        </StarsFeedback>
-                </Card>
-
-                <Card id="card" className="card">
-                    <ImgCard id="imgCard" className="imgCard">
-                        <img src={Chuteiracampofuture} alt="imagem de um card de produto"/>
-                    </ImgCard>
-                        <CorpoCard id="corpoCard" className="corpoCard">
-                            <TituloCard id="tituloCard" className="tituloCard">Chuteira Future Z 3.1 Campo</TituloCard>
-                            <PrecoAnterior id="precoAnterior" className="precoAnterior">R$ 169,30</PrecoAnterior>
-                            <PrecoAtual id="precoAnterior" className="precoAnterior">R$ 139,99</PrecoAtual>
-                        </CorpoCard>
-
-                            <DescCard id="descCard" className="descCard">
-                                <p>em até 12x de R$ 11,66</p>
-                            </DescCard>
-
-                        <StarsFeedback id="starsFeedback" className="starsFeedback">
-                        <StarFeed id="fa-solid fa-star" className="fa-solid fa-star"></StarFeed>
-                        <StarFeed id="fa-solid fa-star" className="fa-solid fa-star"></StarFeed>
-                        <StarFeed id="fa-solid fa-star" className="fa-solid fa-star"></StarFeed>
-                        <StarFeed id="fa-solid fa-star" className="fa-solid fa-star"></StarFeed>
-                        <StarFeed id="fa-regular fa-star " className="fa-regular fa-star "></StarFeed>
-                        </StarsFeedback>
-                </Card>
-
-                <Card id="card" className="card">
-                    <ImgCard id="imgCard" className="imgCard">
-                        <img src={JaquetaZafina} alt="imagem de um card de produto"/>
-                    </ImgCard>
-                        <CorpoCard id="corpoCard" className="corpoCard">
-                            <TituloCard id="tituloCard" className="tituloCard">Jaqueta Zafina</TituloCard>
-                            <PrecoAnterior id="precoAnterior" className="precoAnterior">R$ 169,30</PrecoAnterior>
-                            <PrecoAtual id="precoAnterior" className="precoAnterior">R$ 139,99</PrecoAtual>
-                        </CorpoCard>
-
-                            <DescCard id="descCard" className="descCard">
-                                <p>em até 12x de R$ 11,66</p>
-                            </DescCard>
-
-                        <StarsFeedback id="starsFeedback" className="starsFeedback">
-                        <StarFeed id="fa-solid fa-star" className="fa-solid fa-star"></StarFeed>
-                        <StarFeed id="fa-solid fa-star" className="fa-solid fa-star"></StarFeed>
-                        <StarFeed id="fa-solid fa-star" className="fa-solid fa-star"></StarFeed>
-                        <StarFeed id="fa-solid fa-star" className="fa-solid fa-star"></StarFeed>
-                        <StarFeed id="fa-regular fa-star " className="fa-regular fa-star "></StarFeed>
-                        </StarsFeedback>
-                </Card>
-                
-                <Card id="card" className="card">
-                    <ImgCard id="imgCard" className="imgCard">
-                        <img src={TenisAdidas} alt="imagem de um card de produto"/>
-                    </ImgCard>
-                        <CorpoCard id="corpoCard" className="corpoCard">
-                            <TituloCard id="tituloCard" className="tituloCard">Tênis adidas</TituloCard>
-                            <PrecoAnterior id="precoAnterior" className="precoAnterior">R$ 169,30</PrecoAnterior>
-                            <PrecoAtual id="precoAnterior" className="precoAnterior">R$ 139,99</PrecoAtual>
-                        </CorpoCard>
-
-                            <DescCard id="descCard" className="descCard">
-                                <p>em até 12x de R$ 11,66</p>
-                            </DescCard>
-
-                        <StarsFeedback id="starsFeedback" className="starsFeedback">
-                        <StarFeed id="fa-solid fa-star" className="fa-solid fa-star"></StarFeed>
-                        <StarFeed id="fa-solid fa-star" className="fa-solid fa-star"></StarFeed>
-                        <StarFeed id="fa-solid fa-star" className="fa-solid fa-star"></StarFeed>
-                        <StarFeed id="fa-solid fa-star" className="fa-solid fa-star"></StarFeed>
-                        <StarFeed id="fa-regular fa-star " className="fa-regular fa-star "></StarFeed>
-                        </StarsFeedback>
-                </Card>
-            
-                <Card id="card" className="card">
-                    <ImgCard id="imgCard" className="imgCard">
-                        <img src={MeiaGone} alt="imagem de um card de produto"/>
-                    </ImgCard>
-                        <CorpoCard id="corpoCard" className="corpoCard">
-                            <TituloCard id="tituloCard" className="tituloCard">Meia Gone</TituloCard>
-                            <PrecoAnterior id="precoAnterior" className="precoAnterior">R$ 80,30</PrecoAnterior>
-                            <PrecoAtual id="precoAnterior" className="precoAnterior">R$ 75,30</PrecoAtual>
-                        </CorpoCard>
-
-                            <DescCard id="descCard" className="descCard">
-                                <p>em até 12x de 6,27</p>
-                            </DescCard>
-
-                        <StarsFeedback id="starsFeedback" className="starsFeedback">
-                        <StarFeed id="fa-solid fa-star" className="fa-solid fa-star"></StarFeed>
-                        <StarFeed id="fa-solid fa-star" className="fa-solid fa-star"></StarFeed>
-                        <StarFeed id="fa-solid fa-star" className="fa-solid fa-star"></StarFeed>
-                        <StarFeed id="fa-solid fa-star" className="fa-solid fa-star"></StarFeed>
-                        <StarFeed id="fa-regular fa-star " className="fa-regular fa-star "></StarFeed>
-                        </StarsFeedback>
-                </Card>
-
-                <Card id="card" className="card">
-                    <ImgCard id="imgCard" className="imgCard">
-                        <img src={MeiaGone} alt="imagem de um card de produto"/>
-                    </ImgCard>
-                        <CorpoCard id="corpoCard" className="corpoCard">
-                            <TituloCard id="tituloCard" className="tituloCard">Meia Gone</TituloCard>
-                            <PrecoAnterior id="precoAnterior" className="precoAnterior">R$ 80,30</PrecoAnterior>
-                            <PrecoAtual id="precoAnterior" className="precoAnterior">R$ 75,30</PrecoAtual>
-                        </CorpoCard>
-
-                            <DescCard id="descCard" className="descCard">
-                                <p>em até 12x de 6,27</p>
-                            </DescCard>
-
-                        <StarsFeedback id="starsFeedback" className="starsFeedback">
-                        <StarFeed id="fa-solid fa-star" className="fa-solid fa-star"></StarFeed>
-                        <StarFeed id="fa-solid fa-star" className="fa-solid fa-star"></StarFeed>
-                        <StarFeed id="fa-solid fa-star" className="fa-solid fa-star"></StarFeed>
-                        <StarFeed id="fa-solid fa-star" className="fa-solid fa-star"></StarFeed>
-                        <StarFeed id="fa-regular fa-star " className="fa-regular fa-star "></StarFeed>
-                        </StarsFeedback>
-                </Card>
-
-                <Card id="card" className="card">
-                    <ImgCard id="imgCard" className="imgCard">
-                        <img src={MeiaGone} alt="imagem de um card de produto"/>
-                    </ImgCard>
-                        <CorpoCard id="corpoCard" className="corpoCard">
-                            <TituloCard id="tituloCard" className="tituloCard">Meia Gone</TituloCard>
-                            <PrecoAnterior id="precoAnterior" className="precoAnterior">R$ 80,30</PrecoAnterior>
-                            <PrecoAtual id="precoAnterior" className="precoAnterior">R$ 75,30</PrecoAtual>
-                        </CorpoCard>
-
-                            <DescCard id="descCard" className="descCard">
-                                <p>em até 12x de 6,27</p>
-                            </DescCard>
-
-                        <StarsFeedback id="starsFeedback" className="starsFeedback">
-                        <StarFeed id="fa-solid fa-star" className="fa-solid fa-star"></StarFeed>
-                        <StarFeed id="fa-solid fa-star" className="fa-solid fa-star"></StarFeed>
-                        <StarFeed id="fa-solid fa-star" className="fa-solid fa-star"></StarFeed>
-                        <StarFeed id="fa-solid fa-star" className="fa-solid fa-star"></StarFeed>
-                        <StarFeed id="fa-regular fa-star " className="fa-regular fa-star "></StarFeed>
-                        </StarsFeedback>
-                </Card>
-
-                <Card id="card" className="card">
-                    <ImgCard id="imgCard" className="imgCard">
-                        <img src={MeiaGone} alt="imagem de um card de produto"/>
-                    </ImgCard>
-                        <CorpoCard id="corpoCard" className="corpoCard">
-                            <TituloCard id="tituloCard" className="tituloCard">Meia Gone</TituloCard>
-                            <PrecoAnterior id="precoAnterior" className="precoAnterior">R$ 80,30</PrecoAnterior>
-                            <PrecoAtual id="precoAnterior" className="precoAnterior">R$ 75,30</PrecoAtual>
-                        </CorpoCard>
-
-                            <DescCard id="descCard" className="descCard">
-                                <p>em até 12x de 6,27</p>
-                            </DescCard>
-
-                        <StarsFeedback id="starsFeedback" className="starsFeedback">
-                        <StarFeed id="fa-solid fa-star" className="fa-solid fa-star"></StarFeed>
-                        <StarFeed id="fa-solid fa-star" className="fa-solid fa-star"></StarFeed>
-                        <StarFeed id="fa-solid fa-star" className="fa-solid fa-star"></StarFeed>
-                        <StarFeed id="fa-solid fa-star" className="fa-solid fa-star"></StarFeed>
-                        <StarFeed id="fa-regular fa-star " className="fa-regular fa-star "></StarFeed>
-                        </StarsFeedback>
-                </Card>
-
-                <Card id="card" className="card">
-                    <ImgCard id="imgCard" className="imgCard">
-                        <img src={MeiaGone} alt="imagem de um card de produto"/>
-                    </ImgCard>
-                        <CorpoCard id="corpoCard" className="corpoCard">
-                            <TituloCard id="tituloCard" className="tituloCard">Meia Gone</TituloCard>
-                            <PrecoAnterior id="precoAnterior" className="precoAnterior">R$ 80,30</PrecoAnterior>
-                            <PrecoAtual id="precoAnterior" className="precoAnterior">R$ 75,30</PrecoAtual>
-                        </CorpoCard>
-
-                            <DescCard id="descCard" className="descCard">
-                                <p>em até 12x de 6,27</p>
-                            </DescCard>
-
-                        <StarsFeedback id="starsFeedback" className="starsFeedback">
-                        <StarFeed id="fa-solid fa-star" className="fa-solid fa-star"></StarFeed>
-                        <StarFeed id="fa-solid fa-star" className="fa-solid fa-star"></StarFeed>
-                        <StarFeed id="fa-solid fa-star" className="fa-solid fa-star"></StarFeed>
-                        <StarFeed id="fa-solid fa-star" className="fa-solid fa-star"></StarFeed>
-                        <StarFeed id="fa-regular fa-star " className="fa-regular fa-star "></StarFeed>
-                        </StarsFeedback>
-                </Card>
-
-            </ConjuntoCard>
-            <GrpBtn id="grpBtn" className="grpBtn">
-                <button className="material-symbols-outlined btnSides btnBef"id="material-symbols-outlined btnSides btnBef">
-                    chevron_left
-                </button>
-                <button className="material-symbols-outlined btnSides btnAft" id="material-symbols-outlined btnSides btnAft">
-                    chevron_right
-                </button>
-            </GrpBtn>
-        </ProdutosProcurados>
-
-        <FuturZbBrazilAnuncio id="FuturZbBrazilAnuncio" className="FuturZbBrazilAnuncio">
-            <div>
-                <TituloSec id="tituloSec" className="tituloSec">Confira o novo lançamento da Puma</TituloSec>
-            </div>
-            
-            <DoubleGrid id="doubleGrid" className="DoubleGrid">
-                <AnuncioFutureZ>
-                    <a href="*"><img src={FutureZanuncio} alt=""/></a>
-                </AnuncioFutureZ>
-
-                <ConjuntoTenisFZ id="conjuntoTenisFZ" className="conjuntoTenisFZ">
-                    <CardFTZ id="cardFTZ" className="cardFTZ">
-                        <ImgTenisFTZ id="imgTenisFTZ" className="imgTenisFTZ">
-                        <img src={ChuteiraCampoFuture} alt=""/>
-                        </ImgTenisFTZ>
-                        <CorpoCard id="corpoCard" className="corpoCard">
-                            <TituloCard id="tituloCard" className="tituloCard">Jaqueta Hering Básica Feminina</TituloCard>
-                            <PrecoAnterior id="precoAnterior" className="precoAnterior">R$ 169,30</PrecoAnterior>
-                            <FrtGrtsCard id="frtGrtsCard" className="frtGrtsCard">Frete Grátis</FrtGrtsCard>
-                            <PrecoAtual id="precoAnterior" className="precoAnterior">R$ 139,99</PrecoAtual>
-                        </CorpoCard>
-                            <DescCard id="descCard" className="descCard">
-                                    <p>em até 12x de 6,27</p>
-                            </DescCard>
-                    </CardFTZ>
-
-                    <CardFTZ id="cardFTZ" className="cardFTZ">
-                        <ImgTenisFTZ id="imgTenisFTZ" className="imgTenisFTZ">
-                        <img src={ChuteiraCampoFuture} alt=""/>
-                        </ImgTenisFTZ>
-                        <CorpoCard id="corpoCard" className="corpoCard">
-                            <TituloCard id="tituloCard" className="tituloCard">Jaqueta Hering Básica Feminina</TituloCard>
-                            <PrecoAnterior id="precoAnterior" className="precoAnterior">R$ 169,30</PrecoAnterior>
-                            <FrtGrtsCard id="frtGrtsCard" className="frtGrtsCard">Frete Grátis</FrtGrtsCard>
-                            <PrecoAtual id="precoAnterior" className="precoAnterior">R$ 139,99</PrecoAtual>
-                        </CorpoCard>
-                            <DescCard id="descCard" className="descCard">
-                                    <p>em até 12x de 6,27</p>
-                            </DescCard>
-                    </CardFTZ>
-
-                    <CardFTZ id="cardFTZ" className="cardFTZ">
-                        <ImgTenisFTZ id="imgTenisFTZ" className="imgTenisFTZ">
-                        <img src={ChuteiraCampoFuture} alt=""/>
-                        </ImgTenisFTZ>
-                        <CorpoCard id="corpoCard" className="corpoCard">
-                            <TituloCard id="tituloCard" className="tituloCard">Jaqueta Hering Básica Feminina</TituloCard>
-                            <PrecoAnterior id="precoAnterior" className="precoAnterior">R$ 169,30</PrecoAnterior>
-                            <FrtGrtsCard id="frtGrtsCard" className="frtGrtsCard">Frete Grátis</FrtGrtsCard>
-                            <PrecoAtual id="precoAnterior" className="precoAnterior">R$ 139,99</PrecoAtual>
-                        </CorpoCard>
-                            <DescCard id="descCard" className="descCard">
-                                    <p>em até 12x de 6,27</p>
-                            </DescCard>
-                    </CardFTZ>
-
-                    <CardFTZ id="cardFTZ" className="cardFTZ">
-                        <ImgTenisFTZ id="imgTenisFTZ" className="imgTenisFTZ">
-                        <img src={ChuteiraCampoFuture} alt=""/>
-                        </ImgTenisFTZ>
-                        <CorpoCard id="corpoCard" className="corpoCard">
-                            <TituloCard id="tituloCard" className="tituloCard">Jaqueta Hering Básica Feminina</TituloCard>
-                            <PrecoAnterior id="precoAnterior" className="precoAnterior">R$ 169,30</PrecoAnterior>
-                            <FrtGrtsCard id="frtGrtsCard" className="frtGrtsCard">Frete Grátis</FrtGrtsCard>
-                            <PrecoAtual id="precoAnterior" className="precoAnterior">R$ 139,99</PrecoAtual>
-                        </CorpoCard>
-                            <DescCard id="descCard" className="descCard">
-                                    <p>em até 12x de 6,27</p>
-                            </DescCard>
-                    </CardFTZ>
-
-                    <CardFTZ id="cardFTZ" className="cardFTZ">
-                        <ImgTenisFTZ id="imgTenisFTZ" className="imgTenisFTZ">
-                        <img src={ChuteiraCampoFuture} alt=""/>
-                        </ImgTenisFTZ>
-                        <CorpoCard id="corpoCard" className="corpoCard">
-                            <TituloCard id="tituloCard" className="tituloCard">Jaqueta Hering Básica Feminina</TituloCard>
-                            <PrecoAnterior id="precoAnterior" className="precoAnterior">R$ 169,30</PrecoAnterior>
-                            <FrtGrtsCard id="frtGrtsCard" className="frtGrtsCard">Frete Grátis</FrtGrtsCard>
-                            <PrecoAtual id="precoAnterior" className="precoAnterior">R$ 139,99</PrecoAtual>
-                        </CorpoCard>
-                            <DescCard id="descCard" className="descCard">
-                                    <p>em até 12x de 6,27</p>
-                            </DescCard>
-                    </CardFTZ>
-
-                    <CardFTZ id="cardFTZ" className="cardFTZ">
-                        <ImgTenisFTZ id="imgTenisFTZ" className="imgTenisFTZ">
-                        <img src={ChuteiraCampoFuture} alt=""/>
-                        </ImgTenisFTZ>
-                        <CorpoCard id="corpoCard" className="corpoCard">
-                            <TituloCard id="tituloCard" className="tituloCard">Jaqueta Hering Básica Feminina</TituloCard>
-                            <PrecoAnterior id="precoAnterior" className="precoAnterior">R$ 169,30</PrecoAnterior>
-                            <FrtGrtsCard id="frtGrtsCard" className="frtGrtsCard">Frete Grátis</FrtGrtsCard>
-                            <PrecoAtual id="precoAnterior" className="precoAnterior">R$ 139,99</PrecoAtual>
-                        </CorpoCard>
-                            <DescCard id="descCard" className="descCard">
-                                    <p>em até 12x de 6,27</p>
-                            </DescCard>
-                    </CardFTZ>
-                </ConjuntoTenisFZ>
-            </DoubleGrid>
-        </FuturZbBrazilAnuncio>
-
-        <Marcas id="marcas" className="marcas">
-            <TituloSec id="tituloSec" className="tituloSec">descubra as marcas</TituloSec>
-            <ConjuntoMarcas id="conjuntoMarcas" className="conjuntoMarcas">
-                <Zoom1 id="zomm1" className="zomm1">
-                    <a href=" "><img src={AdidasLogo} alt="imagem do logo da adidas"/></a>
-                </Zoom1>
-                <Zoom1 id="zomm1" className="zomm1">
-                    <a href=" "><img src={PumaLogo} alt="imagem do logo da Puma"/></a>
-                </Zoom1>
-                <Zoom1 id="zomm1" className="zomm1">
-                    <a href=" "><img src={Olympikus} alt="imagem do logo da Olympikus"/></a>
-                </Zoom1>
-                <Zoom1 id="zomm1" className="zomm1">
-                    <a href=" "><img src={ConverseLogo} alt="imamge do Logo da Converse"/></a>
-                </Zoom1>
-                <Zoom1 id="zomm1" className="zomm1">
-                    <a href=" "><img src={AsicsLogo} alt="imagem do logo da Asics" /></a>
-                </Zoom1>
-            </ConjuntoMarcas>
-        </Marcas>
-
-        <Categorias id="categorias" className="categorias">
-            <TituloSec id="tituloSec" className="tituloSec">categorias mais procuradas</TituloSec>
-            <CategoriasGrid id="categorias-grid" className="categorias-grid">
-                <Zoom id="Zoom" className="Zoom">
-                    <a href="/equipamentos"> 
-                        <img src={CardCat1} alt="" />
+const Conteudo = () => {
+    return (
+        <>
+            <Cabecalho />
+            <Main id="conteudo" className="conteudo">
+                <Propaganda id="propaganda" className="propaganda">
+                    <a href="/">
+                        <img src={Banner} alt="imagem propaganda das roupas femininas" />
                     </a>
-                </Zoom>
-                <Zoom id="Zoom" className="Zoom">
-                    <a href="/tenis">
-                        <img src={CardCat2} alt="" />
-                    </a>
-                </Zoom>
-                <Zoom id="Zoom" className="Zoom">
-                    <a href=" ">
-                        <img src={CardCat3} alt="imagem do card" />
-                    </a>
-                </Zoom>
-                <Zoom id="Zoom" className="Zoom">
-                    <a href=" ">
-                        <img src={CardCat4} alt="imagem do card" />
-                    </a>
-                </Zoom>
+                </Propaganda>
+                <section>
+                    <ConjuntoNovidades id="conjuntoNovidades" className="conjuntoNovidades">
+                        <CardNov id="cardNov" className="cardNov">
+                            <img src={Cardvan1} alt="imagem do card de novidades" />
+                        </CardNov>
 
-            </CategoriasGrid>
-        </Categorias>
-    </Main>
-    <Footer/>
-    </>  
+                        <CardNov id="cardNov" className="cardNov">
+                            <img src={Cardvan2} alt="imagem do card de novidades" />
+                        </CardNov>
+
+                        <CardNov id="cardNov" className="cardNov">
+                            <img src={Cardvan3} alt="imagem do card de novidades" />
+                        </CardNov>
+
+                        <CardNov id="cardNov" className="cardNov">
+                            <img src={Cardvan4} alt="imagem do card de novidades" />
+                        </CardNov>
+                    </ConjuntoNovidades>
+                </section>
+
+                <ProdutosProcurados id="produtosProcurados" className="produtosProcurados">
+                    <TituloSec id="tituloSec" className="tituloSec">Produto Mais Procurados</TituloSec>
+
+                    <ConjuntoCard id="conjuntoCard" className="conjuntoCard">
+                        <Cards src={Meiagonew} TituloCard="Meia Gone"
+                            PrecoAnterior="R$ 80,30" PrecoAtual="R$ 75,30"
+                        />
+
+                        <Cards src={JaquetaHering1} TituloCard="Jaqueta Hering Básica Feminina"
+                            PrecoAnterior="R$ 169,30" PrecoAtual="R$ 139,99"
+                        />
+
+                        <Cards src={Chuteiracampofuture} TituloCard="Chuteira Future Z 3.1 Campo"
+                            PrecoAnterior="R$ 169,30" PrecoAtual="R$ 139,99"
+                        />
+
+                        <Cards src={JaquetaZafina} TituloCard="Jaqueta Zafina"
+                            PrecoAnterior="R$ 169,30" PrecoAtual="R$ 139,99"
+                        />
+
+                        <Cards src={TenisAdidas} TituloCard="Tênis adidas"
+                            PrecoAnterior="R$ 169,30" PrecoAtual="R$ 139,99"
+                        />
+
+                        <Cards src={MeiaGone} TituloCard="Meia Gone"
+                            PrecoAnterior="R$ 80,30" PrecoAtual="R$ 75,30"
+                        />
+
+                        <Cards src={MeiaGone} TituloCard="Meia Gone"
+                            PrecoAnterior="R$ 80,30" PrecoAtual="R$ 75,30"
+                        />
+                        <Cards src={MeiaGone} TituloCard="Meia Gone"
+                            PrecoAnterior="R$ 80,30" PrecoAtual="R$ 75,30"
+                        />
+
+
+                    </ConjuntoCard>
+                    <GrpBtn id="grpBtn" className="grpBtn">
+                        <button className="material-symbols-outlined btnSides btnBef" id="material-symbols-outlined btnSides btnBef">
+                            chevron_left
+                        </button>
+                        <button className="material-symbols-outlined btnSides btnAft" id="material-symbols-outlined btnSides btnAft">
+                            chevron_right
+                        </button>
+                    </GrpBtn>
+                </ProdutosProcurados>
+
+                <FuturZbBrazilAnuncio id="FuturZbBrazilAnuncio" className="FuturZbBrazilAnuncio">
+                    <div>
+                        <TituloSec id="tituloSec" className="tituloSec">Confira o novo lançamento da Puma</TituloSec>
+                    </div>
+
+                    <DoubleGrid id="doubleGrid" className="DoubleGrid">
+                        <AnuncioFutureZ>
+                            <a href="*"><img src={FutureZanuncio} alt="" /></a>
+                        </AnuncioFutureZ>
+
+                        <ConjuntoTenisFZ id="conjuntoTenisFZ" className="conjuntoTenisFZ">
+                            <CardsFTZ src={ChuteiraCampoFuture} TituloCard="Jaqueta Hering Básica Feminina"
+                                PrecoAnterior="R$ 169,30" FrtGrtsCard="true" Parcela="em até 12x de 6,27"
+                            />
+
+                            <CardsFTZ src={ChuteiraCampoFuture} TituloCard="Jaqueta Hering Básica Feminina"
+                                PrecoAnterior="R$ 169,30" FrtGrtsCard="false" Parcela="em até 12x de 6,27"
+                            />
+
+                            <CardsFTZ src={ChuteiraCampoFuture} TituloCard="Jaqueta Hering Básica Feminina"
+                                PrecoAnterior="R$ 169,30" FrtGrtsCard="true" Parcela="em até 12x de 6,27"
+                            />
+
+                            <CardsFTZ src={ChuteiraCampoFuture} TituloCard="Jaqueta Hering Básica Feminina"
+                                PrecoAnterior="R$ 169,30" FrtGrtsCard="true" Parcela="em até 12x de 6,27"
+                            />
+                            <CardsFTZ src={ChuteiraCampoFuture} TituloCard="Jaqueta Hering Básica Feminina"
+                                PrecoAnterior="R$ 169,30" FrtGrtsCard="true" Parcela="em até 12x de 6,27"
+                            />
+
+                            <CardsFTZ src={ChuteiraCampoFuture} TituloCard="Jaqueta Hering Básica Feminina"
+                                PrecoAnterior="R$ 169,30" FrtGrtsCard="false" Parcela="em até 12x de 6,27"
+                            />
+
+                        </ConjuntoTenisFZ>
+                    </DoubleGrid>
+                </FuturZbBrazilAnuncio>
+
+                <Marcas id="marcas" className="marcas">
+                    <TituloSec id="tituloSec" className="tituloSec">descubra as marcas</TituloSec>
+                    <ConjuntoMarcas id="conjuntoMarcas" className="conjuntoMarcas">
+                        <Zoom1 id="zomm1" className="zomm1">
+                            <a href=" "><img src={AdidasLogo} alt="imagem do logo da adidas" /></a>
+                        </Zoom1>
+                        <Zoom1 id="zomm1" className="zomm1">
+                            <a href=" "><img src={PumaLogo} alt="imagem do logo da Puma" /></a>
+                        </Zoom1>
+                        <Zoom1 id="zomm1" className="zomm1">
+                            <a href=" "><img src={Olympikus} alt="imagem do logo da Olympikus" /></a>
+                        </Zoom1>
+                        <Zoom1 id="zomm1" className="zomm1">
+                            <a href=" "><img src={ConverseLogo} alt="imamge do Logo da Converse" /></a>
+                        </Zoom1>
+                        <Zoom1 id="zomm1" className="zomm1">
+                            <a href=" "><img src={AsicsLogo} alt="imagem do logo da Asics" /></a>
+                        </Zoom1>
+                    </ConjuntoMarcas>
+                </Marcas>
+
+                <Categorias id="categorias" className="categorias">
+                    <TituloSec id="tituloSec" className="tituloSec">categorias mais procuradas</TituloSec>
+                    <CategoriasGrid id="categorias-grid" className="categorias-grid">
+                        <Zoom id="Zoom" className="Zoom">
+                            <a href="/equipamentos">
+                                <img src={CardCat1} alt="" />
+                            </a>
+                        </Zoom>
+                        <Zoom id="Zoom" className="Zoom">
+                            <a href="/tenis">
+                                <img src={CardCat2} alt="" />
+                            </a>
+                        </Zoom>
+                        <Zoom id="Zoom" className="Zoom">
+                            <a href=" ">
+                                <img src={CardCat3} alt="imagem do card" />
+                            </a>
+                        </Zoom>
+                        <Zoom id="Zoom" className="Zoom">
+                            <a href=" ">
+                                <img src={CardCat4} alt="imagem do card" />
+                            </a>
+                        </Zoom>
+
+                    </CategoriasGrid>
+                </Categorias>
+            </Main>
+            <Footer />
+        </>
     );
 }
 export default Conteudo;
