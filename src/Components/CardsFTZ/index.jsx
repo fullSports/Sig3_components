@@ -38,7 +38,7 @@ const CorpoCard = styled.div`
 const TituloCard = styled.p`
     font-size: 16px;
 `;
-const PrecoAnterior =styled.p`
+const PrecoAnterior = styled.p`
     text-decoration: line-through;
 `;
 const PrecoAtual = styled.h3`
@@ -51,28 +51,30 @@ const DescCard = styled.div`
 `;
 const CardsFTZ = (props) => {
     const FrtGrtsCard = props.FrtGrtsCard;
-    if(FrtGrtsCard==="true"){
+    if (FrtGrtsCard === "true") {
         return (
             <CardFTZ id="cardFTZ" className="cardFTZ">
-            <ImgTenisFTZ id="imgTenisFTZ" className="imgTenisFTZ">
-                <img src={props.src} alt="" />
-            </ImgTenisFTZ>
-            <CorpoCard id="corpoCard" className="corpoCard">
-                <TituloCard id="tituloCard" className="tituloCard">{props.TituloCard}</TituloCard>
-                <PrecoAnterior id="precoAnterior" className="precoAnterior">{props.PrecoAnterior}</PrecoAnterior>
-                <FrtGrtsCard id="frtGrtsCard" className="frtGrtsCard">Frete Grátis</FrtGrtsCard>
-                <PrecoAtual id="precoAnterior" className="precoAnterior">{props.PrecoAnterior}</PrecoAtual>
-            </CorpoCard>
-            <DescCard id="descCard" className="descCard">
-                <p>{props.Parcela}</p>
-            </DescCard>
-        </CardFTZ>
+                <ImgTenisFTZ id="imgTenisFTZ" className="imgTenisFTZ">
+                    <img src={props.src} alt="" />
+                </ImgTenisFTZ>
+                <CorpoCard id="corpoCard" className="corpoCard">
+                    <TituloCard id="tituloCard" className="tituloCard">{props.TituloCard}</TituloCard>
+                    <PrecoAnterior id="precoAnterior" className="precoAnterior">{props.PrecoAnterior}</PrecoAnterior>
+                    <FrtGrtsCard id="frtGrtsCard" className="frtGrtsCard">Frete Grátis</FrtGrtsCard>
+                    <PrecoAtual id="precoAnterior" className="precoAnterior">{props.PrecoAnterior}</PrecoAtual>
+                </CorpoCard>
+                <DescCard id="descCard" className="descCard">
+                    <p>{props.Parcela}</p>
+                </DescCard>
+            </CardFTZ>
         );
     }
-        return (
-            <CardFTZ id="cardFTZ" className="cardFTZ">
+    return (
+        <CardFTZ id="cardFTZ" className="cardFTZ">
             <ImgTenisFTZ id="imgTenisFTZ" className="imgTenisFTZ">
-                <img src={props.src} alt="imagem do card de produto"/>
+                <a href={props.href}>
+                    <img src={props.src} alt="imagem do card de produto" />
+                </a>
             </ImgTenisFTZ>
             <CorpoCard id="corpoCard" className="corpoCard">
                 <TituloCard id="tituloCard" className="tituloCard">{props.TituloCard}</TituloCard>
@@ -83,6 +85,6 @@ const CardsFTZ = (props) => {
                 <p>{props.Parcela}</p>
             </DescCard>
         </CardFTZ>
-        );
+    );
 };
 export default CardsFTZ;
