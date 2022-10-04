@@ -162,7 +162,7 @@ const FrtGrtsCard = styled.p`
     }
 `;
 
-const Equipamentos = () =>{
+const Tenis = () =>{
     const link = "#"
     return(
         <>
@@ -231,4 +231,4 @@ const Equipamentos = () =>{
         </>
     );
 }
-export default Equipamentos;
+export default Tenis;
