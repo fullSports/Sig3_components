@@ -53,8 +53,8 @@ function FormsCliente() {
                         type="text"  id="cpf" placeholder="00.000.000-00"
                     />
 
-                    <Inpults label="Nome do produto" for="nomeProduto"
-                        type="text"  id="nome" placeholder="Nome do Produto"
+                    <Inpults label="Nome" for="nomeProduto"
+                        type="text"  id="nome" placeholder="Digite seu nome"
                     />
                     <Inpults label="Data de Nascimento" for="dataNascimento"
                          id="data" placeholder="__/__/____"
