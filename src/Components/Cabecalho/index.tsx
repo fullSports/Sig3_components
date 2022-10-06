@@ -209,7 +209,7 @@ background-color:#a6e65a;
     position: absolute;
     flex-direction: column;
     background-color:#67a51c;
-    width: 90%;
+    width: 100%;
     height: 50%;
     cursor: pointer;
     transition: .100s;
