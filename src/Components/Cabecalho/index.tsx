@@ -1,11 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import logo_loja from "../../assets/images/fullSportLogo.svg";
-import FacebookIcone from "../../assets/images/facebook.png";
-import TwitterIcone from "../../assets/images/twitter.png"
-import InstagramIcone from "../../assets/images/instagram.png"
-import WhatsappIcone from "../../assets/images/whatsapp.png"
-import ImgBotaoMenu from "./../../assets/images/botao-de-menu-de-tres-linhas-horizontais.png"
+const logo_loja= require("../../assets/images/fullSportLogo.png");
+const FacebookIcone= require( "../../assets/images/facebook.png");
+const TwitterIcone= require("../../assets/images/twitter.png");
+const InstagramIcone= require( "../../assets/images/instagram.png");
+const WhatsappIcone= require( "../../assets/images/whatsapp.png");
+const ImgBotaoMenu= require( './../../assets/images/botao-de-menu-de-tres-linhas-horizontais.png');
+
 const Topo = styled.header`
   min-width:100%
   height auto;
@@ -107,11 +108,8 @@ const BarraPesquisaInpult = styled.input`
 const Logo = styled.div`
   margin-left: auto;
   margin-right: auto;
-  
-  height: 100px;
   img{
-  width: 100%;
-  height: 100%;
+    width: 150px;
   }
  
 `;
@@ -201,6 +199,7 @@ const CabecalhoMenu = styled.button`
   }
 `;
 const MenuLateral = styled.nav`
+background-color:#a6e65a;
   @media screen and (min-width: 460px) {
     display: none;
   }

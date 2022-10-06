@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-const Card = styled.div`
+const Carddiv = styled.div`
     background-color: #fff;
     line-height: 25px;
     padding: 10px;
@@ -19,7 +19,7 @@ const Card = styled.div`
         background-color: #fff;
     }
 `;
-const ImgCard = styled.div`
+const ImgCarddiv = styled.div`
     width: 220px;
     height: 220px;
     margin: 10px 0;
@@ -29,7 +29,7 @@ const ImgCard = styled.div`
         object-fit: cover;
     }
 `;
-const CorpoCard = styled.div`
+const CorpoCarddiv = styled.div`
     margin: 5px 0;
     h3{
         font-size: 19px;
@@ -40,50 +40,49 @@ const CorpoCard = styled.div`
         }
     }
 `;
-const TituloCard = styled.p`
+const TituloCarddiv = styled.p`
     font-size: 16px;
 `;
-const PrecoAnterior =styled.p`
+const PrecoAnteriordiv =styled.p`
     text-decoration: line-through;
 `;
-const PrecoAtual = styled.h3`
+const PrecoAtualdiv = styled.h3`
     h3.precoAtual{
         text-align: left;
     }
 `;
-const StarsFeedback =styled.div`
+const StarsFeedbackdiv =styled.div`
     margin: 10px 0;
 `;
 const StarFeed = styled.i`
     color: #f7bd00;
     font-size: 14px;
 `;
-const DescCard = styled.div`
-    font-size: 13px;
-`;
-const Cards = (props) =>{
+interface Props{
+    src: string
+    TituloCard:string
+    PrecoAnterior:string
+    PrecoAtual:string
+}
+const Cards: React.FC<Props> = ({src, TituloCard,PrecoAnterior,PrecoAtual}) =>{
     return(
-        <Card id="card" className="card">
-                    <ImgCard id="imgCard" className="imgCard">
-                        <img src={props.src} alt="imagem de um card de produto"/>
-                    </ImgCard>
-                        <CorpoCard id="corpoCard" className="corpoCard">
-                            <TituloCard id="tituloCard" className="tituloCard">{props.TituloCard}</TituloCard>
-                            <PrecoAnterior id="precoAnterior" className="precoAnterior">{props.PrecoAnterior}</PrecoAnterior>
-                            <PrecoAtual id="precoAnterior" className="precoAnterior">{props.PrecoAtual}</PrecoAtual>
-                        </CorpoCard>
+        <Carddiv id="card" className="card">
+                    <ImgCarddiv id="imgCard" className="imgCard">
+                        <img src={src} alt="imagem de um card de produto"/>
+                    </ImgCarddiv>
+                        <CorpoCarddiv id="corpoCard" className="corpoCard">
+                            <TituloCarddiv id="tituloCard" className="tituloCard">{TituloCard}</TituloCarddiv>
+                            <PrecoAnteriordiv id="precoAnterior" className="precoAnterior">{PrecoAnterior}</PrecoAnteriordiv>
+                            <PrecoAtualdiv id="precoAnterior" className="precoAnterior">{PrecoAtual}</PrecoAtualdiv>
+                        </CorpoCarddiv>
 
-                            <DescCard id="descCard" className="descCard">
-                                <p>{props.DescCard}</p>
-                            </DescCard>
-
-                        <StarsFeedback id="starsFeedback" className="starsFeedback">
+                        <StarsFeedbackdiv id="starsFeedback" className="starsFeedback">
                         <StarFeed id="fa-solid fa-star" className="fa-solid fa-star"></StarFeed>
                         <StarFeed id="fa-solid fa-star" className="fa-solid fa-star"></StarFeed>
                         <StarFeed id="fa-solid fa-star" className="fa-solid fa-star"></StarFeed>
                         <StarFeed id="fa-solid fa-star" className="fa-solid fa-star"></StarFeed>
                         <StarFeed id="fa-regular fa-star " className="fa-regular fa-star "></StarFeed>
-                        </StarsFeedback>
-                </Card>
+                        </StarsFeedbackdiv>
+                </Carddiv>
 )}
 export default Cards;

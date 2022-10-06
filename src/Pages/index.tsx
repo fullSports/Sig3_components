@@ -2,30 +2,33 @@ import React from "react";
 import styled from "styled-components";
 import Footer from "../Components/Footer";
 import Cabecalho from "../Components/Cabecalho";
-import Banner from "./../assets/images/banner1.png";
-import Cardvan1 from "./../assets/images/card-van-1.png";
-import Cardvan2 from "./../assets/images/card-van-2.png";
-import Cardvan3 from "./../assets/images/card-van-3.png";
-import Cardvan4 from "./../assets/images/card-van-4.png";
-import Meiagonew from "./../assets/images/meia-gonew.jpg";
-import JaquetaHering1 from "./../assets/images/jaqueta-hering1.jpg"
-import Chuteiracampofuture from "./../assets/images/produtos/chuteira-campo-future-3.1-z.png"
-import JaquetaZafina from "./../assets/images/jaqueta-zafina.jpg"
-import TenisAdidas from "./../assets/images/tenis-adidas.jpg";
-import MeiaGone from "./../assets/images/meia-gonew.jpg";
-import FutureZanuncio from "./../assets/images/future-z-anuncio.png";
-import ChuteiraCampoFuture from "./../assets/images/produtos/chuteira-campo-future-3.1-z.png";
-import AdidasLogo from "./../assets/images/adidas-logo.png";
-import PumaLogo from "./../assets/images/puma-logo.png";
-import Olympikus from "./../assets/images/olympikus.png";
-import ConverseLogo from "./../assets/images/converse-logo.png";
-import AsicsLogo from "./../assets/images/asics-logo.png";
-import CardCat1 from "./../assets/images/card-cat-1.png";
-import CardCat2 from "./../assets/images/card-cat-2.png";
-import CardCat3 from "./../assets/images/card-cat-3.png";
-import CardCat4 from "./../assets/images/card-cat-4.png";
-import Cards from "../Components/Card";
 import CardsFTZ from "../Components/CardsFTZ";
+import Cards from "../Components/Card";
+const Banner =require( "./../assets/images/banner1.png");
+const Cardvan1 =require( "./../assets/images/card-van-1.png");
+const Cardvan2 =require( "./../assets/images/card-van-2.png");
+const Cardvan3 =require( "./../assets/images/card-van-3.png");
+const Cardvan4 =require( "./../assets/images/card-van-4.png");
+const Meiagonew =require( "./../assets/images/meia-gonew.jpg");
+const JaquetaHering1 =require("./../assets/images/jaqueta-hering1.jpg");
+const Chuteiracampofuture =require("./../assets/images/produtos/chuteira-campo-future-3.1-z.png");
+const JaquetaZafina =require("./../assets/images/jaqueta-zafina.jpg");
+const TenisAdidas =require( "./../assets/images/tenis-adidas.jpg");
+const MeiaGone =require("./../assets/images/meia-gonew.jpg");
+const FutureZanuncio =require( "./../assets/images/future-z-anuncio.png");
+const ChuteiraCampoFuture =require( "./../assets/images/produtos/chuteira-campo-future-3.1-z.png");
+const AdidasLogo =require( "./../assets/images/adidas-logo.png");
+const PumaLogo =require( "./../assets/images/puma-logo.png");
+const Olympikus =require( "./../assets/images/olympikus.png");
+const ConverseLogo =require( "./../assets/images/converse-logo.png");
+const AsicsLogo =require( "./../assets/images/asics-logo.png");
+const CardCat1 =require( "./../assets/images/card-cat-1.png");
+const CardCat2 =require( "./../assets/images/card-cat-2.png");
+const CardCat3 =require( "./../assets/images/card-cat-3.png");
+const CardCat4 =require( "./../assets/images/card-cat-4.png");
+
+
+
 const Main = styled.main`
     width: 100%;
     min-height: 600px;
@@ -254,7 +257,7 @@ const Zoom = styled.div`
     }
 
 `;
-const Conteudo = () => {
+const Home = () => {
     return (
         <>
             <Cabecalho />
@@ -291,7 +294,6 @@ const Conteudo = () => {
                         <Cards src={Meiagonew} TituloCard="Meia Gone"
                             PrecoAnterior="R$ 80,30" PrecoAtual="R$ 75,30"
                         />
-
                         <Cards src={JaquetaHering1} TituloCard="Jaqueta Hering Básica Feminina"
                             PrecoAnterior="R$ 169,30" PrecoAtual="R$ 139,99"
                         />
@@ -343,26 +345,26 @@ const Conteudo = () => {
 
                         <ConjuntoTenisFZ id="conjuntoTenisFZ" className="conjuntoTenisFZ">
                             <CardsFTZ src={ChuteiraCampoFuture} TituloCard="Jaqueta Hering Básica Feminina"
-                                PrecoAnterior="R$ 169,30" FrtGrtsCard="true" Parcela="em até 12x de 6,27"
+                           href="#" PrecoAtual="2222" PrecoAnterior="R$ 169,30" FrtGrtsCard="true" Parcela="em até 12x de 6,27"
                             />
 
                             <CardsFTZ src={ChuteiraCampoFuture} TituloCard="Jaqueta Hering Básica Feminina"
-                                PrecoAnterior="R$ 169,30" FrtGrtsCard="false" Parcela="em até 12x de 6,27"
+                              href="#" PrecoAtual="2222" PrecoAnterior="R$ 169,30" FrtGrtsCard="false" Parcela="em até 12x de 6,27"
                             />
 
                             <CardsFTZ src={ChuteiraCampoFuture} TituloCard="Jaqueta Hering Básica Feminina"
-                                PrecoAnterior="R$ 169,30" FrtGrtsCard="true" Parcela="em até 12x de 6,27"
+                            href="#"  PrecoAtual="2222"  PrecoAnterior="R$ 169,30" FrtGrtsCard="true" Parcela="em até 12x de 6,27"
                             />
 
                             <CardsFTZ src={ChuteiraCampoFuture} TituloCard="Jaqueta Hering Básica Feminina"
-                                PrecoAnterior="R$ 169,30" FrtGrtsCard="true" Parcela="em até 12x de 6,27"
+                            href="#"  PrecoAtual="2222"  PrecoAnterior="R$ 169,30" FrtGrtsCard="true" Parcela="em até 12x de 6,27"
                             />
                             <CardsFTZ src={ChuteiraCampoFuture} TituloCard="Jaqueta Hering Básica Feminina"
-                                PrecoAnterior="R$ 169,30" FrtGrtsCard="true" Parcela="em até 12x de 6,27"
+                            href="#"  PrecoAtual="2222"  PrecoAnterior="R$ 169,30" FrtGrtsCard="true" Parcela="em até 12x de 6,27"
                             />
 
                             <CardsFTZ src={ChuteiraCampoFuture} TituloCard="Jaqueta Hering Básica Feminina"
-                                PrecoAnterior="R$ 169,30" FrtGrtsCard="false" Parcela="em até 12x de 6,27"
+                            href="#"  PrecoAtual="2222"  PrecoAnterior="R$ 169,30" FrtGrtsCard="false" Parcela="em até 12x de 6,27"
                             />
 
                         </ConjuntoTenisFZ>
@@ -421,4 +423,4 @@ const Conteudo = () => {
         </>
     );
 }
-export default Conteudo;
+export default Home;

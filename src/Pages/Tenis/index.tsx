@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import Footer from "../Components/Footer";
-import Cabecalho from "../Components/Cabecalho";
-import BtnChuteira1 from "./../assets/images/produtos/btnchuteira-campo-puma-one-2.png"
-import BtnChuteira2 from "./../assets/images/produtos/chuteira-campo-puma-one-2.jpg"
-import BtnChuteira3 from "./../assets/images/produtos/chuteira-campo-puma-one-3.jpg"
-import BtnChuteira4 from "./../assets/images/produtos/chuteira-campo-puma-one-4.jpg"
+import Footer from "../../Components/Footer";
+import Cabecalho from "../../Components/Cabecalho";
+const BtnChuteira1 = require ("./../../assets/images/produtos/btnchuteira-campo-puma-one-2.png");
+const BtnChuteira2 = require ("./../../assets/images/produtos/chuteira-campo-puma-one-2.jpg");
+const BtnChuteira3 = require ("./../../assets/images/produtos/chuteira-campo-puma-one-3.jpg");
+const BtnChuteira4 = require ("./../../assets/images/produtos/chuteira-campo-puma-one-4.jpg");
 const VisualizacaoPrd = styled.section`
     margin: 40px 0;
     margin-left: auto;
@@ -205,11 +205,11 @@ const Tenis = () =>{
                         <p id="subTitPrd" className="subTitPrd">em até 12x de R$ 14,99</p>
                         <div id="tmnhPrd" className="tmnhPrd">
                             <p>Selecione seu tamanho</p>
-                            <label for=""><input type="radio" name="optTamanho" id="tam36"/> 36</label>
-                            <label for=""><input type="radio" name="optTamanho" id="tam39"/> 39</label>
-                            <label for=""><input type="radio" name="optTamanho" id="tam40"/> 40</label>
-                            <label for=""><input type="radio" name="optTamanho" id="tam42"/> 42</label>
-                            <label for=""><input type="radio" name="optTamanho" id="tam44"/> 44</label>
+                            <label><input type="radio" name="optTamanho" id="tam36"/> 36</label>
+                            <label><input type="radio" name="optTamanho" id="tam39"/> 39</label>
+                            <label><input type="radio" name="optTamanho" id="tam40"/> 40</label>
+                            <label><input type="radio" name="optTamanho" id="tam42"/> 42</label>
+                            <label><input type="radio" name="optTamanho" id="tam44"/> 44</label>
                         </div>
                         <div id="tmnhQtd" className="tmnhQtd">
                             <p>Quantidade</p>

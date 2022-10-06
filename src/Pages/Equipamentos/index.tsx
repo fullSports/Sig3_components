@@ -1,14 +1,15 @@
 import React from "react";
 import styled from "styled-components";
-import Footer from "../Components/Footer";
-import Cabecalho from "../Components/Cabecalho";
-import NovidadeWhee1Img from "./../assets/images/novidade-wheel.png";
-import ChuteiraPuma1 from "./../assets/images/chuteira-puma1.jpg";
-import JaquetaHering1 from "./../assets/images/jaqueta-hering1.jpg";
-import CuteiraFutsalKidsFuture from "./../assets/images/produtos/chuteira-futsal-kids-future-4.1-z.png";
-import MeiaGone from "./../assets/images/meia-gonew.jpg";
-import ChuteiraFutsalFutureZ from "./../assets/images/produtos/chuteira-futsal-future-z.png";
-import CardsFTZ from "../Components/CardsFTZ";
+import Footer from "../../Components/Footer";
+import Cabecalho from "../../Components/Cabecalho";
+import CardsFTZ from "../../Components/CardsFTZ";
+const NovidadeWhee1Img = require( "./../../assets/images/novidade-wheel.png");
+const ChuteiraPuma1 = require( "./../../assets/images/chuteira-puma1.jpg");
+const JaquetaHering1 = require( "./../../assets/images/jaqueta-hering1.jpg");
+const CuteiraFutsalKidsFuture = require( "./../../assets/images/produtos/chuteira-futsal-kids-future-4.1-z.png");
+const MeiaGone = require( "./../../assets/images/meia-gonew.jpg");
+const ChuteiraFutsalFutureZ = require( "./../../assets/images/produtos/chuteira-futsal-future-z.png");
+
 const Main = styled.main`
     width: 100%;
     min-height: 600px;
@@ -189,21 +190,21 @@ const Equipamentos = () => {
                                                 <div>
                                                     <input type="checkbox" name="Academia" id=""></input>
                                                 </div>
-                                                <label for="">Academia</label>
+                                                <label>Academia</label>
                                             </li>
 
                                             <li>
                                                 <div>
                                                     <input type="checkbox" name="Ginástica" id=""></input>
                                                 </div>
-                                                <label for="">Ginástica</label>
+                                                <label>Ginástica</label>
                                             </li>
 
                                             <li>
                                                 <div>
                                                     <input type="checkbox" name="Corrida" id=""></input>
                                                 </div>
-                                                <label for="">Corrida</label>
+                                                <label>Corrida</label>
                                             </li>
                                         </ul>
                                     </CategoFiltra>

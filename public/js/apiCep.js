@@ -16,6 +16,10 @@ const local = window.location.href;
                         document.getElementById("bairro").value = endereco.neighborhood;
                         document.getElementById("estado").value = endereco.state;
                         document.getElementById("cidade").value = endereco.city;
+                        document.getElementById("rua-label").style.display='none';
+                        document.getElementById("bairro-label").style.display ='none';
+                        document.getElementById("estado-label").style.display ='none';
+                        document.getElementById("cidade-label").style.display ='none'
                     }
                     else if (req.status === 404) {
                         alert("cep invalido");
