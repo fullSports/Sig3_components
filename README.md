@@ -50,7 +50,7 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 
 
-##### Processo de Desenvolvimento de Software - PDS
+## Processo de Desenvolvimento de Software - PDS
 | Grupo 04 |
 | --- |
 | Lisandra Ferraz de Santana |
