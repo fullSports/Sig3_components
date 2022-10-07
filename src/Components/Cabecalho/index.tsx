@@ -1,11 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import logo_loja from "../../assets/images/fullSportLogo.svg";
-import FacebookIcone from "../../assets/images/facebook.png";
-import TwitterIcone from "../../assets/images/twitter.png"
-import InstagramIcone from "../../assets/images/instagram.png"
-import WhatsappIcone from "../../assets/images/whatsapp.png"
-import ImgBotaoMenu from "./../../assets/images/botao-de-menu-de-tres-linhas-horizontais.png"
+const logo_loja = require("../../assets/images/fullSportLogo.png");
+const FacebookIcone = require("../../assets/images/facebook.png");
+const TwitterIcone = require("../../assets/images/twitter.png");
+const InstagramIcone = require("../../assets/images/instagram.png");
+const WhatsappIcone = require("../../assets/images/whatsapp.png");
+const ImgBotaoMenu = require('./../../assets/images/botao-de-menu-de-tres-linhas-horizontais.png');
+
 const Topo = styled.header`
   min-width:100%
   height auto;
@@ -78,11 +79,13 @@ const NavGrid = styled.div`
   @media screen and (max-width: 1144px) {
   justify-items: start;  
   justify-content: space-between;
-  display: grid;
+  display: flex;
   grid-template-columns: repeat(3, 160px);
   }
   @media screen and (max-width: 450px) {  
-    grid-template-columns: repeat(3,100px);
+    justify-content: space-between;
+    display: flex;
+    grid-template-columns: repeat(3,80px);
   }
 `;
 const BarraPesquisa = styled.div`
@@ -105,15 +108,9 @@ const BarraPesquisaInpult = styled.input`
   }
 `;
 const Logo = styled.div`
-  margin-left: auto;
-  margin-right: auto;
-  
-  height: 100px;
   img{
-  width: 100%;
-  height: 100%;
+    width: 150px;
   }
- 
 `;
 const ConjuntoIcones = styled.div`
   margin-top: 10%;
@@ -191,7 +188,7 @@ const CabecalhoMenu = styled.button`
   i::before{
     content: url(${ImgBotaoMenu});
   }
-  @media screen and (max-width:459px) {
+  @media screen and (max-width:460px) {
     width: 20px;
     background-color: #a6e65a;
   }
@@ -200,53 +197,53 @@ const CabecalhoMenu = styled.button`
     background-color: #a6e65a;
   }
 `;
-const MenuLateral = styled.nav`
+const MenuLateral = styled.div`
+background-color:#a6e65a;
   @media screen and (min-width: 460px) {
     display: none;
   }
-  @media screen and (max-width:459px) {
+  @media screen and (max-width:461px) {
+    .menu-lateral{
     display: flex;
     position: absolute;
     flex-direction: column;
-    background-size: auto;
-    background-color:#a6e65a;
-    width: 90%;
-    height: 100%;
+    background-color:#67a51c;
+    width: 100%;
+    height: 50%;
     cursor: pointer;
     transition: .100s;
     left: -90000vh;
-    border-radius: 19px;
 
-    a:hover {
-    background-color:#ebebeb;
-    border: 10px solid #ebebeb;
-    color: #2e2e2e;
+    li{
+      background-color: #a6e65a;
+      width: 100%;
+      display: flex;
+      height: 70px;
     }
-    ul {
-    text-align: center;
-    list-style:none;
+  
+    a{
+      background-color:#67a51c;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      height: 50px;
     }
-    ul li {
-    display: inline;
-    }
-    ul li a {
-    padding: 2px 10px;
-    display: inline-block;
-    border: 10px solid #a6e65a;
-    /* visual do link */
-    background-color: #a6e65a;
-    color: #2e2e2e;
-    text-decoration: none;
   }
-  ul a:hover {
-  /* height: 35px; */
-  background-color:#a6e65a;
-  border: 10px solid #a7e65ab4;
-  color: #000000;
-  }
+    
+  .menu-lateral--ativo{
+    background-color:#a6e65a;
+    transition: .100s;
+    left: 0vh;
+    position: absolute;
+    }
                     
   }
 `;
+const Botao = () => {
+  document.querySelector('.menu-lateral')?.classList.toggle('menu-lateral--ativo');
+  document.querySelector('.form-cadastro-cliente')?.classList.toggle('forms-none');
+  document.querySelector('.form-cadastro-produto')?.classList.toggle('forms-none');
+}
 const Cabecalho = () => {
   const link = '#'
   return (
@@ -254,15 +251,15 @@ const Cabecalho = () => {
       <Acessibilidade id="acessibilidade" className="acessibilidade">
         <Atalhos id="atalhos" className="atalhos">
           <li>
-            <a href="#conteudo"  title="Ir diretamente para o conteúdo">Ir para o conteudo [1]</a>
+            <a href="#conteudo" title="Ir diretamente para o conteúdo">Ir para o conteudo [1]</a>
           </li>
 
           <li>
-            <a href="#menu"  title="Ir diretamente para o menu">Ir para o menu [2]</a>
+            <a href="#menu" title="Ir diretamente para o menu">Ir para o menu [2]</a>
           </li>
 
           <li>
-            <a href="#rodape"  title="Ir diretamente para o rodapé">Ir para o rodape [3]</a>
+            <a href="#rodape" title="Ir diretamente para o rodapé">Ir para o rodape [3]</a>
           </li>
         </Atalhos>
 
@@ -340,21 +337,23 @@ const Cabecalho = () => {
 
       <BarraMenu id="barra__menu" className="barra__menu">
         <TituloCabecalho id="titulo__cabecalho" className="titulo__cabecalho">
-          <CabecalhoMenu id="cabecalho__munu"className="cabecalho__munu" aria-label="Menu">
-          <i></i>
+          <CabecalhoMenu id="cabecalho__munu" onClick={Botao} className="cabecalho__munu" aria-label="Menu">
+            <i></i>
 
           </CabecalhoMenu>
           Menu
         </TituloCabecalho>
       </BarraMenu>
-
-      <MenuLateral id="menu-lateral" className="menu-lateral">
-      <ul>
-          <li><a href="/sig/cadastro-de-cliente" id="menu-lateral__link" className="menu-lateral__link">Clientes</a> </li>
-          <li><a href="/sig/cadastro-de-produto" id="menu-lateral__link" className="menu-lateral__link">Produtos</a> </li>
-          <li><a href="/equipamentos" id="menu-lateral__link" className="menu-lateral__link">Equipamentos</a> </li>
-          <li><a href={link} id="menu-lateral__link" className="menu-lateral__link">Logout</a> </li>
-        </ul>
+      <MenuLateral>
+        <nav id="menu-lateral" className="menu-lateral">
+          <ul>
+            <li><a href="/" id="menu-lateral__link" className="menu-lateral__link">Home</a> </li>
+            <li><a href="/sig/cadastro-de-cliente" id="menu-lateral__link" className="menu-lateral__link">Clientes</a> </li>
+            <li><a href="/sig/cadastro-de-produto" id="menu-lateral__link" className="menu-lateral__link">Produtos</a> </li>
+            <li><a href="/equipamentos" id="menu-lateral__link" className="menu-lateral__link">Equipamentos</a> </li>
+            <li><a href={link} id="menu-lateral__link" className="menu-lateral__link">Logout</a> </li>
+          </ul>
+        </nav>
       </MenuLateral>
 
 

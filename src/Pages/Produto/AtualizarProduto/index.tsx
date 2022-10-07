@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import Cabecalho from "../../Components/Cabecalho";
-import Footer from "../../Components/Footer";
-import FormsProduto from "../../Components/Forms/formsProduto";
+import Cabecalho from "../../../Components/Cabecalho";
+import Footer from "../../../Components/Footer";
+import FormsProduto from "../../../Components/Forms/formsProduto";
 const Main = styled.main`
     width: 100%;
     min-height: 600px;
@@ -12,7 +12,7 @@ const ExibeTitulo = styled.h3`
     text-align: center;
 `;
 
-function AtualizaProdutos() {
+function AtualizaProduto() {
     return (
         <>
             <Cabecalho />
@@ -25,4 +25,4 @@ function AtualizaProdutos() {
 
     )
 };
-export default AtualizaProdutos;
+export default AtualizaProduto;

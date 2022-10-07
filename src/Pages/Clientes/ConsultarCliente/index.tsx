@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import Footer from "../../Components/Footer";
-import Cabecalho from "../../Components/Cabecalho";
+import Footer from "../../../Components/Footer";
+import Cabecalho from "../../../Components/Cabecalho";
 const Main = styled.main`
     width: 100%;
     min-height: 600px;
@@ -61,51 +61,54 @@ const BtnExibe = styled.button`
         transform:translate(0.3s);
     }
 `;
-const ConsultaProduto = () => {
-    const link = "#"
+const ConsultaCliente = () => {
+    const link="#"
     return (
         <>
             <Cabecalho />
             <Main>
-                <ExibeTitulo id="exibe-titulo" className="exibe-titulo">Lista de Produtos</ExibeTitulo>
-                <PainelBody id="panel-body" className="panel-name" >
+                <ExibeTitulo id="exibe-titulo" className="exibe-titulo">Lista de Cliente</ExibeTitulo>
+                <PainelBody id="panel-body" className="panel-name">
 
-                    <div case="*">
+                    <div>
                         <TableExibe id="table-exibe" className="table-exibe">
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>CNPJ</th>
+                                    <th>CPF</th>
                                     <th>Nome</th>
-                                    <th>Tipo</th>
-                                    <th>Cor</th>
-                                    <th>Preço</th>
-                                    <th>Dt.Cadastro</th>
-                                    <th>Qtd.Estoque</th>
-                                    <th>ImagemProduto</th>
+                                    <th>Dt. Nascimento</th>
+                                    <th>Sexo</th>
+                                    <th>CEP</th>
+                                    <th>Rua</th>
+                                    <th>Bairro</th>
+                                    <th>Cidade</th>
+                                    <th>Complemento</th>
+                                    <th>Dt. Cadastro</th>
+
                                 </tr>
                             </thead>
 
                             <tbody>
-                                <tr>
-                                    <td text=""></td>
-                                    <td text=""></td>
-                                    <td text=""></td>
-                                    <td text=""></td>
-                                    <td text=""></td>
-                                    <td text=""></td>
-                                    <td text=""></td>
-                                    <td text=""></td>
-                                    <td >
-                                        {/* <img src="@{/sig/produtos/mostrarImagem/{imagem}(imagem=${produto.nomeImagem})}" width="100" /> */}
-                                    </td>
+                                <tr >
+                                    <td ></td>
+                                    <td ></td>
+                                    <td ></td>
+                                    <td ></td>
+                                    <td ></td>
+                                    <td ></td>
+                                    <td ></td>
+                                    <td ></td>
+                                    <td ></td>
+                                    <td ></td>
+                                    <td ></td>
 
                                     <td>
                                         <BtnExibeGroup id="btn-exibe-group" className="btn-exibe-group">
-                                            
-                                                <BtnExibe id="btn-exibe" class="btn-exibe"><a href={link} > Editar </a></BtnExibe>
-                                            
-                                                <BtnExibe id="btn-exibe" class="btn-exibe"> <a href={link}>Excluir</a></BtnExibe>
+                                            <a href={link} >
+                                                <BtnExibe id="btn-exibe" className="btn-exibe"> Editar </BtnExibe></a>
+                                            <a href={link}>
+                                                <BtnExibe id="btn-exibe" className="btn-exibe">Excluir</BtnExibe></a>
                                         </BtnExibeGroup>
                                     </td>
                                 </tr>
@@ -116,9 +119,12 @@ const ConsultaProduto = () => {
 
 
                 </PainelBody>
+
+
             </Main>
+
             <Footer />
         </>
     );
 }
-export default ConsultaProduto;
+export default ConsultaCliente;

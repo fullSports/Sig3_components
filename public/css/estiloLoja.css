@@ -196,3 +196,6 @@ body::-webkit-scrollbar-thumb {
     position: absolute;
     left: 24px;
 }
+.forms-none{
+    display: none;
+}

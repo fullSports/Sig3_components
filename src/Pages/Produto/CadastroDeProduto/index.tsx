@@ -1,8 +1,8 @@
-import React from "react";
-import styled from "styled-components";
-import Footer from "../../Components/Footer";
-import Cabecalho from "../../Components/Cabecalho";
-import FormsProduto from "../../Components/Forms/formsProduto";
+import React from 'react';
+import styled from 'styled-components';
+import Cabecalho from '../../../Components/Cabecalho';
+import Footer from '../../../Components/Footer';
+import FormsProduto from '../../../Components/Forms/formsProduto';
 
 const Main = styled.main`
     width: 100%;
@@ -13,16 +13,16 @@ const ExibeTitulo = styled.h3`
     text-align: center;
 `;
 
-const CadastrarProduto = ()=>{
+const CadastrarProduto = () =>{
     return(
         <>
-            <Cabecalho />
-            <Main>
+        <Cabecalho />
+        <Main>
             <ExibeTitulo id="exibe-titulo" className="exibe-titulo" >Cadastrar Produto</ExibeTitulo>
             <FormsProduto />
         </Main>
         <Footer />
         </>
     );
-}
+};
 export default CadastrarProduto;
