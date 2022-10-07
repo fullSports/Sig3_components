@@ -10,7 +10,7 @@ const ImgBotaoMenu = require('./../../assets/images/botao-de-menu-de-tres-linhas
 const Topo = styled.header`
   min-width:100%
   height auto;
-`
+`;
 const Acessibilidade = styled.div`
   padding: 15px 0 0 0;
   min-height: 35px;
@@ -18,11 +18,9 @@ const Acessibilidade = styled.div`
   font-size: 14px;
   height: auto;
   margin: auto;
-  
   ul li{
     margin-left: 20px;
   }
-
   a {
     text-decoration: none;
   }
@@ -125,8 +123,6 @@ const ConjuntoIcones = styled.div`
   a {
     text-decoration: none;
   }
-  
-  
   @media screen and (max-width: 450px) {
     ul{
       width:80%
@@ -209,7 +205,7 @@ background-color:#a6e65a;
     flex-direction: column;
     background-color:#67a51c;
     width: 100%;
-    height: 50%;
+    height: 90%;
     cursor: pointer;
     transition: .100s;
     left: -90000vh;
@@ -220,7 +216,6 @@ background-color:#a6e65a;
       display: flex;
       height: 70px;
     }
-  
     a{
       background-color:#67a51c;
       width: 100%;
@@ -229,14 +224,12 @@ background-color:#a6e65a;
       height: 50px;
     }
   }
-    
   .menu-lateral--ativo{
     background-color:#a6e65a;
     transition: .100s;
     left: 0vh;
     position: absolute;
-    }
-                    
+    }                
   }
 `;
 const Botao = () => {

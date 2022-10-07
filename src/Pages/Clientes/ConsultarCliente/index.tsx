@@ -35,6 +35,59 @@ const TableExibe = styled.table`
         color: rgb(232, 232, 232);
         background-color: #4c4f54;
     }
+    @media screen and (max-width: 1144px) {
+        width: auto;
+        position: static;
+        overflow-x: auto;
+        width: 100%;
+        display: block;
+        padding: 20px .625em .625em .625em;
+    
+        thead, tbody, thead, th {
+        display: block;
+        }
+        thead {
+        float: left;
+        }
+        tbody {
+        width: auto;
+        position: static;
+        overflow-x: auto;
+        }
+        td, th {
+        padding: 20px .625em .625em .625em;
+        height: 60px;
+        vertical-align: middle;
+        box-sizing: border-box;
+        overflow-x: hidden;
+        overflow-y: auto;
+        width: 120px;
+        font-size: 13px;
+        text-overflow: ellipsis;
+        }
+        thead th {
+        text-align: left;
+        border-bottom: 1px solid #f7f7f9;
+        }
+        tbody tr {
+        display: table-cell;
+        }
+        tbody td {
+        display: block;
+        text-align: center;
+        }
+        tr:nth-child(even) {
+        background: transparent;
+        }
+        tr td:nth-child(odd) {
+        background: #F8F8F8;
+        border-right: 1px solid #E6E4E4;
+        }
+        tr td:nth-child(even) {
+        border-right: 1px solid #E6E4E4;
+        }
+
+    }
 `;
 const BtnExibeGroup = styled.div`
     display: grid;
@@ -59,6 +112,10 @@ const BtnExibe = styled.button`
         text-decoration: none;
         background-color: rgb(0, 0, 0);
         transform:translate(0.3s);
+    }
+    @media screen and (max-width: 1144px) {
+        width: 40px;
+        justify-content: center;
     }
 `;
 const ConsultaCliente = () => {
