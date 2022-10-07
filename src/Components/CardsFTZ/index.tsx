@@ -7,6 +7,9 @@ const CardFTZdiv = styled.div`
     width: 220px;
     img{
         height: 190px;
+        @media screen and (max-width: 1144px) {
+            height: 100px;
+        }
     }
     :hover{
         transition: .3s;
@@ -14,7 +17,8 @@ const CardFTZdiv = styled.div`
     }
 
     @media screen and (max-width: 1144px) {
-        width: fit-content;
+        width: 180px;
+        padding: 10px;
         :hover{
             transition: .3s;
             box-shadow: 0 0 6px rgba(143, 106, 106, .6);
@@ -30,8 +34,9 @@ const CorpoCard = styled.div`
         font-size: 19px;
     }
     @media screen and (max-width: 1144px) {
+        margin: 1px 0;
         h3{
-        font-size: 19px;
+        font-size: 12px;
         }
     }
 `;

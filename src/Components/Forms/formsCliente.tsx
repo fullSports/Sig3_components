@@ -19,6 +19,7 @@ const FormCadastroCliente = styled.div`
         font-size: 12px;
         border-radius: 10px;
     }
+    
 `;
 const Row1grid = styled.div`
     display: grid;
@@ -51,7 +52,7 @@ const FormsCliente = () => {
                 <Row1grid id="row-1-grid" className="row-1-grid">
                     <label className="col-form-label">CPF</label>
                     <TextField
-                        sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
+                        sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%'}}
                         className="txt-form"
                         label="cpf"
                         id="cpf"

@@ -242,6 +242,8 @@ background-color:#a6e65a;
 `;
 const Botao = () => {
   document.querySelector('.menu-lateral')?.classList.toggle('menu-lateral--ativo');
+  document.querySelector('.form-cadastro-cliente')?.classList.toggle('forms-none');
+  document.querySelector('.form-cadastro-produto')?.classList.toggle('forms-none');
 }
 const Cabecalho = () => {
   const link = '#'

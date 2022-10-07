@@ -1,31 +1,32 @@
+
 import React from "react";
 import styled from "styled-components";
-import Footer from "../Components/Footer";
-import Cabecalho from "../Components/Cabecalho";
-import CardsFTZ from "../Components/CardsFTZ";
-import Cards from "../Components/Card";
-const Banner =require( "./../assets/images/banner1.png");
-const Cardvan1 =require( "./../assets/images/card-van-1.png");
-const Cardvan2 =require( "./../assets/images/card-van-2.png");
-const Cardvan3 =require( "./../assets/images/card-van-3.png");
-const Cardvan4 =require( "./../assets/images/card-van-4.png");
-const Meiagonew =require( "./../assets/images/meia-gonew.jpg");
-const JaquetaHering1 =require("./../assets/images/jaqueta-hering1.jpg");
-const Chuteiracampofuture =require("./../assets/images/produtos/chuteira-campo-future-3.1-z.png");
-const JaquetaZafina =require("./../assets/images/jaqueta-zafina.jpg");
-const TenisAdidas =require( "./../assets/images/tenis-adidas.jpg");
-const MeiaGone =require("./../assets/images/meia-gonew.jpg");
-const FutureZanuncio =require( "./../assets/images/future-z-anuncio.png");
-const ChuteiraCampoFuture =require( "./../assets/images/produtos/chuteira-campo-future-3.1-z.png");
-const AdidasLogo =require( "./../assets/images/adidas-logo.png");
-const PumaLogo =require( "./../assets/images/puma-logo.png");
-const Olympikus =require( "./../assets/images/olympikus.png");
-const ConverseLogo =require( "./../assets/images/converse-logo.png");
-const AsicsLogo =require( "./../assets/images/asics-logo.png");
-const CardCat1 =require( "./../assets/images/card-cat-1.png");
-const CardCat2 =require( "./../assets/images/card-cat-2.png");
-const CardCat3 =require( "./../assets/images/card-cat-3.png");
-const CardCat4 =require( "./../assets/images/card-cat-4.png");
+import Footer from "../../Components/Footer";
+import Cabecalho from "../../Components/Cabecalho";
+import CardsFTZ from "../../Components/CardsFTZ";
+import Cards from "../../Components/Card";
+const Banner =require( "./../../assets/images/banner1.png");
+const Cardvan1 =require( "./../../assets/images/card-van-1.png");
+const Cardvan2 =require( "./../../assets/images/card-van-2.png");
+const Cardvan3 =require( "./../../assets/images/card-van-3.png");
+const Cardvan4 =require( "./../../assets/images/card-van-4.png");
+const Meiagonew =require( "./../../assets/images/meia-gonew.jpg");
+const JaquetaHering1 =require("./../../assets/images/jaqueta-hering1.jpg");
+const Chuteiracampofuture =require("./../../assets/images/produtos/chuteira-campo-future-3.1-z.png");
+const JaquetaZafina =require("./../../assets/images/jaqueta-zafina.jpg");
+const TenisAdidas =require( "./../../assets/images/tenis-adidas.jpg");
+const MeiaGone =require("./../../assets/images/meia-gonew.jpg");
+const FutureZanuncio =require( "./../../assets/images/future-z-anuncio.png");
+const ChuteiraCampoFuture =require( "./../../assets/images/produtos/chuteira-campo-future-3.1-z.png");
+const AdidasLogo =require( "./../../assets/images/adidas-logo.png");
+const PumaLogo =require( "./../../assets/images/puma-logo.png");
+const Olympikus =require( "./../../assets/images/olympikus.png");
+const ConverseLogo =require( "./../../assets/images/converse-logo.png");
+const AsicsLogo =require( "./../../assets/images/asics-logo.png");
+const CardCat1 =require( "./../../assets/images/card-cat-1.png");
+const CardCat2 =require( "./../../assets/images/card-cat-2.png");
+const CardCat3 =require( "./../../assets/images/card-cat-3.png");
+const CardCat4 =require( "./../../assets/images/card-cat-4.png");
 
 
 
@@ -37,7 +38,7 @@ const Propaganda = styled.div`
     width: 100%;
     img {
         width: 100%;
-        height: auto;
+        height: 200px;
         /* height: 470px; */
     }
 `;
@@ -130,10 +131,11 @@ const DoubleGrid = styled.div`
     grid-gap: 30px;
 
     @media screen and (max-width: 1144px) {
-        align-items: center;
-        margin: 2px 0px 0 2px;
-        width: 65%;
+        margin: 0;
+        padding: 2px 0px ;
+        width: 100%;
         height: auto;
+        display: grid;
         justify-content: center;
         grid-template-columns: repeat(1, auto);
         grid-auto-rows: minmax(auto, auto);
@@ -141,13 +143,15 @@ const DoubleGrid = styled.div`
 `;
 const AnuncioFutureZ = styled.div`
     img{
-        height: 755px;
+        height: 790px;
     }
     @media screen and (max-width: 1144px) {
+        align-items: center;
+        display: flex;
+        justify-content: center;
         img{
             height: auto;
-            width: 98%;
-            margin: 1%;
+            width: 100%;
         }
     }
 `;
@@ -156,14 +160,17 @@ const ConjuntoTenisFZ = styled.div`
     display: grid;
     grid-template-columns: repeat(3, auto);
     grid-auto-rows: minmax(auto, auto);
-    grid-gap: 20px;
+    grid-gap: 10px;
 
-    @media screen and (max-width: 1144px) {
+    @media screen and (max-width: 500px) {
+        width: 100%;
         justify-content: center;
         display: grid;
         grid-template-columns: repeat(2, auto);
         grid-gap: 5px;
-        margin: 2%;
+    }
+    @media screen and (max-width: 1144px) and (min-width: 501) {
+        grid-template-columns: repeat(3, auto);
     }
 `;
 const Marcas = styled.section`
@@ -339,8 +346,8 @@ const Home = () => {
                     </div>
 
                     <DoubleGrid id="doubleGrid" className="DoubleGrid">
-                        <AnuncioFutureZ>
-                            <a href="*"><img src={FutureZanuncio} alt="" /></a>
+                        <AnuncioFutureZ id="anucio-future-Z" className="anucio-future-Z">
+                            <a href="#"><img src={FutureZanuncio} alt="" /></a>
                         </AnuncioFutureZ>
 
                         <ConjuntoTenisFZ id="conjuntoTenisFZ" className="conjuntoTenisFZ">

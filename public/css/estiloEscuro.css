@@ -170,3 +170,6 @@ option{
 #btnLinkPrd a{
     color: #e3e3e3;
 }
+.forms-none{
+    display: none;
+}
