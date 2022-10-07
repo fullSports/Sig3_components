@@ -116,10 +116,10 @@ const GridProdutosEqui = styled.div`
     grid-auto-rows: minmax(auto, auto);
     grid-gap: 25px;
     @media screen and (max-width: 1144px) {
-        grid-template-columns: repeat(2, auto);
+        grid-template-columns: repeat(3, auto);
     }
     @media screen and (max-width: 550px) {
-        grid-template-columns: repeat(1, auto);
+        grid-template-columns: repeat(2, auto);
     }
 
 `;

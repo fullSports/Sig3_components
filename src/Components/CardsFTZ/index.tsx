@@ -17,7 +17,7 @@ const CardFTZdiv = styled.div`
     }
 
     @media screen and (max-width: 1144px) {
-        width: 180px;
+        width: 150px;
         padding: 10px;
         :hover{
             transition: .3s;

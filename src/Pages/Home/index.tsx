@@ -38,8 +38,11 @@ const Propaganda = styled.div`
     width: 100%;
     img {
         width: 100%;
-        height: 200px;
-        /* height: 470px; */
+    }
+    @media screen and (max-width: 450px) {  
+        img{
+            height: 200px;
+        }
     }
 `;
 const ConjuntoNovidades = styled.div`
@@ -184,7 +187,7 @@ const ConjuntoMarcas = styled.div`
     /* margin: 0 40px 0 40px; */
 
     display: grid;
-    grid-template-columns: repeat(6, auto);
+    grid-template-columns: repeat(5, auto);
     grid-auto-rows: minmax(auto, auto);
     grid-gap: 50px;
     img{
@@ -196,14 +199,20 @@ const ConjuntoMarcas = styled.div`
             justify-content: center;
             /* margin: 0 40px 0 40px; */
             display: grid;
-            grid-template-columns: repeat(6, auto);
+            grid-template-columns: repeat(3, auto);
             grid-auto-rows: minmax(auto, auto);
             grid-gap: 50px;
             img{
-                height: auto;
-                width: 5%;
+                height: 64px;
             }
       }
+      @media screen and (max-width: 500px) {
+        img{
+                height: 54px;
+            }
+        grid-template-columns: repeat(2, auto);
+      }
+
 `;
 const Zoom1 = styled.div`
     overflow: hidden;
@@ -347,7 +356,7 @@ const Home = () => {
 
                     <DoubleGrid id="doubleGrid" className="DoubleGrid">
                         <AnuncioFutureZ id="anucio-future-Z" className="anucio-future-Z">
-                            <a href="#"><img src={FutureZanuncio} alt="" /></a>
+                            <a href="# "><img src={FutureZanuncio} alt="" /></a>
                         </AnuncioFutureZ>
 
                         <ConjuntoTenisFZ id="conjuntoTenisFZ" className="conjuntoTenisFZ">

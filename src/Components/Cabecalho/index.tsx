@@ -79,11 +79,13 @@ const NavGrid = styled.div`
   @media screen and (max-width: 1144px) {
   justify-items: start;  
   justify-content: space-between;
-  display: grid;
+  display: flex;
   grid-template-columns: repeat(3, 160px);
   }
   @media screen and (max-width: 450px) {  
-    grid-template-columns: repeat(3,100px);
+    justify-content: space-between;
+    display: flex;
+    grid-template-columns: repeat(3,80px);
   }
 `;
 const BarraPesquisa = styled.div`
@@ -106,12 +108,9 @@ const BarraPesquisaInpult = styled.input`
   }
 `;
 const Logo = styled.div`
-  margin-left: auto;
-  margin-right: auto;
   img{
     width: 150px;
   }
- 
 `;
 const ConjuntoIcones = styled.div`
   margin-top: 10%;
@@ -189,7 +188,7 @@ const CabecalhoMenu = styled.button`
   i::before{
     content: url(${ImgBotaoMenu});
   }
-  @media screen and (max-width:459px) {
+  @media screen and (max-width:460px) {
     width: 20px;
     background-color: #a6e65a;
   }
@@ -203,7 +202,7 @@ background-color:#a6e65a;
   @media screen and (min-width: 460px) {
     display: none;
   }
-  @media screen and (max-width:459px) {
+  @media screen and (max-width:461px) {
     .menu-lateral{
     display: flex;
     position: absolute;

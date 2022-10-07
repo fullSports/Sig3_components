@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Box, Button, TextField, FormControl, Select, InputLabel, MenuItem } from "@mui/material";
+import { Button, TextField } from "@mui/material";
 
 const FormCadastroDeProduto = styled.div`
     margin-left: auto;
