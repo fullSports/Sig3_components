@@ -1,12 +1,4 @@
 # Front-end_FullSports_typeScript
-| Grupo 04 |
-| --- |
-| Lisandra Ferraz de Santana                                                                                                                       |
-| Gabriel Gozzi |
-| Renan Figueiredo |
-| Daniela Houck |
-| Paulo H. C. Jesus |
-
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -59,6 +51,13 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 
 ##### Processo de Desenvolvimento de Software - PDS
+| Grupo 04 |
+| --- |
+| Lisandra Ferraz de Santana |
+| Gabriel Gozzi |
+| Renan Figueiredo |
+| Daniela Houck |
+| Paulo H. C. Jesus |
 > O PDS segue uma abordagem interativa incremental. Cada atividade da interação tem uma definição de pronto estabelecida com objetivo de controlar a qualidade. 
 ```mermaid 
 graph TD; 
