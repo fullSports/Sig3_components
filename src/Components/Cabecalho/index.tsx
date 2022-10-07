@@ -69,11 +69,10 @@ const Atalhos2 = styled.ul`
 const NavGrid = styled.div`
   justify-content: center;
   display: grid;
-  grid-template-columns: repeat(3, 350px);
+  grid-template-columns: repeat(3, 400px);
   margin-bottom:10px;
-  justify-items: end;
+  justify-items: center;
   align-items: end;
-
   @media screen and (max-width: 1144px) {
   justify-items: start;  
   justify-content: space-between;
