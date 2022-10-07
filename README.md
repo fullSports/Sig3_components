@@ -1,7 +1,7 @@
 # Front-end_FullSports_typeScript
 | Grupo 04 |
 | --- |
-| Lisandra Ferraz de Santana |
+| Lisandra Ferraz de Santana                                                                                                                       |
 | Gabriel Gozzi |
 | Renan Figueiredo |
 | Daniela Houck |
