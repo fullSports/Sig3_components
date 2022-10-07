@@ -66,6 +66,7 @@ const Atalhos2 = styled.ul`
     margin-left: 3px;
   }
 `;
+
 const NavGrid = styled.div`
   justify-content: center;
   display: grid;
