@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-const logo_loja = require("../../assets/images/fullSportLogo.png");
+const logo_loja: string = require("../../assets/images/fullSportLogo.svg").default;
 const FacebookIcone = require("../../assets/images/facebook.png");
 const TwitterIcone = require("../../assets/images/twitter.png");
 const InstagramIcone = require("../../assets/images/instagram.png");
@@ -205,7 +205,7 @@ background-color:#a6e65a;
     flex-direction: column;
     background-color:#67a51c;
     width: 100%;
-    height: 90%;
+    height: 80%;
     cursor: pointer;
     transition: .100s;
     left: -90000vh;

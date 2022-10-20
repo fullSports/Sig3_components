@@ -41,7 +41,7 @@ const Propaganda = styled.div`
     }
     @media screen and (max-width: 450px) {  
         img{
-            height: 200px;
+            height: 150px;
         }
     }
 `;
