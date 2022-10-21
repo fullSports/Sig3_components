@@ -1,6 +1,7 @@
-import React from "react";
+import  React,{useState} from "react";
 import styled from "styled-components";
 import { Button, TextField, FormControl, Select, InputLabel, MenuItem } from "@mui/material";
+import apiFullSports from "../../api/apiFullSports";
 
 const FormCadastroCliente = styled.div`
     margin-left: auto;
@@ -41,42 +42,79 @@ const BttCadClienteGrid = styled.div`
     grid-gap: 2px;
 `;
 const FormsCliente = () => {
-    const sexo = ['', 'M', 'F', 'O', 'Prefiro não dizer']
-    // const aoSalvar = (evento) => {
-    //     evento.preventDefault()
-    //     alert('e')
-    // }
+    const [cpf, setCpf] = useState('');
+    const [nome, setNome] = useState('');
+    const [dataNascimento, setDataNascimento] = useState('');
+    const [sexo, setSexo] = useState('');
+    const [cep, setCep] = useState('');
+    const [rua, setRua] = useState('');
+    const [bairro, setBairro] = useState('');
+    const [estado, setEstado] = useState('');
+    const [cidade, setCidade] = useState('');
+    const [complemento, setComplemento] = useState('');
+    const [numero, setNumero] = useState('');
+    
+    function aoSubmeterForm(evento: React.FormEvent<HTMLFormElement>) {
+        evento.preventDefault();
+        apiFullSports.request({
+            url: 'cadastrar-cliente/',
+            method: 'POST',
+            data: {
+                cpf: cpf,
+                nome: nome,
+                dataNascimento: dataNascimento,
+                sexo: sexo,
+                cep: cep,
+                endereco: rua + ", " + numero + ", " + complemento + "-" + estado + ", " + cidade + ", " + bairro 
+            }
+        })
+            .then(() => {
+                setCpf('');
+                setNome('');
+                setDataNascimento('');
+                setSexo('');
+                setCep('');
+                setRua('');
+                setBairro('');
+                setEstado('');
+                setCidade('');
+                setComplemento('');
+                setNumero('');
+            })
+            .catch(erro => console.log(erro));
+    }    
     return (
         <FormCadastroCliente id="form-cadastro-cliente" className="form-cadastro-cliente">
-            <form action="#" method="post" >
+            <form action="#" method="post" onSubmit={aoSubmeterForm}>
                 <Row1grid id="row-1-grid" className="row-1-grid">
                     <label className="col-form-label">CPF</label>
                     <TextField
                         sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%'}}
+                        onChange={evento=> setCpf(evento.target.value)}
                         className="txt-form"
                         label="cpf"
                         id="cpf"
                         type="text"
                         placeholder={'00.000.000-00'}
                         fullWidth
-
                     />
 
-                    <label className="col-form-label">Nome do Produto</label>
+                    <label className="col-form-label">Nome</label>
                     <TextField
                         sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
+                        onChange={evento=> setNome(evento.target.value)}
                         className="txt-form"
-                        label="Nome do Produto"
+                        label="Nome"
                         id="nome"
                         type="text"
                         placeholder={'Digite seu nome'}
                         fullWidth
-
                     />
 
                     <label className="col-form-label">Data de Nascimento</label>
                     <TextField
                         sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
+                        onChange={evento=> setDataNascimento(evento.target.value)}
                         className="txt-form"
                         label="Data de Nascimento"
                         id="data"
@@ -87,16 +125,20 @@ const FormsCliente = () => {
 
                     <label className="col-form-label">Sexo</label>
                     <FormControl fullWidth margin="dense">
-                        <InputLabel id="sexo" >Sexo</InputLabel>
-                        <Select className="txt-form" labelId="sexo" sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}>
-                            {sexo.map(item => <MenuItem className="txt-form" value={item}>
-                                {item}
-                            </MenuItem>)}
+                        <InputLabel id="sexo">Sexo</InputLabel>
+                        <Select className="txt-form" labelId="sexo" sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }} 
+                        value={sexo} onChange={evento=> setSexo(evento.target.value)}>
+                            <MenuItem key={''} value={''}></MenuItem>
+                            <MenuItem key={'M'} value={'M'}>Masculino</MenuItem>
+                            <MenuItem key={'F'} value={'F'}>Feminino</MenuItem>
+                            <MenuItem key={'O'} value={'O'}>Outros</MenuItem>
+                            <MenuItem key={'-'} value={'-'}>Prefiro não dizer</MenuItem>
                         </Select>
                     </FormControl>
 
                     <label className="col-form-label">Cep</label>
                     <TextField
+                        onChange={evento=> setCep(evento.target.value)}
                         sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
                         className="txt-form"
                         label="Cep"
@@ -108,6 +150,7 @@ const FormsCliente = () => {
 
                     <label className="col-form-label">Rua</label>
                     <TextField
+                        onChange={evento=> setRua(evento.target.value)}
                         sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
                         className="txt-form"
                         label="Rua"
@@ -119,6 +162,7 @@ const FormsCliente = () => {
 
                     <label className="col-form-label">Bairro</label>
                     <TextField
+                        onChange={evento=> setBairro(evento.target.value)}
                         sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
                         className="txt-form"
                         label="Bairro"
@@ -130,6 +174,7 @@ const FormsCliente = () => {
 
                     <label className="col-form-label">Estado</label>
                     <TextField
+                        onChange={evento=> setEstado(evento.target.value)}
                         sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
                         className="txt-form"
                         label="Estado"
@@ -141,6 +186,7 @@ const FormsCliente = () => {
 
                     <label className="col-form-label">Cidade</label>
                     <TextField
+                        onChange={evento=> setCidade(evento.target.value)}
                         sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
                         className="txt-form"
                         label="Cidade"
@@ -149,9 +195,20 @@ const FormsCliente = () => {
                         placeholder={'Digite sua Cidade'}
                         fullWidth
                     />
+                    <label className="col-form-label">Número</label>
+                    <TextField
+                        onChange={evento=> setNumero(evento.target.value)}
+                        sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
+                        className="txt-form"
+                        label="Nº"
+                        id="numero"
+                        type="number"
+                        fullWidth
+                    />
 
                     <label className="col-form-label">Complemento</label>
                     <TextField
+                        onChange={evento=> setComplemento(evento.target.value)}
                         sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
                         className="txt-form"
                         label="Complemento"
@@ -160,9 +217,6 @@ const FormsCliente = () => {
                         placeholder={'casa/apartamento'}
                         fullWidth
                     />
-
-
-
                 </Row1grid>
 
                 <BttCadClienteGrid id="btt-cad-cliente-grid" className="btt-cad-cliente-grid">
