@@ -53,19 +53,18 @@ const FormsCliente = () => {
     const [cidade, setCidade] = useState('');
     const [complemento, setComplemento] = useState('');
     const [numero, setNumero] = useState('');
-    
     function aoSubmeterForm(evento: React.FormEvent<HTMLFormElement>) {
         evento.preventDefault();
         apiFullSports.request({
             url: 'cadastrar-cliente/',
             method: 'POST',
-            data: {
+            data:{
                 cpf: cpf,
                 nome: nome,
                 dataNascimento: dataNascimento,
                 sexo: sexo,
                 cep: cep,
-                endereco: rua + ", " + numero + ", " + complemento + "-" + estado + ", " + cidade + ", " + bairro 
+                endereco: `${rua}, ${numero}, ${complemento}-${estado}, ${cidade}, ${bairro}`
             }
         })
             .then(() => {
@@ -80,6 +79,7 @@ const FormsCliente = () => {
                 setCidade('');
                 setComplemento('');
                 setNumero('');
+                alert('Cliente cadastrado com sucesso')
             })
             .catch(erro => console.log(erro));
     }    
@@ -97,6 +97,7 @@ const FormsCliente = () => {
                         type="text"
                         placeholder={'00.000.000-00'}
                         fullWidth
+                        required
                     />
 
                     <label className="col-form-label">Nome</label>
@@ -109,6 +110,7 @@ const FormsCliente = () => {
                         type="text"
                         placeholder={'Digite seu nome'}
                         fullWidth
+                        required
                     />
 
                     <label className="col-form-label">Data de Nascimento</label>
@@ -121,13 +123,14 @@ const FormsCliente = () => {
                         type="text"
                         placeholder={'__/__/____'}
                         fullWidth
+                        required
                     />
 
                     <label className="col-form-label">Sexo</label>
                     <FormControl fullWidth margin="dense">
                         <InputLabel id="sexo">Sexo</InputLabel>
                         <Select className="txt-form" labelId="sexo" sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }} 
-                        value={sexo} onChange={evento=> setSexo(evento.target.value)}>
+                        value={sexo} onChange={evento=> setSexo(evento.target.value)} required>
                             <MenuItem key={''} value={''}></MenuItem>
                             <MenuItem key={'M'} value={'M'}>Masculino</MenuItem>
                             <MenuItem key={'F'} value={'F'}>Feminino</MenuItem>
@@ -146,6 +149,7 @@ const FormsCliente = () => {
                         type="text"
                         placeholder={'00000-000'}
                         fullWidth
+                        required
                     />
 
                     <label className="col-form-label">Rua</label>
@@ -158,6 +162,7 @@ const FormsCliente = () => {
                         type="text"
                         placeholder={'Digite sua rua'}
                         fullWidth
+                        required
                     />
 
                     <label className="col-form-label">Bairro</label>
@@ -170,6 +175,7 @@ const FormsCliente = () => {
                         type="text"
                         placeholder={'Digite seu Bairro'}
                         fullWidth
+                        required
                     />
 
                     <label className="col-form-label">Estado</label>
@@ -182,6 +188,7 @@ const FormsCliente = () => {
                         type="text"
                         placeholder={'Digite seu estado'}
                         fullWidth
+                        required
                     />
 
                     <label className="col-form-label">Cidade</label>
@@ -194,6 +201,7 @@ const FormsCliente = () => {
                         type="text"
                         placeholder={'Digite sua Cidade'}
                         fullWidth
+                        required
                     />
                     <label className="col-form-label">Número</label>
                     <TextField
@@ -204,6 +212,7 @@ const FormsCliente = () => {
                         id="numero"
                         type="number"
                         fullWidth
+                        required
                     />
 
                     <label className="col-form-label">Complemento</label>
@@ -216,6 +225,7 @@ const FormsCliente = () => {
                         type="text"
                         placeholder={'casa/apartamento'}
                         fullWidth
+                        required
                     />
                 </Row1grid>
 
