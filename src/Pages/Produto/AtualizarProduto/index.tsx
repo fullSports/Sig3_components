@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Cabecalho from "../../../Components/Cabecalho";
 import Footer from "../../../Components/Footer";
-import FormsProduto from "../../../Components/Forms/formsProduto";
+
 const Main = styled.main`
     width: 100%;
     min-height: 600px;
@@ -18,7 +18,7 @@ function AtualizaProduto() {
             <Cabecalho />
             <Main>
                 <ExibeTitulo id="exibe-titulo" className="exibe-titulo" >Atualizar Produto</ExibeTitulo>
-                <FormsProduto/>
+
             </Main>
             <Footer />
         </>
