@@ -6,4 +6,5 @@ export default interface ICliente{
     sexo: String
     cep: String
     endereco: String
+    dataCadastro: String
 }

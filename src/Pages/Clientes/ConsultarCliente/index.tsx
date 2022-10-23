@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Footer from "../../../Components/Footer";
 import Cabecalho from "../../../Components/Cabecalho";
+import ICliente from "../../../interfaces/ICliente";
+import apiFullSports from "../../../api/apiFullSports";
 const Main = styled.main`
     width: 100%;
     min-height: 600px;
@@ -119,7 +121,17 @@ const BtnExibe = styled.button`
     }
 `;
 const ConsultaCliente = () => {
-    const link="#"
+    const [clientes, setClientes] = useState<ICliente[]>([]);
+
+    useEffect(()=>{
+        apiFullSports.get<ICliente[]>('listar-clientes/')
+            .then(resposta => setClientes(resposta.data));
+    },[]);
+    const deletar = (DeletarCliente: ICliente)=>{
+        apiFullSports.delete(`deletar-cliente/${DeletarCliente._id}/`);
+        window.location.reload();
+    }
+    console.log(clientes.map(item=>item.dataCadastro))
     return (
         <>
             <Cabecalho />
@@ -131,44 +143,38 @@ const ConsultaCliente = () => {
                         <TableExibe id="table-exibe" className="table-exibe">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
+                                    <th>Data de Cadastro</th>
                                     <th>CPF</th>
                                     <th>Nome</th>
                                     <th>Dt. Nascimento</th>
                                     <th>Sexo</th>
                                     <th>CEP</th>
-                                    <th>Rua</th>
-                                    <th>Bairro</th>
-                                    <th>Cidade</th>
-                                    <th>Complemento</th>
-                                    <th>Dt. Cadastro</th>
-
+                                    <th>Endereço</th>
                                 </tr>
                             </thead>
 
                             <tbody>
-                                <tr >
-                                    <td ></td>
-                                    <td ></td>
-                                    <td ></td>
-                                    <td ></td>
-                                    <td ></td>
-                                    <td ></td>
-                                    <td ></td>
-                                    <td ></td>
-                                    <td ></td>
-                                    <td ></td>
-                                    <td ></td>
+                                {clientes.map(item=> 
+                                
+                                <tr key={item._id.toString()}> 
+                                    <th>{`${item.dataCadastro}`}</th>
+                                    <th>{item.cpf}</th>
+                                    <th>{item.nome}</th>
+                                    <th>{item.dataNascimento}</th>
+                                    <th>{item.sexo}</th>
+                                    <th>{item.cep}</th>
+                                    <th>{item.endereco}</th>
 
                                     <td>
                                         <BtnExibeGroup id="btn-exibe-group" className="btn-exibe-group">
-                                            <a href={link} >
+                                            <a href={`/atualizar-cliente/${item._id}`} >
                                                 <BtnExibe id="btn-exibe" className="btn-exibe"> Editar </BtnExibe></a>
-                                            <a href={link}>
-                                                <BtnExibe id="btn-exibe" className="btn-exibe">Excluir</BtnExibe></a>
+                                    
+                                                <BtnExibe id="btn-exibe" className="btn-exibe" onClick={()=> deletar(item)}>Excluir</BtnExibe>
                                         </BtnExibeGroup>
                                     </td>
-                                </tr>
+                                </tr>)}
+
                             </tbody>
                         </TableExibe>
 

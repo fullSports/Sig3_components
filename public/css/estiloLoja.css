@@ -153,6 +153,10 @@ body::-webkit-scrollbar-thumb {
 	font-size: 12pt;
 	background-color: rgb(254, 254, 250);
 }
+#table-exibe tbody th{
+    background-color: rgb(254, 254, 250);
+    color: rgb(58, 58, 58);
+}
 #descAnunPrd{
     color: #313131;
     border: 2px solid rgba(0, 0, 0, 0.123);

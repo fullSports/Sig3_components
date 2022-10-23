@@ -54,6 +54,7 @@ const CadastroCliente = () => {
     const [cpf, setCpf] = useState('');
     const [nome, setNome] = useState('');
     const [dataNascimento, setDataNascimento] = useState('');
+    const dataAtual = new Date(); 
     const [sexo, setSexo] = useState('');
     const [cep, setCep] = useState('');
     const [rua, setRua] = useState('');
@@ -73,7 +74,8 @@ const CadastroCliente = () => {
                 dataNascimento: dataNascimento,
                 sexo: sexo,
                 cep: cep,
-                endereco: `${rua},${numero}-${complemento}-${estado}, ${cidade}, ${bairro}`
+                endereco: `${rua},${numero} -${complemento}- ${estado}, ${cidade}, ${bairro}`,
+                dataCadastro: `${String(dataAtual.getDate()).padStart(2, '0')}/${String(dataAtual.getMonth() + 1).padStart(2, '0')}/${dataAtual.getFullYear()}`
             }
         })
             .then(() => {
