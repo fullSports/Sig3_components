@@ -26,9 +26,9 @@ const App = ()=> {
 
       <Route path='/sig/consulta-de-produtos' element={<ConsultaProduto/>}/>
 
-      <Route path='/sig/atualizar-cliente' element={<AtualizaCliente/>}/>
+      <Route path='/sig/atualizar-cliente/:id' element={<AtualizaCliente/>}/>
 
-      <Route path='/sig/atualizar-produto' element={<AtualizaProduto/>}/>
+      <Route path='/sig/atualizar-produto/id' element={<AtualizaProduto/>}/>
 
       <Route path='/acessibilidade' element={<Acessibilidade/>}/>
 
