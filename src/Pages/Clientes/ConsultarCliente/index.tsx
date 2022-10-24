@@ -127,6 +127,7 @@ const ConsultaCliente = () => {
         apiFullSports.get<ICliente[]>('listar-clientes/')
             .then(resposta => setClientes(resposta.data));
     },[]);
+    
     const deletar = (DeletarCliente: ICliente)=>{
         apiFullSports.delete(`deletar-cliente/${DeletarCliente._id}/`);
         window.location.reload();
@@ -157,7 +158,7 @@ const ConsultaCliente = () => {
                                 {clientes.map(item=> 
                                 
                                 <tr key={item._id.toString()}> 
-                                    <th>{`${item.dataCadastro}`}</th>
+                                    <th>{`${item.dataCadastro.toLocaleString()}`}</th>
                                     <th>{item.cpf}</th>
                                     <th>{item.nome}</th>
                                     <th>{item.dataNascimento}</th>
@@ -167,7 +168,7 @@ const ConsultaCliente = () => {
 
                                     <td>
                                         <BtnExibeGroup id="btn-exibe-group" className="btn-exibe-group">
-                                            <a href={`/atualizar-cliente/${item._id}`} >
+                                            <a href={`/sig/atualizar-cliente/${item._id}`} >
                                                 <BtnExibe id="btn-exibe" className="btn-exibe"> Editar </BtnExibe></a>
                                     
                                                 <BtnExibe id="btn-exibe" className="btn-exibe" onClick={()=> deletar(item)}>Excluir</BtnExibe>

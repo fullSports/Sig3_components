@@ -54,7 +54,7 @@ const CadastroCliente = () => {
     const [cpf, setCpf] = useState('');
     const [nome, setNome] = useState('');
     const [dataNascimento, setDataNascimento] = useState('');
-    const dataAtual = new Date(); 
+    const dataAtual = new Date().toLocaleDateString();
     const [sexo, setSexo] = useState('');
     const [cep, setCep] = useState('');
     const [rua, setRua] = useState('');
@@ -63,6 +63,7 @@ const CadastroCliente = () => {
     const [cidade, setCidade] = useState('');
     const [complemento, setComplemento] = useState('');
     const [numero, setNumero] = useState('');
+    console.log(dataAtual)
     function aoSubmeterForm(evento: React.FormEvent<HTMLFormElement>) {
         evento.preventDefault();
         apiFullSports.request({
@@ -75,7 +76,8 @@ const CadastroCliente = () => {
                 sexo: sexo,
                 cep: cep,
                 endereco: `${rua},${numero} -${complemento}- ${estado}, ${cidade}, ${bairro}`,
-                dataCadastro: `${String(dataAtual.getDate()).padStart(2, '0')}/${String(dataAtual.getMonth() + 1).padStart(2, '0')}/${dataAtual.getFullYear()}`
+                // dataCadastro: `${String(dataAtual.getDate()).padStart(2, '0')}/${String(dataAtual.getMonth() + 1).padStart(2, '0')}/${dataAtual.getFullYear()}`
+                dataCadastro: dataAtual
             }
         })
             .then(() => {
@@ -286,7 +288,7 @@ const CadastroCliente = () => {
                                         justifyContent: 'center', display: 'block', height: '50px', borderRadius: '5px', color: '#fff',
                                         fontSize: '14px', backgroundColor: 'black', ":hover": 'backgroundColor: #313131, transform:translate(0.8s)'
                                     }} type="button" id="btn-cad-forms" className="btn-cad-forms">
-                                    Consulta de Cliente
+                                    Consulta de Clientes
                                 </Button>
                             </BttCadClienteGrid>
                         </form>
