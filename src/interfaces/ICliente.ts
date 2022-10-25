@@ -7,4 +7,7 @@ export default interface ICliente{
     cep: string
     endereco: string
     dataCadastro: string
+    imagemPerfil: {
+        
+    }
 }

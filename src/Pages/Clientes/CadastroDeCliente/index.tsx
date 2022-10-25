@@ -63,9 +63,19 @@ const CadastroCliente = () => {
     const [cidade, setCidade] = useState('');
     const [complemento, setComplemento] = useState('');
     const [numero, setNumero] = useState('');
-    console.log(dataAtual)
+    const [imagem, setImagem] = useState<File | null>(null)
+
+    const selecionarArquivo = (evento: React.ChangeEvent<HTMLInputElement>) => {
+        if (evento.target.files?.length) {
+            setImagem(evento.target.files[0])
+        } else {
+            setImagem(null)
+        }
+    }   
+
     function aoSubmeterForm(evento: React.FormEvent<HTMLFormElement>) {
         evento.preventDefault();
+
         apiFullSports.request({
             url: 'cadastrar-cliente/',
             method: 'POST',
@@ -77,7 +87,8 @@ const CadastroCliente = () => {
                 cep: cep,
                 endereco: `${rua},${numero} -${complemento}- ${estado}, ${cidade}, ${bairro}`,
                 // dataCadastro: `${String(dataAtual.getDate()).padStart(2, '0')}/${String(dataAtual.getMonth() + 1).padStart(2, '0')}/${dataAtual.getFullYear()}`
-                dataCadastro: dataAtual
+                dataCadastro: dataAtual,
+                imagePerfil: imagem
             }
         })
             .then(() => {
@@ -271,6 +282,8 @@ const CadastroCliente = () => {
                                     fullWidth
                                     required
                                 />
+
+                                <input type="file" name="file" onChange={selecionarArquivo}/>
                             </Row1grid>
 
                             <BttCadClienteGrid id="btt-cad-cliente-grid" className="btt-cad-cliente-grid">
