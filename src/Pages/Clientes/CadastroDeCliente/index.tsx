@@ -4,7 +4,6 @@ import Cabecalho from '../../../Components/Cabecalho';
 import Footer from '../../../Components/Footer';
 import { Button, TextField, FormControl, Select, InputLabel, MenuItem, Box } from "@mui/material";
 import apiFullSports from '../../../api/apiFullSports';
-import axios from "axios";
 const Main = styled.main`
     width: 100%;
     min-height: 600px;
@@ -78,52 +77,42 @@ const CadastroCliente = () => {
     function aoSubmeterForm(evento: React.FormEvent<HTMLFormElement>) {
         evento.preventDefault();
 
-        
+        const formData = new FormData();
+        formData.append('cpf', cpf);
+        formData.append('nome', nome);
+        formData.append('dataNascimento', dataNascimento);
+        formData.append('sexo', sexo);
+        formData.append('endereco', `${rua},${numero} -${complemento}- ${estado}, ${cidade}, ${bairro}`);
+        formData.append('dataCadastro', dataAtual);
+        if (file) {
+            formData.append('file', file)
+        }
+        console.log(file)
 
-        // apiFullSports.request({
-        //     url: 'cadastrar-cliente/',
-        //     method: 'POST',
-        //     data: {
-        //         cpf: cpf,
-        //         nome: nome,
-        //         dataNascimento: dataNascimento,
-        //         sexo: sexo,
-        //         cep: cep,
-        //         endereco: `${rua},${numero} -${complemento}- ${estado}, ${cidade}, ${bairro}`,
-        //         // dataCadastro: `${String(dataAtual.getDate()).padStart(2, '0')}/${String(dataAtual.getMonth() + 1).padStart(2, '0')}/${dataAtual.getFullYear()}`
-        //         dataCadastro: dataAtual,
-        //         imagePerfil:imagem
-        //     }
-        // })
-        //     .then(() => {
-        //         setCpf('');
-        //         setNome('');
-        //         setDataNascimento('');
-        //         setSexo('');
-        //         setCep('');
-        //         setRua('');
-        //         setBairro('');
-        //         setEstado('');
-        //         setCidade('');
-        //         setComplemento('');
-        //         setNumero('');
-        //         alert('Cliente cadastrado com sucesso')
-        //     })
-        //     .catch(erro => console.log(erro));
-        
         apiFullSports.request({
-            url:'imagem/',
+            url: 'cadastrar-cliente/',
             method: 'POST',
             headers: {
                 'Access-Control-Allow-Origin': '*',
                 'Content-Type': 'multipart/form-data'
             },
-            data: file
+            data: formData
         })
-        .then(()=>{
-            alert('eee')
+        .then(() => {
+            setCpf('');
+            setNome('');
+            setDataNascimento('');
+            setSexo('');
+            setCep('');
+            setRua('');
+            setBairro('');
+            setEstado('');
+            setCidade('');
+            setComplemento('');
+            setNumero('');
+            alert('Cliente cadastrado com sucesso')
         })
-        .catch(erro=> console.log(erro))
+        .catch(erro => console.log(erro));
         
         }
         function buscaCep(){
@@ -146,7 +135,6 @@ const CadastroCliente = () => {
                     alert("erro ao fazer a requisicao")
                 }
             }
-
         }
         return (
             <>
@@ -154,9 +142,9 @@ const CadastroCliente = () => {
                 <Main>
                     <ExibeTitulo id="exibe-titulo" className="exibe-titulo">Cadastrar Cliente</ExibeTitulo>
                     <FormCadastroCliente id="form-cadastro-cliente" className="form-cadastro-cliente">
-                        <Box component={'form'} onSubmit={aoSubmeterForm}>
+                        <Box component={'form'} onSubmit={aoSubmeterForm} encType="multipart/form-data">
                             <Row1grid id="row-1-grid" className="row-1-grid">
-                                {/* <label className="col-form-label">CPF</label>
+                                <label className="col-form-label">CPF</label>
                                 <TextField
                                     sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
                                     onChange={evento => setCpf(evento.target.value)}
@@ -300,7 +288,7 @@ const CadastroCliente = () => {
                                     placeholder={'casa/apartamento'}
                                     fullWidth
                                     required
-                                /> */}
+                                />
 
                                 <input type="file" accept="image/png,image/jpeg" name="file" onChange={selecionarArquivo}/>
                             </Row1grid>
