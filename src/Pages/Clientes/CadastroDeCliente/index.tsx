@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from 'styled-components';
 import Cabecalho from '../../../Components/Cabecalho';
 import Footer from '../../../Components/Footer';
 import { Button, TextField, FormControl, Select, InputLabel, MenuItem, Box } from "@mui/material";
 import apiFullSports from '../../../api/apiFullSports';
+import Iimagem from "../../../interfaces/Iimagem";
 const Main = styled.main`
     width: 100%;
     min-height: 600px;
@@ -65,6 +66,7 @@ const CadastroCliente = () => {
     const [numero, setNumero] = useState('');
     const [file, setImagem] = useState<File | null>(null)
 
+    const [ImagemString, setImagemString] = useState('')
     const selecionarArquivo = (evento: React.ChangeEvent<HTMLInputElement>) => {
         if (evento.target.files?.length) {
             setImagem(evento.target.files[0])
@@ -73,49 +75,87 @@ const CadastroCliente = () => {
         }
     }   
     console.log(file)
-    
+
     function aoSubmeterForm(evento: React.FormEvent<HTMLFormElement>) {
         evento.preventDefault();
 
-        const formData = new FormData();
-        formData.append('cpf', cpf);
-        formData.append('nome', nome);
-        formData.append('dataNascimento', dataNascimento);
-        formData.append('sexo', sexo);
-        formData.append('endereco', `${rua},${numero} -${complemento}- ${estado}, ${cidade}, ${bairro}`);
-        formData.append('dataCadastro', dataAtual);
+        // const formData = new FormData();
+        const formData1 = new FormData()
+        // formData.append('cpf', cpf);
+        // formData.append('nome', nome);
+        // formData.append('dataNascimento', dataNascimento);
+        // formData.append('sexo', sexo);
+        // formData.append('endereco', `${rua},${numero} -${complemento}- ${estado}, ${cidade}, ${bairro}`);
+        // formData.append('dataCadastro', dataAtual);
         if (file) {
-            formData.append('file', file)
-        }
-        console.log(file)
+            formData1.append('file', file)
+        }   
+        // apiFullSports.request({
+        //     url: 'cadastrar-cliente/',
+        //     method: 'POST',
+        //     headers: {
+        //         'Access-Control-Allow-Origin': '*',
+        //         'Content-Type': 'multipart/form-data'
+        //     },
+        //     data: formData
+        // })  
+        // .then(() => {
+        //     setCpf('');
+        //     setNome('');
+        //     setDataNascimento('');
+        //     setSexo('');
+        //     setCep('');
+        //     setRua('');
+        //     setBairro('');
+        //     setEstado('');
+        //     setCidade('');
+        //     setComplemento('');
+        //     setNumero('');
+        //     alert('Cliente cadastrado com sucesso')
+        // })
+        // .catch(erro => console.log(erro));
+        
 
         apiFullSports.request({
-            url: 'cadastrar-cliente/',
+            url: 'imagem/',
             method: 'POST',
             headers: {
                 'Access-Control-Allow-Origin': '*',
                 'Content-Type': 'multipart/form-data'
             },
-            data: formData
+            data: formData1
         })
-        .then(() => {
-            setCpf('');
-            setNome('');
-            setDataNascimento('');
-            setSexo('');
-            setCep('');
-            setRua('');
-            setBairro('');
-            setEstado('');
-            setCidade('');
-            setComplemento('');
-            setNumero('');
-            alert('Cliente cadastrado com sucesso')
-        })
-        .catch(erro => console.log(erro));
+        .then(response => 
+            
+            apiFullSports.request({
+                url: `imagem/${response.data._id}`,
+                method: 'GET',
+                headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Content-Type': 'multipart/form-data'
+            },
+            })
+            .then(response=>
+
+                apiFullSports.request({
+                    url: 'cadastrar-cliente/',
+                    method: 'POST',
+                    data:{
+                        cpf: cpf,
+                        nome: nome,
+                        dataNascimento: dataNascimento,
+                        sexo: sexo,
+                        cep: cep,
+                        endereco: `${rua},${numero} -${complemento}- ${estado}, ${cidade}, ${bairro}`,
+                        dataCadastro: dataAtual,
+                        imagePerfil:response.data
+                }
+            })).catch(erro => console.log(erro))
+        ).catch(erro => console.log(erro))
         
         }
         function buscaCep(){
+            console.log(cpf+cep)
             let url = "https://brasilapi.com.br/api/cep/v1/" + cep;
             let req = new XMLHttpRequest();
             req.open("GET", url);

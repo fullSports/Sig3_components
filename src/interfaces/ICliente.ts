@@ -1,3 +1,4 @@
+import Iimagem from "./Iimagem"
 export default interface ICliente{
     _id: string
     cpf: string
@@ -7,7 +8,5 @@ export default interface ICliente{
     cep: string
     endereco: string
     dataCadastro: string
-    imagemPerfil: {
-        
-    }
+    imagemPerfil: Iimagem[]
 }
