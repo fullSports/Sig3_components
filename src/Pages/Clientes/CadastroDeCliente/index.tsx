@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import styled from 'styled-components';
 import Cabecalho from '../../../Components/Cabecalho';
 import Footer from '../../../Components/Footer';
-import { Button, TextField, FormControl, Select, InputLabel, MenuItem } from "@mui/material";
+import { Button, TextField, FormControl, Select, InputLabel, MenuItem, Box } from "@mui/material";
 import apiFullSports from '../../../api/apiFullSports';
+import axios from "axios";
 const Main = styled.main`
     width: 100%;
     min-height: 600px;
@@ -63,7 +64,7 @@ const CadastroCliente = () => {
     const [cidade, setCidade] = useState('');
     const [complemento, setComplemento] = useState('');
     const [numero, setNumero] = useState('');
-    const [imagem, setImagem] = useState<File | null>(null)
+    const [file, setImagem] = useState<File | null>(null)
 
     const selecionarArquivo = (evento: React.ChangeEvent<HTMLInputElement>) => {
         if (evento.target.files?.length) {
@@ -72,40 +73,58 @@ const CadastroCliente = () => {
             setImagem(null)
         }
     }   
-
+    console.log(file)
+    
     function aoSubmeterForm(evento: React.FormEvent<HTMLFormElement>) {
         evento.preventDefault();
 
+        
+
+        // apiFullSports.request({
+        //     url: 'cadastrar-cliente/',
+        //     method: 'POST',
+        //     data: {
+        //         cpf: cpf,
+        //         nome: nome,
+        //         dataNascimento: dataNascimento,
+        //         sexo: sexo,
+        //         cep: cep,
+        //         endereco: `${rua},${numero} -${complemento}- ${estado}, ${cidade}, ${bairro}`,
+        //         // dataCadastro: `${String(dataAtual.getDate()).padStart(2, '0')}/${String(dataAtual.getMonth() + 1).padStart(2, '0')}/${dataAtual.getFullYear()}`
+        //         dataCadastro: dataAtual,
+        //         imagePerfil:imagem
+        //     }
+        // })
+        //     .then(() => {
+        //         setCpf('');
+        //         setNome('');
+        //         setDataNascimento('');
+        //         setSexo('');
+        //         setCep('');
+        //         setRua('');
+        //         setBairro('');
+        //         setEstado('');
+        //         setCidade('');
+        //         setComplemento('');
+        //         setNumero('');
+        //         alert('Cliente cadastrado com sucesso')
+        //     })
+        //     .catch(erro => console.log(erro));
+        
         apiFullSports.request({
-            url: 'cadastrar-cliente/',
+            url:'imagem/',
             method: 'POST',
-            data: {
-                cpf: cpf,
-                nome: nome,
-                dataNascimento: dataNascimento,
-                sexo: sexo,
-                cep: cep,
-                endereco: `${rua},${numero} -${complemento}- ${estado}, ${cidade}, ${bairro}`,
-                // dataCadastro: `${String(dataAtual.getDate()).padStart(2, '0')}/${String(dataAtual.getMonth() + 1).padStart(2, '0')}/${dataAtual.getFullYear()}`
-                dataCadastro: dataAtual,
-                imagePerfil: imagem
-            }
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Content-Type': 'multipart/form-data'
+            },
+            data: file
         })
-            .then(() => {
-                setCpf('');
-                setNome('');
-                setDataNascimento('');
-                setSexo('');
-                setCep('');
-                setRua('');
-                setBairro('');
-                setEstado('');
-                setCidade('');
-                setComplemento('');
-                setNumero('');
-                alert('Cliente cadastrado com sucesso')
-            })
-            .catch(erro => console.log(erro));
+        .then(()=>{
+            alert('eee')
+        })
+        .catch(erro=> console.log(erro))
+        
         }
         function buscaCep(){
             let url = "https://brasilapi.com.br/api/cep/v1/" + cep;
@@ -135,9 +154,9 @@ const CadastroCliente = () => {
                 <Main>
                     <ExibeTitulo id="exibe-titulo" className="exibe-titulo">Cadastrar Cliente</ExibeTitulo>
                     <FormCadastroCliente id="form-cadastro-cliente" className="form-cadastro-cliente">
-                        <form action="#" method="post" onSubmit={aoSubmeterForm}>
+                        <Box component={'form'} onSubmit={aoSubmeterForm}>
                             <Row1grid id="row-1-grid" className="row-1-grid">
-                                <label className="col-form-label">CPF</label>
+                                {/* <label className="col-form-label">CPF</label>
                                 <TextField
                                     sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
                                     onChange={evento => setCpf(evento.target.value)}
@@ -281,9 +300,9 @@ const CadastroCliente = () => {
                                     placeholder={'casa/apartamento'}
                                     fullWidth
                                     required
-                                />
+                                /> */}
 
-                                <input type="file" name="file" onChange={selecionarArquivo}/>
+                                <input type="file" accept="image/png,image/jpeg" name="file" onChange={selecionarArquivo}/>
                             </Row1grid>
 
                             <BttCadClienteGrid id="btt-cad-cliente-grid" className="btt-cad-cliente-grid">
@@ -304,7 +323,7 @@ const CadastroCliente = () => {
                                     Consulta de Clientes
                                 </Button>
                             </BttCadClienteGrid>
-                        </form>
+                            </Box>
                     </FormCadastroCliente>
                 </Main>
                 <Footer />
