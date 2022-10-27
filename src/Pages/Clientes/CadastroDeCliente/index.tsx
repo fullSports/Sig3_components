@@ -148,7 +148,7 @@ const CadastroCliente = () => {
                         cep: cep,
                         endereco: `${rua},${numero} -${complemento}- ${estado}, ${cidade}, ${bairro}`,
                         dataCadastro: dataAtual,
-                        imagePerfil:response.data
+                        imagems: response?.data
                 }
             })).catch(erro => console.log(erro))
         ).catch(erro => console.log(erro))
