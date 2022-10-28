@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from 'styled-components';
 import Cabecalho from '../../../Components/Cabecalho';
 import Footer from '../../../Components/Footer';
 import { Button, TextField, FormControl, Select, InputLabel, MenuItem, Box } from "@mui/material";
 import apiFullSports from '../../../api/apiFullSports';
-import Iimagem from "../../../interfaces/Iimagem";
 const Main = styled.main`
     width: 100%;
     min-height: 600px;
@@ -65,8 +64,6 @@ const CadastroCliente = () => {
     const [complemento, setComplemento] = useState('');
     const [numero, setNumero] = useState('');
     const [file, setImagem] = useState<File | null>(null)
-
-    const [ImagemString, setImagemString] = useState('')
     const selecionarArquivo = (evento: React.ChangeEvent<HTMLInputElement>) => {
         if (evento.target.files?.length) {
             setImagem(evento.target.files[0])
@@ -78,44 +75,10 @@ const CadastroCliente = () => {
 
     function aoSubmeterForm(evento: React.FormEvent<HTMLFormElement>) {
         evento.preventDefault();
-
-        // const formData = new FormData();
         const formData1 = new FormData()
-        // formData.append('cpf', cpf);
-        // formData.append('nome', nome);
-        // formData.append('dataNascimento', dataNascimento);
-        // formData.append('sexo', sexo);
-        // formData.append('endereco', `${rua},${numero} -${complemento}- ${estado}, ${cidade}, ${bairro}`);
-        // formData.append('dataCadastro', dataAtual);
         if (file) {
             formData1.append('file', file)
         }   
-        // apiFullSports.request({
-        //     url: 'cadastrar-cliente/',
-        //     method: 'POST',
-        //     headers: {
-        //         'Access-Control-Allow-Origin': '*',
-        //         'Content-Type': 'multipart/form-data'
-        //     },
-        //     data: formData
-        // })  
-        // .then(() => {
-        //     setCpf('');
-        //     setNome('');
-        //     setDataNascimento('');
-        //     setSexo('');
-        //     setCep('');
-        //     setRua('');
-        //     setBairro('');
-        //     setEstado('');
-        //     setCidade('');
-        //     setComplemento('');
-        //     setNumero('');
-        //     alert('Cliente cadastrado com sucesso')
-        // })
-        // .catch(erro => console.log(erro));
-        
-
         apiFullSports.request({
             url: 'imagem/',
             method: 'POST',
@@ -148,9 +111,11 @@ const CadastroCliente = () => {
                         cep: cep,
                         endereco: `${rua},${numero} -${complemento}- ${estado}, ${cidade}, ${bairro}`,
                         dataCadastro: dataAtual,
-                        imagems: response?.data
+                        imagemPerfil: response.data._id
                 }
-            })).catch(erro => console.log(erro))
+            })
+            .then(()=> alert("cliente cadastrado com suceso"))
+            ).catch(erro => console.log(erro))
         ).catch(erro => console.log(erro))
         
         }
