@@ -144,6 +144,7 @@ const ConsultaCliente = () => {
                         <TableExibe id="table-exibe" className="table-exibe">
                             <thead>
                                 <tr>
+                                    <th>foto de perfil</th>
                                     <th>Data de Cadastro</th>
                                     <th>CPF</th>
                                     <th>Nome</th>
@@ -158,6 +159,7 @@ const ConsultaCliente = () => {
                                 {clientes.map(item=> 
                                 
                                 <tr key={item._id.toString()}> 
+                                    <th><img src={item.imagemPerfil.url} width="100px" alt="imagem de perfil"/></th>
                                     <th>{`${item.dataCadastro.toLocaleString()}`}</th>
                                     <th>{item.cpf}</th>
                                     <th>{item.nome}</th>

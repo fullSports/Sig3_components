@@ -11,7 +11,7 @@ import AtualizaProduto from './Pages/Produto/AtualizarProduto';
 import CadastrarProduto from './Pages/Produto/CadastroDeProduto';
 import ConsultaProduto from './Pages/Produto/ConsultaDeProduto';
 import Tenis from './Pages/Tenis';
-const App = ()=> {
+const App: React.FC = ()=> {
   return (
     <BrowserRouter>
     <Routes>
