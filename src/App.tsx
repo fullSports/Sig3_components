@@ -11,6 +11,7 @@ import AtualizaProduto from './Pages/Produto/AtualizarProduto';
 import CadastrarProduto from './Pages/Produto/CadastroDeProduto';
 import ConsultaProduto from './Pages/Produto/ConsultaDeProduto';
 import Tenis from './Pages/Tenis';
+import CadastrarFornecedor from './Pages/Fornecedor/CadastrarFornecedor';
 const App: React.FC = ()=> {
   return (
     <BrowserRouter>
@@ -29,6 +30,8 @@ const App: React.FC = ()=> {
       <Route path='/sig/atualizar-cliente/:id' element={<AtualizaCliente/>}/>
 
       <Route path='/sig/atualizar-produto/id' element={<AtualizaProduto/>}/>
+
+      <Route path='/sig/cadastro-de-fornecedor' element={<CadastrarFornecedor/>}/>
 
       <Route path='/acessibilidade' element={<Acessibilidade/>}/>
 

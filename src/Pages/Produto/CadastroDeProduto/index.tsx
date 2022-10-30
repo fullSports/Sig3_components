@@ -53,18 +53,18 @@ const BttCadPrdutoGrid = styled.div`
 
 
 const CadastrarProduto = () => {
-    const dataAtual = new Date().toLocaleDateString()
+    const dataAtual = new Date().toLocaleDateString();
     const [listaFornecedores, setListaFornecedores] = useState<IFornecedor[]>([]);
     const [fornecedorID, setFornecedorID] = useState<string | undefined>(undefined)
-    const [isLoading, setIsLoading] = useState(false);
-    const [busca, setBusca] = useState('');
+    const [isLoading,] = useState(false);
+    const [, setBusca] = useState('');
 
     const [nomeProduto, setNomeProduto] = useState('');
     const [tipoProduto, setTipoProduto] = useState('');
-    const [corProduto, setCorProduto]= useState('');
+    const [corProduto, setCorProduto] = useState('');
     const [preco, setPreco] = useState('');
-    const [quantidade, setQuantidade]= useState('');
-    
+    const [quantidade, setQuantidade] = useState('');
+
     useEffect(() => {
         apiFullSports.get<IFornecedor[]>('listar-fornecedores/')
             .then(resposta => setListaFornecedores(resposta.data))
@@ -76,33 +76,32 @@ const CadastrarProduto = () => {
         return {
             firsLetter: /[0-9]/.test(firsLetter) ? '0-9' : firsLetter,
             ...item,
-            firsLetterId : firsLetterId
+            firsLetterId: firsLetterId
         };
     })
-    function aoSubmit(evento: React.FormEvent<HTMLFormElement>){
-        evento.preventDefault();
-    apiFullSports.request({
-        method: 'POST',
-        url: 'cadastrar-produto/',
-        data:{
-            nomeProduto: nomeProduto,
-            tipoProduto: tipoProduto,
-            corProduto: corProduto,
-            preco: preco,
-            quantidade: quantidade,
-            dataCadastro: dataAtual,
-            fornecedor: fornecedorID
-        }
-    }).then(()=>{
-        setNomeProduto('');
-        setTipoProduto('');
-        setCorProduto('');
-        setPreco('');
-        setQuantidade('')
-        alert('Produto cadastrado com sucesso')
-    })
-}
-  console.log(fornecedorID)
+    function aoSubmit(evento: React.FormEvent<HTMLFormElement>) {
+        apiFullSports.request({
+            method: 'POST',
+            url: 'cadastrar-produto/',
+            data: {
+                nomeProduto: nomeProduto,
+                tipoProduto: tipoProduto,
+                corProduto: corProduto,
+                preco: preco,
+                quantidade: quantidade,
+                dataCadastro: dataAtual,
+                fornecedor: fornecedorID
+            }
+        }).then(() => {
+            setNomeProduto('');
+            setTipoProduto('');
+            setCorProduto('');
+            setPreco('');
+            setQuantidade('')
+            alert('Produto cadastrado com sucesso')
+        }).catch((err)=> console.log(err))
+    }
+    console.log(fornecedorID)
     return (
         <>
             <Cabecalho />
@@ -111,6 +110,25 @@ const CadastrarProduto = () => {
                 <FormCadastroDeProduto id="form-cadastro-produto" className="form-cadastro-produto">
                     <form action="" method="post" encType="multipart/form-data" onSubmit={aoSubmit}>
                         <Row2grid id="row-2-grid" className="row-1-grid">
+                            <label className="col-form-label">CNPJ do Fornecedor</label>
+                            <Autocomplete
+                                openText='Abrir'
+                                closeText='Fechar'
+                                noOptionsText='Sem opções'
+                                loadingText='Carregando...'
+                                disablePortal
+                                groupBy={(option) => option.firsLetter}
+                                options={options}
+                                loading={isLoading}
+                                getOptionLabel={(option) => option.nomeEmpresa + ' - ' + option.cnpj}
+                                onInputChange={(_, newValue) => setBusca(newValue)}
+                                onChange={(_, newValue) => { setFornecedorID(newValue?._id); setBusca(''); }}
+                                className="txt-form"
+                                id='Auto-complete'
+                                sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%', textAlign: 'center' }}
+                                renderInput={(params) => <TextField {...params} label="Nome/Cnpj" />}
+                            />
+
                             <label className="col-form-label">Nome do Produto</label>
                             <TextField
                                 sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
@@ -153,8 +171,8 @@ const CadastrarProduto = () => {
                                 className="txt-form"
                                 label="Preço do Produto"
                                 id="precoProduto"
+                                name='precoProduto'
                                 type="text"
-                                placeholder={'R$:'}
                                 fullWidth
                                 onChange={evento => setPreco(evento.target.value)}
                             />
@@ -169,27 +187,6 @@ const CadastrarProduto = () => {
                                 fullWidth
                                 onChange={evento => setQuantidade(evento.target.value)}
                             />
-
-                            
-                            <label className="col-form-label">CNPJ do Fornecedor</label>
-                            <Autocomplete
-                            openText='Abrir'
-                            closeText='Fechar'
-                            noOptionsText='Sem opções'
-                            loadingText='Carregando...'
-                            disablePortal
-                            groupBy={(option) => option.firsLetter}
-                            options={options}
-                            loading={isLoading}
-                            getOptionLabel={(option) => option.nomeEmpresa +' - '+ option.cnpj}
-                            onInputChange={(_,newValue)=> setBusca(newValue)}
-                            onChange={(_,newValue)=> {setFornecedorID(newValue?._id); setBusca('');}}
-                            className="txt-form"
-                            id='Auto-complete'
-                            sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%', textAlign: 'center' }}
-                            renderInput={(params) => <TextField {...params} label="Nome/Cnpj" />}
-                            />
-                           
                         </Row2grid>
 
 
