@@ -29,7 +29,6 @@ const FormCadastroCliente = styled.div`
         font-size: 12px;
         border-radius: 10px;
     }
-    
 `;
 const Row1grid = styled.div`
     display: grid;
@@ -119,6 +118,8 @@ const CadastroCliente = () => {
             ).catch(erro => console.log(erro))
 
     }
+
+
     function buscaCep() {
         console.log(cpf + cep)
         let url = "https://brasilapi.com.br/api/cep/v1/" + cep;
@@ -304,8 +305,18 @@ const CadastroCliente = () => {
                                 fullWidth
                                 required
                                 name="file"
-                                
+                                variant="outlined"
+                                accessKey="image/*"
                             />
+                            {/* <input 
+                            onChange={selecionarArquivo} 
+                            className="txt-form" 
+                            id="imagemPerfil"
+                            type="file"
+                            required
+                            name="file"
+                            accept="image/*"
+                            />   */}
                         </Row1grid>
 
                         <BttCadClienteGrid id="btt-cad-cliente-grid" className="btt-cad-cliente-grid">

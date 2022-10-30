@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Cabecalho from '../../../Components/Cabecalho';
 import Footer from '../../../Components/Footer';
-import { Button, TextField, Autocomplete, Stack } from "@mui/material";
+import { Button, TextField, Autocomplete } from "@mui/material";
 import IFornecedor from '../../../interfaces/IFornecedor';
 import apiFullSports from '../../../api/apiFullSports';
 const Main = styled.main`
@@ -53,10 +53,17 @@ const BttCadPrdutoGrid = styled.div`
 
 
 const CadastrarProduto = () => {
-    const date = new Date().toLocaleDateString()
+    const dataAtual = new Date().toLocaleDateString()
     const [listaFornecedores, setListaFornecedores] = useState<IFornecedor[]>([]);
-    const [fornecedorID, setFornecedorID] = useState('')
-    const [fornecedor, setFornecedor] = useState('')
+    const [fornecedorID, setFornecedorID] = useState<string | undefined>(undefined)
+    const [isLoading, setIsLoading] = useState(false);
+    const [busca, setBusca] = useState('');
+
+    const [nomeProduto, setNomeProduto] = useState('');
+    const [tipoProduto, setTipoProduto] = useState('');
+    const [corProduto, setCorProduto]= useState('');
+    const [preco, setPreco] = useState('');
+    const [quantidade, setQuantidade]= useState('');
     
     useEffect(() => {
         apiFullSports.get<IFornecedor[]>('listar-fornecedores/')
@@ -72,15 +79,37 @@ const CadastrarProduto = () => {
             firsLetterId : firsLetterId
         };
     })
-
-  
+    function aoSubmit(evento: React.FormEvent<HTMLFormElement>){
+        evento.preventDefault();
+    apiFullSports.request({
+        method: 'POST',
+        url: 'cadastrar-produto/',
+        data:{
+            nomeProduto: nomeProduto,
+            tipoProduto: tipoProduto,
+            corProduto: corProduto,
+            preco: preco,
+            quantidade: quantidade,
+            dataCadastro: dataAtual,
+            fornecedor: fornecedorID
+        }
+    }).then(()=>{
+        setNomeProduto('');
+        setTipoProduto('');
+        setCorProduto('');
+        setPreco('');
+        setQuantidade('')
+        alert('Produto cadastrado com sucesso')
+    })
+}
+  console.log(fornecedorID)
     return (
         <>
             <Cabecalho />
             <Main>
                 <ExibeTitulo id="exibe-titulo" className="exibe-titulo" >Cadastrar Produto</ExibeTitulo>
                 <FormCadastroDeProduto id="form-cadastro-produto" className="form-cadastro-produto">
-                    <form action="" method="post" encType="multipart/form-data">
+                    <form action="" method="post" encType="multipart/form-data" onSubmit={aoSubmit}>
                         <Row2grid id="row-2-grid" className="row-1-grid">
                             <label className="col-form-label">Nome do Produto</label>
                             <TextField
@@ -91,6 +120,7 @@ const CadastrarProduto = () => {
                                 type="text"
                                 placeholder={'Digite o nome do produto'}
                                 fullWidth
+                                onChange={evento => setNomeProduto(evento.target.value)}
                             />
 
                             <label className="col-form-label">Tipo do Produto</label>
@@ -102,6 +132,7 @@ const CadastrarProduto = () => {
                                 type="text"
                                 placeholder={'Digite o tipo do produto'}
                                 fullWidth
+                                onChange={evento => setTipoProduto(evento.target.value)}
                             />
 
                             <label className="col-form-label">Cor do Produto</label>
@@ -113,6 +144,7 @@ const CadastrarProduto = () => {
                                 type="text"
                                 placeholder={'Digite o tipo a cor do produto'}
                                 fullWidth
+                                onChange={evento => setCorProduto(evento.target.value)}
                             />
 
                             <label className="col-form-label">Preço do Produto</label>
@@ -124,6 +156,7 @@ const CadastrarProduto = () => {
                                 type="text"
                                 placeholder={'R$:'}
                                 fullWidth
+                                onChange={evento => setPreco(evento.target.value)}
                             />
                             <label className="col-form-label">Quantidade de Produtos</label>
                             <TextField
@@ -134,39 +167,27 @@ const CadastrarProduto = () => {
                                 type="number"
                                 // placeholder={'Digite a quantidade de Produto'}
                                 fullWidth
+                                onChange={evento => setQuantidade(evento.target.value)}
                             />
 
-                            <label className="col-form-label">Data de Cadastro</label>
-                            <TextField
-                                sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%', textAlign: 'center' }}
-                                className="txt-form"
-                                label="Data"
-                                id="tipoProduto"
-                                value={date}
-                                type="text"
-                                // placeholder={'Digite o tipo do produto'}
-                                fullWidth
-                            />
+                            
                             <label className="col-form-label">CNPJ do Fornecedor</label>
-                            {/* <TextField
-                        sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
-                        className="txt-form"
-                        label="CNPJ"
-                        id="cnpj"
-                        type="text"
-                        placeholder={'00.000.000./0000-00'}
-                        fullWidth
-                    /> */}
                             <Autocomplete
-                                id="grouped-demo"
-                                options={options.sort((a, b) => -b.firsLetter.localeCompare(a.firsLetter))}
-                                groupBy={(option) => option.firsLetter}
-                                getOptionLabel={(option) => option.nomeEmpresa+' - '+ option.cnpj}
-                                onInputChange={(event, newInputValue,option) => {
-                                    setFornecedorID(option);
-                                  }}
-                                sx={{ width: 300 }}
-                                renderInput={(params) => <TextField {...params} label="Nome/Cnpj" />}
+                            openText='Abrir'
+                            closeText='Fechar'
+                            noOptionsText='Sem opções'
+                            loadingText='Carregando...'
+                            disablePortal
+                            groupBy={(option) => option.firsLetter}
+                            options={options}
+                            loading={isLoading}
+                            getOptionLabel={(option) => option.nomeEmpresa +' - '+ option.cnpj}
+                            onInputChange={(_,newValue)=> setBusca(newValue)}
+                            onChange={(_,newValue)=> {setFornecedorID(newValue?._id); setBusca('');}}
+                            className="txt-form"
+                            id='Auto-complete'
+                            sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%', textAlign: 'center' }}
+                            renderInput={(params) => <TextField {...params} label="Nome/Cnpj" />}
                             />
                            
                         </Row2grid>
