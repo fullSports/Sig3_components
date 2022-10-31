@@ -182,7 +182,7 @@ const ConsultaCliente = () => {
                                 {clientes.map(item =>
 
                                     <tr key={item._id.toString()}>
-                                        <th><img src={item.imagemPerfil.url} width="100px" alt="imagem de perfil" /></th>
+                                        <th><img src={item.imagemPerfil.url} width="230px" height="150px" alt="imagem de perfil" /></th>
                                         <th>{`${item.dataCadastro.toLocaleString()}`}</th>
                                         <th>{item.cpf}</th>
                                         <th>{item.nome}</th>

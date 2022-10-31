@@ -80,6 +80,7 @@ const CadastrarFornecedor = () => {
             setNomeEmpresa('');
 
             alert("Fornecedor cadastrado com sucesso")
+            window.location.href='/sig/consulta-de-fornecedores'
         }).catch((err) => console.log(err))
     }
 
@@ -239,7 +240,7 @@ const CadastrarFornecedor = () => {
                                 Cadastrar Fornecedor
                             </Button>
                             <Button
-                                onClick={evento => window.open('/sig/consulta-de-fornecedores')}
+                                onClick={evento => window.location.href='/sig/consulta-de-fornecedores'}
                                 sx={{
                                     justifyContent: 'center', display: 'block', height: '50px', borderRadius: '5px', color: '#fff',
                                     fontSize: '14px', backgroundColor: 'black', ":hover": 'backgroundColor: #313131, transform:translate(0.8s)'

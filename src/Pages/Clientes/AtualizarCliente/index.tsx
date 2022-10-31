@@ -149,7 +149,7 @@ function AtualizaCliente() {
             })
             .then(()=>{
                 alert("Cliente atualizado com com sucesso");
-                window.open('/sig/consulta-de-clientes');
+                window.location.href='/sig/consulta-de-clientes';
             });
         }else{
             apiFullSports.post('cadastrar-cliente/',{
@@ -163,7 +163,7 @@ function AtualizaCliente() {
             })
             .then(()=>{
                 alert("Cliente novo cadastrado com sucesso");
-                window.open('/sig/consulta-de-clientes');
+                window.location.href='/sig/consulta-de-clientes';
             }).catch(err => console.log(err));
         }
     }
@@ -326,6 +326,16 @@ function AtualizaCliente() {
                                 required
                                 value={complemento}
                             />
+                            {/* <label className="col-form-label">Imagem de Perfil</label>
+                            <input 
+                            onChange={selecionarArquivo} 
+                            className="txt-form" 
+                            id="imagemPerfil"
+                            type="file"
+                            required
+                            name="file"
+                            accept="image/jpeg, image/pjpeg, image/png, image/gif"
+                            />   */}
                         </Row1grid>
 
                         <BttCadClienteGrid id="btt-cad-cliente-grid" className="btt-cad-cliente-grid">
@@ -338,7 +348,7 @@ function AtualizaCliente() {
                                 Atualizar Cliente
                             </Button>
                             <Button
-                                onClick={evento => window.open('/sig/consulta-de-clientes')}
+                                onClick={evento =>  window.location.href='/sig/consulta-de-clientes'}
                                 sx={{
                                     justifyContent: 'center', display: 'block', height: '50px', borderRadius: '5px', color: '#fff',
                                     fontSize: '14px', backgroundColor: 'black', ":hover": 'backgroundColor: #313131, transform:translate(0.8s)'

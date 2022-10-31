@@ -126,7 +126,7 @@ const AtualizarFornecedor = () => {
     function aoSubmeterForm(evento: React.FormEvent<HTMLFormElement>) {
         evento.preventDefault();
         if (parametros.id) {
-            apiFullSports.put(`atualizar-cliente/${parametros.id}`, {
+            apiFullSports.put(`atualizar-fornecedor/${parametros.id}`, {
                 cnpj: cnpj,
                 nomeEmpresa: nomeEmpresa,
                 cep: cep,
@@ -134,10 +134,10 @@ const AtualizarFornecedor = () => {
             })
                 .then(() => {
                     alert("Fornecedor atualizado com sucesso");
-                    window.open('/sig/consulta-de-clientes');
-                });
+                    window.location.href='/sig/consulta-de-fornecedores'
+                }).catch(err => console.log(err));
         } else {
-            apiFullSports.post('cadastrar-cliente/', {
+            apiFullSports.post('cadastrar-fornecedor/', {
                 cnpj: cnpj,
                 nomeEmpresa: nomeEmpresa,
                 cep: cep,
@@ -146,7 +146,7 @@ const AtualizarFornecedor = () => {
             })
                 .then(() => {
                     alert("Fornecedornovo cadastrado com sucesso");
-                    window.open('/sig/consulta-de-clientes');
+                    window.open('/sig/consulta-de-fornecedores');
                 }).catch(err => console.log(err));
         }
 

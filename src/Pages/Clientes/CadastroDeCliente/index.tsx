@@ -120,7 +120,10 @@ const CadastroCliente = () => {
                                 imagemPerfil: response.data._id
                             }
                         })
-                            .then(() => alert("cliente cadastrado com suceso"))
+                            .then(() => {
+                                alert("cliente cadastrado com suceso");
+                                window.location.href="/sig/consulta-de-clientes";
+                            }).catch(erro => console.log(erro))
                     ).catch(erro => console.log(erro))
             ).catch(erro => console.log(erro))
 
@@ -324,7 +327,7 @@ const CadastroCliente = () => {
                                 Cadastrar Cliente
                             </Button>
                             <Button
-                                onClick={evento => window.open('/sig/consulta-de-clientes')}
+                                onClick={evento =>  window.location.href='/sig/consulta-de-clientes'}
                                 sx={{
                                     justifyContent: 'center', display: 'block', height: '50px', borderRadius: '5px', color: '#fff',
                                     fontSize: '14px', backgroundColor: 'black', ":hover": 'backgroundColor: #313131, transform:translate(0.8s)'
