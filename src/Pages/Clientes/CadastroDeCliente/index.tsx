@@ -106,7 +106,6 @@ const CadastroCliente = () => {
                     },
                 })
                     .then(response =>
-
                         apiFullSports.request({
                             url: 'cadastrar-cliente/',
                             method: 'POST',

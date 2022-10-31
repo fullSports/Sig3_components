@@ -64,28 +64,31 @@ function AtualizaCliente() {
     const [estado, setEstado] = useState('');
     const [cidade, setCidade] = useState('');
     const [numero, setNumero] = useState('');
-    const [complemento, setComplemento] = useState('');
-    const dataAtual = new Date().toJSON(); 
-
+    const [complemento, setComplemento] = useState(''); 
+    const dataAtual = new Date().toLocaleDateString();
     useEffect(() => {
         if (parametros.id) {
             apiFullSports.get<ICliente>(`listar-cliente/${parametros.id}`)
-            .then(resposta => setCpf(resposta.data.cpf));
+            .then(resposta => setCpf(resposta.data.cpf))
+            .catch((err)=> console.log(err));
 
             apiFullSports.get<ICliente>(`listar-cliente/${parametros.id}`)
-            .then(resposta => setNome(resposta.data.nome));
-
-            apiFullSports.get<ICliente>(`listar-cliente/${parametros.id}`)
-            .then(resposta => setDataNascimento(resposta.data.dataNascimento));
-
-            apiFullSports.get<ICliente>(`listar-cliente/${parametros.id}`)
-            .then(resposta => setSexo(resposta.data.sexo));
-
-            apiFullSports.get<ICliente>(`listar-cliente/${parametros.id}`)
-            .then(resposta => setCep(resposta.data.cep));
+            .then(resposta => setNome(resposta.data.nome))
+            .catch((err)=> console.log(err));
             
-           
+            apiFullSports.get<ICliente>(`listar-cliente/${parametros.id}`)
+            .then(resposta => setDataNascimento(resposta.data.dataNascimento))
+            .catch((err)=> console.log(err));
+
+            apiFullSports.get<ICliente>(`listar-cliente/${parametros.id}`)
+            .then(resposta => setSexo(resposta.data.sexo))
+            .catch((err)=> console.log(err));
+
+            apiFullSports.get<ICliente>(`listar-cliente/${parametros.id}`)
+            .then(resposta => setCep(resposta.data.cep))
+            .catch((err)=> console.log(err));
         }
+
     }, [parametros]);
     
 
@@ -97,6 +100,10 @@ function AtualizaCliente() {
         req.onload = function () {
             if (req.status === 200) {
                 let endereco = JSON.parse(req.response);
+                setRua('')
+                setBairro('')
+                setEstado('')
+                setCidade('')
                 setRua(endereco.street);
                 setBairro(endereco.neighborhood);
                 setEstado(endereco.state);
@@ -141,7 +148,7 @@ function AtualizaCliente() {
                 endereco: `${rua},${numero} -${complemento}- ${estado}, ${cidade}, ${bairro}`
             })
             .then(()=>{
-                alert("Cliente Cadastrado com sucesso");
+                alert("Cliente atualizado com com sucesso");
                 window.open('/sig/consulta-de-clientes');
             });
         }else{
@@ -152,13 +159,12 @@ function AtualizaCliente() {
                 sexo: sexo,
                 cep: cep,
                 endereco: `${rua},${numero} -${complemento}- ${estado}, ${cidade}, ${bairro}`,
-                // dataCadastro: `${String(dataAtual.getDate()).padStart(2, '0')}/${String(dataAtual.getMonth() + 1).padStart(2, '0')}/${dataAtual.getFullYear()}`
                 dataCadastro: dataAtual
             })
             .then(()=>{
                 alert("Cliente novo cadastrado com sucesso");
                 window.open('/sig/consulta-de-clientes');
-            })
+            }).catch(err => console.log(err));
         }
     }
     
@@ -167,7 +173,7 @@ function AtualizaCliente() {
             <Cabecalho />
             <Main>
                 <ExibeTitulo id="exibe-titulo" className="exibe-titulo">Atualizar Cliente</ExibeTitulo>
-                <FormCadastroCliente id="form-cadastro-cliente" className="form-cadastro-cliente">
+                <FormCadastroCliente id="form-cliente" className="form-cliente">
                     <form action="#" method="post" onSubmit={aoSubmeterForm}>
                         <Row1grid id="row-1-grid" className="row-1-grid">
                             <label className="col-form-label">CPF</label>

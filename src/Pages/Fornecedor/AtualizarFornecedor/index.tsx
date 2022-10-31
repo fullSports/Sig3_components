@@ -1,11 +1,12 @@
-import { TextField, Button, Box } from '@mui/material';
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import apiFullSports from '../../../api/apiFullSports';
-import Cabecalho from '../../../Components/Cabecalho';
-import Footer from '../../../Components/Footer';
-
-
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import styled from "styled-components";
+import apiFullSports from "../../../api/apiFullSports";
+import Cabecalho from "../../../Components/Cabecalho";
+import { Button, TextField} from "@mui/material";
+import Footer from "../../../Components/Footer";
+import IFornecedor from "../../../interfaces/IFornecedor";
+import { Box } from "@mui/system";
 const Main = styled.main`
     width: 100%;
     min-height: 600px;
@@ -14,7 +15,7 @@ const ExibeTitulo = styled.h3`
     margin: 2%;
     text-align: center;
 `;
-const FormCadastroDeFornecedor = styled.div`
+const FormCadastroFornecedor = styled.div`
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 20px;
@@ -31,6 +32,7 @@ const FormCadastroDeFornecedor = styled.div`
         font-size: 12px;
         border-radius: 10px;
     }
+    
 `;
 const Row2grid = styled.div`
     display: grid;
@@ -51,8 +53,8 @@ const BttCadClienteGrid = styled.div`
     grid-auto-rows: minmax(auto, auto);
     grid-gap: 2px;
 `;
-const CadastrarFornecedor = () => {
-    const dataAtual = new Date().toLocaleDateString();
+const AtualizarFornecedor = () => {
+    const parametros = useParams();
     const [cnpj, setCnpj] = useState('');
     const [nomeEmpresa, setNomeEmpresa] = useState('');
     const [cep, setCep] = useState('');
@@ -62,27 +64,22 @@ const CadastrarFornecedor = () => {
     const [cidade, setCidade] = useState('');
     const [complemento, setComplemento] = useState('');
     const [numero, setNumero] = useState('');
-    function aoSubmit(evento: React.FormEvent<HTMLFormElement>) {
-        evento.preventDefault();
-        
-        apiFullSports.request({
-            method: 'POST',
-            url: 'cadastrar-fornecedor/',
-            data: {
-                cnpj: cnpj,
-                nomeEmpresa: nomeEmpresa,
-                cep: cep,
-                endereco: `${rua},${numero} -${complemento}- ${estado}, ${cidade}, ${bairro}`,
-                dataCadastro: dataAtual
-            }
-        }).then(() => {
-            setCnpj('');
-            setNomeEmpresa('');
+    const dataAtual = new Date().toLocaleDateString();
+    useEffect(() => {
+        if (parametros.id) {
+            apiFullSports.get<IFornecedor>(`listar-fornecedor/${parametros.id}`)
+                .then(resposta => setCnpj(resposta.data.cnpj))
+                .catch((err) => console.log(err));
 
-            alert("Fornecedor cadastrado com sucesso")
-        }).catch((err) => console.log(err))
-    }
+            apiFullSports.get<IFornecedor>(`listar-fornecedor/${parametros.id}`)
+                .then(resposta => setNomeEmpresa(resposta.data.nomeEmpresa))
+                .catch((err) => console.log(err));
 
+                apiFullSports.get<IFornecedor>(`listar-fornecedor/${parametros.id}`)
+                .then(resposta => setCep(resposta.data.cep))
+                .catch((err) => console.log(err));
+        }
+    }, [parametros])
     function buscaCep() {
         let url = "https://brasilapi.com.br/api/cep/v1/" + cep;
         let req = new XMLHttpRequest();
@@ -91,6 +88,10 @@ const CadastrarFornecedor = () => {
         req.onload = function () {
             if (req.status === 200) {
                 let endereco = JSON.parse(req.response);
+                setRua('')
+                setBairro('')
+                setEstado('')
+                setCidade('')
                 setRua(endereco.street);
                 setBairro(endereco.neighborhood);
                 setEstado(endereco.state);
@@ -103,16 +104,61 @@ const CadastrarFornecedor = () => {
                 alert("erro ao fazer a requisicao")
             }
         }
-    }
 
+    }
+    function buscaCepCarregarPage() {
+        let url = "https://brasilapi.com.br/api/cep/v1/" + cep;
+        let req = new XMLHttpRequest();
+        req.open("GET", url);
+        req.send();
+        req.onload = function () {
+            if (req.status === 200) {
+                let endereco = JSON.parse(req.response);
+                setRua(endereco.street);
+                setBairro(endereco.neighborhood);
+                setEstado(endereco.state);
+                setCidade(endereco.city)
+            }
+        }
+    }
+    setTimeout(buscaCepCarregarPage, 0)
+
+    function aoSubmeterForm(evento: React.FormEvent<HTMLFormElement>) {
+        evento.preventDefault();
+        if (parametros.id) {
+            apiFullSports.put(`atualizar-cliente/${parametros.id}`, {
+                cnpj: cnpj,
+                nomeEmpresa: nomeEmpresa,
+                cep: cep,
+                endereco: `${rua},${numero} -${complemento}- ${estado}, ${cidade}, ${bairro}`
+            })
+                .then(() => {
+                    alert("Fornecedor atualizado com sucesso");
+                    window.open('/sig/consulta-de-clientes');
+                });
+        } else {
+            apiFullSports.post('cadastrar-cliente/', {
+                cnpj: cnpj,
+                nomeEmpresa: nomeEmpresa,
+                cep: cep,
+                endereco: `${rua},${numero} -${complemento}- ${estado}, ${cidade}, ${bairro}`,
+                dataCadastro: dataAtual
+            })
+                .then(() => {
+                    alert("Fornecedornovo cadastrado com sucesso");
+                    window.open('/sig/consulta-de-clientes');
+                }).catch(err => console.log(err));
+        }
+
+    }
     return (
         <>
             <Cabecalho />
             <Main>
-                <ExibeTitulo id="exibe-titulo" className="exibe-titulo" >Cadastrar Fornecedor</ExibeTitulo>
-                <FormCadastroDeFornecedor id='form-cadastro-fornededor' className='form-cadastro-fornededor'>
-                    <Box component={'form'} onSubmit={aoSubmit}>
-                        <Row2grid id="row-2-grid" className="row-1-grid">
+                <ExibeTitulo id="exibe-titulo" className="exibe-titulo">Atualizar Fornecedor</ExibeTitulo>
+                <FormCadastroFornecedor id="form-fornecedor" className="form=fornecedor">
+                <Box component={'form'} onSubmit={aoSubmeterForm}>
+                <Row2grid id="row-2-grid" className="row-1-grid">
                             <label className="col-form-label">CNPJ do Fornecedor</label>
                             <TextField
                                 sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
@@ -123,6 +169,7 @@ const CadastrarFornecedor = () => {
                                 placeholder={'Digite o CNPJ do fornecedor'}
                                 fullWidth
                                 onChange={evento => setCnpj(evento.target.value)}
+                                value={cnpj}
                             />
                             <label className="col-form-label">Nome do Fornecedor</label>
                             <TextField
@@ -134,7 +181,8 @@ const CadastrarFornecedor = () => {
                                 placeholder={'Digite o nome do fornecedor'}
                                 fullWidth
                                 onChange={evento => setNomeEmpresa(evento.target.value)}
-                            />
+                                value={nomeEmpresa}
+                          />
                             <label className="col-form-label">Cep</label>
                             <TextField
                                 onChange={evento => setCep(evento.target.value)}
@@ -147,6 +195,7 @@ const CadastrarFornecedor = () => {
                                 fullWidth
                                 required
                                 onBlur={buscaCep}
+                                value={cep}
                             />
 
                             <label className="col-form-label">Rua</label>
@@ -227,6 +276,7 @@ const CadastrarFornecedor = () => {
                                 placeholder={'casa/apartamento'}
                                 fullWidth
                                 required
+                                value={complemento}
                             />
                         </Row2grid>
                         <BttCadClienteGrid id="btt-cad-fornecedor-grid" className="btt-cad-fornecedor-grid">
@@ -236,7 +286,7 @@ const CadastrarFornecedor = () => {
                                     fontSize: '14px', backgroundColor: 'black', ":hover": 'backgroundColor: #313131, transform:translate(0.8s)'
                                 }}
                                 type="submit" id="btn-cad-forms" className="btn-cad-forms">
-                                Cadastrar Fornecedor
+                                Atualizar Fornecedor
                             </Button>
                             <Button
                                 onClick={evento => window.open('/sig/consulta-de-fornecedores')}
@@ -247,11 +297,11 @@ const CadastrarFornecedor = () => {
                                 Consulta de Fornecedores
                             </Button>
                         </BttCadClienteGrid>
-                    </Box>
-                </FormCadastroDeFornecedor>
+                </Box>
+                </FormCadastroFornecedor>
             </Main>
             <Footer />
         </>
     )
 }
-export default CadastrarFornecedor
+export default AtualizarFornecedor;

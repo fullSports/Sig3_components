@@ -132,7 +132,6 @@ const ConsultaProduto = () => {
                         <TableExibe id="table-exibe" className="table-exibe">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
                                     <th>CNPJ</th>
                                     <th>Nome</th>
                                     <th>Tipo</th>

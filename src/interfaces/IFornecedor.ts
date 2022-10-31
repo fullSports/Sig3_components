@@ -1,6 +1,8 @@
 export default interface IFornecedor{
     _id: string,
-    nomeEmpresa: string,
     cnpj: string,
-    endereco: string
+    nomeEmpresa: string,
+    cep:string,
+    endereco: string,
+    dataCadastro: string
 }

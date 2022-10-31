@@ -80,6 +80,8 @@ const CadastrarProduto = () => {
         };
     })
     function aoSubmit(evento: React.FormEvent<HTMLFormElement>) {
+        evento.preventDefault();
+
         apiFullSports.request({
             method: 'POST',
             url: 'cadastrar-produto/',
@@ -173,6 +175,7 @@ const CadastrarProduto = () => {
                                 id="precoProduto"
                                 name='precoProduto'
                                 type="text"
+                                placeholder={'Digite o preço do produto'}
                                 fullWidth
                                 onChange={evento => setPreco(evento.target.value)}
                             />
