@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import styled from "styled-components";
-import apiFullSports from "../../../api/apiFullSports";
-import Cabecalho from "../../../Components/Cabecalho";
-import ICliente from "../../../interfaces/ICliente";
-import { Button, TextField, FormControl, Select, InputLabel, MenuItem } from "@mui/material";
+import { TextField, Button, Box } from '@mui/material';
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import apiFullSports from '../../../api/apiFullSports';
+import Cabecalho from '../../../Components/Cabecalho';
+import Footer from '../../../Components/Footer';
+
+
 const Main = styled.main`
     width: 100%;
     min-height: 600px;
@@ -13,7 +14,7 @@ const ExibeTitulo = styled.h3`
     margin: 2%;
     text-align: center;
 `;
-const FormCadastroCliente = styled.div`
+const FormCadastroDeFornecedor = styled.div`
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 20px;
@@ -30,9 +31,8 @@ const FormCadastroCliente = styled.div`
         font-size: 12px;
         border-radius: 10px;
     }
-    
 `;
-const Row1grid = styled.div`
+const Row2grid = styled.div`
     display: grid;
     grid-template-columns: repeat(2, auto);
     grid-auto-rows: minmax(auto, auto);
@@ -51,48 +51,39 @@ const BttCadClienteGrid = styled.div`
     grid-auto-rows: minmax(auto, auto);
     grid-gap: 2px;
 `;
-
-function AtualizaCliente() {
-    const parametros = useParams();
-    const [cpf, setCpf] = useState('');
-    const [nome, setNome] = useState('');
-    const [dataNascimento, setDataNascimento] = useState('');
-    const [sexo, setSexo] = useState('');
+const CadastrarFornecedor = () => {
+    const dataAtual = new Date().toLocaleDateString();
+    const [cnpj, setCnpj] = useState('');
+    const [nomeEmpresa, setNomeEmpresa] = useState('');
     const [cep, setCep] = useState('');
     const [rua, setRua] = useState('');
     const [bairro, setBairro] = useState('');
     const [estado, setEstado] = useState('');
     const [cidade, setCidade] = useState('');
+    const [complemento, setComplemento] = useState('');
     const [numero, setNumero] = useState('');
-    const [complemento, setComplemento] = useState(''); 
-    const dataAtual = new Date().toLocaleDateString();
-    useEffect(() => {
-        if (parametros.id) {
-            apiFullSports.get<ICliente>(`listar-cliente/${parametros.id}`)
-            .then(resposta => setCpf(resposta.data.cpf))
-            .catch((err)=> console.log(err));
+    function aoSubmit(evento: React.FormEvent<HTMLFormElement>) {
+        evento.preventDefault();
+        
+        apiFullSports.request({
+            method: 'POST',
+            url: 'cadastrar-fornecedor/',
+            data: {
+                cnpj: cnpj,
+                nomeEmpresa: nomeEmpresa,
+                cep: cep,
+                endereco: `${rua},${numero} -${complemento}- ${estado}, ${cidade}, ${bairro}`,
+                dataCadastro: dataAtual
+            }
+        }).then(() => {
+            setCnpj('');
+            setNomeEmpresa('');
 
-            apiFullSports.get<ICliente>(`listar-cliente/${parametros.id}`)
-            .then(resposta => setNome(resposta.data.nome))
-            .catch((err)=> console.log(err));
-            
-            apiFullSports.get<ICliente>(`listar-cliente/${parametros.id}`)
-            .then(resposta => setDataNascimento(resposta.data.dataNascimento))
-            .catch((err)=> console.log(err));
+            alert("Fornecedor cadastrado com sucesso")
+        }).catch((err) => console.log(err))
+    }
 
-            apiFullSports.get<ICliente>(`listar-cliente/${parametros.id}`)
-            .then(resposta => setSexo(resposta.data.sexo))
-            .catch((err)=> console.log(err));
-
-            apiFullSports.get<ICliente>(`listar-cliente/${parametros.id}`)
-            .then(resposta => setCep(resposta.data.cep))
-            .catch((err)=> console.log(err));
-        }
-
-    }, [parametros]);
-    
-
-    function buscaCep(){
+    function buscaCep() {
         let url = "https://brasilapi.com.br/api/cep/v1/" + cep;
         let req = new XMLHttpRequest();
         req.open("GET", url);
@@ -100,10 +91,6 @@ function AtualizaCliente() {
         req.onload = function () {
             if (req.status === 200) {
                 let endereco = JSON.parse(req.response);
-                setRua('')
-                setBairro('')
-                setEstado('')
-                setCidade('')
                 setRua(endereco.street);
                 setBairro(endereco.neighborhood);
                 setEstado(endereco.state);
@@ -116,121 +103,38 @@ function AtualizaCliente() {
                 alert("erro ao fazer a requisicao")
             }
         }
+    }
 
-    }
-    function buscaCepCarregarPage(){
-        let url = "https://brasilapi.com.br/api/cep/v1/" + cep;
-        let req = new XMLHttpRequest();
-        req.open("GET", url);
-        req.send();
-        req.onload = function () {
-            if (req.status === 200) {
-                let endereco = JSON.parse(req.response);
-                setRua(endereco.street);
-                setBairro(endereco.neighborhood);
-                setEstado(endereco.state);
-                setCidade(endereco.city)
-            }
-        }
-    }
-    setTimeout(buscaCepCarregarPage, 0)
-    
-  
-    function aoSubmeterForm(evento: React.FormEvent<HTMLFormElement>) {
-        evento.preventDefault();
-        if(parametros.id){
-            apiFullSports.put(`atualizar-cliente/${parametros.id}`,{
-                cpf: cpf,
-                nome: nome,
-                dataNascimento: dataNascimento,
-                sexo: sexo,
-                cep: cep,
-                endereco: `${rua},${numero} -${complemento}- ${estado}, ${cidade}, ${bairro}`
-            })
-            .then(()=>{
-                alert("Cliente atualizado com com sucesso");
-                window.open('/sig/consulta-de-clientes');
-            });
-        }else{
-            apiFullSports.post('cadastrar-cliente/',{
-                cpf: cpf,
-                nome: nome,
-                dataNascimento: dataNascimento,
-                sexo: sexo,
-                cep: cep,
-                endereco: `${rua},${numero} -${complemento}- ${estado}, ${cidade}, ${bairro}`,
-                dataCadastro: dataAtual
-            })
-            .then(()=>{
-                alert("Cliente novo cadastrado com sucesso");
-                window.open('/sig/consulta-de-clientes');
-            }).catch(err => console.log(err));
-        }
-    }
-    
     return (
         <>
             <Cabecalho />
             <Main>
-                <ExibeTitulo id="exibe-titulo" className="exibe-titulo">Atualizar Cliente</ExibeTitulo>
-                <FormCadastroCliente id="form-cliente" className="form-cliente">
-                    <form action="#" method="post" onSubmit={aoSubmeterForm}>
-                        <Row1grid id="row-1-grid" className="row-1-grid">
-                            <label className="col-form-label">CPF</label>
+                <ExibeTitulo id="exibe-titulo" className="exibe-titulo" >Cadastrar Fornecedor</ExibeTitulo>
+                <FormCadastroDeFornecedor id='form-cadastro-fornededor' className='form-cadastro-fornededor'>
+                    <Box component={'form'} onSubmit={aoSubmit}>
+                        <Row2grid id="row-2-grid" className="row-1-grid">
+                            <label className="col-form-label">CNPJ do Fornecedor</label>
                             <TextField
                                 sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
-                                onChange={evento => setCpf(evento.target.value)}
                                 className="txt-form"
-                                label="cpf"
-                                id="cpf"
+                                label="CNPJ"
+                                id='cnpj'
                                 type="text"
-                                placeholder={'00.000.000-00'}
+                                placeholder={'Digite o CNPJ do fornecedor'}
                                 fullWidth
-                                required
-                                value={cpf}
+                                onChange={evento => setCnpj(evento.target.value)}
                             />
-
-                            <label className="col-form-label">Nome</label>
+                            <label className="col-form-label">Nome do Fornecedor</label>
                             <TextField
                                 sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
-                                onChange={evento => setNome(evento.target.value)}
                                 className="txt-form"
-                                label="Nome"
-                                id="nome"
+                                label="Nome Fornecedor"
+                                id='nomeFornecedor'
                                 type="text"
-                                placeholder={'Digite seu nome'}
+                                placeholder={'Digite o nome do fornecedor'}
                                 fullWidth
-                                required
-                                value={nome}
+                                onChange={evento => setNomeEmpresa(evento.target.value)}
                             />
-
-                            <label className="col-form-label">Data de Nascimento</label>
-                            <TextField
-                                sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
-                                onChange={evento => setDataNascimento(evento.target.value)}
-                                className="txt-form"
-                                label="Data de Nascimento"
-                                id="data"
-                                type="text"
-                                placeholder={'__/__/____'}
-                                fullWidth
-                                required
-                                value={dataNascimento}
-                            />
-
-                            <label className="col-form-label">Sexo</label>
-                            <FormControl fullWidth margin="dense">
-                                <InputLabel id="sexo">Sexo</InputLabel>
-                                <Select className="txt-form" labelId="sexo" sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
-                                    value={sexo} onChange={evento => setSexo(evento.target.value)} required>
-                                    <MenuItem key={''} value={''}></MenuItem>
-                                    <MenuItem key={'M'} value={'M'}>Masculino</MenuItem>
-                                    <MenuItem key={'F'} value={'F'}>Feminino</MenuItem>
-                                    <MenuItem key={'O'} value={'O'}>Outros</MenuItem>
-                                    <MenuItem key={'-'} value={'-'}>Prefiro não dizer</MenuItem>
-                                </Select>
-                            </FormControl>
-
                             <label className="col-form-label">Cep</label>
                             <TextField
                                 onChange={evento => setCep(evento.target.value)}
@@ -243,7 +147,6 @@ function AtualizaCliente() {
                                 fullWidth
                                 required
                                 onBlur={buscaCep}
-                                value={cep}
                             />
 
                             <label className="col-form-label">Rua</label>
@@ -324,32 +227,31 @@ function AtualizaCliente() {
                                 placeholder={'casa/apartamento'}
                                 fullWidth
                                 required
-                                value={complemento}
                             />
-                        </Row1grid>
-
-                        <BttCadClienteGrid id="btt-cad-cliente-grid" className="btt-cad-cliente-grid">
+                        </Row2grid>
+                        <BttCadClienteGrid id="btt-cad-fornecedor-grid" className="btt-cad-fornecedor-grid">
                             <Button
                                 sx={{
                                     justifyContent: 'center', display: 'block', height: '50px', borderRadius: '5px', color: '#fff',
                                     fontSize: '14px', backgroundColor: 'black', ":hover": 'backgroundColor: #313131, transform:translate(0.8s)'
                                 }}
                                 type="submit" id="btn-cad-forms" className="btn-cad-forms">
-                                Atualizar Cliente
+                                Cadastrar Fornecedor
                             </Button>
                             <Button
-                                onClick={evento => window.open('/sig/consulta-de-clientes')}
+                                onClick={evento => window.open('/sig/consulta-de-fornecedores')}
                                 sx={{
                                     justifyContent: 'center', display: 'block', height: '50px', borderRadius: '5px', color: '#fff',
                                     fontSize: '14px', backgroundColor: 'black', ":hover": 'backgroundColor: #313131, transform:translate(0.8s)'
                                 }} type="button" id="btn-cad-forms" className="btn-cad-forms">
-                                Consulta de Clientes
+                                Consulta de Fornecedores
                             </Button>
                         </BttCadClienteGrid>
-                    </form>
-                </FormCadastroCliente>
+                    </Box>
+                </FormCadastroDeFornecedor>
             </Main>
+            <Footer />
         </>
     )
-};
-export default AtualizaCliente;
+}
+export default CadastrarFornecedor

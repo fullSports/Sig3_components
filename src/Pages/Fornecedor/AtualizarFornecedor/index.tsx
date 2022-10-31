@@ -3,8 +3,10 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import apiFullSports from "../../../api/apiFullSports";
 import Cabecalho from "../../../Components/Cabecalho";
-import ICliente from "../../../interfaces/ICliente";
-import { Button, TextField, FormControl, Select, InputLabel, MenuItem } from "@mui/material";
+import { Button, TextField} from "@mui/material";
+import Footer from "../../../Components/Footer";
+import IFornecedor from "../../../interfaces/IFornecedor";
+import { Box } from "@mui/system";
 const Main = styled.main`
     width: 100%;
     min-height: 600px;
@@ -13,7 +15,7 @@ const ExibeTitulo = styled.h3`
     margin: 2%;
     text-align: center;
 `;
-const FormCadastroCliente = styled.div`
+const FormCadastroFornecedor = styled.div`
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 20px;
@@ -32,7 +34,7 @@ const FormCadastroCliente = styled.div`
     }
     
 `;
-const Row1grid = styled.div`
+const Row2grid = styled.div`
     display: grid;
     grid-template-columns: repeat(2, auto);
     grid-auto-rows: minmax(auto, auto);
@@ -51,48 +53,34 @@ const BttCadClienteGrid = styled.div`
     grid-auto-rows: minmax(auto, auto);
     grid-gap: 2px;
 `;
-
-function AtualizaCliente() {
+const AtualizarFornecedor = () => {
     const parametros = useParams();
-    const [cpf, setCpf] = useState('');
-    const [nome, setNome] = useState('');
-    const [dataNascimento, setDataNascimento] = useState('');
-    const [sexo, setSexo] = useState('');
+    const [cnpj, setCnpj] = useState('');
+    const [nomeEmpresa, setNomeEmpresa] = useState('');
     const [cep, setCep] = useState('');
     const [rua, setRua] = useState('');
     const [bairro, setBairro] = useState('');
     const [estado, setEstado] = useState('');
     const [cidade, setCidade] = useState('');
+    const [complemento, setComplemento] = useState('');
     const [numero, setNumero] = useState('');
-    const [complemento, setComplemento] = useState(''); 
     const dataAtual = new Date().toLocaleDateString();
     useEffect(() => {
         if (parametros.id) {
-            apiFullSports.get<ICliente>(`listar-cliente/${parametros.id}`)
-            .then(resposta => setCpf(resposta.data.cpf))
-            .catch((err)=> console.log(err));
+            apiFullSports.get<IFornecedor>(`listar-fornecedor/${parametros.id}`)
+                .then(resposta => setCnpj(resposta.data.cnpj))
+                .catch((err) => console.log(err));
 
-            apiFullSports.get<ICliente>(`listar-cliente/${parametros.id}`)
-            .then(resposta => setNome(resposta.data.nome))
-            .catch((err)=> console.log(err));
-            
-            apiFullSports.get<ICliente>(`listar-cliente/${parametros.id}`)
-            .then(resposta => setDataNascimento(resposta.data.dataNascimento))
-            .catch((err)=> console.log(err));
+            apiFullSports.get<IFornecedor>(`listar-fornecedor/${parametros.id}`)
+                .then(resposta => setNomeEmpresa(resposta.data.nomeEmpresa))
+                .catch((err) => console.log(err));
 
-            apiFullSports.get<ICliente>(`listar-cliente/${parametros.id}`)
-            .then(resposta => setSexo(resposta.data.sexo))
-            .catch((err)=> console.log(err));
-
-            apiFullSports.get<ICliente>(`listar-cliente/${parametros.id}`)
-            .then(resposta => setCep(resposta.data.cep))
-            .catch((err)=> console.log(err));
+                apiFullSports.get<IFornecedor>(`listar-fornecedor/${parametros.id}`)
+                .then(resposta => setCep(resposta.data.cep))
+                .catch((err) => console.log(err));
         }
-
-    }, [parametros]);
-    
-
-    function buscaCep(){
+    }, [parametros])
+    function buscaCep() {
         let url = "https://brasilapi.com.br/api/cep/v1/" + cep;
         let req = new XMLHttpRequest();
         req.open("GET", url);
@@ -118,7 +106,7 @@ function AtualizaCliente() {
         }
 
     }
-    function buscaCepCarregarPage(){
+    function buscaCepCarregarPage() {
         let url = "https://brasilapi.com.br/api/cep/v1/" + cep;
         let req = new XMLHttpRequest();
         req.open("GET", url);
@@ -134,103 +122,67 @@ function AtualizaCliente() {
         }
     }
     setTimeout(buscaCepCarregarPage, 0)
-    
-  
+
     function aoSubmeterForm(evento: React.FormEvent<HTMLFormElement>) {
         evento.preventDefault();
-        if(parametros.id){
-            apiFullSports.put(`atualizar-cliente/${parametros.id}`,{
-                cpf: cpf,
-                nome: nome,
-                dataNascimento: dataNascimento,
-                sexo: sexo,
+        if (parametros.id) {
+            apiFullSports.put(`atualizar-cliente/${parametros.id}`, {
+                cnpj: cnpj,
+                nomeEmpresa: nomeEmpresa,
                 cep: cep,
                 endereco: `${rua},${numero} -${complemento}- ${estado}, ${cidade}, ${bairro}`
             })
-            .then(()=>{
-                alert("Cliente atualizado com com sucesso");
-                window.open('/sig/consulta-de-clientes');
-            });
-        }else{
-            apiFullSports.post('cadastrar-cliente/',{
-                cpf: cpf,
-                nome: nome,
-                dataNascimento: dataNascimento,
-                sexo: sexo,
+                .then(() => {
+                    alert("Fornecedor atualizado com sucesso");
+                    window.open('/sig/consulta-de-clientes');
+                });
+        } else {
+            apiFullSports.post('cadastrar-cliente/', {
+                cnpj: cnpj,
+                nomeEmpresa: nomeEmpresa,
                 cep: cep,
                 endereco: `${rua},${numero} -${complemento}- ${estado}, ${cidade}, ${bairro}`,
                 dataCadastro: dataAtual
             })
-            .then(()=>{
-                alert("Cliente novo cadastrado com sucesso");
-                window.open('/sig/consulta-de-clientes');
-            }).catch(err => console.log(err));
+                .then(() => {
+                    alert("Fornecedornovo cadastrado com sucesso");
+                    window.open('/sig/consulta-de-clientes');
+                }).catch(err => console.log(err));
         }
+
     }
-    
     return (
         <>
             <Cabecalho />
             <Main>
-                <ExibeTitulo id="exibe-titulo" className="exibe-titulo">Atualizar Cliente</ExibeTitulo>
-                <FormCadastroCliente id="form-cliente" className="form-cliente">
-                    <form action="#" method="post" onSubmit={aoSubmeterForm}>
-                        <Row1grid id="row-1-grid" className="row-1-grid">
-                            <label className="col-form-label">CPF</label>
+                <ExibeTitulo id="exibe-titulo" className="exibe-titulo">Atualizar Fornecedor</ExibeTitulo>
+                <FormCadastroFornecedor id="form-fornecedor" className="form=fornecedor">
+                <Box component={'form'} onSubmit={aoSubmeterForm}>
+                <Row2grid id="row-2-grid" className="row-1-grid">
+                            <label className="col-form-label">CNPJ do Fornecedor</label>
                             <TextField
                                 sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
-                                onChange={evento => setCpf(evento.target.value)}
                                 className="txt-form"
-                                label="cpf"
-                                id="cpf"
+                                label="CNPJ"
+                                id='cnpj'
                                 type="text"
-                                placeholder={'00.000.000-00'}
+                                placeholder={'Digite o CNPJ do fornecedor'}
                                 fullWidth
-                                required
-                                value={cpf}
+                                onChange={evento => setCnpj(evento.target.value)}
+                                value={cnpj}
                             />
-
-                            <label className="col-form-label">Nome</label>
+                            <label className="col-form-label">Nome do Fornecedor</label>
                             <TextField
                                 sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
-                                onChange={evento => setNome(evento.target.value)}
                                 className="txt-form"
-                                label="Nome"
-                                id="nome"
+                                label="Nome Fornecedor"
+                                id='nomeFornecedor'
                                 type="text"
-                                placeholder={'Digite seu nome'}
+                                placeholder={'Digite o nome do fornecedor'}
                                 fullWidth
-                                required
-                                value={nome}
-                            />
-
-                            <label className="col-form-label">Data de Nascimento</label>
-                            <TextField
-                                sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
-                                onChange={evento => setDataNascimento(evento.target.value)}
-                                className="txt-form"
-                                label="Data de Nascimento"
-                                id="data"
-                                type="text"
-                                placeholder={'__/__/____'}
-                                fullWidth
-                                required
-                                value={dataNascimento}
-                            />
-
-                            <label className="col-form-label">Sexo</label>
-                            <FormControl fullWidth margin="dense">
-                                <InputLabel id="sexo">Sexo</InputLabel>
-                                <Select className="txt-form" labelId="sexo" sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
-                                    value={sexo} onChange={evento => setSexo(evento.target.value)} required>
-                                    <MenuItem key={''} value={''}></MenuItem>
-                                    <MenuItem key={'M'} value={'M'}>Masculino</MenuItem>
-                                    <MenuItem key={'F'} value={'F'}>Feminino</MenuItem>
-                                    <MenuItem key={'O'} value={'O'}>Outros</MenuItem>
-                                    <MenuItem key={'-'} value={'-'}>Prefiro não dizer</MenuItem>
-                                </Select>
-                            </FormControl>
-
+                                onChange={evento => setNomeEmpresa(evento.target.value)}
+                                value={nomeEmpresa}
+                          />
                             <label className="col-form-label">Cep</label>
                             <TextField
                                 onChange={evento => setCep(evento.target.value)}
@@ -326,30 +278,30 @@ function AtualizaCliente() {
                                 required
                                 value={complemento}
                             />
-                        </Row1grid>
-
-                        <BttCadClienteGrid id="btt-cad-cliente-grid" className="btt-cad-cliente-grid">
+                        </Row2grid>
+                        <BttCadClienteGrid id="btt-cad-fornecedor-grid" className="btt-cad-fornecedor-grid">
                             <Button
                                 sx={{
                                     justifyContent: 'center', display: 'block', height: '50px', borderRadius: '5px', color: '#fff',
                                     fontSize: '14px', backgroundColor: 'black', ":hover": 'backgroundColor: #313131, transform:translate(0.8s)'
                                 }}
                                 type="submit" id="btn-cad-forms" className="btn-cad-forms">
-                                Atualizar Cliente
+                                Atualizar Fornecedor
                             </Button>
                             <Button
-                                onClick={evento => window.open('/sig/consulta-de-clientes')}
+                                onClick={evento => window.open('/sig/consulta-de-fornecedores')}
                                 sx={{
                                     justifyContent: 'center', display: 'block', height: '50px', borderRadius: '5px', color: '#fff',
                                     fontSize: '14px', backgroundColor: 'black', ":hover": 'backgroundColor: #313131, transform:translate(0.8s)'
                                 }} type="button" id="btn-cad-forms" className="btn-cad-forms">
-                                Consulta de Clientes
+                                Consulta de Fornecedores
                             </Button>
                         </BttCadClienteGrid>
-                    </form>
-                </FormCadastroCliente>
+                </Box>
+                </FormCadastroFornecedor>
             </Main>
+            <Footer />
         </>
     )
-};
-export default AtualizaCliente;
+}
+export default AtualizarFornecedor;

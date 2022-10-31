@@ -322,6 +322,7 @@ const Cabecalho = () => {
         <ul>
           <li><a href="/sig/cadastro-de-cliente">Clientes</a> </li>
           <li><a href="/sig/cadastro-de-produto">Produtos</a> </li>
+          <li><a href="/sig/cadastro-de-fornecedor">Fornecedor</a> </li>
           <li><a href='/equipamentos'>Equipamentos</a> </li>
           <li><a href={link}>Logout</a> </li>
         </ul>
@@ -342,6 +343,7 @@ const Cabecalho = () => {
             <li><a href="/" id="menu-lateral__link" className="menu-lateral__link">Home</a> </li>
             <li><a href="/sig/cadastro-de-cliente" id="menu-lateral__link" className="menu-lateral__link">Clientes</a> </li>
             <li><a href="/sig/cadastro-de-produto" id="menu-lateral__link" className="menu-lateral__link">Produtos</a> </li>
+            <li><a href="/sig/cadastro-de-fornecedor" id="menu-lateral__link" className="menu-lateral__link">Fornecedor</a> </li>
             <li><a href="/equipamentos" id="menu-lateral__link" className="menu-lateral__link">Equipamentos</a> </li>
             <li><a href={link} id="menu-lateral__link" className="menu-lateral__link">Logout</a> </li>
           </ul>

@@ -2,111 +2,108 @@
 <html lang="pt-BR">
 
 <head>
-	<meta charset="utf-8">
-	<meta name="description" content="Inicio">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="keywords" content="Iniciohtml, web">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-	<link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
-    />
-	<link
-	rel="stylesheet"
-	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
-  />
-	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet"> 
-	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
-    <link rel="icon" href="%PUBLIC_URL%/ico.svg"/>
+    <meta charset="utf-8">
+    <meta name="description" content="Inicio">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="Iniciohtml, web">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="icon" href="%PUBLIC_URL%/ico.svg" />
     <title>Full Sports - O Melhor Dos Artigos Esportivos Para Você</title>
 </head>
-    <!-- Vlibras -->
-	<div vw class="enabled">
-		<div vw-access-button class="active"></div>
-		<div vw-plugin-wrapper>
-			<div class="vw-plugin-top-wrapper"></div>
-		</div>
-	</div>
-  <div id="root"></div>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-    <script>
-      new window.VLibras.Widget('https://vlibras.gov.br/app');
-    </script>
-    <script src="https://code.jquery.com/jquery-3.6.0.js"
-    integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+<!-- Vlibras -->
+<div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper>
+        <div class="vw-plugin-top-wrapper"></div>
+    </div>
+</div>
+<div id="root"></div>
+<noscript>You need to enable JavaScript to run this app.</noscript>
+<script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+<script>
+    new window.VLibras.Widget('https://vlibras.gov.br/app');
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
     crossorigin="anonymous"></script>
 
-    <script src="/js/fonte.js"></script>
-    <script >
-      var link_css = "%PUBLIC_URL%/css/estiloLoja.css";
+<script src="/js/fonte.js"></script>
+<script>
+    var link_css = "%PUBLIC_URL%/css/estiloLoja.css";
 
-				
-if(getCookie2() == "contraste"){
-    link_css = "%PUBLIC_URL%/css/estiloEscuro.css";
-}
-else if(getCookie() == "default"){
-    link_css = "%PUBLIC_URL%/css/estiloLoja.css";
-}
 
-$(document).ready(function(){
-    
-    $("#modoEscuro").click(function(){
-        setCookie("contraste");
-        location.reload();				
-    });
-    
-    $("#modoClaro").click(function(){
-        setCookie("default")
-        location.reload();									
-    });
-    
-});
-
-$("head").append("<link rel=stylesheet href="+ " "+ link_css +" " +"type=text/css>");
-
-function setCookie(value){
-    var data = new Date();
-    data.setTime(data.getTime() + 600000);
-    
-    //cookies structure
-    document.cookie = "contraste="+value+"; expires="+data.toUTCString()+
-        "; path=/";
-    
-}
-
-function getCookie(){
-    var cookie = document.cookie.split("=");
-    
-    return cookie[1];
-}
-
-function getCookie2(){
-    var nameEQ = "contraste=";
-    var ca = document.cookie.split(';');
-    for (var i = 0; i < ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+    if (getCookie2() == "contraste") {
+        link_css = "%PUBLIC_URL%/css/estiloEscuro.css";
     }
-    return undefined;
+    else if (getCookie() == "default") {
+        link_css = "%PUBLIC_URL%/css/estiloLoja.css";
+    }
 
-}
-    </script>
-    <script src="/js/visualizacaoProduto.js"></script>
-    <script type="text/javascript">
-        //mascara
-        $(document).ready(function () {
-            $('#cep').mask('00000-000');
-            $('#cpf').mask('000.000.000-00');
-            $('#data').mask('00/00/0000');
-            $('#cnpj').mask('00.000.000./0000-00');
-            
-            
+    $(document).ready(function () {
+
+        $("#modoEscuro").click(function () {
+            setCookie("contraste");
+            location.reload();
         });
-    </script>
-    <!--Mascara Jquery-->
-    <script type="text/javascript" src="/js/mask.js"></script>
-    <script type="text/javascript" src="/js/botao.js"></script>
-</html>
 
+        $("#modoClaro").click(function () {
+            setCookie("default")
+            location.reload();
+        });
+
+    });
+
+    $("head").append("<link rel=stylesheet href=" + " " + link_css + " " + "type=text/css>");
+
+    function setCookie(value) {
+        var data = new Date();
+        data.setTime(data.getTime() + 600000);
+
+        //cookies structure
+        document.cookie = "contraste=" + value + "; expires=" + data.toUTCString() +
+            "; path=/";
+
+    }
+
+    function getCookie() {
+        var cookie = document.cookie.split("=");
+
+        return cookie[1];
+    }
+
+    function getCookie2() {
+        var nameEQ = "contraste=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+        }
+        return undefined;
+
+    }
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
+<script src="/js/visualizacaoProduto.js"></script>
+<!--Mascara Jquery-->
+<script type="text/javascript" src="/js/mask.js"></script>
+<script type="text/javascript" src="/js/botao.js"></script>
+
+<script type="text/javascript">
+    //mascara
+    $(document).ready(function () {
+        $('#cep').mask('00000-000');
+        $('#cpf').mask('000.000.000-00');
+        $('#data').mask('00/00/0000');
+        $('#cnpj').mask('00.000.000./0000-00');
+        $('#precoProduto').mask('#.##0,00', {reverse: true});
+    })
+</script>
+
+
+</html>

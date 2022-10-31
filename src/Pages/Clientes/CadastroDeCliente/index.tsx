@@ -42,6 +42,14 @@ const Row1grid = styled.div`
     .col-form-label{
         font-size: 20px;
     }
+    #imagemPerfil{
+        box-sizing: border-box;
+        margin: 0 0 15px;
+        width: 100%;
+        padding: 15px;
+        border-radius: 4px;
+    }
+  
 `;
 const BttCadClienteGrid = styled.div`
     display: grid;
@@ -98,7 +106,6 @@ const CadastroCliente = () => {
                     },
                 })
                     .then(response =>
-
                         apiFullSports.request({
                             url: 'cadastrar-cliente/',
                             method: 'POST',
@@ -296,27 +303,15 @@ const CadastroCliente = () => {
                                 required
                             />
                             <label className="col-form-label">Imagem de Perfil</label>
-                            <TextField
-                                sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
-                                className="txt-form"
-                                onChange={selecionarArquivo}
-                                id="imagemPerfil"
-                                type="file"
-                                fullWidth
-                                required
-                                name="file"
-                                variant="outlined"
-                                accessKey="image/*"
-                            />
-                            {/* <input 
+                            <input 
                             onChange={selecionarArquivo} 
                             className="txt-form" 
                             id="imagemPerfil"
                             type="file"
                             required
                             name="file"
-                            accept="image/*"
-                            />   */}
+                            accept="image/jpeg, image/pjpeg, image/png, image/gif"
+                            />  
                         </Row1grid>
 
                         <BttCadClienteGrid id="btt-cad-cliente-grid" className="btt-cad-cliente-grid">

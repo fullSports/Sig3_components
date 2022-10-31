@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Footer from "../../../Components/Footer";
 import Cabecalho from "../../../Components/Cabecalho";
-import ICliente from "../../../interfaces/ICliente";
+import IFornecedor from "../../../interfaces/IFornecedor";
 import apiFullSports from "../../../api/apiFullSports";
 import { Box, Button, Modal} from "@mui/material";
 const Main = styled.main`
@@ -134,7 +134,7 @@ const estiloMenssagem = {
     px: 4,
     pb: 3,
 };
-const ConsultaCliente = () => {
+const ConsultaFornecedor = () => {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => {
         setOpen(true);
@@ -142,57 +142,48 @@ const ConsultaCliente = () => {
     const handleClose = () => {
         setOpen(false);
     };
-
-    const [clientes, setClientes] = useState<ICliente[]>([]);
+    const [fornecedores, setFornecedores] = useState<IFornecedor[]>([]);
 
     useEffect(() => {
-        apiFullSports.get<ICliente[]>('listar-clientes/')
-            .then(resposta => setClientes(resposta.data))
-            .catch((err) => console.log(err));
+        apiFullSports.get<IFornecedor[]>('listar-fornecedores/')
+            .then(resposta => setFornecedores(resposta.data))
+            .catch((err) => console.log(err))
     }, []);
 
-    const deletar = (DeletarCliente: ICliente) => {
-        apiFullSports.delete(`deletar-cliente/${DeletarCliente._id}/`);
-        window.location.reload();
+    const deletar = (DeletarFornecedor: IFornecedor) => {
+        apiFullSports.delete(`deletar-fornecedor/${DeletarFornecedor._id}`)
+            .then(() => {
+                window.location.reload();
+            }).catch((err) => console.log(err))
     }
-    console.log(clientes.map(item => item.dataCadastro))
+
     return (
         <>
             <Cabecalho />
             <Main>
-                <ExibeTitulo id="exibe-titulo" className="exibe-titulo">Lista de Cliente</ExibeTitulo>
-                <PainelBody id="panel-body" className="panel-name">
-
+                <ExibeTitulo id="exibe-titulo" className="exibe-titulo">Lista de Fornecedores</ExibeTitulo>
+                <PainelBody id="panel-body" className="panel-name" >
                     <div>
                         <TableExibe id="table-exibe" className="table-exibe">
                             <thead>
                                 <tr>
-                                    <th>foto de perfil</th>
-                                    <th>Data de Cadastro</th>
-                                    <th>CPF</th>
-                                    <th>Nome</th>
-                                    <th>Dt. Nascimento</th>
-                                    <th>Sexo</th>
-                                    <th>CEP</th>
+                                    <th>CNPJ</th>
+                                    <th>Nome da Empresa</th>
+                                    <th>Cep</th>
                                     <th>Endereço</th>
+                                    <th>Data de Cadastro</th>
                                 </tr>
                             </thead>
-
                             <tbody>
-                                {clientes.map(item =>
-
+                                {fornecedores.map(item=>
                                     <tr key={item._id.toString()}>
-                                        <th><img src={item.imagemPerfil.url} width="100px" alt="imagem de perfil" /></th>
-                                        <th>{`${item.dataCadastro.toLocaleString()}`}</th>
-                                        <th>{item.cpf}</th>
-                                        <th>{item.nome}</th>
-                                        <th>{item.dataNascimento}</th>
-                                        <th>{item.sexo}</th>
+                                        <th>{item.cnpj}</th>
+                                        <th>{item.nomeEmpresa}</th>
                                         <th>{item.cep}</th>
                                         <th>{item.endereco}</th>
                                         <td>
-                                            <BtnExibeGroup id="btn-exibe-group" className="btn-exibe-group">
-                                                <a href={`/sig/atualizar-cliente/${item._id}`} >
+                                        <BtnExibeGroup id="btn-exibe-group" className="btn-exibe-group">
+                                                <a href={`/sig/atualizar-fornecedor/${item._id}`} >
                                                     <BtnExibe id="btn-exibe" className="btn-exibe"> Editar </BtnExibe></a>
 
                                                 <React.Fragment>
@@ -205,7 +196,7 @@ const ConsultaCliente = () => {
                                                         aria-describedby="child-modal-description"
                                                     >
                                                         <Box sx={{ ...estiloMenssagem, width: 650, display: 'flex',justifyContent:'center'}}>
-                                                            <h2 id="child-modal-title">Deseja mesmo excluir o cliente {item.nome} ?</h2>
+                                                            <h2 id="child-modal-title">Deseja mesmo excluir a empresa {item.nomeEmpresa} ?</h2>
                                                             <Button onClick={() => deletar(item)} variant="outlined" color="error" >Excluir</Button>
                                                             <Button onClick={handleClose} variant="outlined" >Cancelar</Button>
                                                         </Box>
@@ -221,6 +212,6 @@ const ConsultaCliente = () => {
             </Main>
             <Footer />
         </>
-    );
+    )
 }
-export default ConsultaCliente;
+export default ConsultaFornecedor;
