@@ -44,6 +44,13 @@ const Row1grid = styled.div`
     .col-form-label{
         font-size: 20px;
     }
+    #imagemPerfil{
+        box-sizing: border-box;
+        margin: 0 0 15px;
+        width: 100%;
+        padding: 15px;
+        border-radius: 4px;
+    }
 `;
 const BttCadClienteGrid = styled.div`
     display: grid;
@@ -64,35 +71,50 @@ function AtualizaCliente() {
     const [estado, setEstado] = useState('');
     const [cidade, setCidade] = useState('');
     const [numero, setNumero] = useState('');
-    const [complemento, setComplemento] = useState(''); 
+    const [complemento, setComplemento] = useState('');
     const dataAtual = new Date().toLocaleDateString();
+
+    const [imagemId, setImagemID] = useState('');
+    const [file, setImagem] = useState<File | null>(null)
+    const selecionarArquivo = (evento: React.ChangeEvent<HTMLInputElement>) => {
+        if (evento.target.files?.length) {
+            setImagem(evento.target.files[0])
+        } else {
+            setImagem(null)
+        }
+    }
+    console.log(imagemId)
     useEffect(() => {
         if (parametros.id) {
             apiFullSports.get<ICliente>(`listar-cliente/${parametros.id}`)
-            .then(resposta => setCpf(resposta.data.cpf))
-            .catch((err)=> console.log(err));
+                .then(resposta => setCpf(resposta.data.cpf))
+                .catch((err) => console.log(err));
 
             apiFullSports.get<ICliente>(`listar-cliente/${parametros.id}`)
-            .then(resposta => setNome(resposta.data.nome))
-            .catch((err)=> console.log(err));
-            
-            apiFullSports.get<ICliente>(`listar-cliente/${parametros.id}`)
-            .then(resposta => setDataNascimento(resposta.data.dataNascimento))
-            .catch((err)=> console.log(err));
+                .then(resposta => setNome(resposta.data.nome))
+                .catch((err) => console.log(err));
 
             apiFullSports.get<ICliente>(`listar-cliente/${parametros.id}`)
-            .then(resposta => setSexo(resposta.data.sexo))
-            .catch((err)=> console.log(err));
+                .then(resposta => setDataNascimento(resposta.data.dataNascimento))
+                .catch((err) => console.log(err));
 
             apiFullSports.get<ICliente>(`listar-cliente/${parametros.id}`)
-            .then(resposta => setCep(resposta.data.cep))
-            .catch((err)=> console.log(err));
+                .then(resposta => setSexo(resposta.data.sexo))
+                .catch((err) => console.log(err));
+
+            apiFullSports.get<ICliente>(`listar-cliente/${parametros.id}`)
+                .then(resposta => setCep(resposta.data.cep))
+                .catch((err) => console.log(err));
+
+            apiFullSports.get<ICliente>(`listar-cliente/${parametros.id}`)
+                .then(resposta => setImagemID(resposta.data.imagemPerfil._id))
+                .catch((err) => console.log(err));
         }
 
     }, [parametros]);
-    
 
-    function buscaCep(){
+
+    function buscaCep() {
         let url = "https://brasilapi.com.br/api/cep/v1/" + cep;
         let req = new XMLHttpRequest();
         req.open("GET", url);
@@ -118,7 +140,7 @@ function AtualizaCliente() {
         }
 
     }
-    function buscaCepCarregarPage(){
+    function buscaCepCarregarPage() {
         let url = "https://brasilapi.com.br/api/cep/v1/" + cep;
         let req = new XMLHttpRequest();
         req.open("GET", url);
@@ -134,40 +156,133 @@ function AtualizaCliente() {
         }
     }
     setTimeout(buscaCepCarregarPage, 0)
-    
-  
+
+
     function aoSubmeterForm(evento: React.FormEvent<HTMLFormElement>) {
         evento.preventDefault();
-        if(parametros.id){
-            apiFullSports.put(`atualizar-cliente/${parametros.id}`,{
-                cpf: cpf,
-                nome: nome,
-                dataNascimento: dataNascimento,
-                sexo: sexo,
-                cep: cep,
-                endereco: `${rua},${numero} -${complemento}- ${estado}, ${cidade}, ${bairro}`
-            })
-            .then(()=>{
-                alert("Cliente atualizado com com sucesso");
-                window.location.href='/sig/consulta-de-clientes';
-            });
-        }else{
-            apiFullSports.post('cadastrar-cliente/',{
-                cpf: cpf,
-                nome: nome,
-                dataNascimento: dataNascimento,
-                sexo: sexo,
-                cep: cep,
-                endereco: `${rua},${numero} -${complemento}- ${estado}, ${cidade}, ${bairro}`,
-                dataCadastro: dataAtual
-            })
-            .then(()=>{
-                alert("Cliente novo cadastrado com sucesso");
-                window.location.href='/sig/consulta-de-clientes';
-            }).catch(err => console.log(err));
+        const formData1 = new FormData()
+        if (file) {
+            formData1.append('file', file)
+        }
+
+
+        if (parametros.id) {
+            if (!file) {
+                apiFullSports.put(`atualizar-cliente/${parametros.id}`, {
+                    cpf: cpf,
+                    nome: nome,
+                    dataNascimento: dataNascimento,
+                    sexo: sexo,
+                    cep: cep,
+                    endereco: `${rua},${numero} -${complemento}- ${estado}, ${cidade}, ${bairro}`,
+                }).then(() => {
+                    alert("cliente atualizado com suceeso");
+                    window.location.href = "/sig/consulta-de-clientes";
+                }).catch(erro => console.log(erro))
+            } else {
+                apiFullSports.get<ICliente>(`listar-cliente/${parametros.id}`)
+                    .then(resposta => {
+                        if (resposta.data.imagemPerfil === null) {
+                            apiFullSports.request({
+                                url: 'imagem/',
+                                method: 'POST',
+                                headers: {
+                                    'Access-Control-Allow-Origin': '*',
+                                    'Content-Type': 'multipart/form-data'
+                                },
+                                data: formData1
+                            })
+                                .then(response =>
+
+                                    apiFullSports.request({
+                                        url: `imagem/${response.data._id}`,
+                                        method: 'GET',
+                                        headers: {
+                                            'Access-Control-Allow-Origin': '*',
+                                            'Content-Type': 'multipart/form-data'
+                                        },
+                                    })
+                                        .then(response =>
+                                            apiFullSports.request({
+                                                url: `atualizar-cliente/${parametros.id}`,
+                                                method: 'PUT',
+                                                data: {
+                                                    cpf: cpf,
+                                                    nome: nome,
+                                                    dataNascimento: dataNascimento,
+                                                    sexo: sexo,
+                                                    cep: cep,
+                                                    endereco: `${rua},${numero} -${complemento}- ${estado}, ${cidade}, ${bairro}`,
+                                                    dataCadastro: dataAtual,
+                                                    imagemPerfil: response.data._id
+                                                }
+                                            })
+                                                .then(() => {
+                                                    alert("cliente atualizado com suceso");
+                                                    window.location.href = "/sig/consulta-de-clientes";
+                                                }).catch(erro => console.log(erro))
+                                        ).catch(erro => console.log(erro))
+                                ).catch(erro => console.log(erro))
+                        } else {
+                            apiFullSports.request({
+                                url: `imagem/${resposta.data.imagemPerfil._id}`,
+                                method: 'GET',
+                                headers: {
+                                    'Access-Control-Allow-Origin': '*',
+                                    'Content-Type': 'multipart/form-data'
+                                },
+                            }).then(responsa => {
+                                apiFullSports.delete(`imagem/${responsa.data._id}`)
+                                apiFullSports.request({
+                                    url: 'imagem/',
+                                    method: 'POST',
+                                    headers: {
+                                        'Access-Control-Allow-Origin': '*',
+                                        'Content-Type': 'multipart/form-data'
+                                    },
+                                    data: formData1
+                                })
+                                    .then(response =>
+
+                                        apiFullSports.request({
+                                            url: `imagem/${response.data._id}`,
+                                            method: 'GET',
+                                            headers: {
+                                                'Access-Control-Allow-Origin': '*',
+                                                'Content-Type': 'multipart/form-data'
+                                            },
+                                        })
+                                            .then(response =>
+                                                apiFullSports.request({
+                                                    url: `atualizar-cliente/${parametros.id}`,
+                                                    method: 'PUT',
+                                                    data: {
+                                                        cpf: cpf,
+                                                        nome: nome,
+                                                        dataNascimento: dataNascimento,
+                                                        sexo: sexo,
+                                                        cep: cep,
+                                                        endereco: `${rua},${numero} -${complemento}- ${estado}, ${cidade}, ${bairro}`,
+                                                        dataCadastro: dataAtual,
+                                                        imagemPerfil: response.data._id
+                                                    }
+                                                })
+                                                    .then(() => {
+                                                        alert("cliente atualizado com suceso");
+                                                        window.location.href = "/sig/consulta-de-clientes";
+                                                    }).catch(erro => console.log(erro))
+                                            ).catch(erro => console.log(erro))
+                                    ).catch(erro => console.log(erro))
+
+                            }).catch(erro => console.log(erro))
+                        }
+                    }).catch(erro => console.log(erro))
+
+            }
+
         }
     }
-    
+
     return (
         <>
             <Cabecalho />
@@ -326,16 +441,15 @@ function AtualizaCliente() {
                                 required
                                 value={complemento}
                             />
-                            {/* <label className="col-form-label">Imagem de Perfil</label>
-                            <input 
-                            onChange={selecionarArquivo} 
-                            className="txt-form" 
-                            id="imagemPerfil"
-                            type="file"
-                            required
-                            name="file"
-                            accept="image/jpeg, image/pjpeg, image/png, image/gif"
-                            />   */}
+                            <label className="col-form-label">Atualizar Imagem de Perfil</label>
+                            <input
+                                onChange={selecionarArquivo}
+                                className="txt-form"
+                                id="imagemPerfil"
+                                type="file"
+                                name="file"
+                                accept="image/jpeg, image/pjpeg, image/png, image/gif"
+                            />
                         </Row1grid>
 
                         <BttCadClienteGrid id="btt-cad-cliente-grid" className="btt-cad-cliente-grid">
@@ -348,7 +462,7 @@ function AtualizaCliente() {
                                 Atualizar Cliente
                             </Button>
                             <Button
-                                onClick={evento =>  window.location.href='/sig/consulta-de-clientes'}
+                                onClick={evento => window.location.href = '/sig/consulta-de-clientes'}
                                 sx={{
                                     justifyContent: 'center', display: 'block', height: '50px', borderRadius: '5px', color: '#fff',
                                     fontSize: '14px', backgroundColor: 'black', ":hover": 'backgroundColor: #313131, transform:translate(0.8s)'

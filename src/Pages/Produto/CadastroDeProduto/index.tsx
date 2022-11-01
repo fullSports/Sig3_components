@@ -64,19 +64,16 @@ const CadastrarProduto = () => {
     const [corProduto, setCorProduto] = useState('');
     const [preco, setPreco] = useState('');
     const [quantidade, setQuantidade] = useState('');
-
+    console.log(fornecedorID)
     useEffect(() => {
         apiFullSports.get<IFornecedor[]>('listar-fornecedores/')
             .then(resposta => setListaFornecedores(resposta.data))
     }, [])
-    console.log(listaFornecedores)
     const options = listaFornecedores.map((item) => {
         const firsLetter = item.nomeEmpresa[0].toLocaleUpperCase();
-        const firsLetterId = item._id
         return {
             firsLetter: /[0-9]/.test(firsLetter) ? '0-9' : firsLetter,
-            ...item,
-            firsLetterId: firsLetterId
+            ...item
         };
     })
     function aoSubmit(evento: React.FormEvent<HTMLFormElement>) {

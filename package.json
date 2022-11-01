@@ -57,6 +57,7 @@
     "eslint": "7.17.0"
   },
   "devDependencies": {
+    "@types/styled-components": "^5.1.26",
     "eslint-config-react-app": "^7.0.1"
   }
 }
