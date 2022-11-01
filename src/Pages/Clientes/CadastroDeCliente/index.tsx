@@ -311,7 +311,6 @@ const CadastroCliente = () => {
                             className="txt-form" 
                             id="imagemPerfil"
                             type="file"
-                            required
                             name="file"
                             accept="image/jpeg, image/pjpeg, image/png, image/gif"
                             />  
