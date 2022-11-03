@@ -64,6 +64,20 @@ const CadastrarProduto = () => {
     const [corProduto, setCorProduto] = useState('');
     const [preco, setPreco] = useState('');
     const [quantidade, setQuantidade] = useState('');
+    let imagens = []
+    
+    const selecionarArquivo = (evento: React.ChangeEvent<HTMLInputElement>) => {
+        if (evento.target.files?.length) {
+            for(let i =0 ; i< evento.target.files.length; i++){
+                const [file, setImagem] = useState<File | null>(null);
+                setImagem(evento.target.files[i]);
+                imagens.unshift(file)
+                console.log(file)
+            }
+            
+        } 
+    }
+
     console.log(fornecedorID)
     useEffect(() => {
         apiFullSports.get<IFornecedor[]>('listar-fornecedores/')
@@ -78,29 +92,9 @@ const CadastrarProduto = () => {
     })
     function aoSubmit(evento: React.FormEvent<HTMLFormElement>) {
         evento.preventDefault();
-
-        apiFullSports.request({
-            method: 'POST',
-            url: 'cadastrar-produto/',
-            data: {
-                nomeProduto: nomeProduto,
-                tipoProduto: tipoProduto,
-                corProduto: corProduto,
-                preco: preco,
-                quantidade: quantidade,
-                dataCadastro: dataAtual,
-                fornecedor: fornecedorID
-            }
-        }).then(() => {
-            setNomeProduto('');
-            setTipoProduto('');
-            setCorProduto('');
-            setPreco('');
-            setQuantidade('')
-            alert('Produto cadastrado com sucesso')
-        }).catch((err)=> console.log(err))
+ 
     }
-    console.log(fornecedorID)
+
     return (
         <>
             <Cabecalho />
@@ -109,7 +103,7 @@ const CadastrarProduto = () => {
                 <FormCadastroDeProduto id="form-cadastro-produto" className="form-cadastro-produto">
                     <form action="" method="post" encType="multipart/form-data" onSubmit={aoSubmit}>
                         <Row2grid id="row-2-grid" className="row-1-grid">
-                            <label className="col-form-label">CNPJ do Fornecedor</label>
+                            {/* <label className="col-form-label">CNPJ do Fornecedor</label>
                             <Autocomplete
                                 openText='Abrir'
                                 closeText='Fechar'
@@ -186,7 +180,19 @@ const CadastrarProduto = () => {
                                 // placeholder={'Digite a quantidade de Produto'}
                                 fullWidth
                                 onChange={evento => setQuantidade(evento.target.value)}
-                            />
+                            /> */}
+                            <label className="col-form-label">Imagens do produto</label>
+                            <input
+                                onChange={selecionarArquivo}
+                                className="txt-form"
+                                id="imagemProduto"
+                                type="file"
+                                name="file"
+                                accept="image/jpeg, image/pjpeg, image/png, image/gif"
+                                multiple
+                            />  
+                            
+
                         </Row2grid>
 
 
