@@ -1,0 +1,5 @@
+
+.header-container{
+    @apply
+    w-[100%] bg-pink-300 h-[100px]
+}

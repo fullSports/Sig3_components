@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Footer from "../../Components/Footer";
-import Cabecalho from "../../Components/Cabecalho";
+import Cabecalho from "../../Components/Menu/Header";
 import CardsFTZ from "../../Components/CardsFTZ";
 const NovidadeWhee1Img = require( "./../../assets/images/novidade-wheel.png");
 const ChuteiraPuma1 = require( "./../../assets/images/chuteira-puma1.jpg");

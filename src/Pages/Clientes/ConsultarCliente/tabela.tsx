@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import ICliente from "../../../interfaces/ICliente";
+import ICliente from "../../../utils/interfaces/ICliente";
 import apiFullSports from "../../../api/apiFullSports";
 import styled from "styled-components";
 import { Box, Button, Modal } from "@mui/material";

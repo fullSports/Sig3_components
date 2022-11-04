@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Footer from "../../../Components/Footer";
-import Cabecalho from "../../../Components/Cabecalho";
-import IFornecedor from "../../../interfaces/IFornecedor";
+import Cabecalho from "../../../Components/Menu/Header";
+import IFornecedor from "../../../utils/interfaces/IFornecedor";
 import apiFullSports from "../../../api/apiFullSports";
 import { Box, Button, Modal} from "@mui/material";
 const Main = styled.main`

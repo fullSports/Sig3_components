@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from 'styled-components';
-import Cabecalho from '../../../Components/Cabecalho';
+import Cabecalho from '../../../Components/Menu/Header';
 import Footer from '../../../Components/Footer';
 import { Button, TextField, FormControl, Select, InputLabel, MenuItem, Box } from "@mui/material";
 import apiFullSports from '../../../api/apiFullSports';

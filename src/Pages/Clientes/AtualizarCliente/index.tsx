@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import apiFullSports from "../../../api/apiFullSports";
-import Cabecalho from "../../../Components/Cabecalho";
-import ICliente from "../../../interfaces/ICliente";
+import Cabecalho from "../../../Components/Menu/Header";
+import ICliente from "../../../utils/interfaces/ICliente";
 import ApiCep from "../../../api/apiCep";
 import { Button, TextField, FormControl, Select, InputLabel, MenuItem } from "@mui/material";
 const Main = styled.main`
