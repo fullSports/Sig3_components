@@ -73,7 +73,7 @@ function AtualizaCliente() {
     const [numero, setNumero] = useState('');
     const [complemento, setComplemento] = useState('');
     const dataAtual = new Date().toLocaleDateString();
-
+    const [spinner, setSpinner] = useState(false);
     const [imagemId, setImagemID] = useState('');
     const [file, setImagem] = useState<File | null>(null)
     const selecionarArquivo = (evento: React.ChangeEvent<HTMLInputElement>) => {
@@ -160,6 +160,7 @@ function AtualizaCliente() {
 
     function aoSubmeterForm(evento: React.FormEvent<HTMLFormElement>) {
         evento.preventDefault();
+        setSpinner(true);
         const formData1 = new FormData()
         if (file) {
             formData1.append('file', file)
@@ -176,6 +177,7 @@ function AtualizaCliente() {
                     cep: cep,
                     endereco: `${rua},${numero} -${complemento}- ${estado}, ${cidade}, ${bairro}`,
                 }).then(() => {
+                    setSpinner(false)
                     alert("cliente atualizado com suceeso");
                     window.location.href = "/sig/consulta-de-clientes";
                 }).catch(erro => console.log(erro))
@@ -218,6 +220,7 @@ function AtualizaCliente() {
                                                 }
                                             })
                                                 .then(() => {
+                                                    setSpinner(false)
                                                     alert("cliente atualizado com suceso");
                                                     window.location.href = "/sig/consulta-de-clientes";
                                                 }).catch(erro => console.log(erro))
@@ -268,6 +271,7 @@ function AtualizaCliente() {
                                                     }
                                                 })
                                                     .then(() => {
+                                                        setSpinner(false)
                                                         alert("cliente atualizado com suceso");
                                                         window.location.href = "/sig/consulta-de-clientes";
                                                     }).catch(erro => console.log(erro))
@@ -450,6 +454,7 @@ function AtualizaCliente() {
                                 name="file"
                                 accept="image/jpeg, image/pjpeg, image/png, image/gif"
                             />
+                            {spinner && (<p>carregando...</p>)}
                         </Row1grid>
 
                         <BttCadClienteGrid id="btt-cad-cliente-grid" className="btt-cad-cliente-grid">

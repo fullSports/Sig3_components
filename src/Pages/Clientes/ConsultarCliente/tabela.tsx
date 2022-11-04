@@ -55,11 +55,13 @@ const TabelaCliente = () => {
     const handleClose = () => {
         setOpen(false);
     };
-
+    
+    const [spinner, setSpinner] = useState(false);   
     const [clientes, setClientes] = useState<ICliente[]>([]);
     useEffect(() => {
+        setSpinner(true);
         apiFullSports.get<ICliente[]>('listar-clientes/')
-            .then(resposta => { setClientes(resposta.data) })
+            .then(resposta => {setSpinner(false); setClientes(resposta.data) })
             .catch((err) => console.log(err));
     }, []);
 
@@ -68,14 +70,15 @@ const TabelaCliente = () => {
         window.location.reload();
     }
 
-       return <>{
+       return <>{spinner && (<p>carregando...</p>)}
+       {
         
         clientes.map(item => {
             if (item.imagemPerfil == null) {
                 return (
                     <tr key={item._id.toString()}>
 
-                        <th>imagem não cadastrada</th>
+                        <th>sem foto de perfil</th>
 
                         <th>{`${item.dataCadastro.toLocaleString()}`}</th>
                         <th>{item.cpf}</th>
@@ -111,6 +114,8 @@ const TabelaCliente = () => {
                 )
             } else {
                 return (
+                    <>
+                    {spinner && (<p>carregando...</p>)}
                     <tr key={item._id.toString()}>
 
                         <th><img src={item.imagemPerfil.url} alt="imagem de perfil" /></th>
@@ -145,6 +150,7 @@ const TabelaCliente = () => {
                             </BtnExibeGroup>
                         </td>
                     </tr>
+                    </>
                 )
             }
         })

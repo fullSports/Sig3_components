@@ -71,6 +71,7 @@ const CadastroCliente = () => {
     const [complemento, setComplemento] = useState('');
     const [numero, setNumero] = useState('');
     const [file, setImagem] = useState<File | null>(null)
+    const [spinner, setSpinner] = useState(false);
     const selecionarArquivo = (evento: React.ChangeEvent<HTMLInputElement>) => {
         if (evento.target.files?.length) {
             setImagem(evento.target.files[0])
@@ -81,6 +82,7 @@ const CadastroCliente = () => {
     console.log(file)
 
     function aoSubmeterForm(evento: React.FormEvent<HTMLFormElement>) {
+        setSpinner(true);
         evento.preventDefault();
         const formData1 = new FormData()
         if (file) {
@@ -121,6 +123,7 @@ const CadastroCliente = () => {
                             }
                         })
                             .then(() => {
+                                setSpinner(false)
                                 alert("cliente cadastrado com suceso");
                                 window.location.href="/sig/consulta-de-clientes";
                             }).catch(erro => console.log(erro))
@@ -314,6 +317,7 @@ const CadastroCliente = () => {
                             name="file"
                             accept="image/jpeg, image/pjpeg, image/png, image/gif"
                             />  
+                            {spinner && (<p>carregando...</p>)}
                         </Row1grid>
 
                         <BttCadClienteGrid id="btt-cad-cliente-grid" className="btt-cad-cliente-grid">

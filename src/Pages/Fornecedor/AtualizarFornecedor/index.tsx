@@ -65,18 +65,19 @@ const AtualizarFornecedor = () => {
     const [complemento, setComplemento] = useState('');
     const [numero, setNumero] = useState('');
     const dataAtual = new Date().toLocaleDateString();
+    const [spinner, setSpinner] = useState(false);
     useEffect(() => {
         if (parametros.id) {
             apiFullSports.get<IFornecedor>(`listar-fornecedor/${parametros.id}`)
-                .then(resposta => setCnpj(resposta.data.cnpj))
+                .then(resposta =>{setSpinner(false); setCnpj(resposta.data.cnpj)})
                 .catch((err) => console.log(err));
 
             apiFullSports.get<IFornecedor>(`listar-fornecedor/${parametros.id}`)
-                .then(resposta => setNomeEmpresa(resposta.data.nomeEmpresa))
+                .then(resposta =>{setSpinner(false); setNomeEmpresa(resposta.data.nomeEmpresa)})
                 .catch((err) => console.log(err));
 
                 apiFullSports.get<IFornecedor>(`listar-fornecedor/${parametros.id}`)
-                .then(resposta => setCep(resposta.data.cep))
+                .then(resposta =>{setSpinner(false); setCep(resposta.data.cep)})
                 .catch((err) => console.log(err));
         }
     }, [parametros])
@@ -124,6 +125,7 @@ const AtualizarFornecedor = () => {
     setTimeout(buscaCepCarregarPage, 0)
 
     function aoSubmeterForm(evento: React.FormEvent<HTMLFormElement>) {
+        setSpinner(true)
         evento.preventDefault();
         if (parametros.id) {
             apiFullSports.put(`atualizar-fornecedor/${parametros.id}`, {
@@ -145,6 +147,7 @@ const AtualizarFornecedor = () => {
                 dataCadastro: dataAtual
             })
                 .then(() => {
+                    setSpinner(false);
                     alert("Fornecedornovo cadastrado com sucesso");
                     window.open('/sig/consulta-de-fornecedores');
                 }).catch(err => console.log(err));
@@ -278,6 +281,7 @@ const AtualizarFornecedor = () => {
                                 required
                                 value={complemento}
                             />
+                            {spinner && (<p>carregando...</p>)}
                         </Row2grid>
                         <BttCadClienteGrid id="btt-cad-fornecedor-grid" className="btt-cad-fornecedor-grid">
                             <Button
