@@ -43,6 +43,13 @@ const Row2grid = styled.div`
     .col-form-label{
         font-size: 20px;
     }
+    #imagemProduto{
+        box-sizing: border-box;
+        margin: 0 0 15px;
+        width: 100%;
+        padding: 15px;
+        border-radius: 4px;
+    }
 `;
 const BttCadPrdutoGrid = styled.div`
     display: grid;
@@ -50,19 +57,7 @@ const BttCadPrdutoGrid = styled.div`
     grid-auto-rows: minmax(auto, auto);
     grid-gap: 2px;
 `;
-const estiloMenssagem = {
-    position: 'absolute' as 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    pt: 2,
-    px: 4,
-    pb: 3,
-};
+
 const Loadiing = styled.div`
 position: absolute;
 padding-left: auto;
@@ -88,7 +83,7 @@ const CadastrarProduto = () => {
     const [preco, setPreco] = useState('');
     const [quantidade, setQuantidade] = useState('');
     const [file, setImagem] = useState<File | null>(null);
-    const ImagensID = [{},]
+    let ImagensID = [{},]
     let imagens = [{},]
     const [statusId, setStatusId] = useState(Number)
     const [spinner, setSpinner] = useState(false);
@@ -138,12 +133,13 @@ const CadastrarProduto = () => {
                         },
                     }).then(response => {
                         ImagensID.unshift(response.data._id)
-                        setSpinner(false)
                     }).catch(err => console.log(err))
                 }).catch(err => console.log(err))
             },)
-            if(spinner==false){
-             
+            if(spinner===false){
+                ImagensID.pop();
+                setTimeout(function(){
+                console.log(ImagensID)
                 apiFullSports.request({
                     url:'cadastrar-produto/',
                     method: 'POST',
@@ -159,10 +155,11 @@ const CadastrarProduto = () => {
                     }
                 }).then(()=>{
                     alert("produto cadastrado com sucesso");
+                    setSpinner(false)
                 })
-            
-            }
+            },2000)
 
+            }
 
         }
 

@@ -70,7 +70,8 @@ const TabelaCliente = () => {
         window.location.reload();
     }
 
-       return <>{spinner && (<p>carregando...</p>)}
+       return <>
+       {spinner && (<p>carregando...</p>)}
        {
         
         clientes.map(item => {
@@ -115,7 +116,6 @@ const TabelaCliente = () => {
             } else {
                 return (
                     <>
-                    {spinner && (<p>carregando...</p>)}
                     <tr key={item._id.toString()}>
 
                         <th><img src={item.imagemPerfil.url} alt="imagem de perfil" /></th>
