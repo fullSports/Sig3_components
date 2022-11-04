@@ -62,9 +62,10 @@ const CadastrarFornecedor = () => {
     const [cidade, setCidade] = useState('');
     const [complemento, setComplemento] = useState('');
     const [numero, setNumero] = useState('');
+    const [spinner, setSpinner] = useState(false);
     function aoSubmit(evento: React.FormEvent<HTMLFormElement>) {
         evento.preventDefault();
-        
+        setSpinner(true);
         apiFullSports.request({
             method: 'POST',
             url: 'cadastrar-fornecedor/',
@@ -76,10 +77,8 @@ const CadastrarFornecedor = () => {
                 dataCadastro: dataAtual
             }
         }).then(() => {
-            setCnpj('');
-            setNomeEmpresa('');
-
-            alert("Fornecedor cadastrado com sucesso")
+            setSpinner(false);
+            // alert("Fornecedor cadastrado com sucesso")
             window.location.href='/sig/consulta-de-fornecedores'
         }).catch((err) => console.log(err))
     }

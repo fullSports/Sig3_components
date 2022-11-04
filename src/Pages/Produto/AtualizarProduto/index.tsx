@@ -12,7 +12,10 @@ const ExibeTitulo = styled.h3`
     text-align: center;
 `;
 
+
+
 function AtualizaProduto() {
+
     return (
         <>
             <Cabecalho />

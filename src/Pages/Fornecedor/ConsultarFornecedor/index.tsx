@@ -142,17 +142,21 @@ const ConsultaFornecedor = () => {
     const handleClose = () => {
         setOpen(false);
     };
+    const [spinner, setSpinner] = useState(false);
     const [fornecedores, setFornecedores] = useState<IFornecedor[]>([]);
 
     useEffect(() => {
+        setSpinner(true)
         apiFullSports.get<IFornecedor[]>('listar-fornecedores/')
-            .then(resposta => setFornecedores(resposta.data))
+            .then(resposta =>{ setFornecedores(resposta.data); setSpinner(false)})
             .catch((err) => console.log(err))
     }, []);
 
     const deletar = (DeletarFornecedor: IFornecedor) => {
+        setSpinner(true)
         apiFullSports.delete(`deletar-fornecedor/${DeletarFornecedor._id}`)
             .then(() => {
+                setSpinner(false)
                 window.location.reload();
             }).catch((err) => console.log(err))
     }
@@ -206,6 +210,7 @@ const ConsultaFornecedor = () => {
                                         </td>
                                     </tr>)}
                             </tbody>
+                            {spinner && (<p>carregando...</p>)}
                         </TableExibe>
                     </div>
                 </PainelBody>

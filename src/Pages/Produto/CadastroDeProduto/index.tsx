@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Cabecalho from '../../../Components/Cabecalho';
 import Footer from '../../../Components/Footer';
-import { Button, TextField, Autocomplete } from "@mui/material";
+import { Button, TextField, Autocomplete, Modal,Box } from "@mui/material";
 import IFornecedor from '../../../interfaces/IFornecedor';
 import apiFullSports from '../../../api/apiFullSports';
 const Main = styled.main`
@@ -43,6 +43,13 @@ const Row2grid = styled.div`
     .col-form-label{
         font-size: 20px;
     }
+    #imagemProduto{
+        box-sizing: border-box;
+        margin: 0 0 15px;
+        width: 100%;
+        padding: 15px;
+        border-radius: 4px;
+    }
 `;
 const BttCadPrdutoGrid = styled.div`
     display: grid;
@@ -51,6 +58,17 @@ const BttCadPrdutoGrid = styled.div`
     grid-gap: 2px;
 `;
 
+const Loadiing = styled.div`
+position: absolute;
+padding-left: auto;
+padding-top: auto;
+padding-right: auto;
+width: 40%;
+height: 10%;
+h1{
+    text-align: center;
+}
+`
 
 const CadastrarProduto = () => {
     const dataAtual = new Date().toLocaleDateString();
@@ -64,7 +82,22 @@ const CadastrarProduto = () => {
     const [corProduto, setCorProduto] = useState('');
     const [preco, setPreco] = useState('');
     const [quantidade, setQuantidade] = useState('');
-    console.log(fornecedorID)
+    const [file, setImagem] = useState<File | null>(null);
+    let ImagensID = [{},]
+    let imagens = [{},]
+    const [statusId, setStatusId] = useState(Number)
+    const [spinner, setSpinner] = useState(false);
+    const selecionarArquivo = (evento: React.ChangeEvent<HTMLInputElement>) => {
+        imagens = [{},]
+        if (evento.target.files?.length) {
+            for (var i = 0; i < evento.target.files.length; i++) {
+                imagens.unshift(evento.target.files[i])
+            }
+            imagens.pop()
+            console.log(imagens)
+        }
+    }
+
     useEffect(() => {
         apiFullSports.get<IFornecedor[]>('listar-fornecedores/')
             .then(resposta => setListaFornecedores(resposta.data))
@@ -78,29 +111,59 @@ const CadastrarProduto = () => {
     })
     function aoSubmit(evento: React.FormEvent<HTMLFormElement>) {
         evento.preventDefault();
+        setSpinner(true);
+            imagens.map(item => {
+                apiFullSports.request({
+                    url: 'imagem/',
+                    method: 'POST',
+                    headers: {
+                        'Access-Control-Allow-Origin': '*',
+                        'Content-Type': 'multipart/form-data'
+                    },
+                    data: {
+                        file: item
+                    }
+                }).then(response => {
+                    apiFullSports.request({
+                        url: `imagem/${response.data._id}`,
+                        method: 'GET',
+                        headers: {
+                            'Access-Control-Allow-Origin': '*',
+                            'Content-Type': 'multipart/form-data'
+                        },
+                    }).then(response => {
+                        ImagensID.unshift(response.data._id)
+                    }).catch(err => console.log(err))
+                }).catch(err => console.log(err))
+            },)
+            if(spinner===false){
+                ImagensID.pop();
+                setTimeout(function(){
+                console.log(ImagensID)
+                apiFullSports.request({
+                    url:'cadastrar-produto/',
+                    method: 'POST',
+                    data:{
+                        nomeProduto: nomeProduto,
+                        tipoProduto: tipoProduto,
+                        corProduto: corProduto,
+                        preco: preco,
+                        quantidade: quantidade,
+                        dataCadastro: dataAtual,
+                        fornecedor: fornecedorID,
+                        imagemProduto: ImagensID
+                    }
+                }).then(()=>{
+                    alert("produto cadastrado com sucesso");
+                    setSpinner(false)
+                    
+                })
+            },2000)
 
-        apiFullSports.request({
-            method: 'POST',
-            url: 'cadastrar-produto/',
-            data: {
-                nomeProduto: nomeProduto,
-                tipoProduto: tipoProduto,
-                corProduto: corProduto,
-                preco: preco,
-                quantidade: quantidade,
-                dataCadastro: dataAtual,
-                fornecedor: fornecedorID
             }
-        }).then(() => {
-            setNomeProduto('');
-            setTipoProduto('');
-            setCorProduto('');
-            setPreco('');
-            setQuantidade('')
-            alert('Produto cadastrado com sucesso')
-        }).catch((err)=> console.log(err))
-    }
-    console.log(fornecedorID)
+
+        }
+
     return (
         <>
             <Cabecalho />
@@ -125,7 +188,7 @@ const CadastrarProduto = () => {
                                 className="txt-form"
                                 id='Auto-complete'
                                 sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%', textAlign: 'center' }}
-                                renderInput={(params) => <TextField {...params} label="Nome/Cnpj" />}
+                                renderInput={(params) => <TextField {...params}  id='Auto-complete' label="Nome/Cnpj" />}
                             />
 
                             <label className="col-form-label">Nome do Produto</label>
@@ -187,6 +250,18 @@ const CadastrarProduto = () => {
                                 fullWidth
                                 onChange={evento => setQuantidade(evento.target.value)}
                             />
+                            <label className="col-form-label">Imagens do produto</label>
+                            <input
+                                onChange={selecionarArquivo}
+                                className="txt-form"
+                                id="imagemProduto"
+                                type="file"
+                                name="file"
+                                accept="image/jpeg, image/pjpeg, image/png, image/gif"
+                                multiple
+                            />
+                            {spinner && (<p>carregando...</p>)}
+
                         </Row2grid>
 
 

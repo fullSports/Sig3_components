@@ -4,6 +4,7 @@ import styled from "styled-components";
 import apiFullSports from "../../../api/apiFullSports";
 import Cabecalho from "../../../Components/Cabecalho";
 import ICliente from "../../../interfaces/ICliente";
+import ApiCep from "../../../api/apiCep";
 import { Button, TextField, FormControl, Select, InputLabel, MenuItem } from "@mui/material";
 const Main = styled.main`
     width: 100%;
@@ -73,7 +74,7 @@ function AtualizaCliente() {
     const [numero, setNumero] = useState('');
     const [complemento, setComplemento] = useState('');
     const dataAtual = new Date().toLocaleDateString();
-
+    const [spinner, setSpinner] = useState(false);
     const [imagemId, setImagemID] = useState('');
     const [file, setImagem] = useState<File | null>(null)
     const selecionarArquivo = (evento: React.ChangeEvent<HTMLInputElement>) => {
@@ -115,51 +116,48 @@ function AtualizaCliente() {
 
 
     function buscaCep() {
-        let url = "https://brasilapi.com.br/api/cep/v1/" + cep;
-        let req = new XMLHttpRequest();
-        req.open("GET", url);
-        req.send();
-        req.onload = function () {
-            if (req.status === 200) {
-                let endereco = JSON.parse(req.response);
-                setRua('')
-                setBairro('')
-                setEstado('')
-                setCidade('')
-                setRua(endereco.street);
-                setBairro(endereco.neighborhood);
-                setEstado(endereco.state);
-                setCidade(endereco.city)
-            }
-            else if (req.status === 404) {
-                alert("cep invalido");
-            }
-            else {
-                alert("erro ao fazer a requisicao")
-            }
-        }
+        ApiCep.request({
+            method: 'GET',
+            url: cep,
+            headers: {
+                'Access-Control-Allow-Origin': '*'
+            },
+        }).then(evento => {
+            setRua('')
+            setBairro('')
+            setEstado('')
+            setCidade('')
+            setRua(evento.data.street);
+            setBairro(evento.data.neighborhood);
+            setEstado(evento.data.state);
+            setCidade(evento.data.city)
+        }).catch(err=>{
+            alert("cep invalido");
+            console.log(err)
+        })
 
     }
     function buscaCepCarregarPage() {
-        let url = "https://brasilapi.com.br/api/cep/v1/" + cep;
-        let req = new XMLHttpRequest();
-        req.open("GET", url);
-        req.send();
-        req.onload = function () {
-            if (req.status === 200) {
-                let endereco = JSON.parse(req.response);
-                setRua(endereco.street);
-                setBairro(endereco.neighborhood);
-                setEstado(endereco.state);
-                setCidade(endereco.city)
-            }
-        }
+        console.log(cep)
+        ApiCep.request({
+            method: 'GET',
+            url: cep,
+            headers: {
+                'Access-Control-Allow-Origin': '*'
+            },
+        }).then(evento => {
+            setRua(evento.data.street);
+            setBairro(evento.data.neighborhood);
+            setEstado(evento.data.state);
+            setCidade(evento.data.city)
+        })
     }
-    setTimeout(buscaCepCarregarPage, 0)
+    setTimeout(buscaCepCarregarPage, 222)
 
 
     function aoSubmeterForm(evento: React.FormEvent<HTMLFormElement>) {
         evento.preventDefault();
+        setSpinner(true);
         const formData1 = new FormData()
         if (file) {
             formData1.append('file', file)
@@ -176,7 +174,8 @@ function AtualizaCliente() {
                     cep: cep,
                     endereco: `${rua},${numero} -${complemento}- ${estado}, ${cidade}, ${bairro}`,
                 }).then(() => {
-                    alert("cliente atualizado com suceeso");
+                    setSpinner(false)
+                    // alert("cliente atualizado com suceeso");
                     window.location.href = "/sig/consulta-de-clientes";
                 }).catch(erro => console.log(erro))
             } else {
@@ -218,7 +217,8 @@ function AtualizaCliente() {
                                                 }
                                             })
                                                 .then(() => {
-                                                    alert("cliente atualizado com suceso");
+                                                    setSpinner(false)
+                                                    // alert("cliente atualizado com suceso");
                                                     window.location.href = "/sig/consulta-de-clientes";
                                                 }).catch(erro => console.log(erro))
                                         ).catch(erro => console.log(erro))
@@ -268,7 +268,8 @@ function AtualizaCliente() {
                                                     }
                                                 })
                                                     .then(() => {
-                                                        alert("cliente atualizado com suceso");
+                                                        setSpinner(false)
+                                                        // alert("cliente atualizado com suceso");
                                                         window.location.href = "/sig/consulta-de-clientes";
                                                     }).catch(erro => console.log(erro))
                                             ).catch(erro => console.log(erro))
@@ -450,6 +451,7 @@ function AtualizaCliente() {
                                 name="file"
                                 accept="image/jpeg, image/pjpeg, image/png, image/gif"
                             />
+                            {spinner && (<p>carregando...</p>)}
                         </Row1grid>
 
                         <BttCadClienteGrid id="btt-cad-cliente-grid" className="btt-cad-cliente-grid">
