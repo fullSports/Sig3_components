@@ -4,6 +4,7 @@ import Cabecalho from '../../../Components/Cabecalho';
 import Footer from '../../../Components/Footer';
 import { Button, TextField, FormControl, Select, InputLabel, MenuItem, Box } from "@mui/material";
 import apiFullSports from '../../../api/apiFullSports';
+import ApiCep from "../../../api/apiCep";
 const Main = styled.main`
     width: 100%;
     min-height: 600px;
@@ -124,8 +125,8 @@ const CadastroCliente = () => {
                         })
                             .then(() => {
                                 setSpinner(false)
-                                alert("cliente cadastrado com suceso");
-                                window.location.href="/sig/consulta-de-clientes";
+                                // alert("cliente cadastrado com suceso");
+                                window.location.href = "/sig/consulta-de-clientes";
                             }).catch(erro => console.log(erro))
                     ).catch(erro => console.log(erro))
             ).catch(erro => console.log(erro))
@@ -134,26 +135,22 @@ const CadastroCliente = () => {
 
 
     function buscaCep() {
-        console.log(cpf + cep)
-        let url = "https://brasilapi.com.br/api/cep/v1/" + cep;
-        let req = new XMLHttpRequest();
-        req.open("GET", url);
-        req.send();
-        req.onload = function () {
-            if (req.status === 200) {
-                let endereco = JSON.parse(req.response);
-                setRua(endereco.street);
-                setBairro(endereco.neighborhood);
-                setEstado(endereco.state);
-                setCidade(endereco.city)
-            }
-            else if (req.status === 404) {
-                alert("cep invalido");
-            }
-            else {
-                alert("erro ao fazer a requisicao")
-            }
-        }
+        console.log(cep)
+        ApiCep.request({
+            method: 'GET',
+            url: cep,
+            headers: {
+                'Access-Control-Allow-Origin': '*'
+            },
+        }).then(evento => {
+            setRua(evento.data.street);
+            setBairro(evento.data.neighborhood);
+            setEstado(evento.data.state);
+            setCidade(evento.data.city)
+        }).catch(err=>{
+            alert("cep invalido");
+            console.log(err)
+        })
     }
     return (
         <>
@@ -309,14 +306,14 @@ const CadastroCliente = () => {
                                 required
                             />
                             <label className="col-form-label">Imagem de Perfil</label>
-                            <input 
-                            onChange={selecionarArquivo} 
-                            className="txt-form" 
-                            id="imagemPerfil"
-                            type="file"
-                            name="file"
-                            accept="image/jpeg, image/pjpeg, image/png, image/gif"
-                            />  
+                            <input
+                                onChange={selecionarArquivo}
+                                className="txt-form"
+                                id="imagemPerfil"
+                                type="file"
+                                name="file"
+                                accept="image/jpeg, image/pjpeg, image/png, image/gif"
+                            />
                             {spinner && (<p>carregando...</p>)}
                         </Row1grid>
 
@@ -330,7 +327,7 @@ const CadastroCliente = () => {
                                 Cadastrar Cliente
                             </Button>
                             <Button
-                                onClick={evento =>  window.location.href='/sig/consulta-de-clientes'}
+                                onClick={evento => window.location.href = '/sig/consulta-de-clientes'}
                                 sx={{
                                     justifyContent: 'center', display: 'block', height: '50px', borderRadius: '5px', color: '#fff',
                                     fontSize: '14px', backgroundColor: 'black', ":hover": 'backgroundColor: #313131, transform:translate(0.8s)'

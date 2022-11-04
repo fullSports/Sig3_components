@@ -156,6 +156,7 @@ const CadastrarProduto = () => {
                 }).then(()=>{
                     alert("produto cadastrado com sucesso");
                     setSpinner(false)
+                    
                 })
             },2000)
 
@@ -187,7 +188,7 @@ const CadastrarProduto = () => {
                                 className="txt-form"
                                 id='Auto-complete'
                                 sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%', textAlign: 'center' }}
-                                renderInput={(params) => <TextField {...params} label="Nome/Cnpj" />}
+                                renderInput={(params) => <TextField {...params}  id='Auto-complete' label="Nome/Cnpj" />}
                             />
 
                             <label className="col-form-label">Nome do Produto</label>

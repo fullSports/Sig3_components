@@ -135,7 +135,8 @@ const AtualizarFornecedor = () => {
                 endereco: `${rua},${numero} -${complemento}- ${estado}, ${cidade}, ${bairro}`
             })
                 .then(() => {
-                    alert("Fornecedor atualizado com sucesso");
+                    setSpinner(false);
+                    // alert("Fornecedor atualizado com sucesso");
                     window.location.href='/sig/consulta-de-fornecedores'
                 }).catch(err => console.log(err));
         } else {
@@ -148,7 +149,7 @@ const AtualizarFornecedor = () => {
             })
                 .then(() => {
                     setSpinner(false);
-                    alert("Fornecedornovo cadastrado com sucesso");
+                    // alert("Fornecedornovo cadastrado com sucesso");
                     window.open('/sig/consulta-de-fornecedores');
                 }).catch(err => console.log(err));
         }
