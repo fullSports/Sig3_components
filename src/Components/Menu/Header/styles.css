@@ -1,5 +1,65 @@
 
 .header-container{
     @apply
-    w-[100%] bg-pink-300 h-[100px]
+    mb-6 w-[100%]
+    bg-def_white 
+}
+
+.help-icons{
+    @apply
+    flex mt-8
+}
+
+.help-icons li a{
+    @apply
+    flex px-3 font-light font-Lato
+    hover:opacity-80 transition-all
+    text-def_black/80 hover:text-def_black
+}
+
+.help-icons li img{
+    @apply
+    w-[23px] h-[23px] mx-2
+}
+
+.header-items-group{
+    @apply
+    flex py-6
+    justify-evenly
+}
+
+.header-logo img{
+    @apply
+    w-40
+}
+
+.search-input{
+    @apply
+    transition-all mt-6
+    w-[460px] h-[40px] p-3 text-txt_size_nr
+    border-[1px] border-def_black/20 rounded-lg
+    focus:border-def_black/20 focus:outline-none focus:shadow-sm
+}
+
+.nav-items-group{
+    @apply
+    py-3
+}
+
+.nav-items{
+    @apply
+    justify-center text-center
+}
+
+.nav-item{
+    @apply
+    inline-block text-txt_size_md my-4
+    font-Lato
+}
+
+.nav-item-btn{
+    @apply
+    px-6 py-4 cursor-pointer transition-all
+    font-light
+    text-def_black hover:text-def_black/70 
 }

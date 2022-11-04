@@ -4,7 +4,28 @@ module.exports = {
     './src/**/*.{tsx, css}'
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontSize: {
+        txt_size_xl: '1.375rem',
+        txt_size_lg: '1.25rem',
+        txt_size_md: '1.125rem',
+        txt_size_nr: '1rem',
+        txt_size_sm: '0.875re',
+        txt_size_xsm: '0.75rem'
+      },
+      fontFamily: {
+        Lato: 'Lato, Verdana, Sans-serif'
+      },
+      colors: {
+        def_white: '#ffffff',
+        def_black: '#090809',
+        def_bllue: '#0081A7',
+        def_soft_yellow: '#FDFCDC',
+        def_yellow: '#27FB6B',
+        def_green: '#16C172',
+        def_orange: '#EA580C'
+      }
+    },
   },
   plugins: [],
 }
