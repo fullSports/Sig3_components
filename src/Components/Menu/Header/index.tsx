@@ -14,10 +14,10 @@ const contaIcon = require('../../../assets/icons/conta-icon.png');
 //   document.querySelector('.form-cadastro-produto')?.classList.toggle('forms-none');
 // }
 const Cabecalho = () => {
-  
+
   return (
     <>
-    <Sidebar/>
+    <Sidebar></Sidebar>
     <div className="header-container">
       <div className="header-acess header-resp">
         <div className="acess-props">
@@ -41,6 +41,7 @@ const Cabecalho = () => {
         <div className="header-items-group">
           <div className="header-search-bar">
             <div className="search-bar">
+              <button>Menu</button>
               <input type="text" className='search-input' placeholder='O que você busca?'/>
             </div>
           </div>
@@ -85,6 +86,7 @@ const Cabecalho = () => {
         </div>
       </div>
     </div>
+    
     </>
   );
 }

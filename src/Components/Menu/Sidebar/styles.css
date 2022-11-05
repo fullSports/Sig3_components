@@ -1,4 +1,9 @@
 .sidebar-container{
     @apply
-    hidden xl:block sm:hidden
+    z-10
+    h-[100%] w-[300px]
+    bg-def_white shadow-lg
+    transition-all
+    opacity-100 md:opacity-100 xl:opacity-0 lg:opacity-0
+    fixed
 }
