@@ -1,0 +1,4 @@
+.sidebar-container{
+    @apply
+    hidden xl:block sm:hidden
+}
