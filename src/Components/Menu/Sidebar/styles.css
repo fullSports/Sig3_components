@@ -1,9 +1,70 @@
 .sidebar-container{
     @apply
-    z-10
+    z-10 font-Lato
     h-[100%] w-[300px]
     bg-def_white shadow-lg
-    transition-all
+    transition-all 
     opacity-100 md:opacity-100 xl:opacity-0 lg:opacity-0
     fixed
+}
+
+.sidebar-body{
+    @apply
+    px-3 pt-6
+}
+
+.sidebar-header{
+    @apply
+    flex
+}
+
+.sidebar-header img{
+    @apply
+    w-[132px] mx-2 my-8
+}
+
+.toggleSidebar{
+    @apply
+    mx-6
+}
+
+.sidebar-navegacao{
+    @apply
+    px-2 mt-3
+}
+
+.sidebar-categorias{
+    @apply
+    px-3 mt-6
+}
+
+.sidebar-sec-title{
+    @apply
+    px-2
+    text-def_green text-txt_size_nr font-semibold
+}
+
+.sidebar-navegacao ul{
+    @apply
+    pt-2 
+}
+
+.sidebar-navegacao ul li{
+    @apply
+    py-2 px-2
+    mt-2
+    transition-all
+    cursor-pointer
+    hover:rounded-sm hover:bg-def_grey/20
+}
+
+.sidebar-navegacao ul li a{
+    @apply
+    text-def_black/80 text-txt_size_nr font-normal
+}
+
+.sidenav-items li{
+    @apply
+    block m-0
+    text-def_black/80 text-txt_size_nr font-normal
 }

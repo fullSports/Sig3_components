@@ -19,11 +19,12 @@ module.exports = {
       colors: {
         def_white: '#ffffff',
         def_black: '#090809',
-        def_bllue: '#0081A7',
+        def_blue: '#0081A7',
         def_soft_yellow: '#FDFCDC',
         def_yellow: '#27FB6B',
         def_green: '#16C172',
-        def_orange: '#EA580C'
+        def_orange: '#EA580C',
+        def_grey: '#F5F5F5'
       }
     },
   },
