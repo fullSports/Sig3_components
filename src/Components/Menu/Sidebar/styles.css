@@ -1,31 +1,15 @@
 .sidebar-container{
     @apply
     z-10 font-Lato
-    h-[100%] w-[300px]
+    h-[100%] w-[320px] top-[160px]
     bg-def_white shadow-lg
     transition-all 
-    opacity-100 md:opacity-100 xl:opacity-0 lg:opacity-0
     fixed
 }
 
 .sidebar-body{
     @apply
     px-3 pt-6
-}
-
-.sidebar-header{
-    @apply
-    flex
-}
-
-.sidebar-header img{
-    @apply
-    w-[132px] mx-2 my-8
-}
-
-.toggleSidebar{
-    @apply
-    mx-6
 }
 
 .sidebar-navegacao{

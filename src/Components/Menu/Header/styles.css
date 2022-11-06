@@ -4,6 +4,52 @@
     transition-all
 }
 
+.hideShow{
+    @apply
+    invisible opacity-0 transition-transform ease-in-out
+}
+
+.sidebar-header{
+    @apply
+    z-10
+    flex fixed
+    bg-def_white shadow-lg
+    transition-all ease-linear 
+    h-[160px] w-[320px]
+    lg:hidden xl:hidden
+}
+
+.sidebar-logo img{
+    @apply
+    w-[132px] mx-8 my-8
+}
+
+.toggle-menu{
+    @apply
+    opacity-100 sm:opacity-100 lg:opacity-0 xl:opacity-0
+}
+
+.toggleSidebar{
+    @apply
+    ml-6 block h-auto w-auto
+}
+
+.header-toggle{
+    @apply
+    py-8
+}
+
+.header-resp-logo{
+    @apply
+    block lg:hidden xl:hidden
+    w-[100%] h-auto pt-2
+}
+
+.header-resp-logo img{
+    @apply
+    w-40  text-center mr-auto ml-auto
+}
+
 .header-resp{
     @apply
     hidden sm:hidden md:hidden lg:block xl:block
@@ -58,7 +104,7 @@
 
 .header-items-group{
     @apply
-    flex py-6
+    flex xl:py-6 lg:py-6
     justify-evenly
 }
 
@@ -67,14 +113,25 @@
     w-40
 }
 
+.search-bar{
+    @apply
+    relative inline-block
+}
+
 .search-input{
     @apply
-    
-    transition-all mt-6
-    md:w-[420px] lg:w-[420px]
-    w-[360px] h-[45px] p-3 text-txt_size_nr
-    border-[1px] border-def_black/20 rounded-lg
-    focus:border-def_black/20 focus:outline-none focus:shadow-sm
+    bg-def_grey/60
+    outline-none rounded-lg
+    mt-6 lg:mt-8 xl:mt-8 
+    w-[330px] h-[45px] p-3 text-txt_size_nr
+    focus:outline-none focus:shadow-sm
+    sm:w-[460px] md:w-[550px] lg:w-[420px]
+}
+
+.input-search-btn{
+    @apply
+    top-6 lg:top-8 xl:top-8 right-0  h-[45px]
+    outline-none px-4 absolute 
 }
 
 .nav-items-group{
@@ -98,4 +155,35 @@
     px-6 py-4 cursor-pointer transition-all
     font-light
     text-def_black hover:text-def_black/70 
+}
+
+.toggle-acess{
+    @apply
+    block lg:hidden xl:hidden
+    fixed right-0 top-[360px] mr-2
+}
+
+.toggle-main{
+    @apply
+    shadow-xl
+    cursor-pointer
+    bg-def_orange rounded-full
+}
+
+.toggle-btn{
+    @apply
+    p-[0.5rem]
+    h-[48px] w-[48px]
+}
+
+.toggle-opts{
+    @apply
+    hover:bg-def_orange/90 shadow-lg
+    bg-def_orange/60 rounded-full mt-2
+}
+
+.toggle-opt-btn{
+    @apply
+    mx-[0.75rem]
+    h-[48px] w-[12px]
 }

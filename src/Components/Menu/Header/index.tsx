@@ -3,21 +3,66 @@ import '../../../styles.css';
 import {arrayNavItems} from '../../../utils/NavItems';
 import Sidebar from '../Sidebar/index'
 
+import {RiMenuFill} from 'react-icons/ri';
+import {BiSearch} from 'react-icons/bi';
+import {TbArrowBigDown, TbArrowBigTop} from 'react-icons/tb';
+import {ImAccessibility, ImContrast} from 'react-icons/im';
 const brandLogo = require('../../../assets/images/fullSportLogo.png');
 const carrinhoIcon = require('../../../assets/icons/carrinho-icon.png');
 const suporteIcon = require('../../../assets/icons/help-icon.png');
 const contaIcon = require('../../../assets/icons/conta-icon.png');
 
-// const Botao = () => {
-//   document.querySelector('.menu-lateral')?.classList.toggle('menu-lateral--ativo');
-//   document.querySelector('.form-cadastro-cliente')?.classList.toggle('forms-none');
-//   document.querySelector('.form-cadastro-produto')?.classList.toggle('forms-none');
-// }
 const Cabecalho = () => {
+
+  function openTeste(){
+    let sidebar = document.querySelector('.sidebar-header');
+    var isSideOpen = sidebar?.classList.contains('hideShow')
+    isSideOpen ? sidebar?.classList.remove("hideShow") : sidebar?.classList.toggle("hideShow")
+  }
+
+  function showToggleOpts(){
+    let toggleAcess = document.querySelector('.toggle-group');
+    var isDisplayed = toggleAcess?.classList.contains('hideShow')
+    isDisplayed ? toggleAcess?.classList.remove("hideShow") : toggleAcess?.classList.toggle("hideShow")
+  }
 
   return (
     <>
-    <Sidebar></Sidebar>
+    <div className="sidebar-header hideShow">
+      <button className="toggleSidebar" onClick={openTeste}>
+        <RiMenuFill size={30} color={'#09080990'}/>
+      </button>
+      <div className="sidebar-logo">
+          <img src={brandLogo} alt="" />
+      </div>
+      <Sidebar/>
+    </div>
+
+    <div className="toggle-acess">
+      <div className="toggle-main">
+        <button onClick={showToggleOpts} className='toggle-btn'>
+          <ImAccessibility size={30} color={'#fff'}/>
+        </button>
+      </div>
+      <div className="toggle-group hideShow">
+        <div className="toggle-opts">
+          <button className='toggle-opt-btn'>
+            <TbArrowBigTop size={24} color={'#fff'}/>
+          </button>
+        </div>
+        <div className="toggle-opts">
+          <button className='toggle-opt-btn'>
+            <TbArrowBigDown size={24} color={'#fff'}/>
+          </button>
+        </div>
+        <div className="toggle-opts">
+          <button className='toggle-opt-btn'>
+            <ImContrast size={24} color={'#fff'}/>
+          </button>
+        </div>
+      </div>
+  </div>
+
     <div className="header-container">
       <div className="header-acess header-resp">
         <div className="acess-props">
@@ -29,7 +74,7 @@ const Cabecalho = () => {
               <span>Diminuir Fonte</span>
             </li>
             <li>
-              <span>Alto Contraste</span>
+              <span className="cursor-pointer">Alto Contraste</span>
             </li>
             <li>
               <span>Modo Escuro</span>
@@ -37,12 +82,20 @@ const Cabecalho = () => {
           </ul>
         </div>
       </div>
+      <div className="header-resp-logo">
+        <img src={brandLogo} alt=""/>
+      </div>
       <div className="header-items-container">
         <div className="header-items-group">
+          <div className="toggle-menu">
+            <button className="header-toggle" onClick={openTeste}>
+              <RiMenuFill size={30} color={'#09080990'}/>
+            </button>
+          </div>
           <div className="header-search-bar">
             <div className="search-bar">
-              <button>Menu</button>
               <input type="text" className='search-input' placeholder='O que você busca?'/>
+              <button className="input-search-btn"><BiSearch size={20} color={'#09080990'}/></button>
             </div>
           </div>
           <div className="header-logo header-resp">

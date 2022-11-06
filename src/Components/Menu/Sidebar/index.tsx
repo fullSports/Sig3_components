@@ -2,23 +2,12 @@ import React from "react";
 import '../../../styles.css';
 import './styles.css';
 import {arrayNavItems} from '../../../utils/NavItems';
-import {RiMenuFill} from 'react-icons/ri';
 const brandLogo = require('../../../assets/images/fullSportLogo.png');
 
 const Sidebar = () => {
 
-    function closeSidenav(){
-        document.querySelector('.sidebar-container')?.classList.toggle('hidden');
-      }
-
     return (
         <div className="sidebar-container">
-            <div className="sidebar-header">
-                <button onClick={closeSidenav}><RiMenuFill className="toggleSidebar" size={30}/></button>
-                <div className="header-logo">
-                    <img src={brandLogo} alt="" />
-                </div>
-            </div>
             <div className="sidebar-body">
                 <div className="sidebar-navegacao">
                     <span className="sidebar-sec-title">Navegação</span>
@@ -35,7 +24,7 @@ const Sidebar = () => {
                     </ul>
                 </div>
                 <div className="sidebar-navegacao">
-                <span className="sidebar-sec-title">Navegação</span>
+                <span className="sidebar-sec-title">Categorias</span>
                 <ul className="sidenav-items">
                 { arrayNavItems.map((el: any) => {
                     return(
