@@ -11,6 +11,10 @@
         @apply
         mx-12
     }
+    .sec-container{
+        @apply
+        mt-36
+    }
     .section-title{
         @apply
         font-Merriweather font-bold

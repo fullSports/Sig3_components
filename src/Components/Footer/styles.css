@@ -1,0 +1,89 @@
+.footer-container{
+    @apply
+    mt-12
+}
+
+.footer-body{
+    @apply
+    flex justify-around
+}
+
+.footer-left-group{
+    @apply
+    justify-start flex gap-16
+}
+
+.footer-news-sub{
+    @apply
+    justify-around
+    flex rounded-full
+    mr-auto ml-auto
+    bg-def_green
+    w-[1185px] h-[95px]
+    py-3 my-12
+}
+
+.news-sub-desc{
+    @apply
+    mt-2.5
+}
+
+.news-sub-desc span{
+    @apply
+    block font-Lato
+}
+
+.news-sub-title{
+    @apply
+    text-txt_size_md font-semibold
+    text-def_white
+}
+
+.news-sub-subt{
+    @apply
+    text-txt_size_nr
+    text-def_white
+}
+
+.footer-item-title{
+    @apply
+    text-txt_size_nr font-semibold
+}
+
+.input-container{
+    @apply
+    relative inline-block
+}
+
+.input-container input{
+    @apply
+    px-3 my-4
+    w-[500px] h-[35px]
+    outline-none bg-def_grey/60 rounded-full
+    focus:bg-def_white focus:text-def_black/80 focus:shadow
+}
+
+/* .input-container input:focus > button{
+    @apply
+    visible opacity-100
+} */
+
+.input-container button{
+    @apply
+    absolute
+    px-2 top-4 right-0 w-[35px]
+    bg-transparent hover:bg-zinc-200
+    h-[35px] rounded-r-full
+}
+
+.footer-items a{
+    @apply
+    block py-1
+}
+
+.items-group{
+    @apply
+    pt-2
+    text-left text-txt_size_sm
+    font-Lato text-def_black/80
+}

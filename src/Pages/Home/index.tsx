@@ -20,23 +20,27 @@ const Home = () => {
         <>
         <Cabecalho />
             <div className='body-container'>
-                <h6 className="section-title">Ofertas da Semana</h6>
-                <div className="ofertas-container">
-                    <div className="cards-container overflow-x-auto">
-                        <VerticalCardProduct/>
+                <div className="sec-containe">
+                    <h6 className="section-title">Ofertas da Semana</h6>
+                    <div className="ofertas-container">
+                        <div className="cards-container overflow-x-auto">
+                            <VerticalCardProduct/>
+                        </div>
+                    </div>
+                    <div className="carousel-controls">
+                        <button >Left</button>
+                        <button >Right</button>
                     </div>
                 </div>
-                <div className="carousel-controls">
-                    <button >Left</button>
-                    <button >Right</button>
-                </div>
 
-                <h6 className="section-title">Placeholder Title</h6>
-                <div className="cards-container overflow-x-auto">
-                    <HorizontalCardProduct/>
+                <div className="sec-container">
+                    <h6 className="section-title">Placeholder Title</h6>
+                    <div className="cards-container overflow-x-auto">
+                        <HorizontalCardProduct/>
+                    </div>
                 </div>
             </div>
-        {/* <Footer /> */}
+        <Footer />
         </>
     );
 }
