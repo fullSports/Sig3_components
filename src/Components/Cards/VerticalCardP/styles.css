@@ -1,0 +1,44 @@
+
+.Vcard-product{
+    @apply
+    my-12
+    bg-def_white
+    h-[425ox] w-[260px]
+    shadow rounded-lg
+}
+
+.card-cover{
+    @apply
+    h-[320px] w-[260px] overflow-hidden
+}
+
+.Vcard-link:hover img {
+    @apply
+    transform scale-105 cursor-pointer
+}
+
+.card-cover img{
+    @apply
+    object-cover w-full h-full rounded-t-lg
+}
+.Vcard-body{
+    @apply
+    py-6 px-4 font-Lato
+}
+
+.Vprice-spec{
+    @apply
+    align-middle my-1.5
+    text-txt_size_sm text-def_black/80
+}
+
+.Vcard-body span {
+    @apply
+    block
+    py-1
+}
+
+.card-product-price-container{
+    @apply
+    flex
+}

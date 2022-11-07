@@ -1,0 +1,47 @@
+.Hcard-product{
+    @apply
+    w-[360px] h-[205px]
+    bg-def_white 
+    shadow rounded-lg
+    flex
+}
+.Hcard-link{
+    @apply flex
+}
+
+.Hcard-link:hover img{
+    @apply
+    scale-105 duration-200 transform
+}
+
+.Hcard-cover{
+    @apply
+    w-[160px] h-[205px]
+    overflow-hidden
+}
+
+.Hcard-cover img{
+    @apply
+    w-full h-full
+    object-cover 
+}
+
+.Hcard-body{
+    @apply
+    font-Lato
+}
+
+.Hcard-product-spec{
+    @apply
+    mt-[30px] pl-5
+}
+
+.Hcard-product-spec span{
+    @apply
+    block py-1 px-2
+}
+
+.card-product-parce{
+    @apply
+    text-txt_size_xsm
+}

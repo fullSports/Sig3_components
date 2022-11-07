@@ -18,9 +18,32 @@
         text-txt_size_xl text-center
 
     }
-    
     .overflow-x-auto::-webkit-scrollbar{
         @apply
         hidden
+    }
+    /* estilo padrao p/ cards produtos */
+    .card-product-name{
+        @apply
+        font-semibold
+        text-def_black/80
+    }
+    .card-old-price{
+        @apply
+        line-through
+        text-txt_size_sm text-def_black/60
+    }
+    .card-product-price{
+        @apply
+        mx-1.5
+        text-def_dark_green text-txt_size_lg
+        font-semibold
+    }
+    .card-product-parce{
+        @apply
+        text-def_black/80
+        bg-zinc-100/60
+        w-fit py-2 px-3
+        rounded-full
     }
 }
