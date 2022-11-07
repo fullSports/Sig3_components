@@ -15,7 +15,7 @@
     flex fixed
     bg-def_white shadow-lg
     transition-all ease-linear 
-    h-[160px] w-[320px]
+    h-[170px] w-[320px]
     lg:hidden xl:hidden
 }
 
@@ -26,7 +26,8 @@
 
 .toggle-menu{
     @apply
-    opacity-100 sm:opacity-100 lg:opacity-0 xl:opacity-0
+    xl:hidden lg:hidden
+    opacity-100 sm:opacity-100
 }
 
 .toggleSidebar{
@@ -36,7 +37,7 @@
 
 .header-toggle{
     @apply
-    py-8
+    xl:hidden lg:hidden py-8
 }
 
 .header-resp-logo{
@@ -57,7 +58,7 @@
 
 .header-acess{
     @apply
-    bg-def_green
+    bg-def_green/60 hover:bg-def_green
     w-[100%] h-[35px]
 }
 
@@ -146,14 +147,16 @@
 
 .nav-item{
     @apply
+    mx-2
     inline-block text-txt_size_md my-4
     font-Lato
 }
 
 .nav-item-btn{
     @apply
-    px-6 py-4 cursor-pointer transition-all
-    font-light
+    px-6 py-3 cursor-pointer transition-all
+    font-light rounded-full
+    hover:bg-def_orange/20
     text-def_black hover:text-def_black/70 
 }
 

@@ -1,0 +1,85 @@
+
+.cards-container{
+    @apply
+    flex flex-row flex-nowrap
+    scroll-smooth
+    
+    gap-4
+}
+
+.carousel-controls{
+    @apply
+    justify-center
+    flex gap-8
+}
+
+.card-product{
+    @apply
+    my-12
+    bg-def_white
+    h-[425ox] w-[260px]
+    shadow rounded-lg
+}
+
+.card-cover{
+    @apply
+    h-[320px] w-[260px] overflow-hidden
+}
+
+.card-link:hover img {
+    @apply
+    transform scale-105 cursor-pointer
+}
+
+.card-cover img{
+    @apply
+    object-cover w-full h-full rounded-t-lg
+}
+.card-body{
+    @apply
+    py-6 px-4 font-Lato
+}
+
+.card-prd-title{
+    @apply
+    font-semibold
+    text-def_black/80
+}
+
+.old-price{
+    @apply
+    line-through
+    text-txt_size_sm text-def_black/60
+}
+
+.product-price{
+    @apply
+    mx-1.5
+    text-def_dark_green text-txt_size_lg
+    font-semibold
+}
+
+.price-spec{
+    @apply
+    align-middle my-1.5
+    text-txt_size_sm text-def_black/80
+}
+
+.product-parce{
+    @apply
+    text-def_black/80
+    bg-zinc-100/60
+    w-fit py-2 px-3
+    rounded-full ml-16
+}
+
+.card-body span {
+    @apply
+    block
+    py-1
+}
+
+.product-price-container{
+    @apply
+    flex
+}
