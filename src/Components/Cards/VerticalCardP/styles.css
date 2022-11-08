@@ -1,15 +1,41 @@
 
+@media (max-width: 768px){
+    .slick-slide{
+        width: 185px !important;
+        @apply
+        mx-2
+    }
+}
+@media (min-width: 769px){
+    .slick-slide{
+        width: 260px !important;
+        @apply
+        mx-2
+        
+    }
+}
+
 .Vcard-product{
     @apply
     my-12
     bg-def_white
-    h-[425ox] w-[260px]
     shadow rounded-lg
+
+    h-[325px] w-[185px]
+    sm:h-[325px] sm:w-[185px]
+    md:h-[465px] md:w-[260px]
+    lg:h-[465px] lg:w-[260px]
+
 }
 
 .card-cover{
     @apply
-    h-[320px] w-[260px] overflow-hidden
+    h-[150px] w-[185px]
+    sm:h-[150px] sm:w-[185px]
+    md:h-[320px] md:w-[260px]
+    lg:h-[320px] lg:w-[260px]
+
+    overflow-hidden
 }
 
 .Vcard-link:hover img {

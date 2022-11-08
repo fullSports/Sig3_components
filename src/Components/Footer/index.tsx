@@ -1,8 +1,10 @@
 import {BiSend} from 'react-icons/bi'
 import {arrayNavItems} from '../../utils/NavItems';
 import {DevNames} from '../../utils/devNames';
+import {AiFillTwitterCircle, AiOutlineInstagram, AiFillFacebook} from 'react-icons/ai';
 import '../../../src/styles.css';
 import './styles.css';
+const brandLogo = require('../../assets/images/fullSportLogo.png');
 
 const Footer = () =>{
     return(
@@ -46,13 +48,34 @@ const Footer = () =>{
                                         </a>
                                     </li>
                                 )
-                            })
-                            }
+                            })}
                         </ul>
                     </div>
                 </div>
-            </div>
 
+                <div className="footer-right-group">
+                    <div className="brand-container">
+                        <img src={brandLogo} alt="Full Sports" />
+                    </div>
+                    <div className="group-specs">
+                        <span>O melhor dos artigos esportivos para você.</span>
+                        <div className="group-socials">
+                            <a href="">
+                                <AiFillTwitterCircle />
+                            </a>
+                            <a href="">
+                                <AiOutlineInstagram />
+                            </a>
+                            <a href="">
+                                <AiFillFacebook />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="footer-bottom-line">
+                Full Sports &copy; Todos os direitos reservados.
+            </div>
         </div>
     );
 }

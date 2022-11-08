@@ -9,11 +9,12 @@
 
     .body-container{
         @apply
-        mx-12
+        mx-3
+        overflow-x-hidden
     }
     .sec-container{
         @apply
-        mt-36
+        mt-16
     }
     .section-title{
         @apply
@@ -30,7 +31,8 @@
     .card-product-name{
         @apply
         font-semibold
-        text-def_black/80
+        text-def_black/70
+        text-txt_size_md
     }
     .card-old-price{
         @apply

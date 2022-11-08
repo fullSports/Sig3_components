@@ -87,3 +87,50 @@
     text-left text-txt_size_sm
     font-Lato text-def_black/80
 }
+
+.footer-right-group{
+    @apply
+    w-[195px] h-fit
+    justify-center text-center
+}
+
+.brand-container{
+    @apply
+    text-center
+}
+
+.brand-container img{
+    @apply
+    w-[132px] mr-auto ml-auto
+}
+
+.group-specs {
+    @apply
+    py-2
+}
+
+.group-specs span{
+    @apply
+    text-def_black/60 font-Lato
+}
+
+.group-socials{
+    @apply
+    flex py-4 gap-2 justify-center
+}
+
+.group-socials a{
+    @apply
+    cursor-pointer text-def_black/80
+    hover:text-def_black hover:bg-def_black/10
+    text-2xl
+    bg-def_grey  rounded-full p-1
+}
+
+.footer-bottom-line{
+    @apply
+    mt-8
+    w-[100%] h-[45px]
+    bg-def_grey text-def_black/80
+    text-center pt-2
+}
