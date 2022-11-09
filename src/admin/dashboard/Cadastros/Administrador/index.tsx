@@ -59,7 +59,7 @@ const BttCadClienteGrid = styled.div`
     grid-gap: 2px;
 `;
 
-const cadastroAdministrador = () => {
+const CadastroAdministrador = () => {
 
     const [cpf, setCpf] = useState('');
     const [nome, setNome] = useState('');
@@ -75,6 +75,15 @@ const cadastroAdministrador = () => {
     const [numero, setNumero] = useState('');
     const [file, setImagem] = useState<File | null>(null)
     const [spinner, setSpinner] = useState(false);
+
+    const [email, setEmail] = useState(''); 
+    const [password, setPassword] = useState('');
+    const [isAdmin] = useState(true);
+
+    const [idImagem, setIdImagem] = useState('');
+    const [idLogin, setIdLogin] = useState('');
+
+    const [mensagemErro, setMensagemErro] = useState('');
 
     const selecionarArquivo = (evento: React.ChangeEvent<HTMLInputElement>) => {
         if (evento.target.files?.length) {
@@ -106,6 +115,66 @@ const cadastroAdministrador = () => {
     function aoSubmeterForm(event: React.FormEvent<HTMLFormElement>){
         setSpinner(true);
         event.preventDefault();
+        console.log(email, password)
+        apiFullSports.request({
+            method: "POST",
+            url: 'login/',
+            headers: {
+                'Access-Control-Allow-Origin': '*'
+            },
+            data: {
+                email: email,
+                password: password,
+                isAdmin: true
+            }
+        })
+            .then(response => {
+                apiFullSports.request({
+                    method: 'GET',
+                    url: `login/${response.data._id}`
+                })
+                .then(response => {
+                    setIdLogin(response.data._id)
+                })
+            })
+            .catch(err => {
+                console.log(err)
+            })
+
+        const formData = new FormData();  
+        // if (file) {
+        //     formData.append("file", file);
+        //     apiFullSports.request({
+        //         method: "POST", 
+        //         url: "imagem/",
+        //         headers: {
+        //             'Access-Control-Allow-Origin': '*',
+        //             'Content-Type': 'multipart/form-data'
+        //         },
+        //         data: formData
+        //     })
+        //     .then(response =>{
+        //         apiFullSports.request({
+        //             method: 'GET',
+        //             url: `imagem/${response.data._id}`,
+        //             headers: {
+        //                 'Access-Control-Allow-Origin': '*',
+        //                 'Content-Type': 'multipart/form-data'
+        //             },
+        //         })
+        //         .then(response =>{
+        //             setIdImagem(response.data._id);
+                    
+        //         })
+        //         .catch(err =>{
+        //             console.log(err)
+        //         })
+        //     })
+        //     .catch(err =>{
+        //         console.log(err)
+        //     })
+        // }
+        console.log(idLogin)
     }
 
     return (
@@ -113,7 +182,7 @@ const cadastroAdministrador = () => {
             <FormCadastroCliente id="form-cadastro-cliente" className="form-cadastro-cliente">
                     <Box component={'form'} onSubmit={aoSubmeterForm} encType="multipart/form-data">
                         <Row1grid id="row-1-grid" className="row-1-grid">
-                            <label className="col-form-label">CPF</label>
+                            {/* <label className="col-form-label">CPF</label>
                             <TextField
                                 sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
                                 onChange={evento => setCpf(evento.target.value)}
@@ -124,9 +193,35 @@ const cadastroAdministrador = () => {
                                 placeholder={'00.000.000-00'}
                                 fullWidth
                                 required
+                            /> */}
+
+                        <label className="col-form-label">E-mail</label>
+                            <TextField
+                                sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
+                                onChange={evento => setEmail(evento.target.value)}
+                                className="txt-form"
+                                label="email"
+                                id="email"
+                                type="email"
+                                placeholder={'Insira seu e-mail'}
+                                fullWidth
+                                required
                             />
 
-                            <label className="col-form-label">Nome</label>
+                            <label className="col-form-label">Senha</label>
+                                <TextField
+                                    sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
+                                    onChange={evento => setPassword(evento.target.value)}
+                                    className="txt-form"
+                                    label="password"
+                                    id="password"
+                                    type="password"
+                                    placeholder={'Insira sua senha'}
+                                    fullWidth
+                                    required
+                                />
+
+                            {/* <label className="col-form-label">Nome</label>
                             <TextField
                                 sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
                                 onChange={evento => setNome(evento.target.value)}
@@ -257,7 +352,7 @@ const cadastroAdministrador = () => {
                                 placeholder={'casa/apartamento'}
                                 fullWidth
                                 required
-                            />
+                            /> */}
                             <label className="col-form-label">Imagem de Perfil</label>
                             <input
                                 onChange={selecionarArquivo}
@@ -294,4 +389,4 @@ const cadastroAdministrador = () => {
     )
 }
 
-export default cadastroAdministrador;
+export default CadastroAdministrador;

@@ -4,6 +4,7 @@ import Home from './Pages/Home';
 import Acessibilidade from './Pages/Acessibilidade';
 import AtualizaCliente from './admin/dashboard/Atualizacoes/AtualizarCliente';
 import CadastroCliente from './admin/dashboard/Cadastros/Clientes/CadastroDeCliente';
+import CadastroAdministrador from './admin/dashboard/Cadastros/Administrador';
 import ConsultaCliente from './admin/dashboard/Cadastros/Clientes/ConsultarCliente';
 import Equipamentos from './Pages/Equipamentos';
 import PageErro404 from './Pages/Erro404';
@@ -44,6 +45,10 @@ const App: React.FC = ()=> {
       <Route path='/equipamentos' element={<Equipamentos/>}/>
 
       <Route path='/tenis' element={<Tenis/>}/>
+
+      {/* DASHBOARD */}
+      <Route path='/dashboard/cadastrar-admin' element={<CadastroAdministrador/>}/>
+      
       
       <Route path='*' element={<PageErro404/>}/>
     </Routes>
