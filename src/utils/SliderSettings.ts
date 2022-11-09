@@ -1,4 +1,4 @@
-export var settings = {
+export var sliderVerticalCards = {
     dots: true,
     className: "center",
     infinite: true,
@@ -58,3 +58,31 @@ export var settings = {
       }
     ]
   };
+
+export var sliderHorizontalCards = {
+  dots: true,
+  className: "center",
+  infinite: true,
+  speed: 800,
+  slidesToShow: 4,
+  slidesToScroll: 4,
+  initialSlide: 0,
+  responsive: [
+      {
+        breakpoint: 860,
+        settings: {
+            slidesToShow: 2,
+            slidesToScroll: 2,
+            initialSlide: 2
+        }
+      },
+      {
+        breakpoint: 426,
+        settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            initialSlide: 1
+        }
+      },
+  ]
+}

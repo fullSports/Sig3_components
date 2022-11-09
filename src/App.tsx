@@ -2,18 +2,18 @@ import React from 'react';
 import { BrowserRouter, Route , Routes } from 'react-router-dom';
 import Home from './Pages/Home';
 import Acessibilidade from './Pages/Acessibilidade';
-import AtualizaCliente from './Pages/Clientes/AtualizarCliente';
-import CadastroCliente from './Pages/Clientes/CadastroDeCliente/';
-import ConsultaCliente from './Pages/Clientes/ConsultarCliente';
+import AtualizaCliente from './admin/dashboard/Atualizacoes/AtualizarCliente';
+import CadastroCliente from './admin/dashboard/Cadastros/Clientes/CadastroDeCliente';
+import ConsultaCliente from './admin/dashboard/Cadastros/Clientes/ConsultarCliente';
 import Equipamentos from './Pages/Equipamentos';
 import PageErro404 from './Pages/Erro404';
-import AtualizaProduto from './Pages/Produto/AtualizarProduto';
-import CadastrarProduto from './Pages/Produto/CadastroDeProduto';
-import ConsultaProduto from './Pages/Produto/ConsultaDeProduto';
+import AtualizaProduto from './admin/dashboard/Atualizacoes/AtualizarProduto';
+import CadastrarProduto from './admin/dashboard/Cadastros/Produto/CadastroDeProduto';
+import ConsultaProduto from './admin/dashboard/Consultas/ConsultaDeProduto';
 import Tenis from './Pages/Tenis';
-import CadastrarFornecedor from './Pages/Fornecedor/CadastrarFornecedor';
-import ConsultaFornecedor from './Pages/Fornecedor/ConsultarFornecedor';
-import AtualizarFornecedor from './Pages/Fornecedor/AtualizarFornecedor';
+import CadastrarFornecedor from './admin/dashboard/Cadastros/Fornecedor/CadastrarFornecedor';
+import ConsultaFornecedor from './admin/dashboard/Consultas/ConsultarFornecedor';
+import AtualizarFornecedor from './admin/dashboard/Cadastros/Fornecedor/AtualizarFornecedor';
 const App: React.FC = ()=> {
   return (
     <BrowserRouter>

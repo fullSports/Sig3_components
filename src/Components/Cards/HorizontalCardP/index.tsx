@@ -14,7 +14,7 @@ const HorizontalCardProduct = () => {
                         <span className="card-product-name">Produto Name</span>
                         <span className="card-old-price">de R$90,90</span>
                         <span className="card-product-price">R$80,90</span>    
-                        <span className="card-product-parce ml-12 mt-2">em até 12x de valor</span>    
+                        <span className="card-product-parce">12x de valor</span>    
                     </div>
                 </div>
             </a>

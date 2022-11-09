@@ -10,7 +10,7 @@
     .body-container{
         @apply
         mx-3
-        overflow-x-hidden
+        overflow-hidden
     }
     .sec-container{
         @apply
@@ -37,12 +37,12 @@
     .card-old-price{
         @apply
         line-through
-        text-txt_size_sm text-def_black/60
+         text-def_black/60
     }
     .card-product-price{
         @apply
         mx-1.5
-        text-def_dark_green text-txt_size_lg
+        text-def_dark_green 
         font-semibold
     }
     .card-product-parce{

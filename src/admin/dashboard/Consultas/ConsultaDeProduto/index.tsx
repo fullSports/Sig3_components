@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from "react";
 import styled from "styled-components";
-import Footer from "../../../Components/Footer";
-import Cabecalho from "../../../Components/Menu/Header";
-import IProduto from "../../../utils/interfaces/IProduto";
-import apiFullSports from "../../../api/apiFullSports";
+import Footer from "../../../../Components/Footer";
+import Cabecalho from "../../../../Components/Menu/Header";
+import IProduto from "../../../../utils/interfaces/IProduto";
+import apiFullSports from "../../../../api/apiFullSports";
 import { Box, Button, Modal} from "@mui/material";
 const Main = styled.main`
     width: 100%;

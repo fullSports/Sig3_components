@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import Cabecalho from "../../../Components/Menu/Header";
-import Footer from "../../../Components/Footer";
+import Cabecalho from "../../../../Components/Menu/Header";
+import Footer from "../../../../Components/Footer";
 
 const Main = styled.main`
     width: 100%;

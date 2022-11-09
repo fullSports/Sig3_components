@@ -1,5 +1,9 @@
 
-.cards-container{
+.Hcard-container .slick-track {
+    display: flex !important;
+}
+
+/* .cards-container{
     @apply
     flex flex-row flex-nowrap
     scroll-smooth
@@ -11,4 +15,4 @@
     @apply
     justify-center
     flex gap-8
-}
+} */

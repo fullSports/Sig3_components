@@ -1,9 +1,9 @@
 import { TextField, Button, Box } from '@mui/material';
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import apiFullSports from '../../../api/apiFullSports';
-import Cabecalho from '../../../Components/Menu/Header';
-import Footer from '../../../Components/Footer';
+import apiFullSports from '../../../../../api/apiFullSports';
+import Cabecalho from '../../../../../Components/Menu/Header';
+import Footer from '../../../../../Components/Footer';
 
 
 const Main = styled.main`

@@ -1,6 +1,27 @@
+
+@media (max-width: 768px){
+    .slick-slide{
+        width: 255px !important;
+        @apply
+        mx-2
+    }
+}
+@media (min-width: 769px){
+    .slick-slide{
+        width: 360px !important;
+        @apply
+        mx-2
+        
+    }
+}
+
 .Hcard-product{
     @apply
-    w-[360px] h-[205px]
+    my-12
+    w-[255px] h-[155px]
+    sm:w-[255px] sm:h-[155px]
+    md:w-[360px] md:h-[205px]
+    lg:w-[360px] lg:h-[205px]
     bg-def_white 
     shadow rounded-lg
     flex
@@ -16,7 +37,11 @@
 
 .Hcard-cover{
     @apply
-    w-[160px] h-[205px]
+    w-[138px] h-[155px]
+    sm:w-[138px] sm:h-[155px]
+    md:w-[160px] md:h-[205px]
+    lg:w-[160px] lg:h-[205px]
+
     overflow-hidden
 }
 
@@ -33,7 +58,9 @@
 
 .Hcard-product-spec{
     @apply
-    mt-[30px] pl-5
+    mt-[12px] sm:mt-[12px] md:mt-[30px] lg:mt-[30px]
+    pl-2 sm:pl-2 md:pl-5 lg:pl-5
+    py-0 sm:py-0 md:py-4 lg:py-4
 }
 
 .Hcard-product-spec span{
@@ -44,4 +71,25 @@
 .card-product-parce{
     @apply
     text-txt_size_xsm
+}
+
+.card-product-name{
+    @apply
+    text-sm
+    sm:text-sm
+    md:text-txt_size_lg
+    lg:text-txt_size_lg
+}
+
+.card-old-price{
+    @apply
+    text-txt_size_xsm
+    sm:text-txt_size_xsm
+    md:text-txt_size_sm
+    lg:text-txt_size_sm
+}
+
+.card-product-parce{
+    @apply
+    ml-4 sm:ml-4 md:ml-20 lg:ml-20
 }

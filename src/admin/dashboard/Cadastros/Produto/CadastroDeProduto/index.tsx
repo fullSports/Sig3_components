@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import Cabecalho from '../../../Components/Menu/Header';
-import Footer from '../../../Components/Footer';
+import Cabecalho from '../../../../../Components/Menu/Header';
+import Footer from '../../../../../Components/Footer';
 import { Button, TextField, Autocomplete, Modal,Box } from "@mui/material";
-import IFornecedor from '../../../utils/interfaces/IFornecedor';
-import apiFullSports from '../../../api/apiFullSports';
+import IFornecedor from '../../../../../utils/interfaces/IFornecedor';
+import apiFullSports from '../../../../../api/apiFullSports';
 const Main = styled.main`
     width: 100%;
     min-height: 600px;

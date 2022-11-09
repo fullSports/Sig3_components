@@ -4,7 +4,7 @@ import React from 'react';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css"
 import Slider from "react-slick";
-import {settings} from '../../utils/SliderSettings'
+import { sliderVerticalCards, sliderHorizontalCards } from '../../utils/SliderSettings'
 
 import './styles.css';
 import './../../styles.css';
@@ -40,7 +40,7 @@ const Home = () => {
             <div className='body-container'>
                 <div className="sec-container">
                     <h6 className="section-title">Ofertas da Semana</h6>
-                    <Slider {...settings}>
+                    <Slider {...sliderVerticalCards}>
                         {
                             produtos.map(item => 
                             <VerticalCardProduct 
@@ -56,17 +56,20 @@ const Home = () => {
 
                 <div className="sec-container">
                     <h6 className="section-title">Placeholder Title</h6>
-                    <div className="cards-container overflow-x-auto">
-                        {/* <Slider {...settings}> */}
-                            {/* <HorizontalCardProduct/>
+                    {/* <div className="cards-container overflow-x-auto"> */}
+                    <div className="Hcard-container">
+                        <Slider {...sliderHorizontalCards}>
                             <HorizontalCardProduct/>
                             <HorizontalCardProduct/>
                             <HorizontalCardProduct/>
                             <HorizontalCardProduct/>
                             <HorizontalCardProduct/>
-                            <HorizontalCardProduct/> */}
-                        {/* </Slider> */}
+                            <HorizontalCardProduct/>
+                            <HorizontalCardProduct/>
+                            <HorizontalCardProduct/>
+                        </Slider>
                     </div>
+                    {/* </div> */}
                 </div>
             </div>
         {/* <Footer /> */}

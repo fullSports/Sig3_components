@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import apiFullSports from "../../../api/apiFullSports";
-import Cabecalho from "../../../Components/Menu/Header";
+import apiFullSports from "../../../../../api/apiFullSports";
+import Cabecalho from "../../../../../Components/Menu/Header";
 import { Button, TextField} from "@mui/material";
-import Footer from "../../../Components/Footer";
-import IFornecedor from "../../../utils/interfaces/IFornecedor";
+import Footer from "../../../../../Components/Footer";
+import IFornecedor from "../../../../../utils/interfaces/IFornecedor";
 import { Box } from "@mui/system";
 const Main = styled.main`
     width: 100%;
