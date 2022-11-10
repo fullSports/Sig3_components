@@ -83,8 +83,8 @@ const CadastroAdministrador = () => {
     const [idImagem, setIdImagem] = useState('');
     const [idLogin, setIdLogin] = useState('');
 
-    const [mensagemErro, setMensagemErro] = useState('');
-
+    const [mensagemErroBolean, setMensagemErroBolean] = useState(false);
+    const [ menssagemErro, setMenssagemErro] = useState('')
     const selecionarArquivo = (evento: React.ChangeEvent<HTMLInputElement>) => {
         if (evento.target.files?.length) {
             setImagem(evento.target.files[0])
@@ -127,62 +127,60 @@ const CadastroAdministrador = () => {
                 password: password,
                 isAdmin: true
             }
-        })
-            .then(response => {
-                apiFullSports.request({
-                    method: 'GET',
-                    url: `login/${response.data._id}`
-                })
-                .then(response => {
-                    setIdLogin(response.data._id)
-                })
-            })
-            .catch(err => {
-                console.log(err)
-            })
+        }).then(respostaLogin => {
+            if(respostaLogin.data.message){
+                setSpinner(false)
+                setMensagemErroBolean(true);
+                setMenssagemErro(respostaLogin.data.message);
+            }else{
+                console.log(respostaLogin.data._id)
+                setIdLogin(respostaLogin.data._id)
+                const formData = new FormData();  
+                if (file) {
+                    formData.append("file", file);
+                    apiFullSports.request({
+                        method: "POST", 
+                        url: "imagem/",
+                        headers: {
+                            'Access-Control-Allow-Origin': '*',
+                            'Content-Type': 'multipart/form-data'
+                        },
+                        data: formData
+                    })
+                    .then(respostaImagem =>{
+                      apiFullSports.request({
+                        method: "POST",
+                        url: "cadastrar-cliente/",
+                        headers: {
+                            'Access-Control-Allow-Origin': '*'
+                        },
+                        data: {
+                            cpf: cpf,
+                            nome: nome, 
+                            login: respostaLogin.data._id,
+                            dataNascimento: dataNascimento,
+                            sexo: sexo,
+                            cep: cep,
+                            endereco: `${rua},${numero} -${complemento}- ${estado}, ${cidade}, ${bairro}`,
+                            dataCadastro: dataAtual,
+                            imagemPerfil: respostaImagem.data._id
+                        }
+                      }).then(()=> setSpinner(false)).catch(err =>{console.log(err)})
+                    }).catch(err =>{console.log(err)})
+                }
+            }
+            }).catch(err=>{console.log(err)})
 
-        const formData = new FormData();  
-        // if (file) {
-        //     formData.append("file", file);
-        //     apiFullSports.request({
-        //         method: "POST", 
-        //         url: "imagem/",
-        //         headers: {
-        //             'Access-Control-Allow-Origin': '*',
-        //             'Content-Type': 'multipart/form-data'
-        //         },
-        //         data: formData
-        //     })
-        //     .then(response =>{
-        //         apiFullSports.request({
-        //             method: 'GET',
-        //             url: `imagem/${response.data._id}`,
-        //             headers: {
-        //                 'Access-Control-Allow-Origin': '*',
-        //                 'Content-Type': 'multipart/form-data'
-        //             },
-        //         })
-        //         .then(response =>{
-        //             setIdImagem(response.data._id);
-                    
-        //         })
-        //         .catch(err =>{
-        //             console.log(err)
-        //         })
-        //     })
-        //     .catch(err =>{
-        //         console.log(err)
-        //     })
-        // }
-        console.log(idLogin)
     }
 
     return (
         <>
+        <Main id="main">
+        <ExibeTitulo id="exibe-titulo" className="exibe-titulo">Cadastrar um Adimin</ExibeTitulo>
             <FormCadastroCliente id="form-cadastro-cliente" className="form-cadastro-cliente">
                     <Box component={'form'} onSubmit={aoSubmeterForm} encType="multipart/form-data">
                         <Row1grid id="row-1-grid" className="row-1-grid">
-                            {/* <label className="col-form-label">CPF</label>
+                            <label className="col-form-label">CPF</label>
                             <TextField
                                 sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
                                 onChange={evento => setCpf(evento.target.value)}
@@ -193,12 +191,13 @@ const CadastroAdministrador = () => {
                                 placeholder={'00.000.000-00'}
                                 fullWidth
                                 required
-                            /> */}
+                            />
 
                         <label className="col-form-label">E-mail</label>
                             <TextField
                                 sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
                                 onChange={evento => setEmail(evento.target.value)}
+                                onClick={()=> setMensagemErroBolean(false)}
                                 className="txt-form"
                                 label="email"
                                 id="email"
@@ -221,7 +220,7 @@ const CadastroAdministrador = () => {
                                     required
                                 />
 
-                            {/* <label className="col-form-label">Nome</label>
+                            <label className="col-form-label">Nome</label>
                             <TextField
                                 sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
                                 onChange={evento => setNome(evento.target.value)}
@@ -352,7 +351,7 @@ const CadastroAdministrador = () => {
                                 placeholder={'casa/apartamento'}
                                 fullWidth
                                 required
-                            /> */}
+                            />
                             <label className="col-form-label">Imagem de Perfil</label>
                             <input
                                 onChange={selecionarArquivo}
@@ -363,6 +362,7 @@ const CadastroAdministrador = () => {
                                 accept="image/jpeg, image/pjpeg, image/png, image/gif"
                             />
                             {spinner && (<p>carregando...</p>)}
+                            {mensagemErroBolean && (<span id="menssagem-erro">{menssagemErro}</span>)}
                         </Row1grid>
 
                         <BttCadClienteGrid id="btt-cad-cliente-grid" className="btt-cad-cliente-grid">
@@ -385,6 +385,7 @@ const CadastroAdministrador = () => {
                         </BttCadClienteGrid>
                     </Box>
             </FormCadastroCliente>
+            </Main>
         </>
     )
 }
