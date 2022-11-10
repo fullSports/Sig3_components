@@ -167,6 +167,24 @@ const CadastroAdministrador = () => {
                         }
                       }).then(()=> setSpinner(false)).catch(err =>{console.log(err)})
                     }).catch(err =>{console.log(err)})
+                }else{
+                    apiFullSports.request({
+                        method: "POST",
+                        url: "cadastrar-cliente/",
+                        headers: {
+                            'Access-Control-Allow-Origin': '*'
+                        },
+                        data: {
+                            cpf: cpf,
+                            nome: nome, 
+                            login: respostaLogin.data._id,
+                            dataNascimento: dataNascimento,
+                            sexo: sexo,
+                            cep: cep,
+                            endereco: `${rua},${numero} -${complemento}- ${estado}, ${cidade}, ${bairro}`,
+                            dataCadastro: dataAtual
+                        }
+                      }).then(()=> setSpinner(false)).catch(err =>{console.log(err)})
                 }
             }
             }).catch(err=>{console.log(err)})
@@ -375,12 +393,12 @@ const CadastroAdministrador = () => {
                                 Cadastrar Cliente
                             </Button>
                             <Button
-                                onClick={evento => window.location.href = '/sig/consulta-de-clientes'}
+                                onClick={evento => window.location.href = '/dashboard/consulta-admin'}
                                 sx={{
                                     justifyContent: 'center', display: 'block', height: '50px', borderRadius: '5px', color: '#fff',
                                     fontSize: '14px', backgroundColor: 'black', ":hover": 'backgroundColor: #313131, transform:translate(0.8s)'
                                 }} type="button" id="btn-cad-forms" className="btn-cad-forms">
-                                Consulta de Clientes
+                                Consulta de Adiministradores
                             </Button>
                         </BttCadClienteGrid>
                     </Box>
