@@ -2,20 +2,17 @@ import React from 'react';
 import { BrowserRouter, Route , Routes } from 'react-router-dom';
 import Home from './Pages/Home';
 import Acessibilidade from './Pages/Acessibilidade';
-import AtualizaCliente from './admin/dashboard/Atualizacoes/AtualizarCliente';
-import CadastroCliente from './admin/dashboard/Cadastros/Clientes/CadastroDeCliente';
 import CadastroAdministrador from './admin/dashboard/Cadastros/Administrador';
-import ConsultaCliente from './admin/dashboard/Cadastros/Clientes/ConsultarCliente';
+import ConsultaCliente from './admin/dashboard/Consultas/ConsultarCliente';
 import Equipamentos from './Pages/Equipamentos';
 import PageErro404 from './Pages/Erro404';
-import AtualizaProduto from './admin/dashboard/Atualizacoes/AtualizarProduto';
 import CadastrarProduto from './admin/dashboard/Cadastros/Produto/CadastroDeProduto';
-import ConsultaProduto from './admin/dashboard/Consultas/ConsultaDeProduto';
+import ConsultaProduto from './admin/dashboard/Consultas/Produtos';
 import Tenis from './Pages/Tenis';
 import CadastrarFornecedor from './admin/dashboard/Cadastros/Fornecedor/CadastrarFornecedor';
-import ConsultaFornecedor from './admin/dashboard/Consultas/ConsultarFornecedor';
+import ConsultaFornecedor from './admin/dashboard/Consultas/Fornecedores';
 import AtualizarFornecedor from './admin/dashboard/Cadastros/Fornecedor/AtualizarFornecedor';
-import ConsultaAdimistrador from './admin/dashboard/Consultas/Administrador';
+import ConsultaAdimistrador from './admin/dashboard/Consultas/Administradores';
 const App: React.FC = ()=> {
   return (
     <BrowserRouter>
@@ -23,7 +20,7 @@ const App: React.FC = ()=> {
       
       <Route  path='/' element={<Home/>} />
 
-      <Route path='/sig/cadastro-de-cliente' element={<CadastroCliente/>}/>
+      {/* <Route path='/sig/cadastro-de-cliente' element={<CadastroCliente/>}/> */}
 
       <Route path='/sig/cadastro-de-produto' element={<CadastrarProduto/>}/>
       
@@ -31,9 +28,9 @@ const App: React.FC = ()=> {
 
       <Route path='/sig/consulta-de-produtos' element={<ConsultaProduto/>}/>
 
-      <Route path='/sig/atualizar-cliente/:id' element={<AtualizaCliente/>}/>
+      {/* <Route path='/sig/atualizar-cliente/:id' element={<AtualizaCliente/>}/>
 
-      <Route path='/sig/atualizar-produto/id' element={<AtualizaProduto/>}/>
+      <Route path='/sig/atualizar-produto/id' element={<AtualizaProduto/>}/> */}
 
       <Route path='/sig/cadastro-de-fornecedor' element={<CadastrarFornecedor/>}/>
 
