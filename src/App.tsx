@@ -6,10 +6,7 @@ import CadastroAdministrador from './admin/dashboard/Administrador/CadastrarAdmi
 import Equipamentos from './Pages/Equipamentos';
 import PageErro404 from './Pages/Erro404';
 import Tenis from './Pages/Tenis';
-import CadastrarFornecedor from './admin/dashboard/Cadastros/Fornecedor/CadastrarFornecedor';
-import ConsultaFornecedor from './admin/dashboard/Consultas/ConsultarFornecedor';
-import AtualizarFornecedor from './admin/dashboard/Cadastros/Fornecedor/AtualizarFornecedor';
-import ConsultaAdimistrador from './admin/dashboard/Consultas/Administrador';
+import DashboardHome from './admin/dashboard';
 const App: React.FC = ()=> {
   return (
     <BrowserRouter>
