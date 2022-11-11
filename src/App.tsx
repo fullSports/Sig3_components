@@ -16,6 +16,7 @@ import CadastrarFornecedor from './admin/dashboard/Cadastros/Fornecedor/Cadastra
 import ConsultaFornecedor from './admin/dashboard/Consultas/ConsultarFornecedor';
 import AtualizarFornecedor from './admin/dashboard/Cadastros/Fornecedor/AtualizarFornecedor';
 import ConsultaAdimistrador from './admin/dashboard/Consultas/Administrador';
+import DashboardHome from './admin/dashboard';
 const App: React.FC = ()=> {
   return (
     <BrowserRouter>
@@ -48,8 +49,8 @@ const App: React.FC = ()=> {
       <Route path='/tenis' element={<Tenis/>}/>
 
       {/* DASHBOARD */}
+      <Route path='/dashboard/home' element={<DashboardHome/>}/>
       <Route path='/dashboard/cadastrar-admin' element={<CadastroAdministrador/>}/>
-      
       <Route path='/dashboard/consulta-admin' element={<ConsultaAdimistrador/>}/>
       
       <Route path='*' element={<PageErro404/>}/>

@@ -25,9 +25,10 @@ module.exports = {
         def_soft_yellow: '#FDFCDC',
         def_yellow: '#27FB6B',
         def_green: '#16C172',
+        def_dark_blue: '#1A181B',
         def_dark_green: '#297373',
         def_orange: '#EA580C',
-        def_grey: '#F5F5F5'
+        def_grey: '#F5F5F5',
       }
     },
   },

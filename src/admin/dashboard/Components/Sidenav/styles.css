@@ -1,0 +1,60 @@
+.sidenav-container{
+    @apply
+    flex h-screen
+    items-center
+}
+
+.sidenav{
+    @apply
+    h-[930px]
+    ml-3
+    bg-def_dark_blue
+    duration-500
+    relative
+    rounded-[50px]
+}
+
+.toggle-collapse {
+    @apply
+    absolute cursor-pointer
+    rounded-full
+    h-[60px] w-[60px]
+    -right-8 top-28
+    bg-def_dark_blue
+    px-5 text-2xl
+    text-def_white
+}
+
+.sidenav-header{
+    @apply
+    py-7
+}
+
+.pfp-container{
+    @apply
+    flex items-center
+    mr-auto ml-auto
+}
+
+.pfp-container img{
+    @apply
+    rounded-full
+    relative
+    border-[1px] border-def_black/60
+}
+
+.user-info {
+    @apply
+    font-semibold text-def_white
+    text-center py-5
+    transition-all
+    duration-200
+}
+
+
+.user-role{
+    @apply
+    font-normal text-def_white/60
+    text-txt_size_xsm
+    py-1
+}
