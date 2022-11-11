@@ -27,7 +27,7 @@
 
 .sidenav-header{
     @apply
-    py-7
+    pt-7 pb-3
 }
 
 .pfp-container{
@@ -51,10 +51,41 @@
     duration-200
 }
 
-
 .user-role{
     @apply
     font-normal text-def_white/60
     text-txt_size_xsm
     py-1
+}
+
+.sidenav-body{
+    @apply
+    mx-6
+}
+
+.sidenav-title{
+    @apply
+    mt-12
+    font-semibold
+    text-txt_size_nr
+    text-def_white
+}
+
+.nav-list{
+    @apply
+    mb-8
+}
+
+.nav-item {
+    @apply
+    block
+    text-txt_size_nr
+    cursor-pointer
+    text-def_white font-light
+    p-2.5 mx-0
+    rounded-xl
+    hover:bg-def_white
+    hover:text-def_black/80
+    hover:font-normal
+    duration-100
 }

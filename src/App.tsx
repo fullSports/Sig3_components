@@ -7,6 +7,7 @@ import Equipamentos from './Pages/Equipamentos';
 import PageErro404 from './Pages/Erro404';
 import Tenis from './Pages/Tenis';
 import DashboardHome from './admin/dashboard';
+import ConsultaAdimistrador from './admin/dashboard/Administrador/ConsultarAdministrador';
 const App: React.FC = ()=> {
   return (
     <BrowserRouter>

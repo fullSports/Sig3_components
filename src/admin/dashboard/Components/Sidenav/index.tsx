@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './styles.css';
 import {GiHamburgerMenu} from 'react-icons/gi'
+import { arrayNavCadastros, arrayNavPerfis } from '../../utils/arrayNavDashboard';
 const ex_pfp = require('../../../../assets/images/pfp-dashboard-ex.png');
 
 const DashboardSidenav = () =>{
@@ -25,7 +26,33 @@ const DashboardSidenav = () =>{
                     </div>
                 </div>
                 <div className="sidenav-body">
-                    
+                    <li className={`${collapsed ? 'invisible opacity-0' : ''} nav-item`}>
+                        <a href="">Início</a>
+                    </li>
+                    <span className={`${collapsed ? 'invisible opacity-0' : ''} sidenav-title`}>
+                        Gerenciar Cadastros
+                    </span>
+                    <ul className="nav-list">
+                    { arrayNavCadastros.map((item: any) =>{
+                        return (
+                            <li className={`${collapsed ? 'invisible opacity-0' : ''} nav-item`}>
+                                <a href="">{item.name}</a>
+                            </li>
+                        )
+                    }) }
+                    </ul>
+                    <span className={`${collapsed ? 'invisible opacity-0' : ''} sidenav-title`}>
+                        Gerenciar Perfis
+                    </span>
+                    <ul className="nav-list">
+                    { arrayNavPerfis.map((item: any) =>{
+                        return (
+                            <li className={`${collapsed ? 'invisible opacity-0' : ''} nav-item`}>
+                                <a href="">{item.name}</a>
+                            </li>
+                        )
+                    }) }
+                    </ul>
                 </div>     
             </div>
         </div>
