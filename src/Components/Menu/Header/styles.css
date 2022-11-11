@@ -142,7 +142,7 @@
 
 .nav-items{
     @apply
-    justify-center text-center
+    justify-center text-center flex
 }
 
 .nav-item{

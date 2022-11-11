@@ -10,7 +10,7 @@ const DashboardSidenav = () =>{
 
     return(
         <div className="sidenav-container">
-            <div className={`${collapsed ? 'w-[90px]' : 'w-[290px]'} sidenav`}>
+            <div className={`${collapsed ? 'sidenav-collapsed' : 'sidenav-open'} sidenav`}>
                 <div className="sidenav-header">
                     <button className="toggle-collapse" onClick={() => setCollapse(!collapsed)}>
                         <GiHamburgerMenu/>
