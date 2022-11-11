@@ -2,11 +2,19 @@ import React, { useEffect, useState } from "react";
 import ICliente from "../../../../utils/interfaces/ICliente";
 import apiFullSports from "../../../../api/apiFullSports";
 import styled from "styled-components";
-import { Box, Button, Modal } from "@mui/material";
-import "./styles.css"
-const BtnExibeGroup = styled.div``;
-const BtnExibe = styled.button``;
 
+const Icone = styled.div`
+    background-color: white;
+    height: 50px;
+    width: 50px;
+    border-radius: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: auto;
+    margin-left: auto;
+    font-size: 22px;
+`
 const TabelaAdimistrador = () => {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => {
@@ -40,9 +48,9 @@ const TabelaAdimistrador = () => {
                     <tr key={item._id.toString()}>
 
                         <th>
-                       <div className="icone">
+                       <Icone className="icone">
                         <p className="text-black">{item.nome.charAt(0)}</p>
-                       </div>
+                       </Icone>
                         </th>
 
                         <th>{`${item.dataCadastro.toLocaleString()}`}</th>

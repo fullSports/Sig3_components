@@ -1,19 +1,16 @@
 import React, { useState } from "react";
+
 import styled from 'styled-components';
-import Cabecalho from '../../../../../Components/Menu/Header';
-import Footer from '../../../../../Components/Footer';
+import './styles.css';
 import { Button, TextField, FormControl, Select, InputLabel, MenuItem, Box } from "@mui/material";
-import apiFullSports from '../../../../../api/apiFullSports';
-import ApiCep from "../../../../../api/apiCep";
-const Main = styled.main`
-    width: 100%;
-    min-height: 600px;
-`;
+import apiFullSports from "../../../../api/apiFullSports";
+import ApiCep from "../../../../api/apiCep";
+const Main = styled.main``;
 const ExibeTitulo = styled.h3`
     margin: 2%;
     text-align: center;
 `;
-const FormCadastroCliente = styled.div`
+const FormCadastroAdmin = styled.div`
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 20px;
@@ -58,7 +55,9 @@ const BttCadClienteGrid = styled.div`
     grid-auto-rows: minmax(auto, auto);
     grid-gap: 2px;
 `;
-const CadastroCliente = () => {
+
+const CadastroAdministrador = () => {
+
     const [cpf, setCpf] = useState('');
     const [nome, setNome] = useState('');
     const [dataNascimento, setDataNascimento] = useState('');
@@ -73,6 +72,16 @@ const CadastroCliente = () => {
     const [numero, setNumero] = useState('');
     const [file, setImagem] = useState<File | null>(null)
     const [spinner, setSpinner] = useState(false);
+
+    const [email, setEmail] = useState(''); 
+    const [password, setPassword] = useState('');
+    const [isAdmin] = useState(true);
+
+    const [idImagem, setIdImagem] = useState('');
+    const [idLogin, setIdLogin] = useState('');
+
+    const [mensagemErroBolean, setMensagemErroBolean] = useState(false);
+    const [ menssagemErro, setMenssagemErro] = useState('')
     const selecionarArquivo = (evento: React.ChangeEvent<HTMLInputElement>) => {
         if (evento.target.files?.length) {
             setImagem(evento.target.files[0])
@@ -80,59 +89,6 @@ const CadastroCliente = () => {
             setImagem(null)
         }
     }
-    console.log(file)
-
-    function aoSubmeterForm(evento: React.FormEvent<HTMLFormElement>) {
-        setSpinner(true);
-        evento.preventDefault();
-        const formData1 = new FormData()
-        if (file) {
-            formData1.append('file', file)
-        }
-        apiFullSports.request({
-            url: 'imagem/',
-            method: 'POST',
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Content-Type': 'multipart/form-data'
-            },
-            data: formData1
-        })
-            .then(response =>
-
-                apiFullSports.request({
-                    url: `imagem/${response.data._id}`,
-                    method: 'GET',
-                    headers: {
-                        'Access-Control-Allow-Origin': '*',
-                        'Content-Type': 'multipart/form-data'
-                    },
-                })
-                    .then(response =>
-                        apiFullSports.request({
-                            url: 'cadastrar-cliente/',
-                            method: 'POST',
-                            data: {
-                                cpf: cpf,
-                                nome: nome,
-                                dataNascimento: dataNascimento,
-                                sexo: sexo,
-                                cep: cep,
-                                endereco: `${rua},${numero} -${complemento}- ${estado}, ${cidade}, ${bairro}`,
-                                dataCadastro: dataAtual,
-                                imagemPerfil: response.data._id
-                            }
-                        })
-                            .then(() => {
-                                setSpinner(false)
-                                // alert("cliente cadastrado com suceso");
-                                window.location.href = "/sig/consulta-de-clientes";
-                            }).catch(erro => console.log(erro))
-                    ).catch(erro => console.log(erro))
-            ).catch(erro => console.log(erro))
-
-    }
-
 
     function buscaCep() {
         console.log(cep)
@@ -152,12 +108,91 @@ const CadastroCliente = () => {
             console.log(err)
         })
     }
+
+    function aoSubmeterForm(event: React.FormEvent<HTMLFormElement>){
+        setSpinner(true);
+        event.preventDefault();
+        console.log(email, password)
+        apiFullSports.request({
+            method: "POST",
+            url: 'login/',
+            headers: {
+                'Access-Control-Allow-Origin': '*'
+            },
+            data: {
+                email: email,
+                password: password,
+                isAdmin: true
+            }
+        }).then(respostaLogin => {
+            if(respostaLogin.data.message){
+                setSpinner(false)
+                setMensagemErroBolean(true);
+                setMenssagemErro(respostaLogin.data.message);
+            }else{
+                console.log(respostaLogin.data._id)
+                setIdLogin(respostaLogin.data._id)
+                const formData = new FormData();  
+                if (file) {
+                    formData.append("file", file);
+                    apiFullSports.request({
+                        method: "POST", 
+                        url: "imagem/",
+                        headers: {
+                            'Access-Control-Allow-Origin': '*',
+                            'Content-Type': 'multipart/form-data'
+                        },
+                        data: formData
+                    })
+                    .then(respostaImagem =>{
+                      apiFullSports.request({
+                        method: "POST",
+                        url: "cadastrar-cliente/",
+                        headers: {
+                            'Access-Control-Allow-Origin': '*'
+                        },
+                        data: {
+                            cpf: cpf,
+                            nome: nome, 
+                            login: respostaLogin.data._id,
+                            dataNascimento: dataNascimento,
+                            sexo: sexo,
+                            cep: cep,
+                            endereco: `${rua},${numero} -${complemento}- ${estado}, ${cidade}, ${bairro}`,
+                            dataCadastro: dataAtual,
+                            imagemPerfil: respostaImagem.data._id
+                        }
+                      }).then(()=> setSpinner(false)).catch(err =>{console.log(err)})
+                    }).catch(err =>{console.log(err)})
+                }else{
+                    apiFullSports.request({
+                        method: "POST",
+                        url: "cadastrar-cliente/",
+                        headers: {
+                            'Access-Control-Allow-Origin': '*'
+                        },
+                        data: {
+                            cpf: cpf,
+                            nome: nome, 
+                            login: respostaLogin.data._id,
+                            dataNascimento: dataNascimento,
+                            sexo: sexo,
+                            cep: cep,
+                            endereco: `${rua},${numero} -${complemento}- ${estado}, ${cidade}, ${bairro}`,
+                            dataCadastro: dataAtual
+                        }
+                      }).then(()=> setSpinner(false)).catch(err =>{console.log(err)})
+                }
+            }
+            }).catch(err=>{console.log(err)})
+
+    }
+
     return (
         <>
-            <Cabecalho />
-            <Main>
-                <ExibeTitulo id="exibe-titulo" className="exibe-titulo">Cadastrar Cliente</ExibeTitulo>
-                <FormCadastroCliente id="form-cadastro-cliente" className="form-cadastro-cliente">
+        <Main id="main">
+        <ExibeTitulo id="exibe-titulo" className="exibe-titulo">Cadastrar um Adimin</ExibeTitulo>
+            <FormCadastroAdmin id="form-cadastro-cliente" className="form-cadastro-cliente">
                     <Box component={'form'} onSubmit={aoSubmeterForm} encType="multipart/form-data">
                         <Row1grid id="row-1-grid" className="row-1-grid">
                             <label className="col-form-label">CPF</label>
@@ -172,6 +207,33 @@ const CadastroCliente = () => {
                                 fullWidth
                                 required
                             />
+
+                        <label className="col-form-label">E-mail</label>
+                            <TextField
+                                sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
+                                onChange={evento => setEmail(evento.target.value)}
+                                onClick={()=> setMensagemErroBolean(false)}
+                                className="txt-form"
+                                label="email"
+                                id="email"
+                                type="email"
+                                placeholder={'Insira seu e-mail'}
+                                fullWidth
+                                required
+                            />
+
+                            <label className="col-form-label">Senha</label>
+                                <TextField
+                                    sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
+                                    onChange={evento => setPassword(evento.target.value)}
+                                    className="txt-form"
+                                    label="password"
+                                    id="password"
+                                    type="password"
+                                    placeholder={'Insira sua senha'}
+                                    fullWidth
+                                    required
+                                />
 
                             <label className="col-form-label">Nome</label>
                             <TextField
@@ -315,6 +377,7 @@ const CadastroCliente = () => {
                                 accept="image/jpeg, image/pjpeg, image/png, image/gif"
                             />
                             {spinner && (<p>carregando...</p>)}
+                            {mensagemErroBolean && (<span id="menssagem-erro">{menssagemErro}</span>)}
                         </Row1grid>
 
                         <BttCadClienteGrid id="btt-cad-cliente-grid" className="btt-cad-cliente-grid">
@@ -327,19 +390,19 @@ const CadastroCliente = () => {
                                 Cadastrar Cliente
                             </Button>
                             <Button
-                                onClick={evento => window.location.href = '/sig/consulta-de-clientes'}
+                                onClick={evento => window.location.href = '/dashboard/consulta-admin'}
                                 sx={{
                                     justifyContent: 'center', display: 'block', height: '50px', borderRadius: '5px', color: '#fff',
                                     fontSize: '14px', backgroundColor: 'black', ":hover": 'backgroundColor: #313131, transform:translate(0.8s)'
                                 }} type="button" id="btn-cad-forms" className="btn-cad-forms">
-                                Consulta de Clientes
+                                Consulta de Adiministradores
                             </Button>
                         </BttCadClienteGrid>
                     </Box>
-                </FormCadastroCliente>
+            </FormCadastroAdmin>
             </Main>
-            <Footer />
         </>
-    );
+    )
 }
-export default CadastroCliente;
+
+export default CadastroAdministrador;
