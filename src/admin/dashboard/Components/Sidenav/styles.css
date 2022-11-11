@@ -1,17 +1,45 @@
 .sidenav-container{
     @apply
-    flex h-screen
+    flex
+    h-screen
     items-center
+    /* fixed */
+}
+
+.sidenav-open{
+    @apply
+    w-[290px]
+}
+
+.sidenav-collapsed{
+    @apply
+    w-[90px]
 }
 
 .sidenav{
     @apply
-    h-[930px]
-    ml-3
+    h-[95vh]
     bg-def_dark_blue
     duration-500
     relative
+    ml-3
     rounded-[50px]
+    overflow-x-auto
+}
+
+.sidenav::-webkit-scrollbar{
+  position: absolute;
+  width: 30px;
+}
+
+.sidenav::-webkit-scrollbar-track{
+    background: #E6E6E6;
+}
+
+.sidenav::-webkit-scrollbar-thumb{
+    background-color: #cacaca;
+    border-radius: 20px;
+    border: none;
 }
 
 .toggle-collapse {
@@ -58,11 +86,6 @@
     py-1
 }
 
-.sidenav-body{
-    @apply
-    mx-6
-}
-
 .sidenav-title{
     @apply
     mt-12
@@ -73,7 +96,7 @@
 
 .nav-list{
     @apply
-    mb-8
+    mb-8 mx-6
 }
 
 .nav-item {

@@ -25,35 +25,33 @@ const DashboardSidenav = () =>{
                         </div>
                     </div>
                 </div>
-                <div className="sidenav-body">
-                    <li className={`${collapsed ? 'invisible opacity-0' : ''} nav-item`}>
-                        <a href="">Início</a>
-                    </li>
-                    <span className={`${collapsed ? 'invisible opacity-0' : ''} sidenav-title`}>
-                        Gerenciar Cadastros
-                    </span>
                     <ul className="nav-list">
-                    { arrayNavCadastros.map((item: any) =>{
-                        return (
-                            <li className={`${collapsed ? 'invisible opacity-0' : ''} nav-item`}>
-                                <a href="">{item.name}</a>
-                            </li>
-                        )
-                    }) }
+                        <li className={`${collapsed ? 'invisible opacity-0' : ''} nav-item`}>
+                            <a href="">Início</a>
+                        </li>
+                    
+                        <span className={`${collapsed ? 'invisible opacity-0' : ''} sidenav-title`}>
+                            Gerenciar Cadastros
+                        </span>
+                        { arrayNavCadastros.map((item: any) =>{
+                            return (
+                                <li className={`${collapsed ? 'invisible opacity-0' : ''} nav-item`}>
+                                    <a href="">{item.name}</a>
+                                </li>
+                            )
+                        }) }
+                        <span className={`${collapsed ? 'invisible opacity-0' : ''} sidenav-title`}>
+                            Gerenciar Perfis
+                        </span>
+                        { arrayNavPerfis.map((item: any) =>{
+                            return (
+                                <li className={`${collapsed ? 'invisible opacity-0' : ''} nav-item`}>
+                                    <a href="">{item.name}</a>
+                                </li>
+                            )
+                        }) }
                     </ul>
-                    <span className={`${collapsed ? 'invisible opacity-0' : ''} sidenav-title`}>
-                        Gerenciar Perfis
-                    </span>
-                    <ul className="nav-list">
-                    { arrayNavPerfis.map((item: any) =>{
-                        return (
-                            <li className={`${collapsed ? 'invisible opacity-0' : ''} nav-item`}>
-                                <a href="">{item.name}</a>
-                            </li>
-                        )
-                    }) }
-                    </ul>
-                </div>     
+                {/* </div>      */}
             </div>
         </div>
     )
