@@ -5,6 +5,7 @@ const Main = styled.main``;
 const ExibeTitulo = styled.h3`
     margin: 2%;
     text-align: center;
+    font-size: 30px;
 `;
 const PainelBody = styled.div`
 `;

@@ -7,7 +7,8 @@ import Equipamentos from './Pages/Equipamentos';
 import PageErro404 from './Pages/Erro404';
 import Tenis from './Pages/Tenis';
 import DashboardHome from './admin/dashboard';
-import ConsultaAdimistrador from './admin/dashboard/Administrador/ConsultarAdministrador';
+import ConsultaAdimistrador from './admin/dashboard/Administrador/ConsultarAdministrador/index';
+import AtualizarAdministrador from './admin/dashboard/Administrador/AtualizarAdministrador';
 const App: React.FC = ()=> {
   return (
     <BrowserRouter>
@@ -28,7 +29,7 @@ const App: React.FC = ()=> {
       <Route path='/dashboard/cadastrar-admin' element={<CadastroAdministrador/>}/>
       <Route path='/dashboard/consulta-admin' element={<ConsultaAdimistrador/>}/>
       
-
+      <Route path='/dashboard/atualizar-admin/:id' element={<AtualizarAdministrador/>}/>  
       {/****************************** */}
       <Route path='*' element={<PageErro404/>}/>
     </Routes>

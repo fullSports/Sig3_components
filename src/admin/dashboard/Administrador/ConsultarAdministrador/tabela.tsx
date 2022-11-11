@@ -14,7 +14,7 @@ const Icone = styled.div`
     margin-right: auto;
     margin-left: auto;
     font-size: 22px;
-`
+`;
 const TabelaAdimistrador = () => {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => {

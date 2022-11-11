@@ -1,16 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from 'styled-components';
-import { Button, TextField, FormControl, Select, InputLabel, MenuItem, Box } from "@mui/material";
+import { Button, TextField, FormControl, Select, InputLabel, MenuItem, Box, Modal } from "@mui/material";
 import apiFullSports from "../../../../api/apiFullSports";
 import ApiCep from "../../../../api/apiCep";
+import { useParams } from "react-router-dom";
+import ICliente from "../../../../utils/interfaces/ICliente";
+import Iimagem from "../../../../utils/interfaces/Iimagem";
 const Main = styled.main`
     width: 100%;
     min-height: 600px;
 `;
-const ExibeTitulo = styled.h3`
+const ExibeTitulo = styled.div`
     margin: 2%;
-    text-align: center;
-    font-size: 25px;
+    display: flex;
+    justify-content: center;
+    h3{
+        
+        margin-right: 2%;
+        font-size: 25px;
+    }
 `;
 const FormCadastroAdmin = styled.div`
     margin-left: auto;
@@ -49,10 +57,20 @@ const Row1grid = styled.div`
         padding: 15px;
         border-radius: 4px;
         border: 1px solid #aca5a5;
+
     }
     #menssagem-erro{
     color: #a23b3b;
     font-size: 20x;
+    }
+    #tela-delete-imagem{
+        position: absolute as absolute;
+        top: 50%;
+        left: 50%;
+        width: 500px;
+        background-color: #aca5a5;
+        border: 2px solid #000;
+        box-shadow: 24px;
     }
 `;
 const BttCadClienteGrid = styled.div`
@@ -74,9 +92,23 @@ const BttCadClienteGrid = styled.div`
         }
     }
 `;
+const Icone = styled.div`
+    background-color: #a49898;
+    height: 50px;
+    width: 50px;
+    border-radius: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+        img{
+        height: 50px;
+        width: 50px;
+        border-radius: 100px;
+        }
+`;
 
-const CadastroAdministrador = () => {
-
+const AtualizarAdministrador = () => {
+    const parametros = useParams();
     const [cpf, setCpf] = useState('');
     const [nome, setNome] = useState('');
     const [dataNascimento, setDataNascimento] = useState('');
@@ -91,12 +123,23 @@ const CadastroAdministrador = () => {
     const [numero, setNumero] = useState('');
     const [file, setImagem] = useState<File | null>(null)
     const [spinner, setSpinner] = useState(false);
+    const [imagemId, setImagemID] = useState('');
+    const [imagemPerfilurl, setImagemPerfilurl] = useState('')
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     const [mensagemErroBolean, setMensagemErroBolean] = useState(false);
     const [menssagemErro, setMenssagemErro] = useState('')
+
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => {
+        setOpen(true);
+    };
+    const handleClose = () => {
+        setOpen(false);
+    };
+
     const selecionarArquivo = (evento: React.ChangeEvent<HTMLInputElement>) => {
         if (evento.target.files?.length) {
             setImagem(evento.target.files[0])
@@ -105,6 +148,37 @@ const CadastroAdministrador = () => {
         }
     }
 
+    useEffect(() => {
+        if (parametros.id) {
+            apiFullSports.get<ICliente>(`listar-cliente/${parametros.id}`)
+                .then(resposta => setCpf(resposta.data.cpf))
+                .catch((err) => console.log(err));
+
+            apiFullSports.get<ICliente>(`listar-cliente/${parametros.id}`)
+                .then(resposta => setNome(resposta.data.nome))
+                .catch((err) => console.log(err));
+
+            apiFullSports.get<ICliente>(`listar-cliente/${parametros.id}`)
+                .then(resposta => setDataNascimento(resposta.data.dataNascimento))
+                .catch((err) => console.log(err));
+
+            apiFullSports.get<ICliente>(`listar-cliente/${parametros.id}`)
+                .then(resposta => setSexo(resposta.data.sexo))
+                .catch((err) => console.log(err));
+
+            apiFullSports.get<ICliente>(`listar-cliente/${parametros.id}`)
+                .then(resposta => setCep(resposta.data.cep))
+                .catch((err) => console.log(err));
+
+            apiFullSports.get<ICliente>(`listar-cliente/${parametros.id}`)
+                .then(resposta => {
+                    setImagemPerfilurl(resposta.data.imagemPerfil.url)
+                    setImagemID(resposta.data.imagemPerfil._id)
+                })
+                .catch((err) => console.log(err));
+        }
+
+    }, [parametros]);
     function buscaCep() {
         console.log(cep)
         ApiCep.request({
@@ -123,89 +197,171 @@ const CadastroAdministrador = () => {
             console.log(err)
         })
     }
-
-    function aoSubmeterForm(event: React.FormEvent<HTMLFormElement>) {
-        setSpinner(true);
-        event.preventDefault();
-        console.log(email, password)
-        apiFullSports.request({
-            method: "POST",
-            url: 'login/',
+    function buscaCepCarregarPage() {
+        console.log(cep)
+        ApiCep.request({
+            method: 'GET',
+            url: cep,
             headers: {
                 'Access-Control-Allow-Origin': '*'
             },
-            data: {
-                email: email,
-                password: password,
-                isAdmin: true
-            }
-        }).then(respostaLogin => {
-            if (respostaLogin.data.message) {
-                setSpinner(false)
-                setMensagemErroBolean(true);
-                setMenssagemErro(respostaLogin.data.message);
-            } else {
-                console.log(respostaLogin.data._id)
-                const formData = new FormData();
-                if (file) {
-                    formData.append("file", file);
-                    apiFullSports.request({
-                        method: "POST",
-                        url: "imagem/",
-                        headers: {
-                            'Access-Control-Allow-Origin': '*',
-                            'Content-Type': 'multipart/form-data'
-                        },
-                        data: formData
-                    })
-                        .then(respostaImagem => {
-                            apiFullSports.request({
-                                method: "POST",
-                                url: "cadastrar-cliente/",
-                                headers: {
-                                    'Access-Control-Allow-Origin': '*'
-                                },
-                                data: {
-                                    cpf: cpf,
-                                    nome: nome,
-                                    login: respostaLogin.data._id,
-                                    dataNascimento: dataNascimento,
-                                    sexo: sexo,
-                                    cep: cep,
-                                    endereco: `${rua},${numero} -${complemento}- ${estado}, ${cidade}, ${bairro}`,
-                                    dataCadastro: dataAtual,
-                                    imagemPerfil: respostaImagem.data._id
-                                }
-                            }).then(() => setSpinner(false)).catch(err => { console.log(err) })
-                        }).catch(err => { console.log(err) })
-                } else {
-                    apiFullSports.request({
-                        method: "POST",
-                        url: "cadastrar-cliente/",
-                        headers: {
-                            'Access-Control-Allow-Origin': '*'
-                        },
-                        data: {
-                            cpf: cpf,
-                            nome: nome,
-                            login: respostaLogin.data._id,
-                            dataNascimento: dataNascimento,
-                            sexo: sexo,
-                            cep: cep,
-                            endereco: `${rua},${numero} -${complemento}- ${estado}, ${cidade}, ${bairro}`,
-                            dataCadastro: dataAtual
-                        }
-                    }).then(() => setSpinner(false)).catch(err => { console.log(err) })
-                }
-            }
-        }).catch(err => { console.log(err) })
+        }).then(evento => {
+            setRua(evento.data.street);
+            setBairro(evento.data.neighborhood);
+            setEstado(evento.data.state);
+            setCidade(evento.data.city)
+        })
+    }
+    setTimeout(buscaCepCarregarPage, 222)
+    const IconePerfil = () => {
+        if (imagemId == '') {
+            return (
+                <Icone className="icone">
+                    <p className="text-black">{nome.charAt(0)}</p>
+                </Icone>
+            )
+        } else {
+            return (
+                <Icone className="icone">
+                    <img src={imagemPerfilurl} alt="imagem de perfil" />
+                </Icone>
+            )
+        }
+    }
 
+    function aoSubmeterForm(evento: React.FormEvent<HTMLFormElement>) {
+        evento.preventDefault();
+        setSpinner(true);
+        const formData1 = new FormData()
+        if (file) {
+            formData1.append('file', file)
+        }
+
+
+        if (parametros.id) {
+            if (!file) {
+                apiFullSports.put(`atualizar-cliente/${parametros.id}`, {
+                    cpf: cpf,
+                    nome: nome,
+                    dataNascimento: dataNascimento,
+                    sexo: sexo,
+                    cep: cep,
+                    endereco: `${rua},${numero} -${complemento}- ${estado}, ${cidade}, ${bairro}`,
+                }).then(() => {
+                    setSpinner(false)
+                    // alert("cliente atualizado com suceeso");
+                    window.location.href = "/sig/consulta-de-clientes";
+                }).catch(erro => console.log(erro))
+            } else {
+                apiFullSports.get<ICliente>(`listar-cliente/${parametros.id}`)
+                    .then(resposta => {
+                        if (resposta.data.imagemPerfil === null) {
+                            apiFullSports.request({
+                                url: 'imagem/',
+                                method: 'POST',
+                                headers: {
+                                    'Access-Control-Allow-Origin': '*',
+                                    'Content-Type': 'multipart/form-data'
+                                },
+                                data: formData1
+                            })
+                                .then(response =>
+
+                                    apiFullSports.request({
+                                        url: `imagem/${response.data._id}`,
+                                        method: 'GET',
+                                        headers: {
+                                            'Access-Control-Allow-Origin': '*',
+                                            'Content-Type': 'multipart/form-data'
+                                        },
+                                    })
+                                        .then(response =>
+                                            apiFullSports.request({
+                                                url: `atualizar-cliente/${parametros.id}`,
+                                                method: 'PUT',
+                                                data: {
+                                                    cpf: cpf,
+                                                    nome: nome,
+                                                    dataNascimento: dataNascimento,
+                                                    sexo: sexo,
+                                                    cep: cep,
+                                                    endereco: `${rua},${numero} -${complemento}- ${estado}, ${cidade}, ${bairro}`,
+                                                    dataCadastro: dataAtual,
+                                                    imagemPerfil: response.data._id
+                                                }
+                                            })
+                                                .then(() => {
+                                                    setSpinner(false)
+                                                    // alert("cliente atualizado com suceso");
+                                                    window.location.href = "/sig/consulta-de-clientes";
+                                                }).catch(erro => console.log(erro))
+                                        ).catch(erro => console.log(erro))
+                                ).catch(erro => console.log(erro))
+                        } else {
+                            apiFullSports.request({
+                                url: `imagem/${resposta.data.imagemPerfil._id}`,
+                                method: 'GET',
+                                headers: {
+                                    'Access-Control-Allow-Origin': '*',
+                                    'Content-Type': 'multipart/form-data'
+                                },
+                            }).then(responsa => {
+                                apiFullSports.delete(`imagem/${responsa.data._id}`)
+                                apiFullSports.request({
+                                    url: 'imagem/',
+                                    method: 'POST',
+                                    headers: {
+                                        'Access-Control-Allow-Origin': '*',
+                                        'Content-Type': 'multipart/form-data'
+                                    },
+                                    data: formData1
+                                })
+                                    .then(response =>
+
+                                        apiFullSports.request({
+                                            url: `imagem/${response.data._id}`,
+                                            method: 'GET',
+                                            headers: {
+                                                'Access-Control-Allow-Origin': '*',
+                                                'Content-Type': 'multipart/form-data'
+                                            },
+                                        })
+                                            .then(response =>
+                                                apiFullSports.request({
+                                                    url: `atualizar-cliente/${parametros.id}`,
+                                                    method: 'PUT',
+                                                    data: {
+                                                        cpf: cpf,
+                                                        nome: nome,
+                                                        dataNascimento: dataNascimento,
+                                                        sexo: sexo,
+                                                        cep: cep,
+                                                        endereco: `${rua},${numero} -${complemento}- ${estado}, ${cidade}, ${bairro}`,
+                                                        dataCadastro: dataAtual,
+                                                        imagemPerfil: response.data._id
+                                                    }
+                                                })
+                                                    .then(() => {
+                                                        setSpinner(false)
+                                                        // alert("cliente atualizado com suceso");
+                                                        window.location.href = "/dashboard/consulta-admin";
+                                                    }).catch(erro => console.log(erro))
+                                            ).catch(erro => console.log(erro))
+                                    ).catch(erro => console.log(erro))
+
+                            }).catch(erro => console.log(erro))
+                        }
+                    }).catch(erro => console.log(erro))
+
+            }
+
+        }
     }
 
     return (
         <>
             <Main id="main">
-                <ExibeTitulo id="exibe-titulo" className="exibe-titulo">Cadastrar um Adimin</ExibeTitulo>
+                <ExibeTitulo id="exibe-titulo" className="exibe-titulo"><h3>Atualizar dados de {nome}</h3> <IconePerfil /></ExibeTitulo>
                 <FormCadastroAdmin id="form-cadastro-cliente" className="form-cadastro-cliente">
                     <Box component={'form'} onSubmit={aoSubmeterForm} encType="multipart/form-data">
                         <Row1grid id="row-1-grid" className="row-1-grid">
@@ -220,6 +376,7 @@ const CadastroAdministrador = () => {
                                 placeholder={'00.000.000-00'}
                                 fullWidth
                                 required
+                                value={cpf}
                             />
 
                             <label className="col-form-label">Nome</label>
@@ -233,6 +390,7 @@ const CadastroAdministrador = () => {
                                 placeholder={'Digite seu nome'}
                                 fullWidth
                                 required
+                                value={nome}
                             />
 
                             <label className="col-form-label">Data de Nascimento</label>
@@ -246,6 +404,7 @@ const CadastroAdministrador = () => {
                                 placeholder={'__/__/____'}
                                 fullWidth
                                 required
+                                value={dataNascimento}
                             />
 
                             <label className="col-form-label">Sexo</label>
@@ -273,6 +432,7 @@ const CadastroAdministrador = () => {
                                 fullWidth
                                 required
                                 onBlur={buscaCep}
+                                value={cep}
                             />
 
                             <label className="col-form-label">Rua</label>
@@ -354,60 +514,41 @@ const CadastroAdministrador = () => {
                                 fullWidth
                                 required
                             />
-                             <label className="col-form-label">E-mail</label>
-                            <TextField
-                                sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
-                                onChange={evento => setEmail(evento.target.value)}
-                                onClick={() => setMensagemErroBolean(false)}
-                                className="txt-form"
-                                label="email"
-                                id="email"
-                                type="email"
-                                placeholder={'Insira seu e-mail'}
-                                fullWidth
-                                required
-                            />
 
-                            <label className="col-form-label">Senha</label>
-                            <TextField
-                                sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
-                                onChange={evento => setPassword(evento.target.value)}
-                                className="txt-form"
-                                label="password"
-                                id="password"
-                                type="password"
-                                placeholder={'Insira sua senha'}
-                                fullWidth
-                                required
-                            />
                             <label className="col-form-label">Imagem de Perfil</label>
-                            <input
+                            {/* <input
                                 onChange={selecionarArquivo}
                                 className="txt-form"
                                 id="imagemPerfil"
                                 type="file"
                                 name="file"
                                 accept="image/jpeg, image/pjpeg, image/png, image/gif"
-                            />
+                            /> */}
+                            <React.Fragment>
+                                <Button onClick={handleOpen}> Atualizar foto</Button>
+                                <Modal
+                                    hideBackdrop
+                                    open={open}
+                                    onClose={handleClose}
+                                >
+                                    <Box id="tela-delete-imagem" className="tela-delete-imagem" sx={{width: 500}}>
+                                    <p>@@</p>
+                                    </Box>
+                                </Modal>
+
+                            </React.Fragment>
+
                             {spinner && (<p>carregando...</p>)}
                             {mensagemErroBolean && (<span id="menssagem-erro">{menssagemErro}</span>)}
                         </Row1grid>
 
                         <BttCadClienteGrid id="btt-cad-cliente-grid" className="btt-cad-cliente-grid">
-                            <Button
-                                sx={{
-                                    justifyContent: 'center', display: 'block', height: '50px', borderRadius: '5px', color: '#fff',
-                                    fontSize: '14px', backgroundColor: 'black', ":hover": 'backgroundColor: #313131, transform:translate(0.8s)'
-                                }}
-                                type="submit" id="btn-cad-forms" className="btn-cad-forms">
+                            <Button type="submit" id="btn-cad-forms" className="btn-cad-forms">
                                 Cadastrar Cliente
                             </Button>
                             <Button
                                 onClick={evento => window.location.href = '/dashboard/consulta-admin'}
-                                sx={{
-                                    justifyContent: 'center', display: 'block', height: '50px', borderRadius: '5px', color: '#fff',
-                                    fontSize: '14px', backgroundColor: 'black', ":hover": 'backgroundColor: #313131, transform:translate(0.8s)'
-                                }} type="button" id="btn-cad-forms" className="btn-cad-forms">
+                                type="button" id="btn-cad-forms" className="btn-cad-forms">
                                 Consulta de Adiministradores
                             </Button>
                         </BttCadClienteGrid>
@@ -416,6 +557,5 @@ const CadastroAdministrador = () => {
             </Main>
         </>
     )
-}
-
-export default CadastroAdministrador;
+};
+export default AtualizarAdministrador;
