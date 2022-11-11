@@ -145,10 +145,9 @@ const AtualizarAdministrador = () => {
     const selecionarArquivo = (evento: React.ChangeEvent<HTMLInputElement>) => {
         if (evento.target.files?.length) {
             setImagem(evento.target.files[0])
-            handleClose()
+            cadastrarFotoPerfil();
         } else {
             setImagem(null)
-            handleClose()
         }
 
     }
@@ -187,7 +186,6 @@ const AtualizarAdministrador = () => {
     const deletarFoto = () => {
         apiFullSports.delete(`imagem/${imagemId}`)
         setImagemID('');
-        window.location.reload();
     }
     function buscaCep() {
         console.log(cep)
@@ -213,7 +211,7 @@ const AtualizarAdministrador = () => {
             method: 'GET',
             url: cep,
             headers: {
-                'Access-Control-Allow-Origin': '*'
+                'Access-Control-Allow-Origin': '*',
             },
         }).then(evento => {
             setRua(evento.data.street);
@@ -238,6 +236,70 @@ const AtualizarAdministrador = () => {
             )
         }
     }
+    function cadastrarFotoPerfil(){
+        if(file){
+        apiFullSports.request({
+            method: "POST",
+            url:"imagem/",
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Content-Type': 'multipart/form-data'
+            }
+        }).then(evento=>{
+            setImagemID(evento.data._id);
+            setImagemPerfilurl(evento.data.url);
+            // handleClose()
+        }).catch(erro => console.log(erro))
+    }
+    } 
+    const OpcoesFotoPerfil = () => {
+        if (imagemId === '' || imagemPerfilurl === '') {
+            return (
+                <Box component={"div"} sx={{ marginTop: '5.5%', marginRight: '3%' }}>
+                    <Box component={"div"} sx={{ display: 'flex', justifyContent: "center", paddingBottom: "1%" }}>
+                        <IconePerfil />
+                    </Box>
+                    <Box component={"div"} sx={{ display: 'grid' }} id="tela-imagem-opcoes">
+                        <div>
+                            <AtualizarImagemLabel htmlFor="file" >cadastrar foto</AtualizarImagemLabel>
+                            <input
+                                onChange={selecionarArquivo}
+                                className="txt-form"
+                                id="file"
+                                type="file"
+                                name="file"
+                                accept="image/jpeg, image/pjpeg, image/png, image/gif"
+                            />
+                        </div>
+                        <Button variant="outlined" sx={{ border: "2px solid" }} onClick={handleClose}>Fechar</Button>
+                    </Box>
+                </Box>
+            )
+        } else {
+            return (
+                <Box component={"div"} sx={{ marginTop: '5.5%', marginRight: '3%' }}>
+                    <Box component={"div"} sx={{ display: 'flex', justifyContent: "center", paddingBottom: "1%" }}>
+                        <IconePerfil />
+                    </Box>
+                    <Box component={"div"} sx={{ display: 'grid' }} id="tela-imagem-opcoes">
+                        <Button color="error" variant="outlined" sx={{ border: "2px solid alert" }} onClick={deletarFoto} >Excluir Foto</Button>
+                        <div>
+                            <AtualizarImagemLabel htmlFor="file" >Atualizar foto</AtualizarImagemLabel>
+                            <input
+                                onChange={selecionarArquivo}
+                                className="txt-form"
+                                id="file"
+                                type="file"
+                                name="file"
+                                accept="image/jpeg, image/pjpeg, image/png, image/gif"
+                            />
+                        </div>
+                        <Button variant="outlined" sx={{ border: "2px solid" }} onClick={handleClose}>Fechar</Button>
+                    </Box>
+                </Box>
+            )
+        }
+    }
 
     function aoSubmeterForm(evento: React.FormEvent<HTMLFormElement>) {
         evento.preventDefault();
@@ -249,7 +311,6 @@ const AtualizarAdministrador = () => {
 
 
         if (parametros.id) {
-            if (!file) {
                 apiFullSports.put(`atualizar-cliente/${parametros.id}`, {
                     cpf: cpf,
                     nome: nome,
@@ -262,111 +323,12 @@ const AtualizarAdministrador = () => {
                     // alert("cliente atualizado com suceeso");
                     window.location.href = "/dashboard/consulta-admin";
                 }).catch(erro => console.log(erro))
-            } else {
-                apiFullSports.get<ICliente>(`listar-cliente/${parametros.id}`)
-                    .then(resposta => {
-                        if (resposta.data.imagemPerfil === null) {
-                            apiFullSports.request({
-                                url: 'imagem/',
-                                method: 'POST',
-                                headers: {
-                                    'Access-Control-Allow-Origin': '*',
-                                    'Content-Type': 'multipart/form-data'
-                                },
-                                data: formData1
-                            })
-                                .then(response =>
 
-                                    apiFullSports.request({
-                                        url: `imagem/${response.data._id}`,
-                                        method: 'GET',
-                                        headers: {
-                                            'Access-Control-Allow-Origin': '*',
-                                            'Content-Type': 'multipart/form-data'
-                                        },
-                                    })
-                                        .then(response =>
-                                            apiFullSports.request({
-                                                url: `atualizar-cliente/${parametros.id}`,
-                                                method: 'PUT',
-                                                data: {
-                                                    cpf: cpf,
-                                                    nome: nome,
-                                                    dataNascimento: dataNascimento,
-                                                    sexo: sexo,
-                                                    cep: cep,
-                                                    endereco: `${rua},${numero} -${complemento}- ${estado}, ${cidade}, ${bairro}`,
-                                                    dataCadastro: dataAtual,
-                                                    imagemPerfil: response.data._id
-                                                }
-                                            })
-                                                .then(() => {
-                                                    setSpinner(false)
-                                                    // alert("cliente atualizado com suceso");
-                                                    window.location.href = "/dashboard/consulta-admin";
-                                                }).catch(erro => console.log(erro))
-                                        ).catch(erro => console.log(erro))
-                                ).catch(erro => console.log(erro))
-                        } else {
-                            apiFullSports.request({
-                                url: `imagem/${resposta.data.imagemPerfil._id}`,
-                                method: 'GET',
-                                headers: {
-                                    'Access-Control-Allow-Origin': '*',
-                                    'Content-Type': 'multipart/form-data'
-                                },
-                            }).then(responsa => {
-                                apiFullSports.delete(`imagem/${responsa.data._id}`)
-                                apiFullSports.request({
-                                    url: 'imagem/',
-                                    method: 'POST',
-                                    headers: {
-                                        'Access-Control-Allow-Origin': '*',
-                                        'Content-Type': 'multipart/form-data'
-                                    },
-                                    data: formData1
-                                })
-                                    .then(response =>
-
-                                        apiFullSports.request({
-                                            url: `imagem/${response.data._id}`,
-                                            method: 'GET',
-                                            headers: {
-                                                'Access-Control-Allow-Origin': '*',
-                                                'Content-Type': 'multipart/form-data'
-                                            },
-                                        })
-                                            .then(response =>
-                                                apiFullSports.request({
-                                                    url: `atualizar-cliente/${parametros.id}`,
-                                                    method: 'PUT',
-                                                    data: {
-                                                        cpf: cpf,
-                                                        nome: nome,
-                                                        dataNascimento: dataNascimento,
-                                                        sexo: sexo,
-                                                        cep: cep,
-                                                        endereco: `${rua},${numero} -${complemento}- ${estado}, ${cidade}, ${bairro}`,
-                                                        dataCadastro: dataAtual,
-                                                        imagemPerfil: response.data._id
-                                                    }
-                                                })
-                                                    .then(() => {
-                                                        setSpinner(false)
-                                                        // alert("cliente atualizado com suceso");
-                                                        window.location.href = "/dashboard/consulta-admin";
-                                                    }).catch(erro => console.log(erro))
-                                            ).catch(erro => console.log(erro))
-                                    ).catch(erro => console.log(erro))
-
-                            }).catch(erro => console.log(erro))
-                        }
-                    }).catch(erro => console.log(erro))
-
+             
             }
 
         }
-    }
+    
 
     return (
         <>
@@ -525,53 +487,6 @@ const AtualizarAdministrador = () => {
                                 required
                             />
 
-                            <label className="col-form-label">Imagem de Perfil</label>
-                            {/* <input
-                                onChange={selecionarArquivo}
-                                className="txt-form"
-                                id="imagemPerfil"
-                                type="file"
-                                name="file"
-                                accept="image/jpeg, image/pjpeg, image/png, image/gif"
-                            /> */}
-
-                            <Button onClick={handleOpen} sx={{ border: "2px solid", marginBottom: '3%' }}> Atualizar foto ou excluir foto</Button>
-                            <Modal
-                                hideBackdrop
-                                open={open}
-                                onClose={handleClose}
-                                id="model"
-                            >
-
-                                <Box component={'div'} id="tela-imagem" className="tela-imagem" sx={{
-                                    width: '30%', height: '25%',
-                                    position: 'absolute' as 'absolute', top: '50%', left: '35%', display: 'flex', justifyContent: 'center',
-                                    backgroundColor: '#4e4a4a', border: '3px solid #000', borderRadius: '20px', pt: 2, px: 4, pb: 3
-                                }}>
-                                    <Box component={"div"} sx={{ marginTop: '5.5%', marginRight: '3%' }}>
-                                        <IconePerfil />
-                                    </Box>
-                                    <Box component={"div"} sx={{ display: 'grid' }} id="tela-imagem-opcoes">
-                                        <Button color="error" variant="outlined" sx={{ border: "2px solid alert" }} onClick={deletarFoto} >Excluir Foto</Button>
-                                        <div>
-                                            <AtualizarImagemLabel htmlFor="file" >Atualizar foto</AtualizarImagemLabel>
-                                            <input
-                                                onChange={selecionarArquivo}
-                                                className="txt-form"
-                                                id="file"
-                                                type="file"
-                                                name="file"
-                                                accept="image/jpeg, image/pjpeg, image/png, image/gif"
-                                            />
-                                        </div>
-                                        <Button variant="outlined" sx={{ border: "2px solid" }} onClick={handleClose}>Cancelar</Button>
-                                    </Box>
-                                </Box>
-
-                            </Modal>
-
-
-
                             {spinner && (<p>carregando...</p>)}
                             {mensagemErroBolean && (<span id="menssagem-erro">{menssagemErro}</span>)}
                         </Row1grid>
@@ -587,8 +502,31 @@ const AtualizarAdministrador = () => {
                             </Button>
                         </BttCadClienteGrid>
                     </Box>
-                </FormAtualizarAdmin>
-            </Main>
+                    <Box component={"div"} sx={{ marginTop: "2%" }}>
+                    <Row1grid>
+                        <label className="col-form-label">Imagem de Perfil</label>
+                        <Button onClick={handleOpen} sx={{ border: "2px solid", marginBottom: '3%' }}> Atualizar foto ou excluir foto</Button>
+                        <Modal
+                            hideBackdrop
+                            open={open}
+                            onClose={handleClose}
+                            id="model"
+                        >
+
+                            <Box component={'div'} id="tela-imagem" className="tela-imagem" sx={{
+                                width: '30%', height: '35%',
+                                position: 'absolute' as 'absolute', top: '30%', left: '35%', display: 'flex', justifyContent: 'center',
+                                backgroundColor: '#4e4a4a', border: '3px solid #000', borderRadius: '20px', pt: 2, px: 4, pb: 3
+                            }}>
+                                <OpcoesFotoPerfil />
+                            </Box>
+
+                        </Modal>
+                    </Row1grid>
+                </Box>
+            </FormAtualizarAdmin>
+
+        </Main>
         </>
     )
 };
