@@ -6,6 +6,7 @@ import ApiCep from "../../../../api/apiCep";
 import { useParams } from "react-router-dom";
 import ICliente from "../../../../utils/interfaces/ICliente";
 import Iimagem from "../../../../utils/interfaces/Iimagem";
+import './styles.css'
 const Main = styled.main`
     width: 100%;
     min-height: 600px;
@@ -20,7 +21,7 @@ const ExibeTitulo = styled.div`
         font-size: 25px;
     }
 `;
-const FormCadastroAdmin = styled.div`
+const FormAtualizarAdmin = styled.div`
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 20px;
@@ -63,15 +64,6 @@ const Row1grid = styled.div`
     color: #a23b3b;
     font-size: 20x;
     }
-    #tela-delete-imagem{
-        position: absolute as absolute;
-        top: 50%;
-        left: 50%;
-        width: 500px;
-        background-color: #aca5a5;
-        border: 2px solid #000;
-        box-shadow: 24px;
-    }
 `;
 const BttCadClienteGrid = styled.div`
     display: grid;
@@ -96,6 +88,7 @@ const Icone = styled.div`
     background-color: #a49898;
     height: 50px;
     width: 50px;
+    
     border-radius: 100px;
     display: flex;
     justify-content: center;
@@ -106,7 +99,16 @@ const Icone = styled.div`
         border-radius: 100px;
         }
 `;
-
+const AtualizarImagemLabel = styled.label`
+cursor: pointer;
+text-transform: uppercase;
+color: #FFF;
+border: solid 1px #ffffff;
+margin-top: 4%;
+margin-bottom: 4%;
+display: flex;
+padding: 10px 10px;
+`;
 const AtualizarAdministrador = () => {
     const parametros = useParams();
     const [cpf, setCpf] = useState('');
@@ -143,11 +145,14 @@ const AtualizarAdministrador = () => {
     const selecionarArquivo = (evento: React.ChangeEvent<HTMLInputElement>) => {
         if (evento.target.files?.length) {
             setImagem(evento.target.files[0])
+            handleClose()
         } else {
             setImagem(null)
+            handleClose()
         }
-    }
 
+    }
+    console.log(file)
     useEffect(() => {
         if (parametros.id) {
             apiFullSports.get<ICliente>(`listar-cliente/${parametros.id}`)
@@ -179,6 +184,11 @@ const AtualizarAdministrador = () => {
         }
 
     }, [parametros]);
+    const deletarFoto = () => {
+        apiFullSports.delete(`imagem/${imagemId}`)
+        setImagemID('');
+        window.location.reload();
+    }
     function buscaCep() {
         console.log(cep)
         ApiCep.request({
@@ -250,7 +260,7 @@ const AtualizarAdministrador = () => {
                 }).then(() => {
                     setSpinner(false)
                     // alert("cliente atualizado com suceeso");
-                    window.location.href = "/sig/consulta-de-clientes";
+                    window.location.href = "/dashboard/consulta-admin";
                 }).catch(erro => console.log(erro))
             } else {
                 apiFullSports.get<ICliente>(`listar-cliente/${parametros.id}`)
@@ -293,7 +303,7 @@ const AtualizarAdministrador = () => {
                                                 .then(() => {
                                                     setSpinner(false)
                                                     // alert("cliente atualizado com suceso");
-                                                    window.location.href = "/sig/consulta-de-clientes";
+                                                    window.location.href = "/dashboard/consulta-admin";
                                                 }).catch(erro => console.log(erro))
                                         ).catch(erro => console.log(erro))
                                 ).catch(erro => console.log(erro))
@@ -362,7 +372,7 @@ const AtualizarAdministrador = () => {
         <>
             <Main id="main">
                 <ExibeTitulo id="exibe-titulo" className="exibe-titulo"><h3>Atualizar dados de {nome}</h3> <IconePerfil /></ExibeTitulo>
-                <FormCadastroAdmin id="form-cadastro-cliente" className="form-cadastro-cliente">
+                <FormAtualizarAdmin id="form-cadastro-cliente" className="form-cadastro-cliente">
                     <Box component={'form'} onSubmit={aoSubmeterForm} encType="multipart/form-data">
                         <Row1grid id="row-1-grid" className="row-1-grid">
                             <label className="col-form-label">CPF</label>
@@ -524,19 +534,43 @@ const AtualizarAdministrador = () => {
                                 name="file"
                                 accept="image/jpeg, image/pjpeg, image/png, image/gif"
                             /> */}
-                            <React.Fragment>
-                                <Button onClick={handleOpen}> Atualizar foto</Button>
-                                <Modal
-                                    hideBackdrop
-                                    open={open}
-                                    onClose={handleClose}
-                                >
-                                    <Box id="tela-delete-imagem" className="tela-delete-imagem" sx={{width: 500}}>
-                                    <p>@@</p>
-                                    </Box>
-                                </Modal>
 
-                            </React.Fragment>
+                            <Button onClick={handleOpen} sx={{ border: "2px solid", marginBottom: '3%' }}> Atualizar foto ou excluir foto</Button>
+                            <Modal
+                                hideBackdrop
+                                open={open}
+                                onClose={handleClose}
+                                id="model"
+                            >
+
+                                <Box component={'div'} id="tela-imagem" className="tela-imagem" sx={{
+                                    width: '30%', height: '25%',
+                                    position: 'absolute' as 'absolute', top: '50%', left: '35%', display: 'flex', justifyContent: 'center',
+                                    backgroundColor: '#4e4a4a', border: '3px solid #000', borderRadius: '20px', pt: 2, px: 4, pb: 3
+                                }}>
+                                    <Box component={"div"} sx={{ marginTop: '5.5%', marginRight: '3%' }}>
+                                        <IconePerfil />
+                                    </Box>
+                                    <Box component={"div"} sx={{ display: 'grid' }} id="tela-imagem-opcoes">
+                                        <Button color="error" variant="outlined" sx={{ border: "2px solid alert" }} onClick={deletarFoto} >Excluir Foto</Button>
+                                        <div>
+                                            <AtualizarImagemLabel htmlFor="file" >Atualizar foto</AtualizarImagemLabel>
+                                            <input
+                                                onChange={selecionarArquivo}
+                                                className="txt-form"
+                                                id="file"
+                                                type="file"
+                                                name="file"
+                                                accept="image/jpeg, image/pjpeg, image/png, image/gif"
+                                            />
+                                        </div>
+                                        <Button variant="outlined" sx={{ border: "2px solid" }} onClick={handleClose}>Cancelar</Button>
+                                    </Box>
+                                </Box>
+
+                            </Modal>
+
+
 
                             {spinner && (<p>carregando...</p>)}
                             {mensagemErroBolean && (<span id="menssagem-erro">{menssagemErro}</span>)}
@@ -544,7 +578,7 @@ const AtualizarAdministrador = () => {
 
                         <BttCadClienteGrid id="btt-cad-cliente-grid" className="btt-cad-cliente-grid">
                             <Button type="submit" id="btn-cad-forms" className="btn-cad-forms">
-                                Cadastrar Cliente
+                                Atualizar Administrador
                             </Button>
                             <Button
                                 onClick={evento => window.location.href = '/dashboard/consulta-admin'}
@@ -553,7 +587,7 @@ const AtualizarAdministrador = () => {
                             </Button>
                         </BttCadClienteGrid>
                     </Box>
-                </FormCadastroAdmin>
+                </FormAtualizarAdmin>
             </Main>
         </>
     )
