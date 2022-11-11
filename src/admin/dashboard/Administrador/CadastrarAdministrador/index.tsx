@@ -5,15 +5,12 @@ import './styles.css';
 import { Button, TextField, FormControl, Select, InputLabel, MenuItem, Box } from "@mui/material";
 import apiFullSports from "../../../../api/apiFullSports";
 import ApiCep from "../../../../api/apiCep";
-const Main = styled.main`
-    width: 100%;
-    min-height: 600px;
-`;
+const Main = styled.main``;
 const ExibeTitulo = styled.h3`
     margin: 2%;
     text-align: center;
 `;
-const FormCadastroCliente = styled.div`
+const FormCadastroAdmin = styled.div`
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 20px;
@@ -195,7 +192,7 @@ const CadastroAdministrador = () => {
         <>
         <Main id="main">
         <ExibeTitulo id="exibe-titulo" className="exibe-titulo">Cadastrar um Adimin</ExibeTitulo>
-            <FormCadastroCliente id="form-cadastro-cliente" className="form-cadastro-cliente">
+            <FormCadastroAdmin id="form-cadastro-cliente" className="form-cadastro-cliente">
                     <Box component={'form'} onSubmit={aoSubmeterForm} encType="multipart/form-data">
                         <Row1grid id="row-1-grid" className="row-1-grid">
                             <label className="col-form-label">CPF</label>
@@ -402,7 +399,7 @@ const CadastroAdministrador = () => {
                             </Button>
                         </BttCadClienteGrid>
                     </Box>
-            </FormCadastroCliente>
+            </FormCadastroAdmin>
             </Main>
         </>
     )

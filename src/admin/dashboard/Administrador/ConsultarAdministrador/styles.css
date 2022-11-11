@@ -1,0 +1,146 @@
+.main {
+    width: 100%;
+    min-height: 600px;
+}
+
+.exibe-titulo {
+    margin: 2%;
+    text-align: center;
+    
+}
+
+/*css do index-Consultar administrador*/
+.btn-exibe-group {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    grid-auto-rows: minmax(auto, auto);
+    grid-gap: 2px;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5px;
+}
+
+.btn-exibe {
+    border: none;
+    border-radius: 5px;
+    background-color: #313131;
+    color: rgb(243, 243, 243);
+    font-size: 14px;
+    width: 70px;
+    height: 35px;
+}
+
+.btn-exibe :hover {
+    text-decoration: none;
+    background-color: rgb(0, 0, 0);
+    transform: translate(0.3s);
+}
+
+@media screen and (max-width: 1144px) {
+    .btn-exibe {
+        width: 40px;
+        justify-content: center;
+    }
+}
+
+/*css da tabela */
+.table-exibe {
+    border-color: rgb(174, 174, 174);
+    margin-right: auto;
+    margin-left: auto;
+    width: 70%;
+    box-shadow: 1px 1px 8px rgb(70, 70, 70, 0.2);
+    border-collapse: separate;
+    border-spacing: 5px 5px;
+    padding-bottom: 5%;
+    line-height: 35px;
+}
+
+td {
+    border-style: none;
+    border-top: 2px solid rgb(167, 230, 89, 0.5);
+}
+
+th,
+td {
+    padding: 1px;
+    border-radius: 3px;
+    border-top: 2px solid rgb(167, 230, 89, 0.5);
+}
+
+th {
+    font-size: 13pt;
+    color: rgb(232, 232, 232);
+    background-color: #4c4f54;
+}
+img {
+    padding: 0;
+    margin: 0;
+    width: 120px;
+    height: 70px;
+}
+tr {
+    background-color: #4c4f54;
+}
+@media screen and (max-width: 1144px) {
+    table{
+    width: auto;
+    position: static;
+    overflow-x: auto;
+    width: 100%;
+    display: block;
+    padding: 20px .625em .625em .625em;
+    }
+    thead, tbody, thead, th {
+    display: block;
+    }
+    thead {
+    float: left;
+    }
+    tbody {
+    width: auto;
+    position: static;
+    overflow-x: auto;
+    }
+    td, th {
+
+    height: 60px;
+    vertical-align: middle;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    overflow-y: auto;
+    width: 100px;
+    font-size: 12px;
+    }
+    tbody tr {
+    display: table-cell;
+    }
+    tbody td {
+    display: block;
+    text-align: center;
+    }
+    tr:nth-child(even) {
+    background: transparent;
+    }
+
+    tr td:nth-child(even) {
+    border-right: 1px solid #493e3e;
+    }
+    img {
+        width: 100%;
+        height: auto;
+    }
+}
+.icone {
+    background-color: white;
+    height: 50px;
+    width: 50px;
+    border-radius: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: auto;
+    margin-left: auto;
+    font-size: 22px;
+}
