@@ -1,20 +1,20 @@
-import { useState, useEffect } from 'react';
+import {  useEffect } from 'react';
 import React from 'react';
 
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css"
 import Slider from "react-slick";
-import { sliderVerticalCards, sliderHorizontalCards } from '../../utils/SliderSettings'
+import { sliderVerticalCards, sliderHorizontalCards } from '../../../utils/SliderSettings'
 
 import './styles.css';
-import './../../styles.css';
-import Footer from "../../Components/Footer";
+import '../../../styles.css';
+import Footer from '../../Components/Footer';
 import Cabecalho from "../../Components/Menu/Header";
 import VerticalCardProduct from "../../Components/Cards/VerticalCardP/index"
 import HorizontalCardProduct from '../../Components/Cards/HorizontalCardP';
-import { render } from "@testing-library/react";
-import IProduto from '../../utils/interfaces/IProduto';
-import apiFullSports from '../../api/apiFullSports';
+// import { render } from "@testing-library/react";
+import IProduto from '../../../utils/interfaces/IProduto';
+import apiFullSports from '../../../api/apiFullSports';
 
 
 const Home = () => {
@@ -72,7 +72,7 @@ const Home = () => {
                     {/* </div> */}
                 </div>
             </div>
-        {/* <Footer /> */}
+        <Footer />
         </>
     );
 }

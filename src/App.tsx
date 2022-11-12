@@ -1,11 +1,11 @@
 import React from 'react';
 import { BrowserRouter, Route , Routes } from 'react-router-dom';
-import Home from './Pages/Home';
-import Acessibilidade from './Pages/Acessibilidade';
+import Home from './clients/Pages/Home';
+import Acessibilidade from './clients/Pages/Acessibilidade';
 import CadastroAdministrador from './admin/dashboard/Pages/Administrador/CadastrarAdministrador';
-import Equipamentos from './Pages/Equipamentos';
-import PageErro404 from './Pages/Erro404';
-import Tenis from './Pages/Tenis';
+import Equipamentos from './clients/Pages/Equipamentos';
+import PageErro404 from './Erro404';
+import Tenis from './clients/Pages/Tenis';
 import DashboardHome from './admin/dashboard';
 import ConsultaAdimistrador from './admin/dashboard/Pages/Administrador/ConsultarAdministrador/index';
 import AtualizarAdministrador from './admin/dashboard/Pages/Administrador/AtualizarAdministrador';

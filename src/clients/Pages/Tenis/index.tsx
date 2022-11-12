@@ -2,10 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import Footer from "../../Components/Footer";
 import Cabecalho from "../../Components/Menu/Header";
-const BtnChuteira1 = require ("./../../assets/images/produtos/btnchuteira-campo-puma-one-2.png");
-const BtnChuteira2 = require ("./../../assets/images/produtos/chuteira-campo-puma-one-2.jpg");
-const BtnChuteira3 = require ("./../../assets/images/produtos/chuteira-campo-puma-one-3.jpg");
-const BtnChuteira4 = require ("./../../assets/images/produtos/chuteira-campo-puma-one-4.jpg");
+const BtnChuteira1 = require ("./../../../assets/images/produtos/btnchuteira-campo-puma-one-2.png");
+const BtnChuteira2 = require ("./../../../assets/images/produtos/chuteira-campo-puma-one-2.jpg");
+const BtnChuteira3 = require ("./../../../assets/images/produtos/chuteira-campo-puma-one-3.jpg");
+const BtnChuteira4 = require ("./../../../assets/images/produtos/chuteira-campo-puma-one-4.jpg");
 const VisualizacaoPrd = styled.section`
     margin: 40px 0;
     margin-left: auto;

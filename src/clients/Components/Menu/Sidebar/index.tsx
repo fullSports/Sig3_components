@@ -1,8 +1,8 @@
 import React from "react";
-import '../../../styles.css';
+import '../../../../styles.css';
 import './styles.css';
-import {arrayNavItems} from '../../../utils/NavItems';
-const brandLogo = require('../../../assets/images/fullSportLogo.png');
+import {arrayNavItems} from '../../../../utils/NavItems';
+const brandLogo = require('../../../../assets/images/fullSportLogo.png');
 
 const Sidebar = () => {
 

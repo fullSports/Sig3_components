@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "styled-components";
-const Img404 = require('./../../assets/images/5680361.png')
+const Img404 = require('./../assets/images/5680361.png')
 const DivImg = styled.div`
 justify-content: center;
 display: flex;

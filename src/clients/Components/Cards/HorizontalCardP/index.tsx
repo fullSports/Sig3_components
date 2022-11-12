@@ -1,6 +1,6 @@
 import './styles.css';
-import '../../../../src/styles.css';
-const imgPrd = require('../../../assets/images/produtos/produto-teste.png')
+import '../../../../../src/styles.css';
+const imgPrd = require('../../../../assets/images/produtos/produto-teste.png')
 
 const HorizontalCardProduct = () => {
     return(

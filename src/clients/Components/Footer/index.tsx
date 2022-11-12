@@ -1,10 +1,10 @@
 import {BiSend} from 'react-icons/bi'
-import {arrayNavItems} from '../../utils/NavItems';
-import {DevNames} from '../../utils/devNames';
+import {arrayNavItems} from '../../../utils/NavItems';
+import {DevNames} from '../../../utils/devNames';
 import {AiFillTwitterCircle, AiOutlineInstagram, AiFillFacebook} from 'react-icons/ai';
-import '../../../src/styles.css';
+import '../../../../src/styles.css';
 import './styles.css';
-const brandLogo = require('../../assets/images/fullSportLogo.png');
+const brandLogo = require('../../../assets/images/fullSportLogo.png');
 
 const Footer = () =>{
     return(
