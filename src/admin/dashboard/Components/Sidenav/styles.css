@@ -27,16 +27,21 @@
     overflow-x-auto
 }
 
-.sidenav::-webkit-scrollbar{
+.nav-list{
+    @apply
+    mb-8 mx-6
+}
+
+.teste::-webkit-scrollbar{
   position: absolute;
   width: 30px;
 }
 
-.sidenav::-webkit-scrollbar-track{
+.teste::-webkit-scrollbar-track{
     background: #E6E6E6;
 }
 
-.sidenav::-webkit-scrollbar-thumb{
+.teste::-webkit-scrollbar-thumb{
     background-color: #cacaca;
     border-radius: 20px;
     border: none;
@@ -44,18 +49,19 @@
 
 .toggle-collapse {
     @apply
-    absolute cursor-pointer
+    cursor-pointer
     rounded-full
     h-[60px] w-[60px]
-    -right-8 top-28
     bg-def_dark_blue
     px-5 text-2xl
     text-def_white
 }
 
-.sidenav-header{
+.sidenav-header {
     @apply
     pt-7 pb-3
+    content-center
+    text-center
 }
 
 .pfp-container{
@@ -92,11 +98,6 @@
     font-semibold
     text-txt_size_nr
     text-def_white
-}
-
-.nav-list{
-    @apply
-    mb-8 mx-6
 }
 
 .nav-item {
