@@ -154,7 +154,7 @@
 
 .nav-item-btn{
     @apply
-    px-6 py-3 cursor-pointer transition-all
+    px-3 py-3 cursor-pointer transition-all
     font-light rounded-full
     hover:bg-def_orange/20
     text-def_black hover:text-def_black/70 
