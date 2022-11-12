@@ -23,6 +23,8 @@
     md:w-[360px] md:h-[205px]
     lg:w-[360px] lg:h-[205px]
     bg-def_white 
+    dark:bg-def_dark_blue
+    dark:border-2 dark:border-def_white
     shadow rounded-lg
     flex
 }

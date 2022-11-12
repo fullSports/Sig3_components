@@ -83,7 +83,8 @@
 .header-items-container{
     @apply
     mb-6 w-[100%] py-4
-    bg-def_white 
+    bg-def_white
+    dark:bg-def_black
 }
 
 .help-icons{

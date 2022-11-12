@@ -1,6 +1,7 @@
 import './styles.css';
 import '../../../styles.css';
 import {arrayNavItems} from '../../../utils/NavItems';
+import { useTheme } from '../../../utils/Hooks/useTheme';
 import Sidebar from '../Sidebar/index'
 
 import {RiMenuFill} from 'react-icons/ri';
@@ -13,6 +14,8 @@ const suporteIcon = require('../../../assets/icons/help-icon.png');
 const contaIcon = require('../../../assets/icons/conta-icon.png');
 
 const Cabecalho = () => {
+
+  const {theme, setTheme} = useTheme();
 
   function openTeste(){
     let sidebar = document.querySelector('.sidebar-header');
@@ -74,7 +77,11 @@ const Cabecalho = () => {
               <span>Diminuir Fonte</span>
             </li>
             <li>
-              <span className="cursor-pointer">Alto Contraste</span>
+              {theme === 'light' ? 
+                (<span onClick={()=> setTheme('dark')} className="cursor-pointer">Alto Contraste</span>)
+                :
+                (<span onClick={()=> setTheme('light')} className="cursor-pointer">Sem Contraste</span>)
+              }
             </li>
             <li>
               <span>Modo Escuro</span>
