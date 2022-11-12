@@ -1,5 +1,5 @@
 import React from 'react';
-import DashboardSidenav from './Components/Sidenav';
+import DashboardSidenav from '../Components/Sidenav';
 import './styles.css';
 
 const DashboardHome = () =>{
