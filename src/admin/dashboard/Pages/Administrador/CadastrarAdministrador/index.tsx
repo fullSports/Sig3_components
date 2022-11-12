@@ -106,7 +106,7 @@ const CadastroAdministrador = () => {
     const [password, setPassword] = useState('');
 
     const [mensagemErroBolean, setMensagemErroBolean] = useState(false);
-    const [menssagemErro, setMenssagemErro] = useState('')
+    const [menssagemErro, setMenssagemErro] = useState('');
     const selecionarArquivo = (evento: React.ChangeEvent<HTMLInputElement>) => {
         if (evento.target.files?.length) {
             setImagem(evento.target.files[0])
