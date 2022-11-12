@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import './styles.css';
 import {GiHamburgerMenu} from 'react-icons/gi'
-import { arrayNavCadastros, arrayNavPerfis } from '../../utils/arrayNavDashboard';
-const ex_pfp = require('../../../../assets/images/pfp-dashboard-ex.png');
+import { arrayNavCadastros, arrayNavPerfis } from '../../dashboard/utils/arrayNavDashboard';
+const ex_pfp = require('../../../assets/images/pfp-dashboard-ex.png');
 
 const DashboardSidenav = () =>{
 
