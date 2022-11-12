@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import styled from 'styled-components';
 import { Button, TextField, FormControl, Select, InputLabel, MenuItem, Box } from "@mui/material";
-import apiFullSports from "../../../../api/apiFullSports";
-import ApiCep from "../../../../api/apiCep";
+import apiFullSports from "../../../../../api/apiFullSports";
+import ApiCep from "../../../../../api/apiCep";
 const Main = styled.main`
     width: 100%;
     min-height: 600px;
@@ -74,7 +74,17 @@ const BttCadClienteGrid = styled.div`
         }
     }
 `;
-
+const AtualizarImagemLabel = styled.label`
+cursor: pointer;
+text-transform: uppercase;
+color: #0b0b0b;
+border: solid 1px #7b7777;;
+margin-top: 4%;
+margin-bottom: 4%;
+display: flex;
+padding: 10px 10px;
+border-radius: 5px;
+`;
 const CadastroAdministrador = () => {
 
     const [cpf, setCpf] = useState('');
@@ -381,10 +391,11 @@ const CadastroAdministrador = () => {
                                 required
                             />
                             <label className="col-form-label">Imagem de Perfil</label>
+                            <AtualizarImagemLabel htmlFor="file" >Escolher foto...</AtualizarImagemLabel>
                             <input
                                 onChange={selecionarArquivo}
                                 className="txt-form"
-                                id="imagemPerfil"
+                                id="file"
                                 type="file"
                                 name="file"
                                 accept="image/jpeg, image/pjpeg, image/png, image/gif"
@@ -400,7 +411,7 @@ const CadastroAdministrador = () => {
                                     fontSize: '14px', backgroundColor: 'black', ":hover": 'backgroundColor: #313131, transform:translate(0.8s)'
                                 }}
                                 type="submit" id="btn-cad-forms" className="btn-cad-forms">
-                                Cadastrar Cliente
+                                Cadastrar Administrador
                             </Button>
                             <Button
                                 onClick={evento => window.location.href = '/dashboard/consulta-admin'}
@@ -408,7 +419,7 @@ const CadastroAdministrador = () => {
                                     justifyContent: 'center', display: 'block', height: '50px', borderRadius: '5px', color: '#fff',
                                     fontSize: '14px', backgroundColor: 'black', ":hover": 'backgroundColor: #313131, transform:translate(0.8s)'
                                 }} type="button" id="btn-cad-forms" className="btn-cad-forms">
-                                Consulta de Adiministradores
+                                Consulta de Administradores
                             </Button>
                         </BttCadClienteGrid>
                     </Box>

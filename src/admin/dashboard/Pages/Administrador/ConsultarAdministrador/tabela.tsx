@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import ICliente from "../../../../utils/interfaces/ICliente";
-import apiFullSports from "../../../../api/apiFullSports";
+import ICliente from "../../../../../utils/interfaces/ICliente";
+import apiFullSports from "../../../../../api/apiFullSports";
 import styled from "styled-components";
 
 const Icone = styled.div`
@@ -16,13 +16,13 @@ const Icone = styled.div`
     font-size: 22px;
 `;
 const TabelaAdimistrador = () => {
-    const [open, setOpen] = React.useState(false);
-    const handleOpen = () => {
-        setOpen(true);
-    };
-    const handleClose = () => {
-        setOpen(false);
-    };
+    // const [open, setOpen] = React.useState(false);
+    // const handleOpen = () => {
+    //     setOpen(true);
+    // };
+    // const handleClose = () => {
+    //     setOpen(false);
+    // };
     
     const [spinner, setSpinner] = useState(false);   
     const [clientes, setClientes] = useState<ICliente[]>([]);
@@ -33,17 +33,17 @@ const TabelaAdimistrador = () => {
             .catch((err) => console.log(err));
     }, []);
 
-    const deletar = (DeletarCliente: ICliente) => {
-        apiFullSports.delete(`deletar-cliente/${DeletarCliente._id}/`);
-        window.location.reload();
-    }
+    // const deletar = (DeletarCliente: ICliente) => {
+    //     apiFullSports.delete(`deletar-cliente/${DeletarCliente._id}/`);
+    //     window.location.reload();
+    // }
 
        return <>
        {spinner && (<p>carregando...</p>)}
        {
         
         clientes.map(item => {
-            if (item.imagemPerfil == null || item.imagemPerfil == undefined) {
+            if (item.imagemPerfil === null || item.imagemPerfil === undefined) {
                 return (
                     <tr key={item._id.toString()}>
 

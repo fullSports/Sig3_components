@@ -2,13 +2,13 @@ import React from 'react';
 import { BrowserRouter, Route , Routes } from 'react-router-dom';
 import Home from './Pages/Home';
 import Acessibilidade from './Pages/Acessibilidade';
-import CadastroAdministrador from './admin/dashboard/Administrador/CadastrarAdministrador';
+import CadastroAdministrador from './admin/dashboard/Pages/Administrador/CadastrarAdministrador';
 import Equipamentos from './Pages/Equipamentos';
 import PageErro404 from './Pages/Erro404';
 import Tenis from './Pages/Tenis';
 import DashboardHome from './admin/dashboard';
-import ConsultaAdimistrador from './admin/dashboard/Administrador/ConsultarAdministrador/index';
-import AtualizarAdministrador from './admin/dashboard/Administrador/AtualizarAdministrador';
+import ConsultaAdimistrador from './admin/dashboard/Pages/Administrador/ConsultarAdministrador/index';
+import AtualizarAdministrador from './admin/dashboard/Pages/Administrador/AtualizarAdministrador';
 const App: React.FC = ()=> {
   return (
     <BrowserRouter>

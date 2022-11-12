@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import styled from 'styled-components';
 import { Button, TextField, FormControl, Select, InputLabel, MenuItem, Box, Modal } from "@mui/material";
-import apiFullSports from "../../../../api/apiFullSports";
-import ApiCep from "../../../../api/apiCep";
+import apiFullSports from "../../../../../api/apiFullSports";
+import ApiCep from "../../../../../api/apiCep";
 import { useParams } from "react-router-dom";
-import ICliente from "../../../../utils/interfaces/ICliente";
-import Iimagem from "../../../../utils/interfaces/Iimagem";
+import ICliente from "../../../../../utils/interfaces/ICliente";
 import './styles.css'
-const SinalMais = require('../../../../assets/icons/sinalMais.png')
+const SinalMais = require('../../../../../assets/icons/sinalMais.png')
 
 const Main = styled.main`
     width: 100%;
@@ -163,11 +162,8 @@ const AtualizarAdministrador = () => {
     const [imagemId, setImagemID] = useState('');
     const [imagemPerfilurl, setImagemPerfilurl] = useState('')
 
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-
-    const [mensagemErroBolean, setMensagemErroBolean] = useState(false);
-    const [menssagemErro, setMenssagemErro] = useState('')
+    const [mensagemErroBolean] = useState(false);
+    const [menssagemErro] = useState('')
     const [cadastrarNovaFoto, setCadastrarNovaFoto] = useState(false)
 
     const [open, setOpen] = React.useState(false);
@@ -345,7 +341,7 @@ const AtualizarAdministrador = () => {
     setTimeout(buscaCepCarregarPage, 222)
 
     const IconePerfil = () => {
-        if (imagemId == '') {
+        if (imagemId === '') {
             return (
                 <Icone className="icone" onClick={handleOpen}>
                     <p className="texto-imagem-pergil">{nome.charAt(0)}</p>
@@ -361,7 +357,7 @@ const AtualizarAdministrador = () => {
         }
     }
     const IconePerfilPage = () => {
-        if (imagemId == '') {
+        if (imagemId === '') {
             return (
                 <IconePage className="icone" onClick={handleOpen}>
                     <p className="texto-imagem-pergil">{nome.charAt(0)}</p>
@@ -448,7 +444,6 @@ const AtualizarAdministrador = () => {
             }).catch(erro => console.log(erro))
         }
     }
-
 
     return (
         <>
