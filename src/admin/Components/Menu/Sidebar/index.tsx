@@ -1,21 +1,18 @@
 import './styles.css';
-import '../../../styles.css';
-import {arrayNavItems} from '../../../utils/NavItems';
-import { useTheme } from '../../../utils/Hooks/useTheme';
-import Sidebar from '../Sidebar/index'
+import '../../../../styles.css';
+import {arrayNavItems} from '../../../../utils/NavItems';
+import Sidebar from './index'
 
 import {RiMenuFill} from 'react-icons/ri';
 import {BiSearch} from 'react-icons/bi';
 import {TbArrowBigDown, TbArrowBigTop} from 'react-icons/tb';
 import {ImAccessibility, ImContrast} from 'react-icons/im';
-const brandLogo = require('../../../assets/images/fullSportLogo.png');
-const carrinhoIcon = require('../../../assets/icons/carrinho-icon.png');
-const suporteIcon = require('../../../assets/icons/help-icon.png');
-const contaIcon = require('../../../assets/icons/conta-icon.png');
+const brandLogo = require('../../../../assets/images/fullSportLogo.png');
+const carrinhoIcon = require('../../../../assets/icons/carrinho-icon.png');
+const suporteIcon = require('../../../../assets/icons/help-icon.png');
+const contaIcon = require('../../../../assets/icons/conta-icon.png');
 
 const Cabecalho = () => {
-
-  const {theme, setTheme} = useTheme();
 
   function openTeste(){
     let sidebar = document.querySelector('.sidebar-header');
@@ -77,11 +74,7 @@ const Cabecalho = () => {
               <span>Diminuir Fonte</span>
             </li>
             <li>
-              {theme === 'light' ? 
-                (<span onClick={()=> setTheme('dark')} className="cursor-pointer">Alto Contraste</span>)
-                :
-                (<span onClick={()=> setTheme('light')} className="cursor-pointer">Sem Contraste</span>)
-              }
+              <span className="cursor-pointer">Alto Contraste</span>
             </li>
             <li>
               <span>Modo Escuro</span>
@@ -146,9 +139,8 @@ const Cabecalho = () => {
         </div>
       </div>
     </div>
-    
+
     </>
   );
 }
 export default Cabecalho;
-

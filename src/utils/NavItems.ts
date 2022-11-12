@@ -1,5 +1,5 @@
 
-export var arrayNavItems = [
+export  var arrayNavItems = [
     {
         title: 'Feminino',
         path: ''
