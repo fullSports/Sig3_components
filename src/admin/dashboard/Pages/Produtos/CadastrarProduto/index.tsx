@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Button, TextField, Autocomplete, Modal,Box, FormControl, InputLabel, Select, MenuItem } from "@mui/material";
+import { Button, TextField, Autocomplete, FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 import IFornecedor from '../../../../../utils/interfaces/IFornecedor';
 import apiFullSports from '../../../../../api/apiFullSports';
 const Main = styled.main`
@@ -105,15 +105,12 @@ const CadastrarProduto = () => {
     const [preco, setPreco] = useState('');
     const [quantidade, setQuantidade] = useState('');
     const [ tamanhoProduto,setTamanhoProduto] = useState('');
-    const [file, setImagem] = useState<File | null>(null);
     const [sexo, setSexo] = useState('');
     let ImagensID = [{},]
     let imagens = [{},]
-    const [statusId, setStatusId] = useState(Number)
     const [spinner, setSpinner] = useState(false);
     const [mensagemErroBolean, setMensagemErroBolean] = useState(false);
     const [menssagemErro, setMenssagemErro] = useState('');
-    const [IdCategoria,setIdCategoria] = useState('');
     const selecionarArquivo = (evento: React.ChangeEvent<HTMLInputElement>) => {
         imagens = [{},]
         if (evento.target.files?.length) {
@@ -147,7 +144,7 @@ const CadastrarProduto = () => {
             setMensagemErroBolean(true);
         }else{
             imagens.map(item => {
-                apiFullSports.request({
+               return apiFullSports.request({
                     url: 'imagem/',
                     method: 'POST',
                     headers: {

@@ -54,7 +54,7 @@ const TabelaAdimistrador = () => {
                         </th>
 
                         <th>{`${item.dataCadastro.toLocaleString()}`}</th>
-                        <th>{item.cpf}</th>
+                        <th>{`${item.cpf.charAt(0)}${item.cpf.charAt(1)}${item.cpf.charAt(2)}. *** . *** -${item.cpf.charAt(12)}${item.cpf.charAt(13)}`}</th>
                         <th>{item.nome}</th>
                         <th>{item.dataNascimento}</th>
                         <th>{item.sexo}</th>
