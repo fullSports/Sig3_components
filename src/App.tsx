@@ -12,6 +12,7 @@ import AtualizarAdministrador from './admin/dashboard/Pages/Administrador/Atuali
 import CadastrarFornecedor from './admin/dashboard/Pages/Fornecedor/CadastrarFornecedor';
 import ConsultarFornecedores from './admin/dashboard/Pages/Fornecedor/ConsultarFornecedores';
 import AtualizarFornecedor from './admin/dashboard/Pages/Fornecedor/AtualizarFornecedor';
+import CadastrarProduto from './admin/dashboard/Pages/Produtos/CadastrarProduto';
 const App: React.FC = ()=> {
   return (
     <BrowserRouter>
@@ -28,19 +29,23 @@ const App: React.FC = ()=> {
       {/* DASHBOARD */}
       <Route path='/dashboard/home' element={<DashboardHome/>}/>
 
-      {/* mvc Administrador */}    
+      {/* crud Administrador */}    
       <Route path='/dashboard/cadastrar-admin' element={<CadastroAdministrador/>}/>
 
       <Route path='/dashboard/consulta-admin' element={<ConsultaAdimistrador/>}/>
 
       <Route path='/dashboard/atualizar-admin/:id' element={<AtualizarAdministrador/>}/>  
 
-      {/* mvc Fornecedor */}
+      {/* crud Fornecedor */}
       <Route path='/dashboard/cadastrar-fornecedor' element={<CadastrarFornecedor/>}/>
       
       <Route path='/dashboard/consultar-fornecedores' element={<ConsultarFornecedores/>}/>
       
       <Route path='/dashboard/atualizar-fornecedor/:id' element={<AtualizarFornecedor/>}/>
+     
+     {/* crud produto */}
+     <Route path='/dashboard/cadastrar-produto' element={<CadastrarProduto/>}/>
+     
       {/****************************** */}
       <Route path='*' element={<PageErro404/>}/>
     </Routes>

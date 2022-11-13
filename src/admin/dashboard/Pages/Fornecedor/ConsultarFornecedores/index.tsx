@@ -15,7 +15,7 @@ const ExibeTitulo = styled.h3`
 const PainelBody = styled.div`
 `;
 const TableExibe = styled.table`
-     border-color: rgb(174, 174, 174);
+    border-color: rgb(174, 174, 174);
 	margin-right: auto;
 	margin-left: auto;
 	width: 70%;

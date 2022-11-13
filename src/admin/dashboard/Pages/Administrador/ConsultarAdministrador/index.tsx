@@ -97,7 +97,8 @@ const ConsultaAdimistrador = () =>{
 
     return(
         <Main id="main">
-                <ExibeTitulo id="exibe-titulo" className="exibe-titulo">Lista de Cliente</ExibeTitulo>
+                <ExibeTitulo id="exibe-titulo" className="exibe-titulo">Lista de Administradores</ExibeTitulo>
+
                 <PainelBody id="panel-body" className="panel-name">
 
                     <div>
