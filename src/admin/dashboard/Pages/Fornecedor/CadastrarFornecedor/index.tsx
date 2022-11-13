@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import styled from "styled-components";
 import apiFullSports from "../../../../../api/apiFullSports";
 import { TextField, Button, Box } from '@mui/material';
+import ApiCep from "../../../../../api/apiCep";
 const Main = styled.main`
     width: 100%;
     min-height: 600px;
@@ -77,6 +78,8 @@ const CadastrarFornecedor = () =>{
     const [complemento, setComplemento] = useState('');
     const [numero, setNumero] = useState('');
     const [spinner, setSpinner] = useState(false);
+    const [carregandoCep, setCarregandoCep] = useState(false);
+    const [carregandoCepMenssagem, setCarregandoCepMessagem] = useState(false);
     const [mensagemErroBolean, setMensagemErroBolean] = useState(false);
     const [menssagemErro, setMenssagemErro] = useState('');
 
@@ -108,25 +111,26 @@ const CadastrarFornecedor = () =>{
     }
 
     function buscaCep() {
-        let url = "https://brasilapi.com.br/api/cep/v1/" + cep;
-        let req = new XMLHttpRequest();
-        req.open("GET", url);
-        req.send();
-        req.onload = function () {
-            if (req.status === 200) {
-                let endereco = JSON.parse(req.response);
-                setRua(endereco.street);
-                setBairro(endereco.neighborhood);
-                setEstado(endereco.state);
-                setCidade(endereco.city)
-            }
-            else if (req.status === 404) {
-                alert("cep invalido");
-            }
-            else {
-                alert("erro ao fazer a requisicao")
-            }
-        }
+        setCarregandoCep(true)
+        setCarregandoCepMessagem(false)
+        console.log(cep)
+        ApiCep.request({
+            method: 'GET',
+            url: cep,
+            headers: {
+                'Access-Control-Allow-Origin': '*'
+            },
+        }).then(evento => {
+            setCarregandoCep(false)
+            setRua(evento.data.street);
+            setBairro(evento.data.neighborhood);
+            setEstado(evento.data.state);
+            setCidade(evento.data.city)
+        }).catch(err => {
+            setCarregandoCep(false)
+            setCarregandoCepMessagem(true)
+            console.log(err)
+        })
     }
     return(
         <>
@@ -157,7 +161,8 @@ const CadastrarFornecedor = () =>{
                                 fullWidth
                                 onChange={evento => setNomeEmpresa(evento.target.value)}
                             />
-                            <label className="col-form-label">Cep</label>
+                             <label className="col-form-label">Cep {carregandoCep && <p>buscando cep...</p>}{carregandoCepMenssagem && <p id="menssagem-erro">cep invalido</p>}</label>
+                            
                             <TextField
                                 onChange={evento => setCep(evento.target.value)}
                                 sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
@@ -170,7 +175,7 @@ const CadastrarFornecedor = () =>{
                                 required
                                 onBlur={buscaCep}
                             />
-
+                           
                             <label className="col-form-label">Rua</label>
                             <TextField
                                 onChange={evento => setRua(evento.target.value)}

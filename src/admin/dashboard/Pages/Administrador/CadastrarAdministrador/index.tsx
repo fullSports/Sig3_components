@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Button, TextField, FormControl, Select, InputLabel, MenuItem, Box } from "@mui/material";
 import apiFullSports from "../../../../../api/apiFullSports";
 import ApiCep from "../../../../../api/apiCep";
+import DashboardSidenav from "../../../../Components/Sidenav";
 const Main = styled.main`
     width: 100%;
     min-height: 600px;
@@ -101,7 +102,8 @@ const CadastroAdministrador = () => {
     const [numero, setNumero] = useState('');
     const [file, setImagem] = useState<File | null>(null)
     const [spinner, setSpinner] = useState(false);
-
+    const [carregandoCep, setCarregandoCep] = useState(false)
+    const [carregandoCepMenssagem, setCarregandoCepMessagem] = useState(false)
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -116,6 +118,8 @@ const CadastroAdministrador = () => {
     }
 
     function buscaCep() {
+        setCarregandoCep(true)
+        setCarregandoCepMessagem(false)
         console.log(cep)
         ApiCep.request({
             method: 'GET',
@@ -124,12 +128,14 @@ const CadastroAdministrador = () => {
                 'Access-Control-Allow-Origin': '*'
             },
         }).then(evento => {
+            setCarregandoCep(false)
             setRua(evento.data.street);
             setBairro(evento.data.neighborhood);
             setEstado(evento.data.state);
             setCidade(evento.data.city)
         }).catch(err => {
-            alert("cep invalido");
+            setCarregandoCep(false)
+            setCarregandoCepMessagem(true)
             console.log(err)
         })
     }
@@ -214,6 +220,7 @@ const CadastroAdministrador = () => {
 
     return (
         <>
+            <DashboardSidenav />
             <Main id="main">
                 <ExibeTitulo id="exibe-titulo" className="exibe-titulo">Cadastrar um Adimin</ExibeTitulo>
                 <FormCadastroAdmin id="form-cadastro-cliente" className="form-cadastro-cliente">
@@ -271,7 +278,7 @@ const CadastroAdministrador = () => {
                                 </Select>
                             </FormControl>
 
-                            <label className="col-form-label">Cep</label>
+                            <label className="col-form-label">Cep {carregandoCep && <p>buscando cep...</p>}{carregandoCepMenssagem && <p id="menssagem-erro">cep invalido</p>}</label>
                             <TextField
                                 onChange={evento => setCep(evento.target.value)}
                                 sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}

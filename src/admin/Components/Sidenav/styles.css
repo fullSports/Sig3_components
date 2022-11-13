@@ -1,9 +1,7 @@
 .sidenav-container{
     @apply
     flex
-    h-screen
-    items-center
-    /* fixed */
+    fixed
 }
 
 .sidenav-open{
@@ -13,12 +11,16 @@
 
 .sidenav-collapsed{
     @apply
-    w-[90px]
+    h-[25vh] w-[200px] 
 }
-
+.sidenav-collapsed ul{
+    display: none;
+}
+.sidenav-collapsed span{
+    display: none;
+}
 .sidenav{
     @apply
-    h-[95vh]
     bg-def_dark_blue
     duration-500
     relative
