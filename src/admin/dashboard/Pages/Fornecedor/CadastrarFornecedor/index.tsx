@@ -105,6 +105,8 @@ const CadastrarFornecedor = () =>{
                 setMenssagemErro(resposta.data.message)
             }else{
             // alert("Fornecedor cadastrado com sucesso")
+            setSpinner(false)
+            setMensagemErroBolean(false)
             window.location.href='/dashboard/consultar-fornecedores'
             }
         }).catch((err) => console.log(err))

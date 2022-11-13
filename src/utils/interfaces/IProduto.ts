@@ -1,16 +1,16 @@
-import IFornecedor from "./IFornecedor";
-import Iimagem from "./Iimagem";
+import ICacados from "./Produtos/ICalcados";
+import IEquipamentos from "./Produtos/IEquipamentos";
+import IRoupa from "./Produtos/IRoupa";
+import ISuplementos from "./Produtos/ISuplementos";
 
-export default interface IProduto{
+
+export default interface IProduto {
+    categoriaProduto: {
+        roupa: IRoupa
+        equipamento: IEquipamentos,
+        suplemento: ISuplementos,
+        calcado: ICacados,
+    }
     _id: string,
-    nomeProduto: string,
-    tipoProduto: string,
-    corProduto: string,
-    preco: string,
-    quantidade: number,
-    dataCadastro: string,
-    fornecedor: IFornecedor,
-    imagemProduto: [
-    Iimagem
-    ]
+    dataCadastro: string
 }

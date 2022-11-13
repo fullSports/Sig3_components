@@ -1,5 +1,4 @@
-import {  useEffect } from 'react';
-import React from 'react';
+import React,{  useEffect,useState } from 'react';
 
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css"
@@ -13,26 +12,54 @@ import Cabecalho from "../../Components/Menu/Header";
 import VerticalCardProduct from "../../Components/Cards/VerticalCardP/index"
 import HorizontalCardProduct from '../../Components/Cards/HorizontalCardP';
 // import { render } from "@testing-library/react";
-import IProduto from '../../../utils/interfaces/IProduto';
-import apiFullSports from '../../../api/apiFullSports';
+// import IProduto from '../../../utils/interfaces/IProduto';
+// import apiFullSports from '../../../api/apiFullSports';
+// import ICacados from '../../../utils/interfaces/Produtos/ICalcados';
+// import IEquipamentos from '../../../utils/interfaces/Produtos/IEquipamentos';
+// import IRoupa from '../../../utils/interfaces/Produtos/IRoupa';
+// import ISuplementos from '../../../utils/interfaces/Produtos/ISuplementos';
 
 
 const Home = () => {
+    //Exemplo de requisição por categorias
 
-    const [ loading, setLoading ] = React.useState(false);
-    const [ produtos, setProdutos ] = React.useState<IProduto[]>([]);
+    // const [ loading, setLoading ] = useState(false);
+    // const [ produtos, setProdutos ] = useState<IProduto[]>([]);
 
-    useEffect(() => {
-        setLoading(true)
-        apiFullSports.get<IProduto[]>('listar-produtos/')
-        .then(response => {
-            setProdutos(response.data);
-        setLoading(false)
-        })
-            .catch((e) =>{
-                console.log(e)
-        })
-    })
+    // const [produtosCacados,setProdutosCacados] = useState<ICacados[]>([]);
+    // const [produtosEquipamentos, setProdutosEquipamentos] = useState<IEquipamentos[]>([]);
+    // const [produtosRoupas,setProdutosRoupas] = useState<IRoupa[]>([]);
+    // const [produtosSuplementos,setProdutosSuplementos] = useState<ISuplementos[]>([]);
+
+    // useEffect(() => {
+    //     setLoading(true)
+    //     apiFullSports.get<IProduto[]>('listar-produtos/')
+    //     .then(response => {
+    //         setProdutos(response.data);
+    //     }).catch((err) =>{console.log(err)});
+
+    //     apiFullSports.get<ICacados[]>('listar-calcados/')
+    //     .then(response => {
+    //         setProdutosCacados(response.data);
+    //     }).catch((err) =>{console.log(err)});
+        
+    //     apiFullSports.get<IEquipamentos[]>('listar-equipamentos/')
+    //     .then(response => {
+    //         setProdutosEquipamentos(response.data);
+    //     }).catch((err) =>{console.log(err)});
+        
+    //     apiFullSports.get<IRoupa[]>('listar-roupas/')
+    //     .then(response => {
+    //         setProdutosRoupas(response.data);
+    //     }).catch((err) =>{console.log(err)});
+
+    //     apiFullSports.get<ISuplementos[]>('listar-suplementos/')
+    //     .then(response => {
+    //         setProdutosSuplementos(response.data);
+    //     }).catch((err) =>{console.log(err)});
+    // },[])
+    
+
 
     return (
         <>
@@ -40,18 +67,27 @@ const Home = () => {
             <div className='body-container'>
                 <div className="sec-container">
                     <h6 className="section-title">Ofertas da Semana</h6>
-                    <Slider {...sliderVerticalCards}>
-                        {
+
+                        {/* {
                             produtos.map(item => 
                             <VerticalCardProduct 
-                                src={item.imagemProduto[0].url}
-                                produtoName={item.nomeProduto}
+                                src={item.categoriaProduto.calcado.imagemProduto[0].url}
+                                produtoName={item.categoriaProduto.calcado.nomeProduto}
                                 PrecoAnterior={'R$80,90'}
-                                PrecoAtual={item.preco}
+                                PrecoAtual={item.categoriaProduto.calcado.preco}
                             />
                             )
-                        }
-                    </Slider>
+                        } */}
+                        {/* { 
+                        produtosRoupas.map(item=>
+                           <VerticalCardProduct
+                            src={item.imagemProduto[0].url}
+                            produtoName={item.nomeProduto}
+                            PrecoAnterior={'R$80,90'}
+                            PrecoAtual={item.preco}
+                           />
+                        )} */}
+     
                 </div>
 
                 <div className="sec-container">
