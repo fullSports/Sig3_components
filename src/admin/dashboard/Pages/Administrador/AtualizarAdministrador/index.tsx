@@ -165,7 +165,8 @@ const AtualizarAdministrador = () => {
     const [mensagemErroBolean] = useState(false);
     const [menssagemErro] = useState('')
     const [cadastrarNovaFoto, setCadastrarNovaFoto] = useState(false)
-
+    const [carregandoCep, setCarregandoCep] = useState(false)
+    const [carregandoCepMenssagem, setCarregandoCepMessagem] = useState(false)
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => {
         setOpen(true);
@@ -306,7 +307,16 @@ const AtualizarAdministrador = () => {
         setImagemID('');
     }
     function buscaCep() {
+        setCarregandoCep(true)
+        setCarregandoCepMessagem(false)
         console.log(cep)
+        if(cep===''){
+            setCarregandoCep(false)
+            setRua('');
+            setBairro('');
+            setEstado('');
+            setCidade('')
+        }else{
         ApiCep.request({
             method: 'GET',
             url: cep,
@@ -314,14 +324,17 @@ const AtualizarAdministrador = () => {
                 'Access-Control-Allow-Origin': '*'
             },
         }).then(evento => {
+            setCarregandoCep(false)
             setRua(evento.data.street);
             setBairro(evento.data.neighborhood);
             setEstado(evento.data.state);
             setCidade(evento.data.city)
         }).catch(err => {
-            alert("cep invalido");
+            setCarregandoCep(false)
+            setCarregandoCepMessagem(true)
             console.log(err)
         })
+    }
     }
     function buscaCepCarregarPage() {
         console.log(cep)
@@ -507,7 +520,7 @@ const AtualizarAdministrador = () => {
                                 </Select>
                             </FormControl>
 
-                            <label className="col-form-label">Cep</label>
+                            <label className="col-form-label">Cep {carregandoCep && <p>buscando cep...</p>}{carregandoCepMenssagem && <p id="menssagem-erro">cep invalido</p>}</label>
                             <TextField
                                 onChange={evento => setCep(evento.target.value)}
                                 sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}

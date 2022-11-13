@@ -4,7 +4,7 @@ import styled from "styled-components";
 import apiFullSports from "../../../../../api/apiFullSports";
 
 import { Button, TextField} from "@mui/material";
-
+import ApiCep from "../../../../../api/apiCep";
 import IFornecedor from "../../../../../utils/interfaces/IFornecedor";
 import { Box } from "@mui/system";
 const Main = styled.main`
@@ -79,6 +79,8 @@ const AtualizarFornecedor = () => {
     const [numero, setNumero] = useState('');
     const dataAtual = new Date().toLocaleDateString();
     const [spinner, setSpinner] = useState(false);
+    const [carregandoCep, setCarregandoCep] = useState(false);
+    const [carregandoCepMenssagem, setCarregandoCepMessagem] = useState(false);
     useEffect(() => {
         if (parametros.id) {
             apiFullSports.get<IFornecedor>(`listar-fornecedor/${parametros.id}`)
@@ -95,47 +97,56 @@ const AtualizarFornecedor = () => {
         }
     }, [parametros])
     function buscaCep() {
-        let url = "https://brasilapi.com.br/api/cep/v1/" + cep;
-        let req = new XMLHttpRequest();
-        req.open("GET", url);
-        req.send();
-        req.onload = function () {
-            if (req.status === 200) {
-                let endereco = JSON.parse(req.response);
-                setRua('')
-                setBairro('')
-                setEstado('')
-                setCidade('')
-                setRua(endereco.street);
-                setBairro(endereco.neighborhood);
-                setEstado(endereco.state);
-                setCidade(endereco.city)
-            }
-            else if (req.status === 404) {
-                alert("cep invalido");
-            }
-            else {
-                alert("erro ao fazer a requisicao")
-            }
-        }
-
+        setCarregandoCep(true)
+        setCarregandoCepMessagem(false)
+        console.log(cep)
+        if(cep===''){
+            setCarregandoCep(false)
+            setRua('');
+            setBairro('');
+            setEstado('');
+            setCidade('')
+        }else{
+        ApiCep.request({
+            method: 'GET',
+            url: cep,
+            headers: {
+                'Access-Control-Allow-Origin': '*'
+            },
+        }).then(evento => {
+            setCarregandoCep(false)
+            setRua(evento.data.street);
+            setBairro(evento.data.neighborhood);
+            setEstado(evento.data.state);
+            setCidade(evento.data.city)
+        }).catch(err => {
+            setCarregandoCep(false)
+            setCarregandoCepMessagem(true)
+            console.log(err)
+        })
+    }
     }
     function buscaCepCarregarPage() {
-        let url = "https://brasilapi.com.br/api/cep/v1/" + cep;
-        let req = new XMLHttpRequest();
-        req.open("GET", url);
-        req.send();
-        req.onload = function () {
-            if (req.status === 200) {
-                let endereco = JSON.parse(req.response);
-                setRua(endereco.street);
-                setBairro(endereco.neighborhood);
-                setEstado(endereco.state);
-                setCidade(endereco.city)
-            }
-        }
+        console.log(cep)
+    
+        ApiCep.request({
+            method: 'GET',
+            url: cep,
+            headers: {
+                'Access-Control-Allow-Origin': '*'
+            },
+        }).then(evento => {
+            setCarregandoCep(false)
+            setRua(evento.data.street);
+            setBairro(evento.data.neighborhood);
+            setEstado(evento.data.state);
+            setCidade(evento.data.city)
+        }).catch(err => {
+            console.log(err)
+        })
+    
     }
-    setTimeout(buscaCepCarregarPage, 0)
+    setTimeout(buscaCepCarregarPage,222)
 
     function aoSubmeterForm(evento: React.FormEvent<HTMLFormElement>) {
         setSpinner(true)
@@ -199,7 +210,7 @@ const AtualizarFornecedor = () => {
                                 onChange={evento => setNomeEmpresa(evento.target.value)}
                                 value={nomeEmpresa}
                           />
-                            <label className="col-form-label">Cep</label>
+                            <label className="col-form-label">Cep {carregandoCep && <p>buscando cep...</p>}{carregandoCepMenssagem && <p id="menssagem-erro">cep invalido</p>}</label>
                             <TextField
                                 onChange={evento => setCep(evento.target.value)}
                                 sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}

@@ -82,7 +82,6 @@ const CadastrarFornecedor = () =>{
     const [carregandoCepMenssagem, setCarregandoCepMessagem] = useState(false);
     const [mensagemErroBolean, setMensagemErroBolean] = useState(false);
     const [menssagemErro, setMenssagemErro] = useState('');
-
     function aoSubmit(evento: React.FormEvent<HTMLFormElement>) {
         evento.preventDefault();
         setSpinner(true);
@@ -116,6 +115,13 @@ const CadastrarFornecedor = () =>{
         setCarregandoCep(true)
         setCarregandoCepMessagem(false)
         console.log(cep)
+        if(cep===''){
+            setCarregandoCep(false)
+            setRua('');
+            setBairro('');
+            setEstado('');
+            setCidade('')
+        }else{
         ApiCep.request({
             method: 'GET',
             url: cep,
@@ -133,6 +139,7 @@ const CadastrarFornecedor = () =>{
             setCarregandoCepMessagem(true)
             console.log(err)
         })
+    }
     }
     return(
         <>

@@ -120,6 +120,13 @@ const CadastroAdministrador = () => {
         setCarregandoCep(true)
         setCarregandoCepMessagem(false)
         console.log(cep)
+        if(cep===''){
+            setCarregandoCep(false)
+            setRua('');
+            setBairro('');
+            setEstado('');
+            setCidade('')
+        }else{
         ApiCep.request({
             method: 'GET',
             url: cep,
@@ -137,6 +144,7 @@ const CadastroAdministrador = () => {
             setCarregandoCepMessagem(true)
             console.log(err)
         })
+    }
     }
 
     function aoSubmeterForm(event: React.FormEvent<HTMLFormElement>) {
