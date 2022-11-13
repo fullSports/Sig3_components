@@ -1,0 +1,167 @@
+.sidenav-container{
+    @apply
+    flex
+    h-screen
+    items-center
+    /* fixed */
+}
+
+.sidenav-open{
+    @apply
+    overflow-x-auto
+    w-[290px]
+}
+
+.sidenav-open::-webkit-scrollbar{
+    @apply
+    absolute
+    rounded-full
+    my-16
+    w-[10px]
+}
+
+.sidenav-open::-webkit-scrollbar-track{
+    @apply
+    bg-def_black/30
+    rounded-full    
+    my-16
+}
+
+.sidenav-open::-webkit-scrollbar-thumb{
+    @apply
+    bg-slate-200
+    rounded-full    
+}
+
+.sidenav-collapsed{
+    @apply
+    w-[90px]
+    overflow-hidden
+}
+
+.sidenav-collapsed .nav-list{
+    @apply
+    mt-12
+}
+
+.sidenav-collapsed .nav-item{
+    @apply
+    px-[17.8px] py-2 my-4
+    flex text-center align-middle
+    transform transition-all duration-300
+}
+
+.sidenav{
+    @apply
+    h-[95vh]
+    duration-500
+    bg-def_vanilla
+    relative
+    ml-6
+    rounded-[50px]
+    shadow-def_lg_shadow
+}
+
+.nav-list{
+    @apply
+    mb-8 mx-4
+}
+
+.toggle-collapse {
+    @apply
+    cursor-pointer
+    rounded-full
+    h-[50px] w-[50px]
+    bg-transparent
+    px-3.5 mb-3 text-2xl
+    hover:text-def_dark_blue/80
+    text-def_dark_blue
+    outline-none
+    active:outline-none
+}
+
+.sidenav-header {
+    @apply
+    pt-5 pb-3
+    content-center
+    text-center
+}
+
+.pfp-container{
+    @apply
+    flex items-center
+    mr-auto ml-auto
+}
+
+.pfp-container img{
+    @apply
+    rounded-full
+    relative
+    border-[1px] border-def_black/60
+}
+
+.user-info {
+    @apply
+    font-semibold text-def_dark_blue
+    text-center py-5
+    transition-all
+    duration-200
+}
+
+.user-role{
+    @apply
+    font-normal text-def_dark_blue/80
+    text-txt_size_xsm
+    py-1
+}
+
+.sidenav-title{
+    @apply
+    mt-12
+    font-semibold
+    text-txt_size_nr
+    text-def_dark_blue
+}
+
+.nav-subitem{
+    @apply
+    h-0 overflow-hidden
+}
+
+.nav-item.open .nav-subitem {
+    @apply
+    pl-8 py-2.5
+    w-[100%]
+    font-light
+    hover:bg-def_black
+    rounded-xl
+    h-auto
+}
+
+.nav-item {
+    @apply
+    block
+    text-txt_size_nr
+    cursor-pointer
+    p-2.5 mx-0
+    rounded-xl
+    text-def_dark_blue font-light
+    hover:bg-def_dark_blue
+    hover:text-def_vanilla
+    hover:font-normal
+}
+
+.nav-item .bi-caret-down-fill{
+    @apply
+    text-sm inline-block float-right
+}
+
+.nav-item i{
+    @apply
+    pr-3 text-xl text-center
+}
+
+.hide-item{
+    @apply
+    invisible opacity-0 hidden
+}

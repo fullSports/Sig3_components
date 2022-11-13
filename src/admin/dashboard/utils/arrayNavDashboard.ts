@@ -3,7 +3,7 @@ import { INavDashboard } from "./interfaces/INavDashboard";
 export var arrayNavCadastros: INavDashboard[] = [
     {
         name: 'Suplementos',
-        icon: '',
+        icon: 'bi bi-capsule',
         subMenu: [
             {
                 name: 'Cadastrar Suplementos',
@@ -17,11 +17,11 @@ export var arrayNavCadastros: INavDashboard[] = [
     },
     {
         name: 'Produtos',
-        icon: '',
+        icon: 'bi bi-inboxes-fill',
         subMenu: [
             {
                 name: 'Cadastrar Produtos',
-                path: ''
+                path: '/dashboard/cadastrar-produto'
             },
             {
                 name: 'Consultar Produtos',
@@ -31,7 +31,7 @@ export var arrayNavCadastros: INavDashboard[] = [
     },
     {
         name: 'Fornecedores',
-        icon: '',
+        icon: 'bi bi-people-fill',
         subMenu: [
             {
                 name: 'Cadastrar Fornecedores',
@@ -45,7 +45,7 @@ export var arrayNavCadastros: INavDashboard[] = [
     },
     {
         name: 'Roupas',
-        icon: '',
+        icon: 'bi bi-binoculars',
         subMenu: [
             {
                 name: 'Cadastrar Roupas',
@@ -59,7 +59,7 @@ export var arrayNavCadastros: INavDashboard[] = [
     },
     {
         name: 'Equipamentos',
-        icon: '',
+        icon: 'bi bi-bicycle',
         subMenu: [
             {
                 name: 'Cadastrar Equipamentos',
@@ -76,7 +76,7 @@ export var arrayNavCadastros: INavDashboard[] = [
 export var arrayNavPerfis: INavDashboard[] = [
     {
         name: 'Admin',
-        icon: '',
+        icon: 'bi bi-person-fill-gear',
         subMenu: [
             {
                 name: 'Cadastrar Admin',
@@ -90,7 +90,7 @@ export var arrayNavPerfis: INavDashboard[] = [
     },
     {
         name: 'Clientes',
-        icon: '',
+        icon: 'bi bi-person-vcard-fill',
         subMenu: [
             {
                 name: 'Cadastrar Clientes',

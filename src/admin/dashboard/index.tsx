@@ -1,5 +1,5 @@
 import React from 'react';
-import DashboardSidenav from '../Components/Sidenav';
+import DashboardSidenav from './Components/Sidenav';
 import './styles.css';
 
 const DashboardHome = () =>{
@@ -8,7 +8,7 @@ const DashboardHome = () =>{
         <div className="flex">
             <DashboardSidenav/>
             <div>
-                <h1>Teste</h1>
+                <h1>Testee</h1>
             </div>
         </div>
         </>

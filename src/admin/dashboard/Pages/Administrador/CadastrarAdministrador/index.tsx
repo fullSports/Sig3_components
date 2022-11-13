@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { Button, TextField, FormControl, Select, InputLabel, MenuItem, Box } from "@mui/material";
 import apiFullSports from "../../../../../api/apiFullSports";
 import ApiCep from "../../../../../api/apiCep";
-import DashboardSidenav from "../../../../Components/Sidenav";
 const Main = styled.main`
     width: 100%;
     min-height: 600px;
@@ -220,7 +219,6 @@ const CadastroAdministrador = () => {
 
     return (
         <>
-            <DashboardSidenav />
             <Main id="main">
                 <ExibeTitulo id="exibe-titulo" className="exibe-titulo">Cadastrar um Adimin</ExibeTitulo>
                 <FormCadastroAdmin id="form-cadastro-cliente" className="form-cadastro-cliente">

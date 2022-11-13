@@ -21,6 +21,7 @@ module.exports = {
       },
       colors: {
         def_white: '#ffffff',
+        def_vanilla: '#ECECEC',
         def_black: '#090809',
         def_blue: '#0081A7',
         def_soft_yellow: '#FDFCDC',
@@ -30,6 +31,9 @@ module.exports = {
         def_dark_green: '#297373',
         def_orange: '#EA580C',
         def_grey: '#F5F5F5',
+      },
+      boxShadow: {
+        'def_lg_shadow': '0 0 8px #00000020;'
       }
     },
   },
