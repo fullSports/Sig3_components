@@ -7,10 +7,10 @@
 
 .sidenav{
     @apply
+    z-10
     h-[95vh]
     transform transition-all duration-300
     bg-def_vanilla
-    relative
     ml-6
     rounded-[50px]
     shadow-def_lg_shadow
@@ -43,6 +43,13 @@
     rounded-full    
 }
 
+
+.sidenav-collapsed .sidenav{
+    @apply
+    md:h-[95vh] lg:h-[95vh]
+    h-[10vh] sm:h-[10vh]
+}
+
 .sidenav-collapsed{
     @apply
     w-[90px]
@@ -50,11 +57,16 @@
 }
 
 .sidenav-collapsed .nav-list{
-    @apply mt-8
+    @apply
+    hidden sm:hidden md:block lg:block
+    mt-16
 }
-.sidenav-collapsed .sidebar-body{
-    @apply pt-12 px-0
+
+.sidenav-collapsed .pfp-container{
+    @apply
+    hidden sm:hidden md:block lg:block
 }
+
 .sidenav-collapsed .nav-item{
     @apply
     px-[17.8px] py-2 my-4
@@ -71,7 +83,7 @@
 }
 
 .sidenav-collapsed .navlist-icon{
-    @apply pl-2
+    @apply pl-1
 }
 
 .sidenav-collapsed .sidenav-title{
@@ -84,7 +96,7 @@
 
 .nav-list{
     @apply
-    mb-8 mx-2
+    mb-8 mx-3
 }
 
 .toggle-collapse {
@@ -167,7 +179,7 @@
     block
     text-txt_size_nr
     cursor-pointer
-    p-2.5 mx-0 
+    p-2.5 mx-0 my-3
     rounded-xl
     text-def_dark_blue font-light
     hover:bg-def_dark_blue

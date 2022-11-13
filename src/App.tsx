@@ -6,7 +6,7 @@ import CadastroAdministrador from './admin/dashboard/Pages/Administrador/Cadastr
 import Equipamentos from './clients/Pages/Equipamentos';
 import PageErro404 from './Erro404';
 import Tenis from './clients/Pages/Tenis';
-import DashboardHome from './admin/dashboard';
+import DashboardHome from './admin/dashboard/shared/Home';
 import ConsultaAdimistrador from './admin/dashboard/Pages/Administrador/ConsultarAdministrador/index';
 import AtualizarAdministrador from './admin/dashboard/Pages/Administrador/AtualizarAdministrador';
 import CadastrarFornecedor from './admin/dashboard/Pages/Fornecedor/CadastrarFornecedor';

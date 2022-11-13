@@ -2,11 +2,6 @@ import { INavDashboard } from "./interfaces/INavDashboard";
 
 export var arrayNavCadastros: INavDashboard[] = [
     {
-        name: 'Início',
-        icon: 'bi bi-house-door-fill',
-        path: '/dashboard/home'
-    },
-    {
         name: 'Suplementos',
         icon: 'bi bi-capsule',
         subMenu: [

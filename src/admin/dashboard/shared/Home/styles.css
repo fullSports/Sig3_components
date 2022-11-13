@@ -1,0 +1,58 @@
+
+.home-body{
+    @apply
+    p-6
+    w-full
+}
+
+.time-display{
+    @apply
+    flex items-center
+}
+
+.home-header{
+    @apply
+    pl-28 sm:pl-28 sm:px-12 md:px-12 lg:px-12 py-4
+    block sm:flex md:flex lg:flex 
+    bg-def_vanilla
+    w-[100%]
+    justify-between
+    rounded-full
+}
+
+.home-welcome-card{
+    @apply
+    w-[100%] xl:h-[170px] h-auto md:h-auto sm:h-auto
+    my-8 p-8
+    rounded-[40px]
+    bg-def_dark_blue
+    text-def_white
+    font-Lato
+}
+
+.home-welcome-card span{
+    @apply block
+}
+
+.dash-desc{
+    @apply
+    font-light
+    py-5
+    md:w-[600px] lg:w-[600px]
+}
+
+.username-welcome{
+    @apply
+    text-txt_size_lg font-semibold
+}
+
+.cards-container{
+    @apply
+    grid grid-flow-col grid-rows-3
+}
+
+.card-statics-dashboard{
+    @apply
+    w-[430px] h-[290px]
+    bg-def_vanilla
+}

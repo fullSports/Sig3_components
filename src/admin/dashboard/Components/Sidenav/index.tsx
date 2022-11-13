@@ -28,16 +28,16 @@ const DashboardSidenav = () =>{
                         </div>
                     </div>
                 </div>
-                <div className="sidebar-body">
+                <ul className="nav-list">
+                    <li className="nav-item">
+                        <i className="bi bi-house-door-fill navlist-icon"></i>
+                        <span> Início </span>
+                    </li>
                     <span className="sidenav-title">Gerenciar cadastros</span>
-                    <ul className="nav-list">
                         { (arrayNavCadastros).map((item: any, index: any) => <SubMenu key={index} item={item}/>) }
-                    </ul>
                     <span className="sidenav-title">Gerenciar Perfis</span>
-                    <ul className="nav-list">
                     { (arrayNavPerfis).map((item: any, index: any) => <SubMenu key={index} item={item}/>) }
-                    </ul>
-                </div>
+                </ul>
             </div>
         </div>
         </>
