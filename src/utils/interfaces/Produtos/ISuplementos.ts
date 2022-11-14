@@ -2,9 +2,9 @@ import IFornecedor from "../IFornecedor"
 import Iimagem from "../Iimagem"
 export default interface ISuplementos{
     _id: string,
-    nomeProduto: string,
+    nome: string,
     fornecedor: IFornecedor,
-    corProduto: string,
+    cor: string,
     preco: string,
     quantidade: number,
     imagemProduto: [

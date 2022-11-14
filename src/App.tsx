@@ -13,6 +13,7 @@ import CadastrarFornecedor from './admin/dashboard/Pages/Fornecedor/CadastrarFor
 import ConsultarFornecedores from './admin/dashboard/Pages/Fornecedor/ConsultarFornecedores';
 import AtualizarFornecedor from './admin/dashboard/Pages/Fornecedor/AtualizarFornecedor';
 import CadastrarProduto from './admin/dashboard/Pages/Produtos/CadastrarProduto';
+import ConsultaProduto from './admin/dashboard/Pages/Produtos/ConsultarProdutos';
 const App: React.FC = ()=> {
   return (
     <BrowserRouter>
@@ -46,6 +47,7 @@ const App: React.FC = ()=> {
      {/* crud produto */}
      <Route path='/dashboard/cadastrar-produto' element={<CadastrarProduto/>}/>
      
+     <Route path='/dashboard/consultar-produtos' element={<ConsultaProduto/>}/>
       {/****************************** */}
       <Route path='*' element={<PageErro404/>}/>
     </Routes>
