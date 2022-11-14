@@ -11,6 +11,8 @@
     h-[95vh]
     transform transition-all duration-300
     bg-def_vanilla
+    dark:bg-def_dark_blue/10
+    dark:border-2 dark:border-white
     ml-6
     rounded-[50px]
     shadow-def_lg_shadow
@@ -91,7 +93,7 @@
 }
 
 .sidenav-collapsed .nav-item.open{
-    @apply bg-transparent text-def_dark_blue
+    @apply bg-transparent text-def_dark_blue dark:text-white
 }
 
 .nav-list{
@@ -108,6 +110,7 @@
     px-3.5 mb-3 text-2xl
     hover:text-def_dark_blue/80
     text-def_dark_blue
+    dark:text-white dark:hover:text-white
     outline-none
     active:outline-none
 }
@@ -123,26 +126,27 @@
     @apply
     flex items-center
     mr-auto ml-auto
+    rounded-full
+    dark:border-2 dark:border-white
 }
 
 .pfp-container img{
     @apply
     rounded-full
     relative
-    border-[1px] border-def_black/60
+    border-[1px]
 }
 
 .user-info {
     @apply
     font-semibold text-def_dark_blue
+    dark:text-white
     text-center py-5
-    
-    
 }
 
 .user-role{
     @apply
-    font-normal text-def_dark_blue/80
+    font-normal text-def_dark_blue/80 dark:text-white
     text-txt_size_xsm
     py-1
 }
@@ -152,7 +156,7 @@
     mt-12 ml-3
     font-semibold
     text-txt_size_nr
-    text-def_dark_blue
+    text-def_dark_blue dark:text-white
 }
 
 .nav-subitem{
@@ -163,15 +167,19 @@
     @apply
     bg-def_dark_blue
     text-def_white
+    dark:bg-black
+    dark:border-[1px] dark:border-white
 }
 
 .nav-item.open .nav-subitem {
     @apply
     ml-6 mt-2 px-2 py-2.5 w-[93%]
     font-light
+    dark:text-def_cont_yellow
     hover:bg-def_black
     rounded-tl-xl rounded-bl-xl
     h-auto
+    dark:border-b-[1px] dark:rounded-none dark:border-white
 }
 
 .nav-item {
@@ -183,6 +191,7 @@
     rounded-xl
     text-def_dark_blue font-light
     hover:bg-def_dark_blue
+    dark:text-white
     hover:text-def_vanilla
     hover:font-normal
 }

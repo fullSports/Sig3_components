@@ -3,6 +3,8 @@
     z-10 font-Lato
     h-[100%] w-[320px] top-[160px]
     bg-def_white shadow-lg
+    dark:bg-black
+    dark:border-2 dark:border-white
     transition-all 
     fixed
 }
@@ -26,25 +28,30 @@
     @apply
     px-2
     text-def_green text-txt_size_nr font-semibold
+    dark:text-white
 }
 
 .sidebar-navegacao ul{
     @apply
-    pt-2 
+    pt-2 mb-8 
 }
 
 .sidebar-navegacao ul li{
     @apply
-    py-2 px-2
+    py-3 px-2
     mt-2
+    rounded-md
     transition-all
     cursor-pointer
-    hover:rounded-sm hover:bg-def_grey/20
+    hover:bg-def_grey/20
+    dark:hover:bg-def_dark_blue/10
 }
 
 .sidebar-navegacao ul li a{
     @apply
     text-def_black/80 text-txt_size_nr font-normal
+    dark:text-white
+    dark:font-light
 }
 
 .sidenav-items li{

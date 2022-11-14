@@ -31,6 +31,7 @@ module.exports = {
         def_dark_green: '#297373',
         def_orange: '#EA580C',
         def_grey: '#F5F5F5',
+        def_cont_yellow: "#ffff00"
       },
       boxShadow: {
         'def_lg_shadow': '0 0 8px #00000020;'

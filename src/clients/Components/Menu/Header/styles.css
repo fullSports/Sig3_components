@@ -13,10 +13,14 @@
     @apply
     z-10
     flex fixed
-    bg-def_white shadow-lg
     transition-all ease-linear 
     h-[170px] w-[320px]
     lg:hidden xl:hidden
+    dark:bg-black
+    bg-def_white shadow-lg
+    dark:border-2 dark:border-white
+    dark:text-white
+    text-def_dark_blue
 }
 
 .sidebar-logo img{
@@ -38,6 +42,8 @@
 .header-toggle{
     @apply
     xl:hidden lg:hidden py-8
+    text-def_dark_blue
+    dark:text-white
 }
 
 .header-resp-logo{
@@ -59,6 +65,8 @@
 .header-acess{
     @apply
     bg-def_green/60 hover:bg-def_green
+    dark:bg-def_cont_yellow
+    dark:border-b-2 dark:border-def_white
     w-[100%] h-[35px]
 }
 
@@ -71,8 +79,9 @@
 .acess-props li{
     @apply
     inline-flex
-    hover:text-def_white/80
-    text-def_white text-center text-txt_size_sm
+    text-center text-txt_size_sm
+    text-def_white hover:text-def_white/80
+    dark:text-def_black dark:hover:text-def_black
 }
 
 .acess-props li span{
@@ -82,8 +91,10 @@
 
 .header-items-container{
     @apply
-    mb-6 w-[100%] py-4
-    bg-def_white 
+    mb-6 w-[100%] py-2 sm:py-2 md:py-0 lg:py-0
+    bg-def_white
+    dark:bg-black
+    dark:border-[1px] dark:border-def_white
 }
 
 .help-icons{
@@ -94,7 +105,8 @@
 .help-icons li a{
     @apply
     flex px-3 font-light font-Lato
-    hover:opacity-80 transition-all
+    transition-all
+    dark:text-white dark:hover:text-white
     text-def_black/80 hover:text-def_black
 }
 
@@ -121,12 +133,13 @@
 
 .search-input{
     @apply
+    dark:bg-white
     bg-def_grey/60
     outline-none rounded-lg
     mt-6 lg:mt-8 xl:mt-8 
     w-[330px] h-[45px] p-3 text-txt_size_nr
     focus:outline-none focus:shadow-sm
-    sm:w-[460px] md:w-[550px] lg:w-[420px]
+    sm:w-[460px] md:w-[550px] lg:w-[450px]
 }
 
 .input-search-btn{
@@ -137,40 +150,50 @@
 
 .nav-items-group{
     @apply
-    py-3
+    py-0
 }
 
 .nav-items{
     @apply
     justify-center text-center flex
+    dark:border-y-2 dark:border-def_white
 }
 
-.nav-item{
+.header-nav-item{
     @apply
     mx-2
-    inline-block text-txt_size_md my-4
+    inline-block text-txt_size_md my-4 py-2 px-1
     font-Lato
+    hover:rounded-full
+    hover:bg-def_green/60
+    dark:hover:bg-def_cont_yellow
+    dark:hover:text-black
 }
 
 .nav-item-btn{
     @apply
     px-3 py-3 cursor-pointer transition-all
-    font-light rounded-full
-    hover:bg-def_orange/20
-    text-def_black hover:text-def_black/70 
+    font-light
+    text-def_black
+    dark:text-def_white
+    dark:hover:text-def_black
 }
 
 .toggle-acess{
     @apply
+    z-10
     block lg:hidden xl:hidden
-    fixed right-0 top-[360px] mr-2
+    fixed right-0 top-[320px] mr-2
 }
 
 .toggle-main{
     @apply
     shadow-xl
     cursor-pointer
+    text-white
     bg-def_orange rounded-full
+    dark:bg-def_cont_yellow
+    dark:text-black
 }
 
 .toggle-btn{
@@ -181,7 +204,9 @@
 
 .toggle-opts{
     @apply
-    hover:bg-def_orange/90 shadow-lg
+    text-white dark:text-black
+    dark:bg-def_cont_yellow dark:hover:bg-def_cont_yellow
+    hover:bg-def_orange shadow-lg
     bg-def_orange/60 rounded-full mt-2
 }
 

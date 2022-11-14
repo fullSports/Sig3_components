@@ -5,14 +5,21 @@ const ThemeContext = createContext();
 export default function ThemeContextProvider({children}){
     
     const [theme, setTheme] = useState(
-        localStorage.getItem('theme') !== 'dark' ? 'light' : 'dark'
+        localStorage.getItem("theme") !== "dark" ? "light" : "dark"
     );
+
+    console.log(theme)
 
     useEffect(() =>{
         const root = window.document.documentElement;
-        root.classList.add(theme)
-        localStorage.setItem('theme', theme)
-    })
+
+        const removeOldTheme = theme === "light" ? "dark" : "light"
+
+        root.classList.add(removeOldTheme)
+        root.classList.remove(theme)
+
+        localStorage.setItem("theme", theme)
+    },[theme]);
     
     return (
         <ThemeContext.Provider value={{theme, setTheme}}>

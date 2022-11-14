@@ -1,0 +1,26 @@
+.css-5ryogn-MuiButtonBase-root-MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track{
+    @apply dark:bg-def_cont_yellow  
+}
+
+.home-header{
+    @apply
+    pl-28 sm:pl-28 sm:px-12 md:px-12 lg:px-12 py-4
+    block sm:flex md:flex lg:flex 
+    bg-def_vanilla dark:bg-def_dark_blue/10
+    dark:border-2 dark:border-white
+    w-[100%]
+    justify-between
+    rounded-full
+}
+
+.home-header span{
+    @apply
+    font-Lato
+    text-def_black/80
+    dark:text-white
+}
+
+.time-display{
+    @apply
+    flex items-center
+}

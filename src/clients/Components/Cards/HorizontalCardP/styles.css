@@ -1,7 +1,7 @@
 
 @media (max-width: 768px){
     .slick-slide{
-        width: 255px !important;
+        width: 270px !important;
         @apply
         mx-2
     }
@@ -18,37 +18,48 @@
 .Hcard-product{
     @apply
     my-12
-    w-[255px] h-[155px]
-    sm:w-[255px] sm:h-[155px]
-    md:w-[360px] md:h-[205px]
-    lg:w-[360px] lg:h-[205px]
+    w-[270px] h-[175px]
+    sm:w-[270px] sm:h-[175px]
+    md:w-[360px] md:h-[200px]
+    lg:w-[360px] lg:h-[200px]
     bg-def_white 
+    dark:bg-def_dark_blue/10
+    dark:border-2 dark:border-white
     shadow rounded-lg
     flex
 }
 .Hcard-link{
     @apply flex
 }
+.Hcard-link:hover span{
+    @apply
+    dark:text-def_cont_yellow
+}
+
+.Hcard-link:hover .card-product-parce{
+    @apply
+    dark:text-black
+}
 
 .Hcard-link:hover img{
     @apply
-    scale-105 duration-200 transform
+    scale-105 duration-200 transform 
 }
 
 .Hcard-cover{
     @apply
-    w-[138px] h-[155px]
-    sm:w-[138px] sm:h-[155px]
-    md:w-[160px] md:h-[205px]
-    lg:w-[160px] lg:h-[205px]
-
+    w-[138px] h-auto
+    sm:w-[138px] sm:h-auto
+    md:w-[160px] md:h-auto
+    lg:w-[160px] lg:h-auto
+    rounded-l-md
     overflow-hidden
 }
 
 .Hcard-cover img{
     @apply
     w-full h-full
-    object-cover 
+    object-cover
 }
 
 .Hcard-body{

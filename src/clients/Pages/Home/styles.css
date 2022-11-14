@@ -3,6 +3,11 @@
     display: flex !important;
 }
 
+.Hcard-container{
+    @apply
+    -z-50
+    h-auto sm:h-auto md:h-[320px] lg:h-[320px]
+}
 /* .cards-container{
     @apply
     flex flex-row flex-nowrap

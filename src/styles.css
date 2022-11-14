@@ -7,6 +7,11 @@
 
 @layer components{
 
+    body{
+        @apply
+        dark:bg-black
+    }
+
     .body-container{
         @apply
         mx-3
@@ -20,6 +25,7 @@
         @apply
         font-Merriweather font-bold
         text-def_black/80
+        dark:text-white
         text-txt_size_xl text-center
 
     }
@@ -32,23 +38,28 @@
         @apply
         font-semibold
         text-def_black/70
+        dark:text-white
         text-txt_size_md
     }
     .card-old-price{
         @apply
         line-through
-         text-def_black/60
+        text-def_black/60
+        dark:text-white
     }
     .card-product-price{
         @apply
         mx-1.5
-        text-def_dark_green 
+        text-def_dark_green
+        dark:text-white
         font-semibold
     }
     .card-product-parce{
         @apply
         text-def_black/80
         bg-zinc-100/60
+        dark:bg-def_white
+        dark:text-black
         w-fit py-2 px-3
         rounded-full
     }

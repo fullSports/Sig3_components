@@ -10,7 +10,7 @@ const Footer = () =>{
     return(
         <div className="footer-container">
 
-            {/* <div className="footer-news-sub">
+            <div className="footer-news-sub">
                 <div className="news-sub-desc">
                     <span className="news-sub-title">Quer ficar por dentro das novidades?</span>
                     <span className="news-sub-subt">Assine nossa newsletter e continue atualizado sobre nossos lançamentos.</span>
@@ -19,11 +19,11 @@ const Footer = () =>{
                     <input placeholder="Insira seu e-mail" type="email" />
                     <button><BiSend color={'#09080980'}/></button>
                 </div>
-            </div> */}
+            </div>
 
             <div className="footer-body">
                 <div className="footer-left-group">
-                    <div className="footer-items-group">
+                    <div className="footer-item-group">
                         <h6 className="footer-item-title">Navegação</h6>
                         <ul className="items-group">
                             { arrayNavItems.map((el: any) =>{

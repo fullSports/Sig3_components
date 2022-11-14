@@ -1,6 +1,7 @@
 import './styles.css';
 import '../../../../styles.css';
 import {arrayNavItems} from '../../../../utils/NavItems';
+import { useTheme } from '../../../../utils/Hooks/useTheme';
 import Sidebar from '../Sidebar/index'
 
 import {RiMenuFill} from 'react-icons/ri';
@@ -13,6 +14,8 @@ const suporteIcon = require('../../../../assets/icons/help-icon.png');
 const contaIcon = require('../../../../assets/icons/conta-icon.png');
 
 const Cabecalho = () => {
+
+  const {theme, setTheme} = useTheme();
 
   function openTeste(){
     let sidebar = document.querySelector('.sidebar-header');
@@ -30,7 +33,7 @@ const Cabecalho = () => {
     <>
     <div className="sidebar-header hideShow">
       <button className="toggleSidebar" onClick={openTeste}>
-        <RiMenuFill size={30} color={'#09080990'}/>
+        <RiMenuFill size={30}/>
       </button>
       <div className="sidebar-logo">
           <img src={brandLogo} alt="" />
@@ -41,24 +44,31 @@ const Cabecalho = () => {
     <div className="toggle-acess">
       <div className="toggle-main">
         <button onClick={showToggleOpts} className='toggle-btn'>
-          <ImAccessibility size={30} color={'#fff'}/>
+          <ImAccessibility size={30} />
         </button>
       </div>
       <div className="toggle-group hideShow">
         <div className="toggle-opts">
           <button className='toggle-opt-btn'>
-            <TbArrowBigTop size={24} color={'#fff'}/>
+            <TbArrowBigTop size={24} />
           </button>
         </div>
         <div className="toggle-opts">
           <button className='toggle-opt-btn'>
-            <TbArrowBigDown size={24} color={'#fff'}/>
+            <TbArrowBigDown size={24}/>
           </button>
         </div>
         <div className="toggle-opts">
-          <button className='toggle-opt-btn'>
-            <ImContrast size={24} color={'#fff'}/>
-          </button>
+          { theme === 'light' ? 
+          (<button onClick={()=> setTheme("dark")} className='toggle-opt-btn'>
+            <ImContrast size={24} />
+          </button>) 
+          : 
+          (<button onClick={()=> setTheme("light")} className='toggle-opt-btn'>
+            <ImContrast size={24} />
+          </button>) }
+            
+
         </div>
       </div>
   </div>
@@ -74,11 +84,15 @@ const Cabecalho = () => {
               <span>Diminuir Fonte</span>
             </li>
             <li>
-              <span className="cursor-pointer">Alto Contraste</span>
+              {theme === 'light' ? 
+                  (<span onClick={()=> setTheme("dark")} className="cursor-pointer"> Sem Contraste</span>)
+                  :
+                  (<span onClick={()=> setTheme("light")} className="cursor-pointer">  Alto Contraste</span>)
+                }
             </li>
-            <li>
+            {/* <li>
               <span>Modo Escuro</span>
-            </li>
+            </li> */}
           </ul>
         </div>
       </div>
@@ -89,7 +103,7 @@ const Cabecalho = () => {
         <div className="header-items-group">
           <div className="toggle-menu">
             <button className="header-toggle" onClick={openTeste}>
-              <RiMenuFill size={30} color={'#09080990'}/>
+              <RiMenuFill size={30}/>
             </button>
           </div>
           <div className="header-search-bar">
@@ -128,7 +142,7 @@ const Cabecalho = () => {
           <ul className="nav-items">
           { arrayNavItems.map((el: any) => {
               return(
-                <li className="nav-item">
+                <li className="header-nav-item">
                   <a href="{el.path}" className='nav-item-btn'>
                     {el.title}
                   </a>

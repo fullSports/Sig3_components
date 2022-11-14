@@ -35,11 +35,11 @@ export var arrayNavCadastros: INavDashboard[] = [
         subMenu: [
             {
                 name: 'Cadastrar Fornecedores',
-                path: ''
+                path: '/dashboard/cadastrar-fornecedor'
             },
             {
                 name: 'Consultar Fornecedores',
-                path: ''
+                path: '/dashboard/consultar-fornecedores'
             }
         ]
     },
@@ -80,11 +80,11 @@ export var arrayNavPerfis: INavDashboard[] = [
         subMenu: [
             {
                 name: 'Cadastrar Admin',
-                path: ''
+                path: '/dashboard/cadastrar-admin'
             },
             {
                 name: 'Consultar Admin',
-                path: ''
+                path: 'dashboard/consulta-admin'
             }
         ]
     },
