@@ -6,6 +6,7 @@ import apiFullSports from "../../../../../api/apiFullSports";
 import IFornecedor from '../../../../../utils/interfaces/IFornecedor';
 import IProduto from '../../../../../utils/interfaces/IProduto';
 import Iimagem from '../../../../../utils/interfaces/Iimagem';
+import './styles.css';
 const Main = styled.main`
     width: 100%;
     min-height: 600px;
@@ -125,21 +126,21 @@ const AtualizarProduto = () => {
     const [mensagemErroBolean, setMensagemErroBolean] = useState(false);
     const [menssagemErro, setMenssagemErro] = useState('');
     const [open, setOpen] = React.useState(false);
-    const [cadastrarNovaFoto, setCadastrarNovaFoto] = useState(true);
+    const [messagemErroFoto, setmessagemErroFoto] = useState(false)
     const [categoriaID, setCategoriaID] = useState('');
     const handleClose = () => {
         setOpen(false);
     };
     const selecionarArquivo = (evento: React.ChangeEvent<HTMLInputElement>) => {
-        imagens = [{},]
+        imagens = [{},];
         if (evento.target.files?.length) {
             for (var i = 0; i < evento.target.files.length; i++) {
                 imagens.unshift(evento.target.files[i])
             }
-            imagens.pop();
             console.log(imagens);
         }
     }
+
     useEffect(() => {
         if (parametros.id) {
             apiFullSports.get<IFornecedor[]>('listar-fornecedores/')
@@ -179,6 +180,7 @@ const AtualizarProduto = () => {
                         setCategoriaProduto("roupa");
                         setCategoriaID(categoria.roupa._id);
                         setCorProduto(categoria.roupa.cor);
+                        setPreco(categoria.roupa.preco)
                         setQuantidade(categoria.roupa.quantidade.toString());
                         setTamanhoProduto(categoria.roupa.tamanho.toString());
                         setImagemProduto(categoria.roupa.imagemProduto)
@@ -204,49 +206,57 @@ const AtualizarProduto = () => {
     }, [parametros])
 
     function cadastrarNovasFotos() {
-        console.log(imagens);
-        ImagemProduto?.map(item => {
-            return ImagensID.unshift(item._id);
-        });
-        imagens.map(async    item => {
-            return apiFullSports.request({
-                url: 'imagem/',
-                method: 'POST',
-                headers: {
-                    'Access-Control-Allow-Origin': '*',
-                    'Content-Type': 'multipart/form-data'
-                },
-                data: {
-                    file: item
-                }
-            }).then(response => {
+        setmessagemErroFoto(false)
+        setSpinner(true)
+        if (imagens.length > 1) {
+            imagens.pop();
+            console.log(imagens);
+            ImagemProduto?.map(item => {
+                return ImagensID.unshift(item._id);
+            });
+            imagens.map(item => {
+                return apiFullSports.request({
+                    url: 'imagem/',
+                    method: 'POST',
+                    headers: {
+                        'Access-Control-Allow-Origin': '*',
+                        'Content-Type': 'multipart/form-data'
+                    },
+                    data: {
+                        file: item
+                    }
+                }).then(response => {
+                    apiFullSports.request({
+                        url: `imagem/${response.data._id}`,
+                        method: 'GET',
+                        headers: {
+                            'Access-Control-Allow-Origin': '*'
+                        },
+                    }).then(response => {
+                        ImagensID.unshift(response.data._id)
+                    }).catch(err => console.log(err))
+                }).catch(err => console.log(err))
+            })
+            ImagensID.pop();
+            console.log(ImagensID)
+            setTimeout(function () {
+                console.log(`atualizar-${categoriaProduto}/${categoriaID}`)
                 apiFullSports.request({
-                    url: `imagem/${response.data._id}`,
-                    method: 'GET',
+                    url: `atualizar-${categoriaProduto}/${categoriaID}`,
+                    method: "PUT",
                     headers: {
                         'Access-Control-Allow-Origin': '*'
                     },
-                }).then(response => {
-                    ImagensID.unshift(response.data._id)
-                }).catch(err => console.log(err))
-            }).catch(err => console.log(err))
-        })
-        ImagensID.pop();
-        console.log(ImagensID)
-        setTimeout(function () {
-            console.log(`atualizar-${categoriaProduto}/${categoriaID}`)
-            apiFullSports.request({
-                url: `atualizar-${categoriaProduto}/${categoriaID}`,
-                method: "PUT",
-                headers: {
-                    'Access-Control-Allow-Origin': '*'
-                },
-                data: {
-                    imagemProduto: ImagensID
-                }
-            }).then(()=>window.location.reload())
-            .catch(err => console.log(err));
-        }, 5000)
+                    data: {
+                        imagemProduto: ImagensID
+                    }
+                }).then(() => { window.location.reload(); setSpinner(false) })
+                    .catch(err => console.log(err));
+            }, 5000)
+        } else {
+            setSpinner(false)
+            setmessagemErroFoto(true)
+        }
     }
     const deletarImagem = (DeletarImagem: string) => {
         apiFullSports.delete(`imagem/${DeletarImagem}/`)
@@ -274,6 +284,117 @@ const AtualizarProduto = () => {
     })
     function aoSubmit(evento: React.FormEvent<HTMLFormElement>) {
         evento.preventDefault();
+        setSpinner(true);
+        if (categoriaProduto === '') {
+            setMenssagemErro('escolha uma categoria de produto');
+            setMensagemErroBolean(true);
+        } else if (sexo === '') {
+            setMenssagemErro('escolha uma sexo de produto');
+            setMensagemErroBolean(true);
+        } else {
+            ImagensID = [{},];
+            ImagemProduto?.map(item => {
+                return ImagensID.unshift(item._id);
+            });
+            ImagensID.pop();
+            console.log(ImagensID);
+            setTimeout(function () {
+                if (categoriaProduto === 'roupa') {
+                    apiFullSports.request({
+                        method: "PUT",
+                        url: `atualizar-produto/${parametros.id}`,
+                        headers: {
+                            'Access-Control-Allow-Origin': '*'
+                        },
+                        data: {
+                            categoriaProduto: {
+                                roupa: {
+                                    nome: nomeProduto,
+                                    fornecedor: fornecedorID,
+                                    cor: corProduto,
+                                    sexo: sexo,
+                                    tamanho: tamanhoProduto,
+                                    preco: preco,
+                                    quantidade: quantidade,
+                                    imagemProduto: ImagensID
+                                }
+                            }
+                        }
+                    }).then(()=> window.location.href= '/dashboard/consultar-produtos')
+                    .catch(err => console.log(err));
+                }else if(categoriaProduto==='equipamento'){
+                    apiFullSports.request({
+                        method: "PUT",
+                        url: `atualizar-produto/${parametros.id}`,
+                        headers: {
+                            'Access-Control-Allow-Origin': '*'
+                        },
+                        data: {
+                            categoriaProduto: {
+                                equipamento: {
+                                    nome: nomeProduto,
+                                    fornecedor: fornecedorID,
+                                    cor: corProduto,
+                                    sexo: sexo,
+                                    tamanho: tamanhoProduto,
+                                    preco: preco,
+                                    quantidade: quantidade,
+                                    imagemProduto: ImagensID
+                                }
+                            }
+                        }
+                    }).then(()=> window.location.href= '/dashboard/consultar-produtos')
+                    .catch(err => console.log(err));
+                }else if(categoriaProduto==='suplemento'){
+                    apiFullSports.request({
+                        method: "PUT",
+                        url: `atualizar-produto/${parametros.id}`,
+                        headers: {
+                            'Access-Control-Allow-Origin': '*'
+                        },
+                        data: {
+                            categoriaProduto: {
+                                suplemento: {
+                                    nome: nomeProduto,
+                                    fornecedor: fornecedorID,
+                                    cor: corProduto,
+                                    sexo: sexo,
+                                    tamanho: tamanhoProduto,
+                                    preco: preco,
+                                    quantidade: quantidade,
+                                    imagemProduto: ImagensID
+                                }
+                            }
+                        }
+                    }).then(()=> window.location.href= '/dashboard/consultar-produtos')
+                    .catch(err => console.log(err));
+                }else if(categoriaProduto==='calcado'){
+                    apiFullSports.request({
+                        method: "PUT",
+                        url: `atualizar-produto/${parametros.id}`,
+                        headers: {
+                            'Access-Control-Allow-Origin': '*'
+                        },
+                        data: {
+                            categoriaProduto: {
+                                calcado: {
+                                    nome: nomeProduto,
+                                    fornecedor: fornecedorID,
+                                    cor: corProduto,
+                                    sexo: sexo,
+                                    tamanho: tamanhoProduto,
+                                    preco: preco,
+                                    quantidade: quantidade,
+                                    imagemProduto: ImagensID
+                                }
+                            }
+                        }
+                    }).then(()=> window.location.href= '/dashboard/consultar-produtos')
+                    .catch(err => console.log(err));
+                }
+
+            }, 200)
+        }
 
     }
     return <>
@@ -395,16 +516,8 @@ const AtualizarProduto = () => {
                             value={tamanhoProduto}
                         />
                         <label className="col-form-label">Imagens do produto</label>
-                        <CadatrarImagemLabel onClick={() => setOpen(true)}>Atualizar fotos do produto...</CadatrarImagemLabel>
-                        <input
-                            onChange={selecionarArquivo}
-                            className="txt-form"
-                            id="file"
-                            type="file"
-                            name="file"
-                            accept="image/jpeg, image/pjpeg, image/png, image/gif"
-                            multiple
-                        />
+                        <CadatrarImagemLabel onClick={() => { setOpen(true) }}>Atualizar fotos do produto...</CadatrarImagemLabel>
+
                         {spinner && (<p>carregando...</p>)}
                         {mensagemErroBolean && (<span id="menssagem-erro">{menssagemErro}</span>)}
                     </Row2grid>
@@ -417,7 +530,7 @@ const AtualizarProduto = () => {
                                 fontSize: '14px', backgroundColor: 'black', ":hover": 'backgroundColor: #313131, transform:translate(0.8s)'
                             }}
                             type="submit" id="btn-cad-forms" className="btn-cad-forms">
-                            Cadastrar Produto
+                            atualizar Dados do Produto
                         </Button>
                         <Button
                             onClick={() => window.location.href = '/dashboard/consultar-produtos'}
@@ -425,7 +538,7 @@ const AtualizarProduto = () => {
                                 justifyContent: 'center', display: 'block', height: '50px', borderRadius: '5px', color: '#fff',
                                 fontSize: '14px', backgroundColor: 'black', ":hover": 'backgroundColor: #313131, transform:translate(0.8s)'
                             }} type="button" id="btn-cad-forms" className="btn-cad-forms">
-                            Consulta de Produto
+                            Consulta de Produtos
                         </Button>
                     </BttCadPrdutoGrid>
                 </form>
@@ -439,8 +552,8 @@ const AtualizarProduto = () => {
             id="model"
         >
             <Box component={'div'} id="tela-imagem" className="tela-imagem" sx={{
-                width: '70%', height: '50%',
-                position: 'absolute' as 'absolute', top: '20%', left: '15%', display: '',
+                width: '70%', height: '80%',
+                position: 'absolute' as 'absolute', top: '10%', left: '15%', display: '',
                 backgroundColor: '#4e4a4a', border: '3px solid #000', borderRadius: '20px', pt: 2, px: 4, pb: 3
             }}>
                 <OpcoentesFotoProduto />
@@ -455,10 +568,13 @@ const AtualizarProduto = () => {
                     accept="image/jpeg, image/pjpeg, image/png, image/gif"
                     multiple
                 />
-                {cadastrarNovaFoto && (<Button variant="outlined" sx={{ border: "2px solid" }} onClick={cadastrarNovasFotos}>Cadastrar Nova Foto</Button>)}
-                <Button variant="outlined" sx={{ border: "2px solid" }} onClick={handleClose}>Fechar</Button>
+                <Box component={'div'} sx={{ display: 'flex', justifyContent: 'center' }}>
+                    <Button variant="outlined" sx={{ border: "2px solid", margin: "1%" }} onClick={cadastrarNovasFotos}>Cadastrar Nova Foto</Button>
+                    <Button variant="outlined" sx={{ border: "2px solid", margin: "1%" }} onClick={handleClose}>Fechar</Button>
+                </Box>
                 <Box component={'div'} sx={{ display: 'flex', fontSize: '23px' }}>
                     {spinner && (<p>carregando...</p>)}
+                    {messagemErroFoto && <p id='menssagem-erro'>selecione uma imagem...</p>}
                 </Box>
             </Box>
 
