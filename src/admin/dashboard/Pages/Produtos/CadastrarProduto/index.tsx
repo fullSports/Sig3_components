@@ -117,8 +117,8 @@ const CadastrarProduto = () => {
             for (var i = 0; i < evento.target.files.length; i++) {
                 imagens.unshift(evento.target.files[i])
             }
-            imagens.pop()
-            console.log(imagens)
+            imagens.pop();
+            console.log(imagens);
         }
     }
 
@@ -143,7 +143,7 @@ const CadastrarProduto = () => {
             setMenssagemErro('escolha uma sexo de produto');
             setMensagemErroBolean(true);
         }else{
-            imagens.map(item => {
+            imagens.map(async item => {
                return apiFullSports.request({
                     url: 'imagem/',
                     method: 'POST',

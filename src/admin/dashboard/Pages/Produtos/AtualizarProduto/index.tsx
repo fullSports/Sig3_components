@@ -119,16 +119,27 @@ const AtualizarProduto = () => {
     const [sexo, setSexo] = useState('');
     const [dataCadastro, setDataCadastro] = useState('')
     let imagens = [{},]
+    let ImagensID = [{},]
     const [ImagemProduto, setImagemProduto] = useState<Iimagem[]>()
     const [spinner, setSpinner] = useState(false);
     const [mensagemErroBolean, setMensagemErroBolean] = useState(false);
     const [menssagemErro, setMenssagemErro] = useState('');
     const [open, setOpen] = React.useState(false);
-    const [cadastrarNovaFoto, setCadastrarNovaFoto] = useState(false)
+    const [cadastrarNovaFoto, setCadastrarNovaFoto] = useState(true);
+    const [categoriaID, setCategoriaID] = useState('');
     const handleClose = () => {
         setOpen(false);
     };
-    
+    const selecionarArquivo = (evento: React.ChangeEvent<HTMLInputElement>) => {
+        imagens = [{},]
+        if (evento.target.files?.length) {
+            for (var i = 0; i < evento.target.files.length; i++) {
+                imagens.unshift(evento.target.files[i])
+            }
+            imagens.pop();
+            console.log(imagens);
+        }
+    }
     useEffect(() => {
         if (parametros.id) {
             apiFullSports.get<IFornecedor[]>('listar-fornecedores/')
@@ -166,11 +177,11 @@ const AtualizarProduto = () => {
                         setNomeProduto(categoria.roupa.nome);
                         setSexo(categoria.roupa.sexo);
                         setCategoriaProduto("roupa");
+                        setCategoriaID(categoria.roupa._id);
                         setCorProduto(categoria.roupa.cor);
                         setQuantidade(categoria.roupa.quantidade.toString());
                         setTamanhoProduto(categoria.roupa.tamanho.toString());
                         setImagemProduto(categoria.roupa.imagemProduto)
-
                     } else if (categoria.suplemento !== undefined) {
                         setFornecedorID(categoria.suplemento.fornecedor._id);
                         setNomeProduto(categoria.suplemento.nome);
@@ -191,19 +202,51 @@ const AtualizarProduto = () => {
 
         }
     }, [parametros])
-    const selecionarArquivo = (evento: React.ChangeEvent<HTMLInputElement>) => {
-        imagens = [{},]
-        if (evento.target.files?.length) {
-            for (var i = 0; i < evento.target.files.length; i++) {
-                imagens.unshift(evento.target.files[i])
-            }
-            imagens.pop()
-            setCadastrarNovaFoto(true)
-            console.log(imagens)
-        }
-    }
-    function cadastrarNovasFotos(){
-        
+
+    function cadastrarNovasFotos() {
+        console.log(imagens);
+        ImagemProduto?.map(item => {
+            return ImagensID.unshift(item._id);
+        });
+        imagens.map(async    item => {
+            return apiFullSports.request({
+                url: 'imagem/',
+                method: 'POST',
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                    'Content-Type': 'multipart/form-data'
+                },
+                data: {
+                    file: item
+                }
+            }).then(response => {
+                apiFullSports.request({
+                    url: `imagem/${response.data._id}`,
+                    method: 'GET',
+                    headers: {
+                        'Access-Control-Allow-Origin': '*'
+                    },
+                }).then(response => {
+                    ImagensID.unshift(response.data._id)
+                }).catch(err => console.log(err))
+            }).catch(err => console.log(err))
+        })
+        ImagensID.pop();
+        console.log(ImagensID)
+        setTimeout(function () {
+            console.log(`atualizar-${categoriaProduto}/${categoriaID}`)
+            apiFullSports.request({
+                url: `atualizar-${categoriaProduto}/${categoriaID}`,
+                method: "PUT",
+                headers: {
+                    'Access-Control-Allow-Origin': '*'
+                },
+                data: {
+                    imagemProduto: ImagensID
+                }
+            }).then(()=>window.location.reload())
+            .catch(err => console.log(err));
+        }, 5000)
     }
     const deletarImagem = (DeletarImagem: string) => {
         apiFullSports.delete(`imagem/${DeletarImagem}/`)
@@ -412,8 +455,10 @@ const AtualizarProduto = () => {
                     accept="image/jpeg, image/pjpeg, image/png, image/gif"
                     multiple
                 />
-                <Box component={'div'} sx={{display:'flex',fontSize:'23px'}}>
-                    {spinner && (<p>carregando...</p>)} 
+                {cadastrarNovaFoto && (<Button variant="outlined" sx={{ border: "2px solid" }} onClick={cadastrarNovasFotos}>Cadastrar Nova Foto</Button>)}
+                <Button variant="outlined" sx={{ border: "2px solid" }} onClick={handleClose}>Fechar</Button>
+                <Box component={'div'} sx={{ display: 'flex', fontSize: '23px' }}>
+                    {spinner && (<p>carregando...</p>)}
                 </Box>
             </Box>
 

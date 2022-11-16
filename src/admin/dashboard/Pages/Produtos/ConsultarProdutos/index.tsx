@@ -47,7 +47,7 @@ const TableExibe = styled.table`
         background-color: #4c4f54;
     }
     
-    @media screen and (max-width: 1144px) {
+    @media screen and (max-width: 900px) {
        
     width: auto;
     position: static;
