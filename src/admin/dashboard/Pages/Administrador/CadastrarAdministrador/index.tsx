@@ -427,7 +427,7 @@ const CadastroAdministrador = () => {
                                 Cadastrar Administrador
                             </Button>
                             <Button
-                                onClick={evento => window.location.href = '/dashboard/consulta-admin'}
+                                onClick={evento => window.location.href = '/dashboard/consultar-admin'}
                                 sx={{
                                     justifyContent: 'center', display: 'block', height: '50px', borderRadius: '5px', color: '#fff',
                                     fontSize: '14px', backgroundColor: 'black', ":hover": 'backgroundColor: #313131, transform:translate(0.8s)'

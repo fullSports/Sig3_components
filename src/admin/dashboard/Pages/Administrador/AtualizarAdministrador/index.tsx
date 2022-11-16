@@ -453,7 +453,7 @@ const AtualizarAdministrador = () => {
             }).then(() => {
                 setSpinner(false)
                 // alert("cliente atualizado com suceeso");
-                window.location.href = "/dashboard/consulta-admin";
+                window.location.href = "/dashboard/consultar-admin";
             }).catch(erro => console.log(erro))
         }
     }
@@ -624,7 +624,7 @@ const AtualizarAdministrador = () => {
                                 Atualizar Administrador
                             </Button>
                             <Button
-                                onClick={evento => window.location.href = '/dashboard/consulta-admin'}
+                                onClick={evento => window.location.href = '/dashboard/consultar-admin'}
                                 type="button" id="btn-cad-forms" className="btn-cad-forms">
                                 Consulta de Adiministradores
                             </Button>

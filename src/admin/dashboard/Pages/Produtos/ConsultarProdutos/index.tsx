@@ -1,8 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
-import apiFullSports from "../../../../../api/apiFullSports";
-import IProduto from "../../../../../utils/interfaces/IProduto";
-import { Box, Button, Modal } from "@mui/material";
 import TabelaProduto from "./tabela";
 const Main = styled.main`
     width: 100%;
@@ -40,7 +37,8 @@ const TableExibe = styled.table`
         background-color: #4c4f54;
         img{
             padding: 0;
-            margin: 0;
+            margin-left: auto;
+            margin-right: auto;
             width: 120px;
             height: 70px;
         }
@@ -93,55 +91,9 @@ const TableExibe = styled.table`
     tr td:nth-child(even) {
     border-right: 1px solid #493e3e;
     }
-    img {
-        width: 100%;
-        height: auto;
-    }
+   
     }
 `;
-const BtnExibeGroup = styled.div`
-    display: grid;
-    grid-template-columns: repeat(2, auto);
-    grid-auto-rows: minmax(auto, auto);
-    grid-gap: 2px;
-    justify-content: center;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 5px;
-`;
-const BtnExibe = styled.button`
-    border: none;
-	border-radius: 5px;
-    background-color: #313131;
-    a{
-        color: rgb(243, 243, 243);
-    }
-        font-size: 14px;
-    width: 70px;
-    height: 35px;
-    :hover{
-        text-decoration: none;
-        background-color: rgb(0, 0, 0);
-        transform:translate(0.3s);
-    }
-    @media screen and (max-width: 1144px) {
-        width: 40px;
-        justify-content: center;
-    }
-`;
-const estiloMenssagem = {
-    position: 'absolute' as 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    pt: 2,
-    px: 4,
-    pb: 3,
-};
 const ConsultaProduto = () => {
 
     return (
@@ -156,11 +108,12 @@ const ConsultaProduto = () => {
                                     <th>CNPJ do Fornecedor</th>
                                     <th>Nome</th>
                                     <th>Categoria</th>
+                                    <th>Sexo alvo</th>
                                     <th>Cor</th>
                                     <th>Preço</th>
                                     <th>Dt.Cadastro</th>
                                     <th>Qtd.Estoque</th>
-                                    <th>ImagemProduto</th>
+                                    <th>1º ImagemProduto</th>
                                 </tr>
                             </thead>
                             <tbody>

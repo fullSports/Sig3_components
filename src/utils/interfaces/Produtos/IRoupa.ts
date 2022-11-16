@@ -5,6 +5,8 @@ export default interface IRoupa{
     nome: string,
     fornecedor: IFornecedor,
     cor: string,
+    sexo: string,
+    tamanho: number
     preco: string,
     quantidade: number,
     imagemProduto: [

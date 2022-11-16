@@ -3,10 +3,6 @@ import IProduto from "../../../../../utils/interfaces/IProduto";
 import apiFullSports from "../../../../../api/apiFullSports";
 import styled from "styled-components";
 import { Box, Button, Modal } from "@mui/material";
-import ICacados from "../../../../../utils/interfaces/Produtos/ICalcados";
-import IEquipamentos from "../../../../../utils/interfaces/Produtos/IEquipamentos";
-import ISuplementos from "../../../../../utils/interfaces/Produtos/ISuplementos";
-import IRoupa from "../../../../../utils/interfaces/Produtos/IRoupa";
 const BtnExibeGroup = styled.div`
     display: grid;
     grid-template-columns: repeat(2, auto);
@@ -79,18 +75,18 @@ const TabelaProduto = () => {
     return <>
         {spinner && (<p>carregando...</p>)}
         {produto.map(item => {
-            const categoriaDeproduto = item.categoriaProduto;
-
+           const categoriaDeproduto = item.categoriaProduto;
             if (categoriaDeproduto.calcado !== undefined) {
                 return <tr key={item._id.toString()}>
                     <th>{categoriaDeproduto.calcado.fornecedor.cnpj}</th>
                     <th>{categoriaDeproduto.calcado.nome}</th>
                     <th>Calçados</th>
+                    <th>{categoriaDeproduto.calcado.sexo}</th>
                     <th>{categoriaDeproduto.calcado.cor}</th>
                     <th>{categoriaDeproduto.calcado.preco}</th>
                     <th>{item.dataCadastro}</th>
                     <th>{categoriaDeproduto.calcado.quantidade}</th>
-                    <th><img src={categoriaDeproduto.calcado.imagemProduto[0].url} width='100' /></th>
+                    <th><img src={categoriaDeproduto.calcado.imagemProduto[0].url} width='100' alt="primeira imagem de produto"/></th>
                     <td>
                         <BtnExibeGroup id="btn-exibe-group" className="btn-exibe-group">
                             <a href={`/dashboard/atualizar-produto/${item._id}`} >
@@ -115,16 +111,17 @@ const TabelaProduto = () => {
                         </BtnExibeGroup>
                     </td>
                 </tr>
-            } else if (categoriaDeproduto.roupa != undefined) {
+            } else if (categoriaDeproduto.roupa !== undefined) {
                 return <tr key={item._id.toString()}>
                     <th>{categoriaDeproduto.roupa.fornecedor.cnpj}</th>
                     <th>{categoriaDeproduto.roupa.nome}</th>
                     <th>Roupas</th>
+                    <th>{categoriaDeproduto.roupa.sexo}</th>
                     <th>{categoriaDeproduto.roupa.cor}</th>
                     <th>{categoriaDeproduto.roupa.preco}</th>
                     <th>{item.dataCadastro}</th>
                     <th>{categoriaDeproduto.roupa.quantidade}</th>
-                    <th><img src={categoriaDeproduto.roupa.imagemProduto[0].url} width='100' /></th>
+                    <th><img src={categoriaDeproduto.roupa.imagemProduto[0].url} width='100' alt="primeira imagem de produto" /></th>
                     <td>
                         <BtnExibeGroup id="btn-exibe-group" className="btn-exibe-group">
                             <a href={`/dashboard/atualizar-produto/${item._id}`} >
@@ -154,11 +151,12 @@ const TabelaProduto = () => {
                     <th>{categoriaDeproduto.equipamento.fornecedor.cnpj}</th>
                     <th>{categoriaDeproduto.equipamento.nome}</th>
                     <th>Equipamentos</th>
+                    <th>{categoriaDeproduto.equipamento.sexo}</th>
                     <th>{categoriaDeproduto.equipamento.cor}</th>
                     <th>{categoriaDeproduto.equipamento.preco}</th>
                     <th>{item.dataCadastro}</th>
                     <th>{categoriaDeproduto.equipamento.quantidade}</th>
-                    <th><img src={categoriaDeproduto.equipamento.imagemProduto[0].url} width='100' /></th>
+                    <th><img src={categoriaDeproduto.equipamento.imagemProduto[0].url} width='100' alt="primeira imagem de produto" /></th>
                     <td>
                         <BtnExibeGroup id="btn-exibe-group" className="btn-exibe-group">
                             <a href={`/dashboard/atualizar-produto/${item._id}`} >
@@ -188,11 +186,12 @@ const TabelaProduto = () => {
                     <th>{categoriaDeproduto.suplemento.fornecedor.cnpj}</th>
                     <th>{categoriaDeproduto.suplemento.nome}</th>
                     <th>Suplementos</th>
+                    <th>{categoriaDeproduto.suplemento.sexo}</th>
                     <th>{categoriaDeproduto.suplemento.cor}</th>
                     <th>{categoriaDeproduto.suplemento.preco}</th>
                     <th>{item.dataCadastro}</th>
                     <th>{categoriaDeproduto.suplemento.quantidade}</th>
-                    <th><img src={categoriaDeproduto.suplemento.imagemProduto[0].url} width='100' /></th>
+                    <th><img src={categoriaDeproduto.suplemento.imagemProduto[0].url} width='100' alt="primeira imagem de produto" /></th>
                     <td>
                         <BtnExibeGroup id="btn-exibe-group" className="btn-exibe-group">
                             <a href={`/dashboard/atualizar-produto/${item._id}`} >
@@ -217,6 +216,8 @@ const TabelaProduto = () => {
                         </BtnExibeGroup>
                     </td>
                 </tr>
+            }else{
+                return <> </>
             }
 
         })}
@@ -224,82 +225,3 @@ const TabelaProduto = () => {
 
 }
 export default TabelaProduto;
-// if (item.categoriaProduto.suplemento) {
-//     <tr key={item._id.toString()}>
-//         <th>{item.categoriaProduto.suplemento.fornecedor.cnpj}</th>
-//         <th>{item.categoriaProduto.suplemento.nomeProduto}</th>
-//         <th>Caçado</th>
-//         <th>{item.categoriaProduto.suplemento.corProduto}</th>
-//         <th>{item.categoriaProduto.suplemento.preco}</th>
-//         <th>{item.categoriaProduto.suplemento.quantidade}</th>
-//         <th>{item.categoriaProduto.suplemento.imagemProduto[0].url}</th>
-
-
-//         <td>
-//             <BtnExibeGroup id="btn-exibe-group" className="btn-exibe-group">
-//                 <a href={`/dashboard/atualizar-produto/${item._id}`} >
-//                     <BtnExibe id="btn-exibe" className="btn-exibe"> Editar </BtnExibe></a>
-
-//                 <React.Fragment>
-//                     <BtnExibe id="btn-exibe" className="btn-exibe" onClick={handleOpen}>Excluir</BtnExibe>
-//                     <Modal
-//                         hideBackdrop
-//                         open={open}
-//                         onClose={handleClose}
-//                         aria-labelledby="child-modal-title"
-//                         aria-describedby="child-modal-description"
-//                     >
-//                         <Box sx={{ ...estiloMenssagem, width: 650, display: 'flex', justifyContent: 'center' }}>
-//                             <h2 id="child-modal-title">Deseja mesmo excluir esse produto { } ?</h2>
-//                             <Button onClick={() => deletar(item)} variant="outlined" color="error" >Excluir</Button>
-//                             <Button onClick={handleClose} variant="outlined" >Cancelar</Button>
-//                         </Box>
-//                     </Modal>
-//                 </React.Fragment>
-//             </BtnExibeGroup>
-//         </td>
-//     </tr>
-// }
-
-
-
-
-{/* <tbody>
-            
-{produtosCacados.map(item=>
-  <tr key={item._id.toString()}>
-  <td>cacados</td>
- <th>{item.fornecedor.cnpj}</th>
- <th>{item.nomeProduto}</th>
- <th>Caçados</th>
- <th>{item.corProduto}</th>
- <th>{item.preco}</th>
- <th>{item.quantidade}</th>
- <th><img src={item.imagemProduto[0].url} alt="imagem do produto" width='100' /></th>
-  <td>
-      <BtnExibeGroup id="btn-exibe-group" className="btn-exibe-group">
-          <a href={`/sig/atualizar-cliente/${item._id}`} >
-              <BtnExibe id="btn-exibe" className="btn-exibe"> Editar </BtnExibe></a>
-
-          <React.Fragment>
-              <BtnExibe id="btn-exibe" className="btn-exibe" onClick={handleOpen}>Excluir</BtnExibe>
-              {/* <Modal
-                  hideBackdrop
-                  open={open}
-                  onClose={handleClose}
-                  aria-labelledby="child-modal-title"
-                  aria-describedby="child-modal-description"
-              >
-                  <Box sx={{ ...estiloMenssagem, width: 650, display: 'flex', justifyContent: 'center' }}>
-                      <h2 id="child-modal-title">Deseja mesmo excluir o cliente {item.nome} ?</h2>
-                      <Button onClick={() => deletar(item)} variant="outlined" color="error" >Excluir</Button>
-                      <Button onClick={handleClose} variant="outlined" >Cancelar</Button>
-                  </Box>
-              </Modal> */}
-//           </React.Fragment>
-//       </BtnExibeGroup>
-//   </td>
-// </tr>
-
-//  )}
-//  </tbody> */}

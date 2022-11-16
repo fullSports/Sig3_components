@@ -14,6 +14,7 @@ import ConsultarFornecedores from './admin/dashboard/Pages/Fornecedor/ConsultarF
 import AtualizarFornecedor from './admin/dashboard/Pages/Fornecedor/AtualizarFornecedor';
 import CadastrarProduto from './admin/dashboard/Pages/Produtos/CadastrarProduto';
 import ConsultaProduto from './admin/dashboard/Pages/Produtos/ConsultarProdutos';
+import AtualizarProduto from './admin/dashboard/Pages/Produtos/AtualizarProduto';
 const App: React.FC = ()=> {
   return (
     <BrowserRouter>
@@ -33,7 +34,7 @@ const App: React.FC = ()=> {
       {/* crud Administrador */}    
       <Route path='/dashboard/cadastrar-admin' element={<CadastroAdministrador/>}/>
 
-      <Route path='/dashboard/consulta-admin' element={<ConsultaAdimistrador/>}/>
+      <Route path='/dashboard/consultar-admin' element={<ConsultaAdimistrador/>}/>
 
       <Route path='/dashboard/atualizar-admin/:id' element={<AtualizarAdministrador/>}/>  
 
@@ -48,6 +49,8 @@ const App: React.FC = ()=> {
      <Route path='/dashboard/cadastrar-produto' element={<CadastrarProduto/>}/>
      
      <Route path='/dashboard/consultar-produtos' element={<ConsultaProduto/>}/>
+
+     <Route path='/dashboard/atualizar-produto/:id' element={<AtualizarProduto/>}/>
       {/****************************** */}
       <Route path='*' element={<PageErro404/>}/>
     </Routes>
