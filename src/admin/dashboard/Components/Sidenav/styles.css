@@ -6,16 +6,16 @@
 }
 
 .sidenav{
-    @apply
-    z-10
+    @apply 
+    z-10 fixed
     h-[95vh]
     transform transition-all duration-300
     bg-def_vanilla
     dark:bg-def_dark_blue/10
     dark:border-2 dark:border-white
-    ml-6
     rounded-[50px]
     shadow-def_lg_shadow
+    ml-6
 }
 
 .sidenav-open{

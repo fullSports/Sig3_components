@@ -12,7 +12,7 @@ const DashboardSidenav = () =>{
 
     return(
         <>
-        <div className="sidenav-container">
+        <div className={`${collapsed ? 'w-[140px] mr-3' : 'w-[400px] mr-8'} sidenav-container`}>
             <div className={`${collapsed ? 'sidenav-collapsed' : 'sidenav-open'} sidenav`}>
                 <div className="sidenav-header">
                     <button className="toggle-collapse" onClick={() => setCollapse(!collapsed)}>
