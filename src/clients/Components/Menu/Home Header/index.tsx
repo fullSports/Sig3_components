@@ -16,14 +16,14 @@ const HomeHeader = () =>{
     const {theme, setTheme} = useTheme();
 
     function openTeste(){
-      let sidebar = document.querySelector('.sidebar-header');
-      var isSideOpen = sidebar?.classList.contains('hideShow')
-      isSideOpen ? sidebar?.classList.remove("hideShow") : sidebar?.classList.toggle("hideShow")
+      let sidebar = document.querySelector('.header-side');
+      var isSideOpen = sidebar?.classList.contains('show-sidebar')
+      isSideOpen ? sidebar?.classList.remove("show-sidebar") : sidebar?.classList.toggle("hideShow")
     }
 
     return(
         <>
-        <div className="sidebar-header hideShow">
+        <div className="header-side show-sidebar">
           <button className="toggleSidebar" onClick={openTeste}>
             <RiMenuFill size={30}/>
           </button>
@@ -71,6 +71,11 @@ const HomeHeader = () =>{
             </div>
         </div>
         <div className="search-container">
+            <div className="menu-toggle">
+                <button onClick={openTeste}>
+                    <RiMenuFill/>
+                </button>
+            </div>
             <div className="searchbar-contaienr">
                 <input type="text" placeholder='O que você busca?'/>
                 <button className="search-btn"><BiSearch/></button>
@@ -95,7 +100,7 @@ const HomeHeader = () =>{
                 <span className='txt-bold'>artigos esportivos</span>
                 <span className='txt-light'>para <span className='underline'>você.</span></span>
             </div>
-            <div className="brand-container">
+            <div className="header-brand-container">
                 <img src={brandLogo} alt="Full Sports" />
             </div>
         </div>

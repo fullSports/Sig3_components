@@ -49,7 +49,7 @@
     absolute z-10
     mt-20 flex w-full gap-2 items-center
     justify-center sm:justify-center
-    lg:justify-between px-12 py-8
+    lg:justify-between px-0 sm:px-0 md:px-12 py-8
 }
 
 .searchbar-contaienr {
@@ -113,7 +113,7 @@
     font-black uppercase
 }
 
-.brand-container{
+.header-brand-container{
     @apply
     bg-def_white
     h-[90px] w-[90px] p-2
@@ -125,4 +125,28 @@
 .hide-header{
     @apply
     hidden sm:hidden md:hidden lg:block xl:block
+}
+
+.show-sidebar{
+    @apply
+    invisible opacity-0 transition-transform ease-in-out
+}
+
+.header-side{
+    @apply
+    transition-all ease-in-out
+    z-20 fixed flex
+    bg-def_white
+    w-[320px] h-[170px] 
+}
+
+.menu-toggle{
+    @apply
+    visible sm:visible md:visible lg:invisible
+    px-2
+}
+
+.menu-toggle button {
+    @apply
+    flex text-def_white/80 text-3xl
 }
