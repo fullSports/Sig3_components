@@ -1,13 +1,25 @@
-import {BiSend} from 'react-icons/bi'
-import {arrayNavItems} from '../../../utils/NavItems';
-import {DevNames} from '../../../utils/devNames';
-import {AiFillTwitterCircle, AiOutlineInstagram, AiFillFacebook} from 'react-icons/ai';
+import { BiSend } from 'react-icons/bi'
+import { arrayNavItems } from '../../../utils/NavItems';
+import { DevNames } from '../../../utils/devNames';
+import { AiFillTwitterCircle, AiOutlineInstagram, AiFillFacebook } from 'react-icons/ai';
 import '../../../../src/styles.css';
 import './styles.css';
+import { useState } from 'react';
+import apiFullSports from '../../../api/apiFullSports';
 const brandLogo = require('../../../assets/images/fullSportLogo.png');
-
-const Footer = () =>{
-    return(
+const Footer = () => {
+    const [email, setEmail] = useState('');
+    function pesquisaEmail(evento: React.FormEvent<HTMLFormElement>){
+        evento.preventDefault();
+        apiFullSports.post('pesquisar-email/', { email: email }).then(reposta => {
+            if (reposta.data.emailExiste) {
+                window.location.href = "/login"
+            } else{
+                window.location.href = "/cadastrar-cliente"
+            }
+        })
+    }
+    return (
         <div className="footer-container">
 
             <div className="footer-news-sub">
@@ -16,8 +28,10 @@ const Footer = () =>{
                     <span className="news-sub-subt">Assine nossa newsletter e continue atualizado sobre nossos lançamentos.</span>
                 </div>
                 <div className="input-container">
-                    <input placeholder="Insira seu e-mail" type="email" />
-                    <button><BiSend color={'#09080980'}/></button>
+                    <form action="" method="post"   onSubmit={pesquisaEmail}>
+                        <input placeholder="Insira seu e-mail" type="email" onChange={evento => setEmail(evento.target.value)} />
+                        <button type="submit"  ><BiSend color={'#09080980'} /></button>
+                    </form>
                 </div>
             </div>
 
@@ -26,7 +40,7 @@ const Footer = () =>{
                     <div className="footer-item-group">
                         <h6 className="footer-item-title">Navegação</h6>
                         <ul className="items-group">
-                            { arrayNavItems.map((el: any) =>{
+                            {arrayNavItems.map((el: any) => {
                                 return (
                                     <li className="footer-items">
                                         <a href="#" className="footer-link">
@@ -34,14 +48,14 @@ const Footer = () =>{
                                         </a>
                                     </li>
                                 )
-                            }) }
+                            })}
                         </ul>
                     </div>
                     <div className="footer-item-group">
                         <h6 className="footer-item-title">Desenvolvedores</h6>
                         <ul className="items-group">
-                            { DevNames.map((el: any) => {
-                                return(
+                            {DevNames.map((el: any) => {
+                                return (
                                     <li className="footer-items">
                                         <a target="_blank" href={el.linkedin}>
                                             {el.name}
