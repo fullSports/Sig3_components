@@ -20,12 +20,4 @@ export  var arrayNavItems = [
         title: 'Equipamentos',
         path: ''
     },
-    {
-        title: 'Promoções',
-        path: ''
-    },
-    {
-        title: 'Mais Vendidos',
-        path: ''
-    }
 ]

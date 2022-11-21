@@ -11,6 +11,7 @@ import Footer from '../../Components/Footer';
 import Cabecalho from "../../Components/Menu/Header";
 import VerticalCardProduct from "../../Components/Cards/VerticalCardP/index"
 import HorizontalCardProduct from '../../Components/Cards/HorizontalCardP';
+import HomeHeader from '../../Components/Menu/Home Header';
 // import { render } from "@testing-library/react";
 // import IProduto from '../../../utils/interfaces/IProduto';
 // import apiFullSports from '../../../api/apiFullSports';
@@ -59,11 +60,9 @@ const Home = () => {
     //     }).catch((err) =>{console.log(err)});
     // },[])
     
-
-
     return (
         <>
-        <Cabecalho />
+        <HomeHeader />
             <div className='body-container'>
                 <div className="sec-container">
                     <h6 className="section-title">Ofertas da Semana</h6>
