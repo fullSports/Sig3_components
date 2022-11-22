@@ -1,5 +1,5 @@
-import React from 'react';
-import { BrowserRouter, Route , Routes } from 'react-router-dom';
+import React, { useState } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './clients/Pages/Home';
 import Acessibilidade from './clients/Pages/Acessibilidade';
 import CadastroAdministrador from './admin/dashboard/Pages/Administrador/CadastrarAdministrador';
@@ -15,45 +15,51 @@ import AtualizarFornecedor from './admin/dashboard/Pages/Fornecedor/AtualizarFor
 import CadastrarProduto from './admin/dashboard/Pages/Produtos/CadastrarProduto';
 import ConsultaProduto from './admin/dashboard/Pages/Produtos/ConsultarProdutos';
 import AtualizarProduto from './admin/dashboard/Pages/Produtos/AtualizarProduto';
-const App: React.FC = ()=> {
+import AutenticacaoAdmin from './admin/auth';
+import { AuthContext } from './contexts/auth';
+
+const App = () => {
+  
   return (
     <BrowserRouter>
-    <Routes>
       
-      <Route  path='/' element={<Home/>} />
+        <Routes>
 
-      <Route path='/acessibilidade' element={<Acessibilidade/>}/>
+          <Route path='/' element={<Home />} />
 
-      <Route path='/equipamentos' element={<Equipamentos/>}/>
+          <Route path='/acessibilidade' element={<Acessibilidade />} />
 
-      <Route path='/tenis' element={<Tenis/>}/>
+          <Route path='/equipamentos' element={<Equipamentos />} />
 
-      {/* DASHBOARD */}
-      <Route path='/dashboard/home' element={<DashboardHome/>}/>
+          <Route path='/tenis' element={<Tenis />} />
 
-      {/* crud Administrador */}    
-      <Route path='/dashboard/cadastrar-admin' element={<CadastroAdministrador/>}/>
+          {/* DASHBOARD */}
+          <Route path='/dashboard/home' element={<DashboardHome />} />
 
-      <Route path='/dashboard/consultar-admin' element={<ConsultaAdimistrador/>}/>
+          <Route path='/dashboard/login' element={<AutenticacaoAdmin />} />
+          {/* crud Administrador */}
+          <Route path='/dashboard/cadastrar-admin' element={<CadastroAdministrador />} />
 
-      <Route path='/dashboard/atualizar-admin/:id' element={<AtualizarAdministrador/>}/>  
+          <Route path='/dashboard/consultar-admin' element={<ConsultaAdimistrador />} />
 
-      {/* crud Fornecedor */}
-      <Route path='/dashboard/cadastrar-fornecedor' element={<CadastrarFornecedor/>}/>
-      
-      <Route path='/dashboard/consultar-fornecedores' element={<ConsultarFornecedores/>}/>
-      
-      <Route path='/dashboard/atualizar-fornecedor/:id' element={<AtualizarFornecedor/>}/>
-     
-     {/* crud produto */}
-     <Route path='/dashboard/cadastrar-produto' element={<CadastrarProduto/>}/>
-     
-     <Route path='/dashboard/consultar-produtos' element={<ConsultaProduto/>}/>
+          <Route path='/dashboard/atualizar-admin/:id' element={<AtualizarAdministrador />} />
 
-     <Route path='/dashboard/atualizar-produto/:id' element={<AtualizarProduto/>}/>
-      {/****************************** */}
-      <Route path='*' element={<PageErro404/>}/>
-    </Routes>
+          {/* crud Fornecedor */}
+          <Route path='/dashboard/cadastrar-fornecedor' element={<CadastrarFornecedor />} />
+
+          <Route path='/dashboard/consultar-fornecedores' element={<ConsultarFornecedores />} />
+
+          <Route path='/dashboard/atualizar-fornecedor/:id' element={<AtualizarFornecedor />} />
+
+          {/* crud produto */}
+          <Route path='/dashboard/cadastrar-produto' element={<CadastrarProduto />} />
+
+          <Route path='/dashboard/consultar-produtos' element={<ConsultaProduto />} />
+
+          <Route path='/dashboard/atualizar-produto/:id' element={<AtualizarProduto />} />
+          {/****************************** */}
+          <Route path='*' element={<PageErro404 />} />
+        </Routes>
     </BrowserRouter>
   );
 }
