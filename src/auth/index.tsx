@@ -67,7 +67,7 @@ const AutenticacaoAdmin = () => {
                 setMensagemErroBolean(true);
                 setMenssagemErro('email ou senha invalida!');
             } else {
-                apiFullSports.post("pesquisar-email-cliente", { email: email }).then(resposta => {
+                apiFullSports.post("pesquisar-email-cliente/", { email: email }).then(resposta => {
                     console.log(resposta.data)
                     localStorage.setItem('user', JSON.stringify(resposta.data));
                     if(resposta.data.login.isAdmin){
@@ -124,9 +124,9 @@ const AutenticacaoAdmin = () => {
                         {mensagemErroBolean && (<span id="menssagem-erro">{menssagemErro}</span>)}
                         <div className="btn-group">
                             <button
-                                onClick={() => window.location.href = '/dashboard/cadastrar-admin'}
+                                onClick={() => window.location.href = '/cadastrar-cliente'}
                                 className="btn-cad-forms hallow-btn">
-                                Novo Admin
+                                Criar Conta
                             </button>
                             <button
                                 type="submit" className="btn-cad-forms full-btn">

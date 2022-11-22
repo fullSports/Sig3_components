@@ -19,6 +19,7 @@ import AutenticacaoAdmin from './auth';
 import apiFullSports from './api/apiFullSports';
 import { Button, Modal } from '@mui/material';
 import { Box } from '@mui/system';
+import CadastroCliente from './clients/Pages/cliente/cadastrarCliente';
 const App = () => {
   const [open, setOpen] = useState(Boolean);
   const handleClose = () => {
@@ -153,6 +154,8 @@ const App = () => {
           <Route path='/equipamentos' element={<Equipamentos />} />
 
           <Route path='/tenis' element={<Tenis />} />
+
+          <Route path='/cadastrar-cliente' element={<CadastroCliente/>}/>
 
           {/****************************** */}
           <Route path='*' element={<PageErro404 />} />

@@ -1,0 +1,397 @@
+import React, { useState } from "react";
+import "../../../../styles.css"
+import styled from 'styled-components';
+import { TextField, FormControl, Select, InputLabel, MenuItem, Box } from "@mui/material";
+import apiFullSports from "../../../../api/apiFullSports";
+import ApiCep from "../../../../api/apiCep";
+
+
+const AtualizarImagemLabel = styled.label`
+cursor: pointer;
+text-transform: uppercase;
+color: #0b0b0b;
+border: solid 1px #7b7777;;
+margin-top: 4%;
+margin-bottom: 4%;
+display: flex;
+padding: 10px 10px;
+border-radius: 5px;
+`;
+const CadastroCliente = () => {
+
+    const [cpf, setCpf] = useState('');
+    const [nome, setNome] = useState('');
+    const [dataNascimento, setDataNascimento] = useState('');
+    const dataAtual = new Date().toLocaleDateString();
+    const [sexo, setSexo] = useState('');
+    const [cep, setCep] = useState('');
+    const [rua, setRua] = useState('');
+    const [bairro, setBairro] = useState('');
+    const [estado, setEstado] = useState('');
+    const [cidade, setCidade] = useState('');
+    const [complemento, setComplemento] = useState('');
+    const [numero, setNumero] = useState('');
+    const [file, setImagem] = useState<File | null>(null)
+    const [spinner, setSpinner] = useState(false);
+    const [carregandoCep, setCarregandoCep] = useState(false)
+    const [carregandoCepMenssagem, setCarregandoCepMessagem] = useState(false)
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const [mensagemErroBolean, setMensagemErroBolean] = useState(false);
+    const [menssagemErro, setMenssagemErro] = useState('');
+    const selecionarArquivo = (evento: React.ChangeEvent<HTMLInputElement>) => {
+        if (evento.target.files?.length) {
+            setImagem(evento.target.files[0])
+        } else {
+            setImagem(null)
+        }
+    }
+
+    function buscaCep() {
+        setCarregandoCep(true)
+        setCarregandoCepMessagem(false)
+        console.log(cep)
+        if (cep === '') {
+            setCarregandoCep(false)
+            setRua('');
+            setBairro('');
+            setEstado('');
+            setCidade('')
+        } else {
+            ApiCep.request({
+                method: 'GET',
+                url: cep,
+                headers: {
+                    'Access-Control-Allow-Origin': '*'
+                },
+            }).then(evento => {
+                setCarregandoCep(false)
+                setRua(evento.data.street);
+                setBairro(evento.data.neighborhood);
+                setEstado(evento.data.state);
+                setCidade(evento.data.city)
+            }).catch(err => {
+                setCarregandoCep(false)
+                setCarregandoCepMessagem(true)
+                console.log(err)
+            })
+        }
+    }
+
+    function aoSubmeterForm(event: React.FormEvent<HTMLFormElement>) {
+        setSpinner(true);
+        event.preventDefault();
+        console.log(email, password)
+        apiFullSports.request({
+            method: "POST",
+            url: 'login/',
+            headers: {
+                'Access-Control-Allow-Origin': '*'
+            },
+            data: {
+                email: email,
+                password: password,
+                isAdmin: false
+            }
+        }).then(respostaLogin => {
+            if (respostaLogin.data.message) {
+                setSpinner(false)
+                setMensagemErroBolean(true);
+                setMenssagemErro(respostaLogin.data.message);
+            } else {
+                console.log(respostaLogin.data._id)
+                const formData = new FormData();
+                if (file) {
+                    formData.append("file", file);
+                    apiFullSports.request({
+                        method: "POST",
+                        url: "imagem/",
+                        headers: {
+                            'Access-Control-Allow-Origin': '*',
+                            'Content-Type': 'multipart/form-data'
+                        },
+                        data: formData
+                    })
+                        .then(respostaImagem => {
+                            apiFullSports.request({
+                                method: "POST",
+                                url: "cadastrar-cliente/",
+                                headers: {
+                                    'Access-Control-Allow-Origin': '*'
+                                },
+                                data: {
+                                    cpf: cpf,
+                                    nome: nome,
+                                    login: respostaLogin.data._id,
+                                    dataNascimento: dataNascimento,
+                                    sexo: sexo,
+                                    cep: cep,
+                                    endereco: `${rua},${numero} -${complemento}- ${estado}, ${cidade}, ${bairro}`,
+                                    dataCadastro: dataAtual,
+                                    imagemPerfil: respostaImagem.data._id
+                                }
+                            }).then(() => {
+                                setSpinner(false)
+                                window.location.href='/login'
+                            }).catch(err => { console.log(err) })
+                        }).catch(err => { console.log(err) })
+                } else {
+                    apiFullSports.request({
+                        method: "POST",
+                        url: "cadastrar-cliente/",
+                        headers: {
+                            'Access-Control-Allow-Origin': '*'
+                        },
+                        data: {
+                            cpf: cpf,
+                            nome: nome,
+                            login: respostaLogin.data._id,
+                            dataNascimento: dataNascimento,
+                            sexo: sexo,
+                            cep: cep,
+                            endereco: `${rua},${numero} -${complemento}- ${estado}, ${cidade}, ${bairro}`,
+                            dataCadastro: dataAtual
+                        }
+                    }).then(() => {
+                        setSpinner(false);
+                        window.location.href = '/login'
+                    }).catch(err => { console.log(err) })
+                }
+            }
+        }).catch(err => { console.log(err) })
+
+    }
+
+    return (
+        <>
+            <div className="flex">
+                <div id="main" className="dashboard-body">
+                    <div className="form-card">
+                        <div id="form-cadastro-cliente" className="form-cadastro-cliente">
+                            <span className="form-title">Cadastro de Admnistrador</span>
+                            <Box component={'form'} onSubmit={aoSubmeterForm} encType="multipart/form-data">
+                                <div className="form-rows">
+                                </div>
+                                <div className="row-grid">
+                                    <label className="col-form-label">Nome Completo
+                                        <TextField
+                                            sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
+                                            onChange={evento => setNome(evento.target.value)}
+                                            className="txt-form"
+                                            label="Nome"
+                                            id="nome"
+                                            type="text"
+                                            placeholder={'Digite o nome do admnistrador.'}
+                                            fullWidth
+                                            required
+                                        />
+                                    </label>
+                                    <label className="col-form-label">CPF
+                                        <TextField
+                                            sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
+                                            onChange={evento => setCpf(evento.target.value)}
+                                            className="txt-form"
+                                            label="cpf"
+                                            id="cpf"
+                                            type="text"
+                                            placeholder={'00.000.000-00'}
+                                            fullWidth
+                                            required
+                                        />
+                                    </label>
+                                </div>
+                                <div className="row-grid">
+                                    <label className="col-form-label">Data de Nascimento
+                                        <TextField
+                                            sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
+                                            onChange={evento => setDataNascimento(evento.target.value)}
+                                            className="txt-form"
+                                            label="Data de Nascimento"
+                                            id="data"
+                                            type="text"
+                                            placeholder={'__/__/____'}
+                                            fullWidth
+                                            required
+                                        />
+                                    </label>
+
+                                    <label className="col-form-label">Sexo
+                                        <FormControl fullWidth margin="dense">
+                                            <InputLabel id="sexo">Sexo</InputLabel>
+                                            <Select className="txt-form" labelId="sexo" sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
+                                                value={sexo} onChange={evento => setSexo(evento.target.value)} required>
+                                                <MenuItem key={''} value={''}></MenuItem>
+                                                <MenuItem key={'M'} value={'M'}>Masculino</MenuItem>
+                                                <MenuItem key={'F'} value={'F'}>Feminino</MenuItem>
+                                                <MenuItem key={'O'} value={'O'}>Outros</MenuItem>
+                                                <MenuItem key={'-'} value={'-'}>Prefiro não dizer</MenuItem>
+                                            </Select>
+                                        </FormControl>
+                                    </label>
+                                </div>
+                                <div className="row-grid">
+                                    <label className="col-form-label">Cep {carregandoCep && <p>buscando cep...</p>}{carregandoCepMenssagem && <p id="menssagem-erro">cep invalido</p>}
+                                        <TextField
+                                            onChange={evento => setCep(evento.target.value)}
+                                            sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
+                                            className="txt-form"
+                                            label="Cep"
+                                            id="cep"
+                                            type="text"
+                                            placeholder={'00000-000'}
+                                            fullWidth
+                                            required
+                                            onBlur={buscaCep}
+                                        />
+                                    </label>
+
+                                    <label className="col-form-label">Rua
+                                        <TextField
+                                            onChange={evento => setRua(evento.target.value)}
+                                            sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
+                                            className="txt-form"
+                                            label="Rua"
+                                            id="rua"
+                                            type="text"
+                                            placeholder={'Digite sua rua'}
+                                            fullWidth
+                                            required
+                                            value={rua}
+                                        />
+                                    </label>
+                                </div>
+                                <div className="row-grid">
+                                    <label className="col-form-label">Bairro
+                                        <TextField
+                                            onChange={evento => setBairro(evento.target.value)}
+                                            sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
+                                            className="txt-form"
+                                            label="Bairro"
+                                            id="bairro"
+                                            type="text"
+                                            placeholder={'Digite seu Bairro'}
+                                            fullWidth
+                                            required
+                                            value={bairro}
+                                        />
+                                    </label>
+
+                                    <label className="col-form-label">Estado
+                                        <TextField
+                                            onChange={evento => setEstado(evento.target.value)}
+                                            sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
+                                            className="txt-form"
+                                            label="Estado"
+                                            id="estado"
+                                            type="text"
+                                            placeholder={'Digite seu estado'}
+                                            fullWidth
+                                            required
+                                            value={estado}
+                                        />
+                                    </label>
+                                </div>
+                                <div className="row-grid">
+                                    <label className="col-form-label">Cidade
+                                        <TextField
+                                            onChange={evento => setCidade(evento.target.value)}
+                                            sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
+                                            className="txt-form"
+                                            label="Cidade"
+                                            id="cidade"
+                                            type="text"
+                                            placeholder={'Digite sua Cidade'}
+                                            fullWidth
+                                            required
+                                            value={cidade}
+                                        />
+                                    </label>
+                                    <label className="col-form-label">Número
+                                        <TextField
+                                            onChange={evento => setNumero(evento.target.value)}
+                                            sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
+                                            className="txt-form"
+                                            label="Nº"
+                                            id="numero"
+                                            type="number"
+                                            fullWidth
+                                            required
+                                        />
+                                    </label>
+
+                                    <label className="col-form-label">Complemento
+                                        <TextField
+                                            onChange={evento => setComplemento(evento.target.value)}
+                                            sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
+                                            className="txt-form"
+                                            label="Complemento"
+                                            id="complemento"
+                                            type="text"
+                                            placeholder={'casa/apartamento'}
+                                            fullWidth
+                                            required
+                                        />
+                                    </label>
+                                </div>
+                                <div className="row-grid">
+                                    <label className="col-form-label">E-mail
+                                        <TextField
+                                            sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
+                                            onChange={evento => setEmail(evento.target.value)}
+                                            onClick={() => setMensagemErroBolean(false)}
+                                            className="txt-form"
+                                            label="email"
+                                            id="email"
+                                            type="email"
+                                            placeholder={'Insira seu e-mail'}
+                                            fullWidth
+                                            required
+                                        />
+                                    </label>
+
+                                    <label className="col-form-label">Senha
+                                        <TextField
+                                            sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
+                                            onChange={evento => setPassword(evento.target.value)}
+                                            className="txt-form"
+                                            label="password"
+                                            id="password"
+                                            type="password"
+                                            placeholder={'Insira sua senha'}
+                                            fullWidth
+                                            required
+                                        />
+                                    </label>
+                                </div>
+                                <div className="row-grid-1">
+                                    <label className="col-form-label">Imagem de Perfil
+                                        <AtualizarImagemLabel htmlFor="file" >Escolher foto...</AtualizarImagemLabel>
+                                        <input
+                                            onChange={selecionarArquivo}
+                                            className="txt-form"
+                                            id="file"
+                                            type="file"
+                                            name="file"
+                                            accept="image/jpeg, image/pjpeg, image/png, image/gif"
+                                        />
+                                    </label>
+                                </div>
+                                {spinner && (<p>carregando...</p>)}
+                                {mensagemErroBolean && (<span id="menssagem-erro">{menssagemErro}</span>)}
+                                <div className="btn-group">
+                                    <button
+                                        type="submit" className="btn-cad-forms full-btn">
+                                        Cadastrar
+                                    </button>
+                                </div>
+                            </Box>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </>
+    )
+}
+
+export default CadastroCliente;
