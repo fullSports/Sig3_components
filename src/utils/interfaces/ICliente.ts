@@ -11,4 +11,5 @@ export default interface ICliente{
     endereco: string
     dataCadastro: string
     imagemPerfil: Iimagem
+    isLogin?: boolean
 }

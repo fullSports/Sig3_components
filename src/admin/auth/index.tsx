@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import './styles.css';
-import {login} from '../../utils/interfaces/login'
+import { login } from '../../utils/interfaces/login'
 import ILogin from "../../utils/interfaces/ILogin";
 import { Button, TextField, FormControl, Select, InputLabel, MenuItem, Box, Modal } from "@mui/material";
 import styled from "styled-components";
 import apiFullSports from "../../api/apiFullSports";
+import ICliente from "../../utils/interfaces/ICliente";
 const Main = styled.main`
     width: 100%;
     min-height: 600px;
@@ -38,7 +39,7 @@ const FormLogin = styled.div`
     }
 `;
 
-  
+
 const AutenticacaoAdmin = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -47,6 +48,10 @@ const AutenticacaoAdmin = () => {
     const [spinner, setSpinner] = useState(false);
     const [mensagemErroBolean, setMensagemErroBolean] = useState(false);
     const [menssagemErro, setMenssagemErro] = useState('');
+    const [user, setUser] = useState<ICliente[]>([]);
+    // if (localStorage.getItem("user")) {
+    //     window.location.href = "/dashboard/home"
+    // }
     function realizarLogin(evento: React.FormEvent<HTMLFormElement>) {
         evento.preventDefault();
         setMensagemErroBolean(false)
@@ -72,12 +77,20 @@ const AutenticacaoAdmin = () => {
                     setSpinner(false)
                     setMensagemErroBolean(true);
                     setMenssagemErro("esse emai não é adiministrador");
-                }else{
+                } else {
+                    apiFullSports.post("pesquisar-email-cliente", { email: email }).then(resposta => {
+                        console.log(resposta.data)
+                        var jsonAux = JSON.stringify(resposta.data);
 
+                        // "Seta" este json no localStorage
+                        window.localStorage.setItem('user', jsonAux);
+
+                    }).catch((err) => console.log(err));
                 }
             }
         }).catch((err) => console.log(err));
     }
+
 
     return (
         <>
@@ -132,6 +145,7 @@ const AutenticacaoAdmin = () => {
                     </Box>
                 </FormLogin>
             </Main>
+            <Button onClick={() => localStorage.removeItem("user")}>deslogar</Button>
 
         </>
     )

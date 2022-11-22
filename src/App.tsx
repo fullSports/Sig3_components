@@ -16,11 +16,11 @@ import CadastrarProduto from './admin/dashboard/Pages/Produtos/CadastrarProduto'
 import ConsultaProduto from './admin/dashboard/Pages/Produtos/ConsultarProdutos';
 import AtualizarProduto from './admin/dashboard/Pages/Produtos/AtualizarProduto';
 import AutenticacaoAdmin from './admin/auth';
-import { AuthContext } from './contexts/auth';
-
+import User from './contexts/user';
 const App = () => {
   
   return (
+
     <BrowserRouter>
       
         <Routes>
