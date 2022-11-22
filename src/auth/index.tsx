@@ -1,11 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, {useState } from "react";
 import './styles.css';
-import { login } from '../../utils/interfaces/login'
-import ILogin from "../../utils/interfaces/ILogin";
-import { Button, TextField, FormControl, Select, InputLabel, MenuItem, Box, Modal } from "@mui/material";
+import {  TextField,Box } from "@mui/material";
 import styled from "styled-components";
-import apiFullSports from "../../api/apiFullSports";
-import ICliente from "../../utils/interfaces/ICliente";
+import apiFullSports from "../api/apiFullSports";
 const Main = styled.main`
     width: 100%;
     min-height: 600px;
@@ -43,14 +40,11 @@ const FormLogin = styled.div`
 const AutenticacaoAdmin = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [isAdmin, setIsAdmin] = useState(Boolean)
-    const [login, setLogin] = useState<ILogin[]>([]);
     const [spinner, setSpinner] = useState(false);
     const [mensagemErroBolean, setMensagemErroBolean] = useState(false);
     const [menssagemErro, setMenssagemErro] = useState('');
-    const [user, setUser] = useState<ICliente[]>([]);
     // if (localStorage.getItem("user")) {
-    //     window.location.href = "/dashboard/home"
+    //     window.location.href = "/"
     // }
     function realizarLogin(evento: React.FormEvent<HTMLFormElement>) {
         evento.preventDefault();
@@ -71,26 +65,23 @@ const AutenticacaoAdmin = () => {
             if (resposta.data.message !== undefined) {
                 setSpinner(false)
                 setMensagemErroBolean(true);
-                setMenssagemErro(resposta.data.message);
+                setMenssagemErro('email ou senha invalida!');
             } else {
-                if (!resposta.data.result.isAdmin) {
-                    setSpinner(false)
-                    setMensagemErroBolean(true);
-                    setMenssagemErro("esse emai não é adiministrador");
-                } else {
-                    apiFullSports.post("pesquisar-email-cliente", { email: email }).then(resposta => {
-                        console.log(resposta.data)
-                        var jsonAux = JSON.stringify(resposta.data);
-
-                        // "Seta" este json no localStorage
-                        window.localStorage.setItem('user', jsonAux);
-
-                    }).catch((err) => console.log(err));
-                }
+                apiFullSports.post("pesquisar-email-cliente", { email: email }).then(resposta => {
+                    console.log(resposta.data)
+                    localStorage.setItem('user', JSON.stringify(resposta.data));
+                    if(resposta.data.login.isAdmin){
+                        window.location.href='/dashboard/home/'
+                    }else{
+                        window.location.href='/'
+                    }
+                }).catch((err) => console.log(err));
             }
         }).catch((err) => console.log(err));
     }
-
+    if(localStorage.getItem('user')){
+        console.log(JSON.parse(localStorage.getItem('user') as string));
+    }
 
     return (
         <>
@@ -145,8 +136,6 @@ const AutenticacaoAdmin = () => {
                     </Box>
                 </FormLogin>
             </Main>
-            <Button onClick={() => localStorage.removeItem("user")}>deslogar</Button>
-
         </>
     )
 }

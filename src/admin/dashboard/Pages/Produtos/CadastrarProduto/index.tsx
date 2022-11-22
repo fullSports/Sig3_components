@@ -104,13 +104,15 @@ const CadastrarProduto = () => {
     const [corProduto, setCorProduto] = useState('');
     const [preco, setPreco] = useState('');
     const [quantidade, setQuantidade] = useState('');
-    const [ tamanhoProduto,setTamanhoProduto] = useState('');
+    const [tamanhoProduto, setTamanhoProduto] = useState('');
     const [sexo, setSexo] = useState('');
     let ImagensID = [{},]
     let imagens = [{},]
     const [spinner, setSpinner] = useState(false);
     const [mensagemErroBolean, setMensagemErroBolean] = useState(false);
     const [menssagemErro, setMenssagemErro] = useState('');
+    const urlParams = new URLSearchParams(window.location.search);
+    const categoriaParam = urlParams.get('categoria');
     const selecionarArquivo = (evento: React.ChangeEvent<HTMLInputElement>) => {
         imagens = [{},]
         if (evento.target.files?.length) {
@@ -125,6 +127,10 @@ const CadastrarProduto = () => {
     useEffect(() => {
         apiFullSports.get<IFornecedor[]>('listar-fornecedores/')
             .then(resposta => setListaFornecedores(resposta.data))
+            if(categoriaParam){
+                console.log(categoriaParam.toString())
+                setCategoriaProduto(categoriaParam.toString());
+            }
     }, [])
     const options = listaFornecedores.map((item) => {
         const firsLetter = item.nomeEmpresa[0].toLocaleUpperCase();
@@ -136,15 +142,15 @@ const CadastrarProduto = () => {
     function aoSubmit(evento: React.FormEvent<HTMLFormElement>) {
         evento.preventDefault();
         setSpinner(true);
-        if(categoriaProduto===''){
+        if (categoriaProduto === '') {
             setMenssagemErro('escolha uma categoria de produto');
             setMensagemErroBolean(true);
-        }else if(sexo===''){
+        } else if (sexo === '') {
             setMenssagemErro('escolha uma sexo de produto');
             setMensagemErroBolean(true);
-        }else{
+        } else {
             imagens.map(async item => {
-               return apiFullSports.request({
+                return apiFullSports.request({
                     url: 'imagem/',
                     method: 'POST',
                     headers: {
@@ -167,152 +173,152 @@ const CadastrarProduto = () => {
                     }).catch(err => console.log(err))
                 }).catch(err => console.log(err))
             })
-       }
-       setTimeout(function(){
-        if(categoriaProduto==='roupa'){
-            if(spinner===false){
-                ImagensID.pop();
-                setTimeout(function(){
-                console.log(ImagensID)
-                apiFullSports.request({
-                    url:'cadastrar-roupa/',
-                    method: 'POST',
-                    data:{
-                        nome: nomeProduto,
-                        fornecedor: fornecedorID,
-                        cor: corProduto,
-                        sexo: sexo,
-                        tamanho: tamanhoProduto,
-                        preco: preco,
-                        quantidade: quantidade,
-                        imagemProduto: ImagensID
-                    }
-                }).then( resposta =>{
-                    apiFullSports.request({
-                        method: "POST",
-                        url: "cadastrar-produto/",
-                        data:{
-                            categoriaProduto:{
-                                roupa: resposta.data._id
-                            },
-                            dataCadastro: dataAtual
-                        }
-                    }).then(()=>{
-                        setSpinner(false);
-                        window.location.href = '/dashboard/consultar-produtos'
-                    }).catch(err => console.log(err))
-                }).catch(err => console.log(err))
-            },2000)
-            }
-        }else if(categoriaProduto === 'equipamento'){
-            if(spinner===false){
-                ImagensID.pop();
-                setTimeout(function(){
-                console.log(ImagensID)
-                apiFullSports.request({
-                    url:'cadastrar-equipamento/',
-                    method: 'POST',
-                    data:{
-                        nome: nomeProduto,
-                        fornecedor: fornecedorID,
-                        cor: corProduto,
-                        sexo: sexo,
-                        tamanho: tamanhoProduto,
-                        preco: preco,
-                        quantidade: quantidade,
-                        imagemProduto: ImagensID
-                    }
-                }).then( resposta =>{
-                    apiFullSports.request({
-                        method: "POST",
-                        url: "cadastrar-produto/",
-                        data:{
-                            categoriaProduto:{
-                                equipamento: resposta.data._id
-                            },
-                            dataCadastro: dataAtual
-                        }
-                    }).then(()=>{
-                        setSpinner(false);
-                        window.location.href = '/dashboard/consultar-produtos'
-                    }).catch(err => console.log(err))
-                }).catch(err => console.log(err))
-            },2000)
-            }
-        }else if(categoriaProduto === 'suplemento'){
-            if(spinner===false){
-                ImagensID.pop();
-                setTimeout(function(){
-                console.log(ImagensID)
-                apiFullSports.request({
-                    url:'cadastrar-suplemento/',
-                    method: 'POST',
-                    data:{
-                        nome: nomeProduto,
-                        fornecedor: fornecedorID,
-                        cor: corProduto,
-                        sexo: sexo,
-                        tamanho: tamanhoProduto,
-                        preco: preco,
-                        quantidade: quantidade,
-                        imagemProduto: ImagensID
-                    }
-                }).then( resposta =>{
-                    apiFullSports.request({
-                        method: "POST",
-                        url: "cadastrar-produto/",
-                        data:{
-                            categoriaProduto:{
-                                suplemento: resposta.data._id
-                            },
-                            dataCadastro: dataAtual
-                        }
-                    }).then(()=>{
-                        setSpinner(false);
-                        window.location.href = '/dashboard/consultar-produtos'
-                    }).catch(err => console.log(err))
-                }).catch(err => console.log(err))
-            },2000)
-            }
-        }else if(categoriaProduto === 'calcado'){
-            if(spinner===false){
-                ImagensID.pop();
-                setTimeout(function(){
-                console.log(ImagensID)
-                apiFullSports.request({
-                    url:'cadastrar-calcado/',
-                    method: 'POST',
-                    data:{
-                        nome: nomeProduto,
-                        fornecedor: fornecedorID,
-                        cor: corProduto,
-                        sexo: sexo,
-                        tamanho: tamanhoProduto,
-                        preco: preco,
-                        quantidade: quantidade,
-                        imagemProduto: ImagensID
-                    }
-                }).then( resposta =>{
-                    apiFullSports.request({
-                        method: "POST",
-                        url: "cadastrar-produto/",
-                        data:{
-                            categoriaProduto:{
-                                calcado: resposta.data._id
-                            },
-                            dataCadastro: dataAtual
-                        }
-                    }).then(()=>{
-                        setSpinner(false);
-                        window.location.href = '/dashboard/consultar-produtos'
-                    }).catch(err => console.log(err))
-                }).catch(err => console.log(err))
-            },2000)
-            }
         }
-    },2000)
+        setTimeout(function () {
+            if (categoriaProduto === 'roupa') {
+                if (spinner === false) {
+                    ImagensID.pop();
+                    setTimeout(function () {
+                        console.log(ImagensID)
+                        apiFullSports.request({
+                            url: 'cadastrar-roupa/',
+                            method: 'POST',
+                            data: {
+                                nome: nomeProduto,
+                                fornecedor: fornecedorID,
+                                cor: corProduto,
+                                sexo: sexo,
+                                tamanho: tamanhoProduto,
+                                preco: preco,
+                                quantidade: quantidade,
+                                imagemProduto: ImagensID
+                            }
+                        }).then(resposta => {
+                            apiFullSports.request({
+                                method: "POST",
+                                url: "cadastrar-produto/",
+                                data: {
+                                    categoriaProduto: {
+                                        roupa: resposta.data._id
+                                    },
+                                    dataCadastro: dataAtual
+                                }
+                            }).then(() => {
+                                setSpinner(false);
+                                window.location.href = '/dashboard/consultar-produtos'
+                            }).catch(err => console.log(err))
+                        }).catch(err => console.log(err))
+                    }, 2000)
+                }
+            } else if (categoriaProduto === 'equipamento') {
+                if (spinner === false) {
+                    ImagensID.pop();
+                    setTimeout(function () {
+                        console.log(ImagensID)
+                        apiFullSports.request({
+                            url: 'cadastrar-equipamento/',
+                            method: 'POST',
+                            data: {
+                                nome: nomeProduto,
+                                fornecedor: fornecedorID,
+                                cor: corProduto,
+                                sexo: sexo,
+                                tamanho: tamanhoProduto,
+                                preco: preco,
+                                quantidade: quantidade,
+                                imagemProduto: ImagensID
+                            }
+                        }).then(resposta => {
+                            apiFullSports.request({
+                                method: "POST",
+                                url: "cadastrar-produto/",
+                                data: {
+                                    categoriaProduto: {
+                                        equipamento: resposta.data._id
+                                    },
+                                    dataCadastro: dataAtual
+                                }
+                            }).then(() => {
+                                setSpinner(false);
+                                window.location.href = '/dashboard/consultar-produtos'
+                            }).catch(err => console.log(err))
+                        }).catch(err => console.log(err))
+                    }, 2000)
+                }
+            } else if (categoriaProduto === 'suplemento') {
+                if (spinner === false) {
+                    ImagensID.pop();
+                    setTimeout(function () {
+                        console.log(ImagensID)
+                        apiFullSports.request({
+                            url: 'cadastrar-suplemento/',
+                            method: 'POST',
+                            data: {
+                                nome: nomeProduto,
+                                fornecedor: fornecedorID,
+                                cor: corProduto,
+                                sexo: sexo,
+                                tamanho: tamanhoProduto,
+                                preco: preco,
+                                quantidade: quantidade,
+                                imagemProduto: ImagensID
+                            }
+                        }).then(resposta => {
+                            apiFullSports.request({
+                                method: "POST",
+                                url: "cadastrar-produto/",
+                                data: {
+                                    categoriaProduto: {
+                                        suplemento: resposta.data._id
+                                    },
+                                    dataCadastro: dataAtual
+                                }
+                            }).then(() => {
+                                setSpinner(false);
+                                window.location.href = '/dashboard/consultar-produtos'
+                            }).catch(err => console.log(err))
+                        }).catch(err => console.log(err))
+                    }, 2000)
+                }
+            } else if (categoriaProduto === 'calcado') {
+                if (spinner === false) {
+                    ImagensID.pop();
+                    setTimeout(function () {
+                        console.log(ImagensID)
+                        apiFullSports.request({
+                            url: 'cadastrar-calcado/',
+                            method: 'POST',
+                            data: {
+                                nome: nomeProduto,
+                                fornecedor: fornecedorID,
+                                cor: corProduto,
+                                sexo: sexo,
+                                tamanho: tamanhoProduto,
+                                preco: preco,
+                                quantidade: quantidade,
+                                imagemProduto: ImagensID
+                            }
+                        }).then(resposta => {
+                            apiFullSports.request({
+                                method: "POST",
+                                url: "cadastrar-produto/",
+                                data: {
+                                    categoriaProduto: {
+                                        calcado: resposta.data._id
+                                    },
+                                    dataCadastro: dataAtual
+                                }
+                            }).then(() => {
+                                setSpinner(false);
+                                window.location.href = '/dashboard/consultar-produtos'
+                            }).catch(err => console.log(err))
+                        }).catch(err => console.log(err))
+                    }, 2000)
+                }
+            }
+        }, 2000)
 
-        }
+    }
 
     return (
         <>
@@ -337,7 +343,7 @@ const CadastrarProduto = () => {
                                 className="txt-form"
                                 id='Auto-complete'
                                 sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%', textAlign: 'center' }}
-                                renderInput={(params) => <TextField {...params}  id='Auto-complete' label="Nome/Cnpj" />}
+                                renderInput={(params) => <TextField {...params} id='Auto-complete' label="Nome/Cnpj" />}
                             />
 
                             <label className="col-form-label">Nome do Produto</label>
@@ -355,9 +361,9 @@ const CadastrarProduto = () => {
                             <label className="col-form-label">Categoria do Produto</label>
                             <FormControl fullWidth margin='dense'>
                                 <InputLabel id='categoria-produto'>Categoria</InputLabel>
-                                <Select className='text-form' labelId='categoria-produto' 
-                                sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
-                                value={categoriaProduto} onChange={envento => setCategoriaProduto(envento.target.value)}>
+                                <Select className='text-form' labelId='categoria-produto'
+                                    sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
+                                    value={categoriaProduto} onChange={envento => setCategoriaProduto(envento.target.value)}>
                                     <MenuItem key={''} value={''}></MenuItem>
                                     <MenuItem key={'roupa'} value={'roupa'}>Roupas</MenuItem>
                                     <MenuItem key={'equipamento'} value={'equipamento'}>Equipamento</MenuItem>
@@ -403,7 +409,7 @@ const CadastrarProduto = () => {
                                 fullWidth
                                 onChange={evento => setPreco(evento.target.value)}
                             />
-                             <label className="col-form-label">Quantidade de Produtos</label>
+                            <label className="col-form-label">Quantidade de Produtos</label>
                             <TextField
                                 sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
                                 className="txt-form"
@@ -451,7 +457,7 @@ const CadastrarProduto = () => {
                                 Cadastrar Produto
                             </Button>
                             <Button
-                                onClick={()=>  window.location.href = '/dashboard/consultar-produtos'}
+                                onClick={() => window.location.href = '/dashboard/consultar-produtos'}
                                 sx={{
                                     justifyContent: 'center', display: 'block', height: '50px', borderRadius: '5px', color: '#fff',
                                     fontSize: '14px', backgroundColor: 'black', ":hover": 'backgroundColor: #313131, transform:translate(0.8s)'

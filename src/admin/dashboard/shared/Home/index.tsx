@@ -4,7 +4,7 @@ import '../../styles.css';
 import './styles.css';
 
 const DashboardHome = () =>{
-
+    const user = JSON.parse(localStorage.getItem('user') as string)
     return(
         <>
         <div className="flex">
@@ -13,7 +13,7 @@ const DashboardHome = () =>{
                 <DashboardHeader/>
                 <div className="home-welcome-card">
                     <div className="username-welcome">
-                        <span>Bem vindo(a), Renan Figueredo.</span>
+                        <span>Bem vindo(a), {user.nome}.</span>
                     </div>
                     <div className="dash-desc">
                         <span>

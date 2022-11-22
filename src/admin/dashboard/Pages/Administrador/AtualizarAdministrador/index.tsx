@@ -305,6 +305,7 @@ const AtualizarAdministrador = () => {
     const deletarFoto = () => {
         apiFullSports.delete(`imagem/${imagemId}`)
         setImagemID('');
+        window.location.reload();
     }
     function buscaCep() {
         setCarregandoCep(true)
