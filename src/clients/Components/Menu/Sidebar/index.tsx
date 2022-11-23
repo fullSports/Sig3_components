@@ -29,7 +29,7 @@ const Sidebar = () => {
                 { arrayNavItems.map((el: any) => {
                     return(
                         <li className="nav-item">
-                        <a href="{el.path}" className='sidenav-item-btn'>
+                        <a href={el.path} className='sidenav-item-btn'>
                             {el.title}
                         </a>
                         </li>

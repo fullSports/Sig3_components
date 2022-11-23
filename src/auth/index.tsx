@@ -1,4 +1,4 @@
-import React, {useState } from "react";
+import React, {useEffect, useState } from "react";
 import './styles.css';
 import {  TextField,Box } from "@mui/material";
 import styled from "styled-components";
@@ -43,9 +43,13 @@ const AutenticacaoAdmin = () => {
     const [spinner, setSpinner] = useState(false);
     const [mensagemErroBolean, setMensagemErroBolean] = useState(false);
     const [menssagemErro, setMenssagemErro] = useState('');
-    // if (localStorage.getItem("user")) {
-    //     window.location.href = "/"
-    // }
+    const emailCookies = JSON.parse(localStorage.getItem('email') as string)
+   useEffect(()=>{
+    if(emailCookies){
+        console.log(emailCookies.toString())
+        setEmail(emailCookies.toString())
+    }
+   },[emailCookies])
     function realizarLogin(evento: React.FormEvent<HTMLFormElement>) {
         evento.preventDefault();
         setMensagemErroBolean(false)
@@ -71,9 +75,11 @@ const AutenticacaoAdmin = () => {
                     console.log(resposta.data)
                     localStorage.setItem('user', JSON.stringify(resposta.data));
                     if(resposta.data.login.isAdmin){
+                        localStorage.removeItem("email");
                         window.location.href='/dashboard/home/'
                     }else{
-                        window.location.href='/'
+                        localStorage.removeItem("email");
+                        window.location.href='/';
                     }
                 }).catch((err) => console.log(err));
             }
@@ -103,6 +109,7 @@ const AutenticacaoAdmin = () => {
                                         placeholder={'Insira seu e-mail'}
                                         fullWidth
                                         required
+                                        value={email}
                                     />
                                 </label>
                                 <label className="col-form-label">Senha

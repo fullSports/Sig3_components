@@ -20,6 +20,7 @@ import apiFullSports from './api/apiFullSports';
 import { Button, Modal } from '@mui/material';
 import { Box } from '@mui/system';
 import CadastroCliente from './clients/Pages/cliente/cadastrarCliente';
+import VizualizacaoDeProdutos from './clients/Pages/produto/vizualizarProdutos';
 const App = () => {
   const [open, setOpen] = useState(Boolean);
   const handleClose = () => {
@@ -146,7 +147,7 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path='/login' element={<AutenticacaoAdmin />} />
-
+          <Route path='/produtos' element={<VizualizacaoDeProdutos/>} />
           <Route path='/' element={<Home />} />
 
           <Route path='/acessibilidade' element={<Acessibilidade />} />

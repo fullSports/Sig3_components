@@ -9,15 +9,20 @@ export  var arrayNavItems = [
         path: ''
     },
     {
+        title: 'Roupas',
+        path: '/produtos?categoria=roupa'
+    },
+    {
         title: 'Calçados',
-        path: ''
+        path: 'produtos?categoria=calcado'
     },
     {
         title: 'Suplementos',
-        path: ''
+        path: 'produtos?categoria=suplemento'
     },
     {
         title: 'Equipamentos',
-        path: ''
+        path: 'produtos?categoria=equipamento'
     },
+    
 ]

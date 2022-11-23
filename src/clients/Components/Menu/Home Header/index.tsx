@@ -1,4 +1,5 @@
-import {arrayNavItems} from '../../../../utils/NavItems';
+import React, { useState } from 'react'
+import { arrayNavItems } from '../../../../utils/NavItems';
 import { useTheme } from '../../../../utils/Hooks/useTheme';
 import Sidebar from '../Sidebar/index'
 import headerVideo from './../../../../assets/videos/banner-home-run-cinematic.mp4'
@@ -11,106 +12,118 @@ const carrinhoIcon = require('../../../../assets/icons/carrinho-icon.png');
 const suporteIcon = require('../../../../assets/icons/help-icon.png');
 const contaIcon = require('../../../../assets/icons/conta-icon.png');
 
-const HomeHeader = () =>{
+const HomeHeader = () => {
 
-    const {theme, setTheme} = useTheme();
+    const [collapsed, setCollapse] = useState(false);
+    const { theme, setTheme } = useTheme();
+    const user = JSON.parse(localStorage.getItem('user') as string)
 
-    function openTeste(){
-      let sidebar = document.querySelector('.header-side');
-      var isSideOpen = sidebar?.classList.contains('show-sidebar')
-      isSideOpen ? sidebar?.classList.remove("show-sidebar") : sidebar?.classList.toggle("hideShow")
+    function openTeste() {
+        let sidebar = document.querySelector('.header-side');
+        var isSideOpen = sidebar?.classList.contains('show-sidebar')
+        isSideOpen ? sidebar?.classList.remove("show-sidebar") : sidebar?.classList.toggle("hideShow")
     }
-
-    return(
+    function MostrarImagemPerfil() {
+        if (user) {
+            if (user.imagemPerfil === null || user.imagemPerfil === undefined) {
+                return <img src={contaIcon} alt="conta" />
+            } else {
+                return <img src={user.imagemPerfil.url} alt="conta" />
+            }
+        }else{
+            return <img src={contaIcon} alt="conta" />
+        }
+    }
+    return (
         <>
-        <div className="header-side show-sidebar">
-          <button className="toggleSidebar" onClick={openTeste}>
-            <RiMenuFill size={30}/>
-          </button>
-          <div className="sidebar-logo">
-              <img src={brandLogo} alt="" />
-          </div>
-          <Sidebar/>
-        </div>
-        <div className="header-top-barra">
-            <div className="home-barra-acess-props hide-header">
-                <ul>
-                    <li>
-                    <span>Aumentar Fonte</span>
-                    </li>
-                    <li>
-                    <span>Diminuir Fonte</span>
-                    </li>
-                    <li>
-                    {theme === 'light' ? 
-                        (<span onClick={()=> setTheme("dark")} className="cursor-pointer"> Sem Contraste</span>)
-                        :
-                        (<span onClick={()=> setTheme("light")} className="cursor-pointer">  Alto Contraste</span>)
-                        }
-                    </li>
-                    {/* <li>
+            <div className="header-side show-sidebar">
+                <button className="toggleSidebar" onClick={openTeste}>
+                    <RiMenuFill size={30} />
+                </button>
+                <div className="sidebar-logo">
+                    <img src={brandLogo} alt="" />
+                </div>
+                <Sidebar />
+            </div>
+            <div className="header-top-barra">
+                <div className="home-barra-acess-props hide-header">
+                    <ul>
+                        <li>
+                            <span>Aumentar Fonte</span>
+                        </li>
+                        <li>
+                            <span>Diminuir Fonte</span>
+                        </li>
+                        <li>
+                            {theme === 'light' ?
+                                (<span onClick={() => setTheme("dark")} className="cursor-pointer"> Sem Contraste</span>)
+                                :
+                                (<span onClick={() => setTheme("light")} className="cursor-pointer">  Alto Contraste</span>)
+                            }
+                        </li>
+                        {/* <li>
                     <span>Modo Escuro</span>
                     </li> */}
-                </ul>
-            </div>
-            <div className="home-barra-client-items">
-                <ul>
-                    <li>
-                        <img src={carrinhoIcon} alt="Carrinho" />
-                        Carrinho
-                    </li>
-                    <li>
-                        <img src={suporteIcon} alt="Suporte" />
-                        Suporte
-                    </li>
-                    <li>
-                        <img src={contaIcon} alt="Conta" />
-                        Conta
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div className="search-container">
-            <div className="menu-toggle">
-                <button onClick={openTeste}>
-                    <RiMenuFill/>
-                </button>
-            </div>
-            <div className="searchbar-contaienr">
-                <input type="text" placeholder='O que você busca?'/>
-                <button className="search-btn"><BiSearch/></button>
-            </div>
-            <div className="hide-header">
-                <ul className="menu-items">
-                { arrayNavItems.map((el: any) => {
-                    return(
-                        <li className="menu-item">
-                            <a href="{el.path}" className='menu-item-btn'>
-                                {el.title}
-                            </a>
+                    </ul>
+                </div>
+                <div className="home-barra-client-items">
+                    <ul>
+                        <li>
+                            <img src={carrinhoIcon} alt="Carrinho" />
+                            Carrinho
                         </li>
-                    )
-                    })}
-                </ul>
+                        <li>
+                            <img src={suporteIcon} alt="Suporte" />
+                            Suporte
+                        </li>
+                        <li>
+                            <MostrarImagemPerfil />
+                            Conta
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div>
-        <div className="header-desc">
-            <div className="header-txt">
-                <span className='txt-light'>o melhor dos</span>
-                <span className='txt-bold'>artigos esportivos</span>
-                <span className='txt-light'>para <span className='underline'>você.</span></span>
+            <div className="search-container">
+                <div className="menu-toggle">
+                    <button onClick={openTeste}>
+                        <RiMenuFill />
+                    </button>
+                </div>
+                <div className="searchbar-contaienr">
+                    <input type="text" placeholder='O que você busca?' />
+                    <button className="search-btn"><BiSearch /></button>
+                </div>
+                <div className="hide-header">
+                    <ul className="menu-items">
+                        {arrayNavItems.map((el: any) => {
+                            return (
+                                <li className="menu-item">
+                                    <a href={el.path} className='menu-item-btn'>
+                                        {el.title}
+                                    </a>
+                                </li>
+                            )
+                        })}
+                    </ul>
+                </div>
             </div>
-            <div className="header-brand-container">
-                <img src={brandLogo} alt="Full Sports" />
+            <div className="header-desc">
+                <div className="header-txt">
+                    <span className='txt-light'>o melhor dos</span>
+                    <span className='txt-bold'>artigos esportivos</span>
+                    <span className='txt-light'>para <span className='underline'>você.</span></span>
+                </div>
+                <div className="header-brand-container">
+                    <img src={brandLogo} alt="Full Sports" />
+                </div>
             </div>
-        </div>
-        <div className="video-header">
-            <div className="header-transparent-cover"></div>
-            <video autoPlay loop muted>
-                <source src={headerVideo} type="video/mp4"/>
-            </video>
-        </div>
-        
+            <div className="video-header">
+                <div className="header-transparent-cover"></div>
+                <video autoPlay loop muted>
+                    <source src={headerVideo} type="video/mp4" />
+                </video>
+            </div>
+
         </>
     )
 }

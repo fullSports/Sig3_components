@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../../../../styles.css"
 import styled from 'styled-components';
 import { TextField, FormControl, Select, InputLabel, MenuItem, Box } from "@mui/material";
@@ -40,6 +40,12 @@ const CadastroCliente = () => {
 
     const [mensagemErroBolean, setMensagemErroBolean] = useState(false);
     const [menssagemErro, setMenssagemErro] = useState('');
+    const emailCookies = JSON.parse(localStorage.getItem('email') as string)
+    useEffect(() => {
+        if (emailCookies) {
+            setEmail(emailCookies.toString())
+        }
+    }, [emailCookies])
     const selecionarArquivo = (evento: React.ChangeEvent<HTMLInputElement>) => {
         if (evento.target.files?.length) {
             setImagem(evento.target.files[0])
@@ -133,7 +139,8 @@ const CadastroCliente = () => {
                                 }
                             }).then(() => {
                                 setSpinner(false)
-                                window.location.href='/login'
+                                localStorage.removeItem("email")
+                                window.location.href = '/login'
                             }).catch(err => { console.log(err) })
                         }).catch(err => { console.log(err) })
                 } else {
@@ -155,7 +162,8 @@ const CadastroCliente = () => {
                         }
                     }).then(() => {
                         setSpinner(false);
-                        window.location.href = '/login'
+                        localStorage.removeItem("email");
+                        window.location.href = '/login';
                     }).catch(err => { console.log(err) })
                 }
             }
@@ -169,7 +177,7 @@ const CadastroCliente = () => {
                 <div id="main" className="dashboard-body">
                     <div className="form-card">
                         <div id="form-cadastro-cliente" className="form-cadastro-cliente">
-                            <span className="form-title">Cadastro de Admnistrador</span>
+                            <span className="form-title">Cadastrar Nova Conta</span>
                             <Box component={'form'} onSubmit={aoSubmeterForm} encType="multipart/form-data">
                                 <div className="form-rows">
                                 </div>
@@ -347,6 +355,7 @@ const CadastroCliente = () => {
                                             placeholder={'Insira seu e-mail'}
                                             fullWidth
                                             required
+                                            value={email}
                                         />
                                     </label>
 
