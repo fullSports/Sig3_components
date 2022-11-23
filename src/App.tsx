@@ -77,7 +77,7 @@ const App = () => {
             <Route path='/equipamentos' element={<Equipamentos />} />
 
             <Route path='/tenis' element={<Tenis />} />
-
+            <Route path='/produtos' element={<VizualizacaoDeProdutos/>} />
             {/****************************** */}
             <Route path='*' element={<PageErro404 />} />
           </Routes>
@@ -109,6 +109,7 @@ const App = () => {
           <Routes>
             <Route path='/login' element={<AutenticacaoAdmin />} />
 
+            <Route path='/produtos' element={<VizualizacaoDeProdutos/>} />
             <Route path='/' element={<Home />} />
 
             <Route path='/acessibilidade' element={<Acessibilidade />} />

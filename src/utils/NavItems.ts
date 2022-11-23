@@ -14,15 +14,15 @@ export  var arrayNavItems = [
     },
     {
         title: 'Calçados',
-        path: 'produtos?categoria=calcado'
+        path: '/produtos?categoria=calcado'
     },
     {
         title: 'Suplementos',
-        path: 'produtos?categoria=suplemento'
+        path: '/produtos?categoria=suplemento'
     },
     {
         title: 'Equipamentos',
-        path: 'produtos?categoria=equipamento'
+        path: '/produtos?categoria=equipamento'
     },
     
 ]
