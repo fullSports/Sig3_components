@@ -6,17 +6,28 @@ import headerVideo from './../../../../assets/videos/banner-home-run-cinematic.m
 import './styles.css';
 import { BiSearch } from 'react-icons/bi';
 import { RiMenuFill } from 'react-icons/ri';
-
+import styled from 'styled-components';
 const brandLogo = require('../../../../assets/images/fullSportLogo.png');
 const carrinhoIcon = require('../../../../assets/icons/carrinho-icon.png');
 const suporteIcon = require('../../../../assets/icons/help-icon.png');
 const contaIcon = require('../../../../assets/icons/conta-icon.png');
-
+const Icone = styled.div`
+    background-color: #796969;
+    height: 27px;
+    width: 27px;
+    border-radius: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: auto;
+    margin-left: auto;
+    font-size: 22px;
+`;
 const HomeHeader = () => {
 
     const [collapsed, setCollapse] = useState(false);
     const { theme, setTheme } = useTheme();
-    const user = JSON.parse(localStorage.getItem('user') as string)
+    const user = JSON.parse(localStorage.getItem('user') as string);
 
     function openTeste() {
         let sidebar = document.querySelector('.header-side');
@@ -26,7 +37,9 @@ const HomeHeader = () => {
     function MostrarImagemPerfil() {
         if (user) {
             if (user.imagemPerfil === null || user.imagemPerfil === undefined) {
-                return <img src={contaIcon} alt="conta" />
+                return <Icone className="icone">
+                <p className="text-black">{user.nome.charAt(0)}</p>
+               </Icone>
             } else {
                 return <img src={user.imagemPerfil.url} alt="conta" />
             }

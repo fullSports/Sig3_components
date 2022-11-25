@@ -21,6 +21,7 @@ import { Button, Modal } from '@mui/material';
 import { Box } from '@mui/system';
 import CadastroCliente from './clients/Pages/cliente/cadastrarCliente';
 import VizualizacaoDeProdutos from './clients/Pages/produto/vizualizarProdutos';
+import AtualizarCliente from './clients/Pages/cliente/AtualizarCliente';
 const App = () => {
   const [open, setOpen] = useState(Boolean);
   const handleClose = () => {
@@ -109,14 +110,15 @@ const App = () => {
           <Routes>
             <Route path='/login' element={<AutenticacaoAdmin />} />
 
-            <Route path='/produtos' element={<VizualizacaoDeProdutos/>} />
             <Route path='/' element={<Home />} />
 
             <Route path='/acessibilidade' element={<Acessibilidade />} />
 
-            <Route path='/equipamentos' element={<Equipamentos />} />
+            {/* <Route path='/equipamentos' element={<Equipamentos />} />
 
-            <Route path='/tenis' element={<Tenis />} />
+            <Route path='/tenis' element={<Tenis />} /> */}
+            <Route path='/atualizar-cliente/:id' element={<AtualizarCliente/>} />
+            <Route path='/produtos' element={<VizualizacaoDeProdutos/>} />
 
             {/****************************** */}
             <Route path='*' element={<PageErro404 />} />
@@ -169,8 +171,8 @@ const App = () => {
         onClose={handleClose}
         id="aviso-cookie">
         <Box component={"div"} id='div-menssagem-cookies' className="tela-imagem" sx={{
-          width: '50%', height: '10%',
-          position: 'absolute' as 'absolute', top: '85%', left: '30%',marginBottom: '10%', display: '',
+          width: '60%', height: '10%',
+          position: 'absolute' as 'absolute', top: '85%', left: '25%',marginBottom: '10%', display: '',
           backgroundColor: '#4e4a4a', border: '3px solid #000', borderRadius: '20px', pt: 2, px: 4, pb: 3
         }}>
           <p>Nós usamos cookies e outras tecnologias semelhantes para melhorar a sua experiência em nossos serviços.<Button
