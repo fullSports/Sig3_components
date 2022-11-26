@@ -44,23 +44,23 @@ const TabelaAdimistrador = () => {
 
             clientes.map(item => {
                 if (item.login.isAdmin) {
-                    if (item.imagemPerfil === null || item.imagemPerfil === undefined) {
+                    if (item.imagemPerfil === null || item.imagemPerfil === undefined || !item.imagemPerfil) {
                         return (
                             <tr key={item._id.toString()}>
 
-                                <th>
+                                <td>
                                     <Icone className="icone">
                                         <p className="text-black">{item.nome.charAt(0)}</p>
                                     </Icone>
-                                </th>
+                                </td>
 
-                                <th>{`${item.dataCadastro.toLocaleString()}`}</th>
-                                <th>{`${item.cpf.charAt(0)}${item.cpf.charAt(1)}${item.cpf.charAt(2)}. *** . *** -${item.cpf.charAt(12)}${item.cpf.charAt(13)}`}</th>
-                                <th>{item.nome}</th>
-                                <th>{item.dataNascimento}</th>
-                                <th>{item.sexo}</th>
-                                <th>{item.cep}</th>
-                                <th>{item.endereco}</th>
+                                <td>{`${item.dataCadastro.toLocaleString()}`}</td>
+                                <td>{`${item.cpf.charAt(0)}${item.cpf.charAt(1)}${item.cpf.charAt(2)}. *** . *** -${item.cpf.charAt(12)}${item.cpf.charAt(13)}`}</td>
+                                <td>{item.nome}</td>
+                                <td>{item.dataNascimento}</td>
+                                <td>{item.sexo}</td>
+                                <td>{item.cep}</td>
+                                <td>{item.endereco}</td>
                                 {/* <td>
                             <BtnExibeGroup id="btn-exibe-group" className="btn-exibe-group">
                                 <a href={`/sig/atualizar-cliente/${item._id}`} >
@@ -91,14 +91,18 @@ const TabelaAdimistrador = () => {
                             <>
                                 <tr key={item._id.toString()}>
 
-                                    <th><img src={item.imagemPerfil.url} alt="imagem de perfil" /></th>
-                                    <th>{`${item.dataCadastro.toLocaleString()}`}</th>
-                                    <th>{item.cpf}</th>
-                                    <th>{item.nome}</th>
-                                    <th>{item.dataNascimento}</th>
-                                    <th>{item.sexo}</th>
-                                    <th>{item.cep}</th>
-                                    <th>{item.endereco}</th>
+                                    <td>
+                                        <div className="consulta-img-container">
+                                            <img src={item.imagemPerfil.url}/>
+                                        </div>
+                                    </td>
+                                    <td>{`${item.dataCadastro.toLocaleString()}`}</td>
+                                    <td>{item.cpf}</td>
+                                    <td>{item.nome}</td>
+                                    <td>{item.dataNascimento}</td>
+                                    <td>{item.sexo}</td>
+                                    <td>{item.cep}</td>
+                                    <td>{item.endereco}</td>
                                     {/* <td>
                             <BtnExibeGroup id="btn-exibe-group" className="btn-exibe-group">
                                 <a href={`/sig/atualizar-cliente/${item._id}`} >

@@ -102,6 +102,8 @@ const Home = () => {
                             <HorizontalCardProduct/>
                             <HorizontalCardProduct/>
                             <HorizontalCardProduct/>
+                            <HorizontalCardProduct/>
+                            <HorizontalCardProduct/>
                         </Slider>
                     </div>
                     {/* </div> */}

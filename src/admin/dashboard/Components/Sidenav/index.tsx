@@ -6,6 +6,7 @@ import { arrayNavCadastros, arrayNavPerfis } from '../../utils/arrayNavDashboard
 import SubMenu from './SubMenu';
 import styled from 'styled-components';
 import { Button } from '@mui/material';
+import { Link } from 'react-router-dom';
 const ex_pfp = require('../../../../assets/images/pfp-dashboard-ex.png');
 const Icone = styled.div`
     background-color: #796969;
@@ -62,10 +63,12 @@ const DashboardSidenav = () => {
                         </div>
                     </div>
                     <ul className="nav-list">
-                        <li className="nav-item">
-                            <i className="bi bi-house-door-fill navlist-icon"></i>
-                            <span> Início </span>
-                        </li>
+                        <Link to="/dashboard/home">
+                            <li className="nav-item">
+                                <i className="bi bi-house-door-fill navlist-icon"></i>
+                                <span> Início </span>
+                            </li>
+                        </Link>
                         <span className="sidenav-title">Gerenciar cadastros</span>
                         {(arrayNavCadastros).map((item: any, index: any) => <SubMenu key={index} item={item} />)}
                         <span className="sidenav-title">Gerenciar Perfis</span>

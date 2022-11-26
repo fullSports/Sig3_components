@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./../../../styles.css"
-import "./styles.css"
 import DashboardSidenav from '../../../Components/Sidenav'
 import styled from 'styled-components';
 import { TextField, FormControl, Select, InputLabel, MenuItem, Box } from "@mui/material";
@@ -167,17 +166,16 @@ const CadastroAdministrador = () => {
                     <DashboardHeader />
                     <div className="form-card">
                         <div id="form-cadastro-cliente" className="form-cadastro-cliente">
-                            <span className="form-title">Cadastro de Admnistrador</span>
+                            <span className="form-title">Cadastro de Administrador</span>
                             <Box component={'form'} onSubmit={aoSubmeterForm} encType="multipart/form-data">
                                 <div className="form-rows">
                                 </div>
                                 <div className="row-grid">
                                     <label className="col-form-label">Nome Completo
                                         <TextField
-                                            sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
+                                            sx={{ boxSizing: 'border-box', margin: '8px 0 15px', width: '100%' }}
                                             onChange={evento => setNome(evento.target.value)}
                                             className="txt-form"
-                                            label="Nome"
                                             id="nome"
                                             type="text"
                                             placeholder={'Digite o nome do admnistrador.'}
@@ -187,10 +185,9 @@ const CadastroAdministrador = () => {
                                     </label>
                                     <label className="col-form-label">CPF
                                         <TextField
-                                            sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
+                                            sx={{ boxSizing: 'border-box', margin: '8px 0 15px', width: '100%' }}
                                             onChange={evento => setCpf(evento.target.value)}
                                             className="txt-form"
-                                            label="cpf"
                                             id="cpf"
                                             type="text"
                                             placeholder={'00.000.000-00'}
@@ -202,10 +199,9 @@ const CadastroAdministrador = () => {
                                 <div className="row-grid">
                                     <label className="col-form-label">Data de Nascimento
                                         <TextField
-                                            sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
+                                            sx={{ boxSizing: 'border-box', margin: '8px 0 15px', width: '100%' }}
                                             onChange={evento => setDataNascimento(evento.target.value)}
                                             className="txt-form"
-                                            label="Data de Nascimento"
                                             id="data"
                                             type="text"
                                             placeholder={'__/__/____'}
@@ -217,7 +213,7 @@ const CadastroAdministrador = () => {
                                     <label className="col-form-label">Sexo
                                         <FormControl fullWidth margin="dense">
                                             <InputLabel id="sexo">Sexo</InputLabel>
-                                            <Select className="txt-form" labelId="sexo" sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
+                                            <Select className="txt-form" labelId="sexo" sx={{ boxSizing: 'border-box', margin: '8px 0 15px', width: '100%' }}
                                                 value={sexo} onChange={evento => setSexo(evento.target.value)} required>
                                                 <MenuItem key={''} value={''}></MenuItem>
                                                 <MenuItem key={'M'} value={'M'}>Masculino</MenuItem>
@@ -232,9 +228,8 @@ const CadastroAdministrador = () => {
                                     <label className="col-form-label">Cep {carregandoCep && <p>buscando cep...</p>}{carregandoCepMenssagem && <p id="menssagem-erro">cep invalido</p>}
                                         <TextField
                                             onChange={evento => setCep(evento.target.value)}
-                                            sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
+                                            sx={{ boxSizing: 'border-box', margin: '8px 0 15px', width: '100%' }}
                                             className="txt-form"
-                                            label="Cep"
                                             id="cep"
                                             type="text"
                                             placeholder={'00000-000'}
@@ -247,9 +242,8 @@ const CadastroAdministrador = () => {
                                     <label className="col-form-label">Rua
                                         <TextField
                                             onChange={evento => setRua(evento.target.value)}
-                                            sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
+                                            sx={{ boxSizing: 'border-box', margin: '8px 0 15px', width: '100%' }}
                                             className="txt-form"
-                                            label="Rua"
                                             id="rua"
                                             type="text"
                                             placeholder={'Digite sua rua'}
@@ -263,9 +257,8 @@ const CadastroAdministrador = () => {
                                     <label className="col-form-label">Bairro
                                         <TextField
                                             onChange={evento => setBairro(evento.target.value)}
-                                            sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
+                                            sx={{ boxSizing: 'border-box', margin: '8px 0 15px', width: '100%' }}
                                             className="txt-form"
-                                            label="Bairro"
                                             id="bairro"
                                             type="text"
                                             placeholder={'Digite seu Bairro'}
@@ -278,9 +271,8 @@ const CadastroAdministrador = () => {
                                     <label className="col-form-label">Estado
                                         <TextField
                                             onChange={evento => setEstado(evento.target.value)}
-                                            sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
+                                            sx={{ boxSizing: 'border-box', margin: '8px 0 15px', width: '100%' }}
                                             className="txt-form"
-                                            label="Estado"
                                             id="estado"
                                             type="text"
                                             placeholder={'Digite seu estado'}
@@ -294,9 +286,8 @@ const CadastroAdministrador = () => {
                                     <label className="col-form-label">Cidade
                                         <TextField
                                             onChange={evento => setCidade(evento.target.value)}
-                                            sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
+                                            sx={{ boxSizing: 'border-box', margin: '8px 0 15px', width: '100%' }}
                                             className="txt-form"
-                                            label="Cidade"
                                             id="cidade"
                                             type="text"
                                             placeholder={'Digite sua Cidade'}
@@ -308,9 +299,8 @@ const CadastroAdministrador = () => {
                                     <label className="col-form-label">Número
                                         <TextField
                                             onChange={evento => setNumero(evento.target.value)}
-                                            sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
+                                            sx={{ boxSizing: 'border-box', margin: '8px 0 15px', width: '100%' }}
                                             className="txt-form"
-                                            label="Nº"
                                             id="numero"
                                             type="number"
                                             fullWidth
@@ -321,9 +311,8 @@ const CadastroAdministrador = () => {
                                     <label className="col-form-label">Complemento
                                         <TextField
                                             onChange={evento => setComplemento(evento.target.value)}
-                                            sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
+                                            sx={{ boxSizing: 'border-box', margin: '8px 0 15px', width: '100%' }}
                                             className="txt-form"
-                                            label="Complemento"
                                             id="complemento"
                                             type="text"
                                             placeholder={'casa/apartamento'}
@@ -335,11 +324,10 @@ const CadastroAdministrador = () => {
                                 <div className="row-grid">
                                     <label className="col-form-label">E-mail
                                         <TextField
-                                            sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
+                                            sx={{ boxSizing: 'border-box', margin: '8px 0 15px', width: '100%' }}
                                             onChange={evento => setEmail(evento.target.value)}
                                             onClick={() => setMensagemErroBolean(false)}
                                             className="txt-form"
-                                            label="email"
                                             id="email"
                                             type="email"
                                             placeholder={'Insira seu e-mail'}
@@ -350,10 +338,9 @@ const CadastroAdministrador = () => {
 
                                     <label className="col-form-label">Senha
                                         <TextField
-                                            sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
+                                            sx={{ boxSizing: 'border-box', margin: '8px 0 15px', width: '100%' }}
                                             onChange={evento => setPassword(evento.target.value)}
                                             className="txt-form"
-                                            label="password"
                                             id="password"
                                             type="password"
                                             placeholder={'Insira sua senha'}

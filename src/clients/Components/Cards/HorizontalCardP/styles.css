@@ -1,13 +1,13 @@
 
 @media (max-width: 768px){
-    .slick-slide{
+    div.slick-slide{
         width: 270px !important;
         @apply
         mx-2
     }
 }
 @media (min-width: 769px){
-    .slick-slide{
+    div.slick-slide{
         width: 360px !important;
         @apply
         mx-2
