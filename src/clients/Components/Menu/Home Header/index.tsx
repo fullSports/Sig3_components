@@ -38,12 +38,12 @@ const HomeHeader = () => {
         if (user) {
             if (user.imagemPerfil === null || user.imagemPerfil === undefined) {
                 return <Icone className="icone">
-                <p className="text-black">{user.nome.charAt(0)}</p>
-               </Icone>
+                    <p className="text-black">{user.nome.charAt(0)}</p>
+                </Icone>
             } else {
                 return <img src={user.imagemPerfil.url} alt="conta" />
             }
-        }else{
+        } else {
             return <img src={contaIcon} alt="conta" />
         }
     }
@@ -62,10 +62,10 @@ const HomeHeader = () => {
                 <div className="home-barra-acess-props hide-header">
                     <ul>
                         <li>
-                            <span>Aumentar Fonte</span>
+                            <span id='aumentaFonte'>Aumentar Fonte</span>
                         </li>
                         <li>
-                            <span>Diminuir Fonte</span>
+                            <span id='diminuiFonte'>Diminuir Fonte</span>
                         </li>
                         <li>
                             {theme === 'light' ?
@@ -93,6 +93,7 @@ const HomeHeader = () => {
                             <MostrarImagemPerfil />
                             Conta
                         </li>
+                        
                     </ul>
                 </div>
             </div>

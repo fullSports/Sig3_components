@@ -82,7 +82,7 @@ export var arrayNavCadastros: INavDashboard[] = [
             },
             {
                 name: 'Consultar Equipamentos',
-                path: '/dashboard/consultar-produtos?categoria=calcado?categoria=equipamento'
+                path: '/dashboard/consultar-produtos?categoria=equipamento'
             }
         ]
     },

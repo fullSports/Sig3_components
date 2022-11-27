@@ -140,7 +140,7 @@ const Cabecalho = () => {
                 <img src={brandLogo} alt="" />
               </a>
             </div>
-            <div className="header-help-icons header-resp"> 
+            <div className="header-help-icons header-resp">
               <ul className="help-icons">
                 <li>
                   <a href="#">
@@ -168,7 +168,7 @@ const Cabecalho = () => {
               {arrayNavItems.map((el: any) => {
                 return (
                   <li className="header-nav-item">
-                    <a href="{el.path}" className='nav-item-btn'>
+                    <a href={el.path} className='nav-item-btn'>
                       {el.title}
                     </a>
                   </li>
