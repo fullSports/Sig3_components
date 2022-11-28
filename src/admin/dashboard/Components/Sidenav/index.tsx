@@ -69,6 +69,12 @@ const DashboardSidenav = () => {
                                 <span> Início </span>
                             </li>
                         </Link>
+                        <Link to="/">
+                            <li className="nav-item">
+                                <i className="bi bi-house-door-fill navlist-icon"></i>
+                                <span> Loja </span>
+                            </li>
+                        </Link>
                         <span className="sidenav-title">Gerenciar cadastros</span>
                         {(arrayNavCadastros).map((item: any, index: any) => <SubMenu key={index} item={item} />)}
                         <span className="sidenav-title">Gerenciar Perfis</span>
