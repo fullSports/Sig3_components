@@ -3,6 +3,8 @@ import apiFullSports from "../../../../api/apiFullSports";
 import IProduto from "../../../../utils/interfaces/IProduto";
 import styled from "styled-components";
 import VerticalCardProduct from "../../../Components/Cards/VerticalCardP";
+import Cabecalho from "../../../Components/Menu/Header";
+import Footer from "../../../Components/Footer";
 const Main = styled.main`
     width: 100%;
     min-height: 600px;
@@ -27,108 +29,176 @@ const VizualizacaoDeProdutos = () => {
     }, []);
 
     if (categoriaParam?.toString() === 'equipamento') {
-        return <Main>
-            <Grid>
-                {produtos.map(item => {
-                    const categoriaDeproduto = item.categoriaProduto.equipamento;
-                    if (categoriaDeproduto !== undefined) {
-                        return <VerticalCardProduct
-                            src={categoriaDeproduto.imagemProduto[0].url}
-                            produtoName={categoriaDeproduto.nome}
-                            PrecoAnterior={"teste"}
-                            PrecoAtual={categoriaDeproduto.preco}
-                        />
-                    }
-                })}
-            </Grid>
-        </Main>
+        return <>
+            <Cabecalho />
+            <Main>
+                <Grid>
+                    {produtos.map(item => {
+                        const categoriaDeproduto = item.categoriaProduto.equipamento;
+                        if (categoriaDeproduto !== undefined) {
+                            var newPrecoProduto = parseFloat(categoriaDeproduto.preco.replace(',', '.'));
+                            var parcela = newPrecoProduto / 12;
+                            var newParcela = parcela.toFixed(2);
+                            return <VerticalCardProduct
+                                tamanho={item.categoriaProduto.equipamento.tamanho}
+                                precoParcelado={newParcela.toString().replace(".",",")}
+                                produtoId={item._id}
+                                src={categoriaDeproduto.imagemProduto[0].url}
+                                produtoName={categoriaDeproduto.nome}
+                                PrecoAnterior={""}
+                                PrecoAtual={categoriaDeproduto.preco}
+                            />
+                        }
+                    })}
+                </Grid>
+            </Main>
+            <Footer />
+        </>
     } else if (categoriaParam?.toString() === 'calcado') {
-        return <Main>
-            <Grid>
-                {produtos.map(item => {
-                    const categoriaDeproduto = item.categoriaProduto.calcado;
-                    if (categoriaDeproduto !== undefined) {
-                        return <VerticalCardProduct
-                            src={categoriaDeproduto.imagemProduto[0].url}
-                            produtoName={categoriaDeproduto.nome}
-                            PrecoAnterior={"teste"}
-                            PrecoAtual={categoriaDeproduto.preco}
-                        />
-                    }
-                })}
-            </Grid>
-        </Main>
-    }else if (categoriaParam?.toString() === 'roupa') {
-        return <Main>
-            <Grid>
-                {produtos.map(item => {
-                    const categoriaDeproduto = item.categoriaProduto.roupa;
-                    if (categoriaDeproduto !== undefined) {
-                        return <VerticalCardProduct
-                            src={categoriaDeproduto.imagemProduto[0].url}
-                            produtoName={categoriaDeproduto.nome}
-                            PrecoAnterior={"teste"}
-                            PrecoAtual={categoriaDeproduto.preco}
-                        />
-                    }
-                })}
-            </Grid>
-        </Main>
-    }else if (categoriaParam?.toString() === 'suplemento') {
-        return <Main>
-        <Grid>
-            {produtos.map(item => {
-                const categoriaDeproduto = item.categoriaProduto.suplemento;
-                if (categoriaDeproduto !== undefined) {
-                    return <VerticalCardProduct
-                        src={categoriaDeproduto.imagemProduto[0].url}
-                        produtoName={categoriaDeproduto.nome}
-                        PrecoAnterior={"teste"}
-                        PrecoAtual={categoriaDeproduto.preco}
-                    />
-                }
-            })}
-        </Grid>
-    </Main>
-    }else{
-        return <Main>
-        <Grid>
-            {produtos.map(item => {
-                const categoriaDeproduto = item.categoriaProduto;
-                if (categoriaDeproduto.equipamento !== undefined) {
-                    return <VerticalCardProduct
-                        src={categoriaDeproduto.equipamento.imagemProduto[0].url}
-                        produtoName={categoriaDeproduto.equipamento.nome}
-                        PrecoAnterior={"teste"}
-                        PrecoAtual={categoriaDeproduto.equipamento.preco}
-                    />
-                }else if (categoriaDeproduto.calcado !== undefined) {
-                    return <VerticalCardProduct
-                        src={categoriaDeproduto.calcado.imagemProduto[0].url}
-                        produtoName={categoriaDeproduto.calcado.nome}
-                        PrecoAnterior={"teste"}
-                        PrecoAtual={categoriaDeproduto.calcado.preco}
-                    />
-                }else if (categoriaDeproduto.roupa !== undefined) {
-                    return <VerticalCardProduct
-                        src={categoriaDeproduto.roupa.imagemProduto[0].url}
-                        produtoName={categoriaDeproduto.roupa.nome}
-                        PrecoAnterior={"teste"}
-                        PrecoAtual={categoriaDeproduto.roupa.preco}
-                    />
-                }else if (categoriaDeproduto.suplemento !== undefined) {
-                    return <VerticalCardProduct
-                        src={categoriaDeproduto.suplemento.imagemProduto[0].url}
-                        produtoName={categoriaDeproduto.suplemento.nome}
-                        PrecoAnterior={"teste"}
-                        PrecoAtual={categoriaDeproduto.suplemento.preco}
-                    />
-                }else{
-                    return <></>
-                }
-            })}
-        </Grid>
-    </Main>
+        return <>
+            <Cabecalho />
+            <Main>
+                <Grid>
+                    {produtos.map(item => {
+                        const categoriaDeproduto = item.categoriaProduto.calcado;
+                        if (categoriaDeproduto !== undefined) {
+                            var newPrecoProduto = parseFloat(categoriaDeproduto.preco.replace(',', '.'));
+                            var parcela = newPrecoProduto / 12;
+                            var newParcela = parcela.toFixed(2);
+                            return <VerticalCardProduct
+                                tamanho={item.categoriaProduto.calcado.tamanho}
+                                precoParcelado={newParcela.toString().replace(".",",")}
+                                produtoId={item._id}
+                                src={categoriaDeproduto.imagemProduto[0].url}
+                                produtoName={categoriaDeproduto.nome}
+                                PrecoAnterior={""}
+                                PrecoAtual={categoriaDeproduto.preco}
+                            />
+                        }
+                    })}
+                </Grid>
+            </Main>
+            <Footer />
+        </>
+    } else if (categoriaParam?.toString() === 'roupa') {
+        return <>
+            <Cabecalho />
+            <Main>
+                <Grid>
+                    {produtos.map(item => {
+                        const categoriaDeproduto = item.categoriaProduto.roupa;
+                        if (categoriaDeproduto !== undefined) {
+                            var newPrecoProduto = parseFloat(categoriaDeproduto.preco.replace(',', '.'));
+                            var parcela = newPrecoProduto / 12;
+                            var newParcela = parcela.toFixed(2);
+                            return <VerticalCardProduct
+                                tamanho={item.categoriaProduto.roupa.tamanho}
+                                precoParcelado={newParcela.toString().replace(".",",")}
+                                produtoId={item._id}
+                                src={categoriaDeproduto.imagemProduto[0].url}
+                                produtoName={categoriaDeproduto.nome}
+                                PrecoAnterior={""}
+                                PrecoAtual={categoriaDeproduto.preco}
+                            />
+                        }
+                    })}
+                </Grid>
+            </Main>
+            <Footer />
+        </>
+    } else if (categoriaParam?.toString() === 'suplemento') {
+        return <>
+            <Cabecalho />
+            <Main>
+                <Grid>
+                    {produtos.map(item => {
+                        const categoriaDeproduto = item.categoriaProduto.suplemento;
+                        if (categoriaDeproduto !== undefined) {
+                            var newPrecoProduto = parseFloat(categoriaDeproduto.preco.replace(',', '.'));
+                            var parcela = newPrecoProduto / 12;
+                            var newParcela = parcela.toFixed(2);
+                            return <VerticalCardProduct
+                                tamanho={item.categoriaProduto.suplemento.tamanho}
+                                precoParcelado={newParcela.toString().replace(".",",")}
+                                produtoId={item._id}
+                                src={categoriaDeproduto.imagemProduto[0].url}
+                                produtoName={categoriaDeproduto.nome}
+                                PrecoAnterior={""}
+                                PrecoAtual={categoriaDeproduto.preco}
+                            />
+                        }
+                    })}
+                </Grid>
+            </Main>
+            <Footer />
+        </>
+    } else {
+        return <>
+            <Cabecalho />
+            <Main>
+                <Grid>
+                    {produtos.map(item => {
+                        const categoriaDeproduto = item.categoriaProduto;
+                        if (categoriaDeproduto.equipamento !== undefined) {
+                            var newPrecoProduto = parseFloat(categoriaDeproduto.equipamento.preco.replace(',', '.'));
+                            var parcela = newPrecoProduto / 12;
+                            var newParcela = parcela.toFixed(2);
+                            return <VerticalCardProduct
+                                tamanho={item.categoriaProduto.equipamento.tamanho}
+                                precoParcelado={newParcela.toString().replace(".",",")}
+                                produtoId={item._id}
+                                src={categoriaDeproduto.equipamento.imagemProduto[0].url}
+                                produtoName={categoriaDeproduto.equipamento.nome}
+                                PrecoAnterior={""}
+                                PrecoAtual={categoriaDeproduto.equipamento.preco}
+                            />
+                        } else if (categoriaDeproduto.calcado !== undefined) {
+                            var newPrecoProduto = parseFloat(categoriaDeproduto.calcado.preco.replace(',', '.'));
+                            var parcela = newPrecoProduto / 12;
+                            var newParcela = parcela.toFixed(2);
+                            return <VerticalCardProduct
+                                tamanho={item.categoriaProduto.calcado.tamanho}
+                                precoParcelado={newParcela.toString().replace(".",",")}
+                                produtoId={item._id}
+                                src={categoriaDeproduto.calcado.imagemProduto[0].url}
+                                produtoName={categoriaDeproduto.calcado.nome}
+                                PrecoAnterior={""}
+                                PrecoAtual={categoriaDeproduto.calcado.preco}
+                            />
+                        } else if (categoriaDeproduto.roupa !== undefined) {
+                            var newPrecoProduto = parseFloat(categoriaDeproduto.roupa.preco.replace(',', '.'));
+                            var parcela = newPrecoProduto / 12;
+                            var newParcela = parcela.toFixed(2);
+                            return <VerticalCardProduct
+                                tamanho={item.categoriaProduto.roupa.tamanho}
+                                precoParcelado={newParcela.toString().replace(".",",")}
+                                produtoId={item._id}
+                                src={categoriaDeproduto.roupa.imagemProduto[0].url}
+                                produtoName={categoriaDeproduto.roupa.nome}
+                                PrecoAnterior={""}
+                                PrecoAtual={categoriaDeproduto.roupa.preco}
+                            />
+                        } else if (categoriaDeproduto.suplemento !== undefined) {
+                            var newPrecoProduto = parseFloat(categoriaDeproduto.suplemento.preco.replace(',', '.'));
+                            var parcela = newPrecoProduto / 12;
+                            var newParcela = parcela.toFixed(2);
+                            return <VerticalCardProduct
+                                tamanho={item.categoriaProduto.suplemento.tamanho}
+                                precoParcelado={newParcela.toString().replace(".",",")}
+                                produtoId={item._id}
+                                src={categoriaDeproduto.suplemento.imagemProduto[0].url}
+                                produtoName={categoriaDeproduto.suplemento.nome}
+                                PrecoAnterior={""}
+                                PrecoAtual={categoriaDeproduto.suplemento.preco}
+                            />
+                        } else {
+                            return <></>
+                        }
+                    })}
+                </Grid>
+            </Main>
+            <Footer />
+        </>
     }
 }
 export default VizualizacaoDeProdutos

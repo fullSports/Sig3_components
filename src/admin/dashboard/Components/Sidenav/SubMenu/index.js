@@ -22,7 +22,7 @@ export default function SubMenu({item}){
         }
         else{
             return (
-                <Link to={item.path}>
+                <Link onClick={()=> window.location.href=`${item.path}`}>
                     <li className="nav-subitem">
                         <span> {item.name} </span>
                     </li>

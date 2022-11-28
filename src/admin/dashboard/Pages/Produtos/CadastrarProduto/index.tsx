@@ -37,15 +37,18 @@ const CadastrarProduto = () => {
             console.log(imagens);
         }
     }
-
     useEffect(() => {
-        apiFullSports.get<IFornecedor[]>('listar-fornecedores/')
-            .then(resposta => setListaFornecedores(resposta.data))
-            if(categoriaParam){
-                console.log(categoriaParam.toString())
-                setCategoriaProduto(categoriaParam.toString());
-            }
-    }, [])
+        apiFullSports.get<IFornecedor[]>('listar-fornecedores/').then(resposta => {
+            setListaFornecedores(resposta.data);
+        }).catch((err) => console.log(err));
+        setCategoriaProduto('');
+        if (categoriaParam) {
+            setCategoriaProduto(categoriaParam.toString());
+        } else {
+            setCategoriaProduto('');
+        }
+
+    },[])
     const options = listaFornecedores.map((item) => {
         const firsLetter = item.nomeEmpresa[0].toLocaleUpperCase();
         return {
@@ -237,9 +240,9 @@ const CadastrarProduto = () => {
     return (
         <>
             <div className='flex'>
-                <DashboardSidenav/>
+                <DashboardSidenav />
                 <div className="dashboard-body">
-                    <DashboardHeader/>
+                    <DashboardHeader />
                     <div className="form-card">
                         <div className="form-cadastro-cliente">
                             <span className="form-title">Cadastrar Produto</span>
@@ -262,7 +265,7 @@ const CadastrarProduto = () => {
                                                 className="txt-form"
                                                 id='Auto-complete'
                                                 sx={{ boxSizing: 'border-box', margin: '8px 0 15px', width: '100%', textAlign: 'center' }}
-                                                renderInput={(params) => <TextField {...params} id='Auto-complete'/>}
+                                                renderInput={(params) => <TextField {...params} id='Auto-complete' />}
                                             />
                                         </label>
 
@@ -295,7 +298,7 @@ const CadastrarProduto = () => {
 
                                         <label className="col-form-label">Sexo
                                             <FormControl fullWidth margin="dense">
-                                                <Select className="txt-form"  sx={{ boxSizing: 'border-box', margin: '8px 0 15px', width: '100%', height: '56px', padding: '3px'}}
+                                                <Select className="txt-form" sx={{ boxSizing: 'border-box', margin: '8px 0 15px', width: '100%', height: '56px', padding: '3px' }}
                                                     value={sexo} onChange={evento => setSexo(evento.target.value)} required>
                                                     <MenuItem key={'M'} value={'M'}>Masculino</MenuItem>
                                                     <MenuItem key={'F'} value={'F'}>Feminino</MenuItem>

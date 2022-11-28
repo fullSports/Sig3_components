@@ -112,6 +112,12 @@
     text-[60px] sm:text-[60px] md:text-[72px]
     font-black uppercase
 }
+@media screen and (max-width: 1144px) {
+.txt-bold{
+    @apply
+    text-[30px] sm:text-[30px]
+}
+}
 
 .header-brand-container{
     @apply

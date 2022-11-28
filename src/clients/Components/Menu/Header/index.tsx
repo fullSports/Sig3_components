@@ -103,11 +103,11 @@ const Cabecalho = () => {
         <div className="header-acess header-resp">
           <div className="acess-props">
             <ul>
-              <li>
-                <span>Aumentar Fonte</span>
+              <li id='aumentaFonte'>
+                <span id='aumentaFonte'>Aumentar Fonte</span>
               </li>
-              <li>
-                <span>Diminuir Fonte</span>
+              <li id='diminuiFonte'>
+                <span id='diminuiFonte'>Diminuir Fonte</span>
               </li>
               <li>
                 {theme === 'light' ?
@@ -143,7 +143,7 @@ const Cabecalho = () => {
                 <img src={brandLogo} alt="" />
               </a>
             </div>
-            <div className="header-help-icons header-resp"> 
+            <div className="header-help-icons header-resp">
               <ul className="help-icons">
                 <li>
                   <a href="#">
@@ -171,7 +171,7 @@ const Cabecalho = () => {
               {arrayNavItems.map((el: any) => {
                 return (
                   <li className="header-nav-item">
-                    <a href="{el.path}" className='nav-item-btn'>
+                    <a href={el.path} className='nav-item-btn'>
                       {el.title}
                     </a>
                   </li>

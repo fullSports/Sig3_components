@@ -35,11 +35,11 @@ export var arrayNavCadastros: INavDashboard[] = [
         subMenu: [
             {
                 name: 'Cadastrar Suplementos',
-                path: '/dashboard/cadastrar-produto?categoria=suplemento'
+                path: '/dashboard/cadastrar-produto/?categoria=suplemento'
             },
             {
                 name: 'Consultar Suplementos',
-                path: '/dashboard/consultar-produtos?categoria=suplemento'
+                path: '/dashboard/consultar-produtos/?categoria=suplemento'
             }
         ]
     },
@@ -49,11 +49,11 @@ export var arrayNavCadastros: INavDashboard[] = [
         subMenu: [
             {
                 name: 'Cadastrar Roupas',
-                path: '/dashboard/cadastrar-produto?categoria=roupa'
+                path: '/dashboard/cadastrar-produto/?categoria=roupa'
             },
             {
                 name: 'Consultar Roupas',
-                path: '/dashboard/consultar-produtos?categoria=roupa'
+                path: '/dashboard/consultar-produtos/?categoria=roupa'
             }
         ]
     },
@@ -63,11 +63,11 @@ export var arrayNavCadastros: INavDashboard[] = [
         subMenu:[
             {
                 name: 'Cadastrar Calçado',
-                path: '/dashboard/cadastrar-produto?categoria=calcado'
+                path: '/dashboard/cadastrar-produto/?categoria=calcado'
             },
             {
                 name: 'Consultar Calçados',
-                path: '/dashboard/consultar-produtos?categoria=calcado'
+                path: '/dashboard/consultar-produtos/?categoria=calcado'
             }
         ]
 
@@ -78,11 +78,11 @@ export var arrayNavCadastros: INavDashboard[] = [
         subMenu: [
             {
                 name: 'Cadastrar Equipamentos',
-                path: '/dashboard/cadastrar-produto?categoria=equipamento'
+                path: '/dashboard/cadastrar-produto/?categoria=equipamento'
             },
             {
                 name: 'Consultar Equipamentos',
-                path: '/dashboard/consultar-produtos?categoria=calcado?categoria=equipamento'
+                path: '/dashboard/consultar-produtos/?categoria=equipamento'
             }
         ]
     },

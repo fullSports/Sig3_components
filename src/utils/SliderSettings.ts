@@ -62,7 +62,7 @@ export var sliderVerticalCards = {
 export var sliderHorizontalCards = {
   dots: true,
   className: "center",
-  infinite: true,
+  infinite: false,
   speed: 800,
   slidesToShow: 4,
   slidesToScroll: 4,
