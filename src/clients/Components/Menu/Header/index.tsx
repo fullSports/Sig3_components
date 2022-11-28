@@ -8,6 +8,7 @@ import { RiMenuFill } from 'react-icons/ri';
 import { BiSearch } from 'react-icons/bi';
 import { TbArrowBigDown, TbArrowBigTop } from 'react-icons/tb';
 import { ImAccessibility, ImContrast } from 'react-icons/im';
+import { Link } from 'react-router-dom';
 const brandLogo = require('../../../../assets/images/fullSportLogo.png');
 const carrinhoIcon = require('../../../../assets/icons/carrinho-icon.png');
 const suporteIcon = require('../../../../assets/icons/help-icon.png');
@@ -59,7 +60,9 @@ const Cabecalho = () => {
           <RiMenuFill size={30} />
         </button>
         <div className="sidebar-logo">
-          <img src={brandLogo} alt="" />
+          <Link to="/">
+            <img src={brandLogo} alt="" />
+          </Link>
         </div>
         <Sidebar />
       </div>

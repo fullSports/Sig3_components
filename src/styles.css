@@ -63,4 +63,15 @@
         w-fit py-2 px-3
         rounded-full
     }
+    .picture-label{
+        @apply
+        py-4
+    }
+    
+    .chose-pic-label{
+        @apply
+        w-[100%] h-[56px]
+        border-[1px] border-def_black/30
+        flex items-center px-3 rounded
+    }
 }
