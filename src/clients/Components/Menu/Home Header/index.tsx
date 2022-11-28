@@ -7,6 +7,7 @@ import './styles.css';
 import { BiSearch } from 'react-icons/bi';
 import { RiMenuFill } from 'react-icons/ri';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 const brandLogo = require('../../../../assets/images/fullSportLogo.png');
 const carrinhoIcon = require('../../../../assets/icons/carrinho-icon.png');
 const suporteIcon = require('../../../../assets/icons/help-icon.png');
@@ -45,6 +46,14 @@ const HomeHeader = () => {
             }
         } else {
             return <img src={contaIcon} alt="conta" />
+        }
+    }
+
+    function editarInfoConta(){
+        if (user) {
+           let userDetails = document.querySelector('.user-options');
+           let isDisplayed = userDetails?.classList.contains('hide');
+           isDisplayed ? userDetails?.classList.remove("hide") : userDetails?.classList.toggle('hide')
         }
     }
     return (
@@ -90,8 +99,17 @@ const HomeHeader = () => {
                             Suporte
                         </li>
                         <li>
-                            <MostrarImagemPerfil />
-                            Conta
+                            <div onClick={editarInfoConta} className="flex gap-2">
+                                <MostrarImagemPerfil />
+                                { user ? user.nome : <Link to="/login">Entrar</Link> }
+                            </div> 
+                            
+                            <div className="user-options ">
+                                <ul>
+                                    <li>Editar Perfil</li>
+                                    <li>Sair</li>
+                                </ul>
+                            </div>  
                         </li>
                         
                     </ul>
@@ -118,6 +136,7 @@ const HomeHeader = () => {
                                 </li>
                             )
                         })}
+                        
                     </ul>
                 </div>
             </div>

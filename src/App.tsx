@@ -20,9 +20,9 @@ import apiFullSports from './api/apiFullSports';
 import { Button, Modal } from '@mui/material';
 import { Box } from '@mui/system';
 import CadastroCliente from './clients/Pages/cliente/cadastrarCliente';
-import VizualizacaoDeProdutos from './clients/Pages/Produto/VizualizarProdutos';
+import VizualizacaoDeProdutos from './clients/Pages/produto/vizualizarProdutos';
+import ComprarProduto from './clients/Pages/produto/ComprarProduto';
 import AtualizarCliente from './clients/Pages/cliente/AtualizarCliente';
-import ComprarProduto from './clients/Pages/Produto/ComprarProduto';
 const App = () => {
   const [open, setOpen] = useState(Boolean);
   const handleClose = () => {

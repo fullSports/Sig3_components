@@ -156,3 +156,31 @@
     @apply
     flex text-def_white/80 text-3xl
 }
+
+.hide{
+    @apply
+    hidden invisible opacity-0 
+    transition-all duration-300
+}
+
+.user-options{
+    @apply
+    absolute top-12 rounded
+    bg-def_white h-[130px] w-[130px]
+    -z-50
+}
+
+.user-options ul{
+    @apply
+    block leading-7
+    -z-50
+}
+
+.user-options ul li{
+    @apply
+     text-def_dark_blue
+     hover:text-def_dark_blue/80
+     hover:bg-slate-400 bg-yellow-400
+     p-4
+     -z-50
+}
