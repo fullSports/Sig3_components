@@ -20,10 +20,25 @@ const GridVisuPrd = styled.div`
     display: grid;
     grid-template-columns: repeat(3, auto);
     /* grid-gap: 25px; */
+    @media screen and (max-width: 1040px){
+        display: grid;
+        grid-template-columns: repeat(1, auto);
+        margin: 0;
+    }
 `;
 const FotosAdcPrd = styled.div`
     img{
+        width: 150px;
         height: 124px;
+    }
+    @media screen and (max-width: 1040px){
+        img{
+        width: 75px;
+        height: 65px;
+        }
+        display: flex;
+        border: 2px solid #000;;
+        
     }
     button{
         /* margin: 0 0 0 300px; */
@@ -200,13 +215,25 @@ const ComprarProduto = () => {
         console.log(estiloImgProd1Array)
         const categoria = produto?.categoriaProduto;
         const FotoPrd = styled.div`
+        
         overflow: hidden;
         img{
             margin: 10px 0 10px;
+            width: 550px;
             height: 460px;
             -moz-transition: all 0.3s;
             -webkit-transition: all 0.3s;
             transition: all 0.3s;
+        }
+        @media screen and (max-width: 1040px){
+            img{
+            margin: 10px 0 10px;
+            width: 90%;
+            height: 160px;
+            -moz-transition: all 0.3s;
+            -webkit-transition: all 0.3s;
+            transition: all 0.3s;
+        }
         }
         :hover img{
             -moz-transform: scale(1.1);
@@ -245,7 +272,7 @@ const ComprarProduto = () => {
                                     estiloImgProd.pop();
                                     setEstiloImgProd1Array(estiloImgProd)
                                 }}>
-                                    <img src={item.url} alt="imagem produto" width='150' />
+                                    <img src={item.url} alt="imagem produto"  />
                                 </button>
                             })}
                         </FotosAdcPrd>
@@ -300,7 +327,7 @@ const ComprarProduto = () => {
                                     estiloImgProd.pop();
                                     setEstiloImgProd1Array(estiloImgProd)
                                 }}>
-                                    <img src={item.url} alt="imagem produto" width='150' />
+                                    <img src={item.url} alt="imagem produto"  />
                                 </button>
                             })}
                         </FotosAdcPrd>
@@ -354,7 +381,7 @@ const ComprarProduto = () => {
                                 estiloImgProd.pop();
                                 setEstiloImgProd1Array(estiloImgProd)
                             }}>
-                                <img src={item.url} alt="imagem produto" width='150' />
+                                <img src={item.url} alt="imagem produto"  />
                             </button>
                             })}
                         </FotosAdcPrd>
@@ -410,7 +437,7 @@ const ComprarProduto = () => {
                                 estiloImgProd.pop();
                                 setEstiloImgProd1Array(estiloImgProd)
                             }}>
-                                <img src={item.url} alt="imagem produto" width='150' />
+                                <img src={item.url} alt="imagem produto"  />
                             </button>
                             })}
                         </FotosAdcPrd>
