@@ -181,4 +181,24 @@
         @apply
         flex justify-center border-none
     }
+
+    .modal-container{
+        @apply flex justify-center h-fit absolute
+        top-0
+    }
+
+    .confirma-menesagem{
+        @apply
+        p-6 shadow-def_lg_shadow
+        bg-zinc-100 
+        dark:bg-def_dark_blue
+        dark:border-2 dark:border-def_white
+        dark:text-def_white
+        opacity-100
+        z-10
+    }
+    .btns-confirma-cont{
+        @apply flex gap-2 justify-center
+    }
+
 }
