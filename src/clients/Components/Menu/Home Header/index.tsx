@@ -8,6 +8,8 @@ import { BiSearch } from 'react-icons/bi';
 import { RiMenuFill } from 'react-icons/ri';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { ImAccessibility, ImContrast } from 'react-icons/im';
+import { TbArrowBigDown, TbArrowBigTop } from 'react-icons/tb';
 const brandLogo = require('../../../../assets/images/fullSportLogo.png');
 const carrinhoIcon = require('../../../../assets/icons/carrinho-icon.png');
 const suporteIcon = require('../../../../assets/icons/help-icon.png');
@@ -35,6 +37,12 @@ const HomeHeader = () => {
         var isSideOpen = sidebar?.classList.contains('show-sidebar')
         isSideOpen ? sidebar?.classList.remove("show-sidebar") : sidebar?.classList.toggle("hideShow")
     }
+    function showToggleOpts() {
+        let toggleAcess = document.querySelector('.toggle-group');
+        var isDisplayed = toggleAcess?.classList.contains('hideShow')
+        isDisplayed ? toggleAcess?.classList.remove("hideShow") : toggleAcess?.classList.toggle("hideShow")
+    }
+
     function MostrarImagemPerfil() {
         if (user) {
             if (user.imagemPerfil === null || user.imagemPerfil === undefined) {
@@ -42,22 +50,52 @@ const HomeHeader = () => {
                     <p className="text-black">{user.nome.charAt(0)}</p>
                 </Icone>
             } else {
-                return <img src={user.imagemPerfil.url} alt="conta" />
+                return <img src={user.imagemPerfil.url} />
             }
         } else {
-            return <img src={contaIcon} alt="conta" />
+            return <img src={contaIcon} />
         }
     }
 
     function editarInfoConta(){
         if (user) {
-           let userDetails = document.querySelector('.user-options');
+           let userDetails = document.querySelector('.user-options-home');
            let isDisplayed = userDetails?.classList.contains('hide');
            isDisplayed ? userDetails?.classList.remove("hide") : userDetails?.classList.toggle('hide')
         }
     }
     return (
         <>
+            
+        <div className="toggle-acess">
+            <div className="toggle-main">
+                <button onClick={showToggleOpts} className='toggle-btn'>
+                    <ImAccessibility size={30} />
+                </button>
+            </div>
+            <div className="toggle-group hideShow">
+                <div className="toggle-opts">
+                    <button className='toggle-opt-btn'>
+                    <TbArrowBigTop />
+                    </button>
+                </div>
+                <div className="toggle-opts">
+                    <button className='toggle-opt-btn'>
+                    <TbArrowBigDown />
+                    </button>
+                </div>
+                <div className="toggle-opts">
+                    {theme === 'light' ?
+                    (<button onClick={() => setTheme("dark")} className='toggle-opt-btn'>
+                        <ImContrast />
+                    </button>)
+                    :
+                    (<button onClick={() => setTheme("light")} className='toggle-opt-btn'>
+                        <ImContrast />
+                    </button>)}
+                </div>
+            </div>
+        </div>
             <div className="header-side show-sidebar">
                 <button className="toggleSidebar" onClick={openTeste}>
                     <RiMenuFill size={30} />
@@ -103,11 +141,13 @@ const HomeHeader = () => {
                                 <MostrarImagemPerfil />
                                 { user ? user.nome : <Link to="/login">Entrar</Link> }
                             </div> 
-                            
-                            <div className="user-options ">
+                            <div className="user-options-home hide">
                                 <ul>
                                     <li>Editar Perfil</li>
-                                    <li>Sair</li>
+                                    <li onClick={()=>{
+                                        window.localStorage.removeItem("user");
+                                        window.location.href="/"
+                                    }}>Sair</li>
                                 </ul>
                             </div>  
                         </li>
@@ -152,7 +192,7 @@ const HomeHeader = () => {
             </div>
             <div className="video-header">
                 <div className="header-transparent-cover"></div>
-                <video autoPlay loop muted>
+                <video autoPlay loop muted disablePictureInPicture controlsList='nodownload'>
                     <source src={headerVideo} type="video/mp4" />
                 </video>
             </div>

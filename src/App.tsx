@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import './styles.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './clients/Pages/Home';
 import Acessibilidade from './clients/Pages/Acessibilidade';
@@ -93,7 +94,15 @@ const App = () => {
           open={open}
           onClose={handleClose}
           id="aviso-cookie">
-          <Box component={"div"} id='div-menssagem-cookies' className="tela-imagem" sx={{
+            <div className="aviso-cookies">
+              <span>Nós usamos cookies e outras tecnologias semelhantes para melhorar sua experiência em nossos serviços.</span>
+              <button onClick={()=>{
+                localStorage.setItem('avisoCookie', JSON.stringify('usando cookies'));
+                handleClose();
+              }} >OK</button>
+            </div>
+
+          {/* <Box component={"div"} id='div-menssagem-cookies' className="tela-imagem" sx={{
             width: '50%', height: '10%',
             position: 'absolute' as 'absolute', top: '85%', left: '30%', marginBottom: '10%', display: '',
             backgroundColor: '#4e4a4a', border: '3px solid #000', borderRadius: '20px', pt: 2, px: 4, pb: 3
@@ -106,7 +115,7 @@ const App = () => {
                 }}
               >Ok!</Button>
             </p>
-          </Box>
+          </Box> */}
         </Modal>
       </>
     } else {
@@ -137,7 +146,14 @@ const App = () => {
           open={open}
           onClose={handleClose}
           id="aviso-cookie">
-          <Box component={"div"} id='div-menssagem-cookies' className="tela-imagem" sx={{
+            <div className="aviso-cookies">
+              <span>Nós usamos cookies e outras tecnologias semelhantes para melhorar sua experiência em nossos serviços.</span>
+              <button onClick={()=>{
+                localStorage.setItem('avisoCookie', JSON.stringify('usando cookies'));
+                handleClose();
+              }} >OK</button>
+            </div>
+          {/* <Box component={"div"} id='div-menssagem-cookies' className="tela-imagem" sx={{
             width: '50%', height: '10%',
             position: 'absolute' as 'absolute', top: '85%', left: '30%', marginBottom: '10%', display: '',
             backgroundColor: '#4e4a4a', border: '3px solid #000', borderRadius: '20px', pt: 2, px: 4, pb: 3
@@ -149,7 +165,7 @@ const App = () => {
               }}
             >Ok!</Button></p>
 
-          </Box>
+          </Box> */}
         </Modal>
       </>
     }
@@ -181,8 +197,16 @@ const App = () => {
         hideBackdrop
         open={open}
         onClose={handleClose}
-        id="aviso-cookie">
-        <Box component={"div"} id='div-menssagem-cookies' className="tela-imagem" sx={{
+        id="aviso-cookie"
+        className="cookies-container">
+          <div className="aviso-cookies">
+              <span>Nós usamos cookies e outras tecnologias semelhantes para melhorar sua experiência em nossos serviços.</span>
+              <button onClick={()=>{
+                localStorage.setItem('avisoCookie', JSON.stringify('usando cookies'));
+                handleClose();
+              }} >OK</button>
+            </div>
+        {/* <Box component={"div"} id='div-menssagem-cookies' className="tela-imagem" sx={{
           width: '60%', height: '10%',
           position: 'absolute' as 'absolute', top: '85%', left: '25%', marginBottom: '10%', display: '',
           backgroundColor: '#4e4a4a', border: '3px solid #000', borderRadius: '20px', pt: 2, px: 4, pb: 3
@@ -193,7 +217,7 @@ const App = () => {
               handleClose();
             }}
           >Ok!</Button></p>
-        </Box>
+        </Box> */}
       </Modal>
     </>
   }

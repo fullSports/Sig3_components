@@ -12,6 +12,42 @@
         dark:bg-black
     }
 
+    .cookies-container{
+        @apply
+        flex items-center justify-center
+    }
+    .aviso-cookies{
+        @apply
+        mb-10
+        absolute w-[85vw] rounded-lg h-[85px] bottom-0
+        p-4 flex justify-center items-center
+        bg-def_dark_blue/20 shadow-def_lg_shadow
+        dark:bg-def_dark_blue dark:border-2 dark:border-def_white
+    }
+    .aviso-cookies span{
+        @apply
+        text-txt_size_md text-def_black
+        dark:text-def_white 
+    } 
+    
+    .aviso-cookies span+button{
+        @apply flex mx-2
+    }
+    .aviso-cookies button{
+        @apply
+        w-20 
+        rounded 
+        justify-center
+        shadow p-1 hover:bg-def_green/80
+        bg-def_green 
+        text-def_dark_blue
+        dark:bg-def_cont_yellow
+        dark:text-def_black
+        dark:hover:bg-def_cont_yellow
+        dark:border-2
+        dark:border-def_white 
+    }
+
     .body-container{
         @apply
         mx-3

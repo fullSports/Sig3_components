@@ -1,6 +1,17 @@
+
+.toggleSidebar{
+    @apply
+    text-def_black dark:text-def_white
+}
+
+.hideShow{
+    @apply
+    invisible opacity-0 transition-transform ease-in-out
+}
+
 .header-top-barra{
     @apply
-    absolute flex z-10
+    absolute flex z-20
     justify-end sm:justify-end md:justify-end lg:justify-between
     w-full
     px-12 py-5
@@ -141,14 +152,18 @@
 .header-side{
     @apply
     transition-all ease-in-out
-    z-20 fixed flex
+     fixed 
     bg-def_white
     w-[320px] h-[170px] 
+    dark:bg-black
+    dark:border-[1px] dark:border-def_white
+    flex lg:hidden
+    z-30
 }
 
 .menu-toggle{
     @apply
-    visible sm:visible md:visible lg:invisible
+    visible sm:visible md:visible lg:hidden
     px-2
 }
 
@@ -163,24 +178,23 @@
     transition-all duration-300
 }
 
-.user-options{
+.user-options-home{
     @apply
-    absolute top-12 rounded
-    bg-def_white h-[130px] w-[130px]
-    -z-50
+    absolute top-14
+    h-fit
+    right-44
 }
 
-.user-options ul{
+.user-options-home ul{
     @apply
-    block leading-7
-    -z-50
+    block leading-7 absolute  w-[130px]
 }
 
-.user-options ul li{
+.user-options-home ul li{
     @apply
      text-def_dark_blue
+     bg-def_white
      hover:text-def_dark_blue/80
-     hover:bg-slate-400 bg-yellow-400
-     p-4
-     -z-50
+     hover:bg-zinc-200
+     px-4 py-2
 }

@@ -179,27 +179,34 @@
     dark:hover:text-def_black
 }
 
+
 .toggle-acess{
     @apply
-    z-10
+    z-30
     block lg:hidden xl:hidden
-    fixed right-0 top-[320px] mr-2
+    fixed right-0 top-[340px] 
 }
 
 .toggle-main{
     @apply
+    text-sm
     shadow-xl
     cursor-pointer
     text-white
-    bg-def_orange rounded-full
+    bg-def_orange rounded-xl
     dark:bg-def_cont_yellow
     dark:text-black
 }
 
 .toggle-btn{
     @apply
-    p-[0.5rem]
-    h-[48px] w-[48px]
+    flex justify-center items-center
+    /* p-[0.5rem] */
+    h-[37.8px] w-[37.8px]
+}
+
+.toggle-btn svg{
+    @apply h-[24px] w-[24px]
 }
 
 .toggle-opts{
@@ -212,6 +219,46 @@
 
 .toggle-opt-btn{
     @apply
-    mx-[0.75rem]
-    h-[48px] w-[12px]
+    mx-1.5
+    flex justify-center items-center
+    h-[38px] w-[24px]
+}
+
+.hide{
+    @apply
+    hidden invisible opacity-0 
+    transition-all duration-300
+}
+
+.profile-info{
+    @apply
+    flex gap-2 cursor-pointer
+    dark:text-def_white
+    text-def_black/80
+}
+
+.user-options{
+    @apply
+    absolute top-32
+    right-56
+}
+
+.user-options ul{
+    @apply
+    block leading-7 absolute
+    shadow w-[150px]
+    h-fit
+}
+
+.user-options ul li{
+    @apply
+    px-4 py-2 cursor-pointer
+     text-def_dark_blue
+     bg-def_white
+     hover:text-def_dark_blue/80
+     hover:bg-zinc-200
+     dark:text-def_white
+     dark:hover:text-def_cont_yellow 
+     dark:bg-def_black
+     dark:border-2 dark:border-def_white
 }

@@ -47,12 +47,20 @@ const Cabecalho = () => {
           <p className="text-black">{user.nome.charAt(0)}</p>
         </Icone>
       } else {
-        return <img src={user.imagemPerfil.url} alt="conta" />
+        return <img src={user.imagemPerfil.url} />
       }
     } else {
-      return <img src={contaIcon} alt="conta" />
+      return <img src={contaIcon} />
     }
   }
+  function editarInfoConta(){
+    if (user) {
+       let userDetails = document.querySelector('.user-options');
+       let isDisplayed = userDetails?.classList.contains('hide');
+       isDisplayed ? userDetails?.classList.remove("hide") : userDetails?.classList.toggle('hide')
+    }
+  }
+
   return (
     <>
       <div className="sidebar-header hideShow">
@@ -70,28 +78,28 @@ const Cabecalho = () => {
       <div className="toggle-acess">
         <div className="toggle-main">
           <button onClick={showToggleOpts} className='toggle-btn'>
-            <ImAccessibility size={30} />
+            <ImAccessibility />
           </button>
         </div>
         <div className="toggle-group hideShow">
           <div className="toggle-opts">
             <button className='toggle-opt-btn'>
-              <TbArrowBigTop size={24} />
+              <TbArrowBigTop />
             </button>
           </div>
           <div className="toggle-opts">
             <button className='toggle-opt-btn'>
-              <TbArrowBigDown size={24} />
+              <TbArrowBigDown />
             </button>
           </div>
           <div className="toggle-opts">
             {theme === 'light' ?
               (<button onClick={() => setTheme("dark")} className='toggle-opt-btn'>
-                <ImContrast size={24} />
+                <ImContrast />
               </button>)
               :
               (<button onClick={() => setTheme("light")} className='toggle-opt-btn'>
-                <ImContrast size={24} />
+                <ImContrast />
               </button>)}
 
 
@@ -158,10 +166,19 @@ const Cabecalho = () => {
                   </a>
                 </li>
                 <li>
-                  <a href="#">
-                    <MostrarImagemPerfil />
-                    Conta
-                  </a>
+                    <div onClick={editarInfoConta} className="">
+                        <MostrarImagemPerfil />
+                        { user ? user.nome : <Link to="/login">Entrar</Link> }
+                    </div> 
+                    <div className="user-options hide">
+                        <ul>
+                            <li>Editar Perfil</li>
+                            <li onClick={()=>{
+                                window.localStorage.removeItem("user");
+                                window.location.href="/"
+                            }}>Sair</li>
+                        </ul>
+                    </div> 
                 </li>
               </ul>
             </div>

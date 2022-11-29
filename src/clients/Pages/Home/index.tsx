@@ -19,6 +19,8 @@ import apiFullSports from '../../../api/apiFullSports';
 // import IEquipamentos from '../../../utils/interfaces/Produtos/IEquipamentos';
 import IRoupa from '../../../utils/interfaces/Produtos/IRoupa';
 // import ISuplementos from '../../../utils/interfaces/Produtos/ISuplementos';
+const tenisBanner = require('../../../assets/images/banners/transparent-shoes-banner.png');
+const roupasBanner = require('../../../assets/images/banners/transparent-clothes-banner.png');
 
 const Grid = styled.div`
     margin: 40px 10px 40px 40px;
@@ -46,33 +48,42 @@ const Home = () => {
             <HomeHeader />
             <div className='body-container'>
                 <div className="sec-container">
-                    <h6 className="section-title">Roupas da semana</h6>
-                    {/* <div className="cards-container overflow-x-auto"> */}
-                    <div className="Hcard-container">
-                        <Slider {...sliderHorizontalCards}>
-                            {produtos.map(item => {
-                                if (item.categoriaProduto.roupa !== undefined) {
-                                    var newPrecoProduto = parseFloat(item.categoriaProduto.roupa.preco.replace(',', '.'));
-                                    var parcela = newPrecoProduto / 12;
-                                    var newParcela = parcela.toFixed(2);
-                                    return <HorizontalCardProduct
-                                        tamanho={item.categoriaProduto.roupa.tamanho}
-                                        produtoID={item._id}
-                                        nome={item.categoriaProduto.roupa.nome}
-                                        preco={item.categoriaProduto.roupa.preco}
-                                        precoParcelado={newParcela.toString().replace(".", ",")}
-                                        src={item.categoriaProduto.roupa.imagemProduto[0].url}
-                                    />
-                                } else {
-                                    return <>
-                                    </>
-                                }
-                            })}
-                        </Slider>
+                    <div className="product-container">
+                        <div className="product-banner">
+                            <img src={roupasBanner} alt="" />
+                        </div>
+                        {/* <div className="cards-container overflow-x-auto"> */}
+                        <div className="Hcard-container">
+                            <Slider {...sliderHorizontalCards}>
+                                {produtos.map(item => {
+                                    if (item.categoriaProduto.roupa !== undefined) {
+                                        var newPrecoProduto = parseFloat(item.categoriaProduto.roupa.preco.replace(',', '.'));
+                                        var parcela = newPrecoProduto / 12;
+                                        var newParcela = parcela.toFixed(2);
+                                        return <HorizontalCardProduct
+                                            tamanho={item.categoriaProduto.roupa.tamanho}
+                                            produtoID={item._id}
+                                            nome={item.categoriaProduto.roupa.nome}
+                                            preco={item.categoriaProduto.roupa.preco}
+                                            precoParcelado={newParcela.toString().replace(".", ",")}
+                                            src={item.categoriaProduto.roupa.imagemProduto[0].url}
+                                        />
+                                    } else {
+                                        return <>
+                                        </>
+                                    }
+                                })}
+                            </Slider>
+                        </div>
                     </div>
-                    {/* </div> */}
                 </div>
-
+                <div className="sec-container">
+                    <div className="product-container">
+                        <div className="product-banner">
+                            <img src={tenisBanner} alt="" />
+                        </div>
+                    </div>
+                </div>
             </div>
             <Footer />
         </>

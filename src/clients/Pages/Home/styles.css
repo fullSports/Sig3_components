@@ -8,6 +8,18 @@
     -z-50
     h-auto sm:h-auto md:h-[320px] lg:h-[320px]
 }
+
+.product-banner{
+    @apply
+    w-fit
+    h-[400px]
+    relative
+    mr-auto ml-auto
+}
+.product-banner img{
+    @apply
+    w-full h-full object-cover
+}
 /* .cards-container{
     @apply
     flex flex-row flex-nowrap
