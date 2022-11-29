@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import apiFullSports from "../../../../api/apiFullSports";
 import IProduto from "../../../../utils/interfaces/IProduto";
 import styled from "styled-components";
+import './styles.css';
 import VerticalCardProduct from "../../../Components/Cards/VerticalCardP";
 import Cabecalho from "../../../Components/Menu/Header";
 import Footer from "../../../Components/Footer";
@@ -9,12 +10,7 @@ const Main = styled.main`
     width: 100%;
     min-height: 600px;
 `;
-const Grid = styled.div`
-    margin: 40px 10px 40px 40px;
-    display: grid;
-    grid-template-columns: repeat(6, auto);
-    grid-gap: 15px;
-`;
+
 const VizualizacaoDeProdutos = () => {
     const [produtos, setProdutos] = useState<IProduto[]>([]);
     const [spinner, setSpinner] = useState(false);
@@ -32,7 +28,7 @@ const VizualizacaoDeProdutos = () => {
         return <>
             <Cabecalho />
             <Main>
-                <Grid>
+                <div className="produtos-grid-container">
                     {produtos.map(item => {
                         const categoriaDeproduto = item.categoriaProduto.equipamento;
                         if (categoriaDeproduto !== undefined) {
@@ -50,7 +46,7 @@ const VizualizacaoDeProdutos = () => {
                             />
                         }
                     })}
-                </Grid>
+                </div>
             </Main>
             <Footer />
         </>
@@ -58,7 +54,7 @@ const VizualizacaoDeProdutos = () => {
         return <>
             <Cabecalho />
             <Main>
-                <Grid>
+                <div className="produtos-grid-container">
                     {produtos.map(item => {
                         const categoriaDeproduto = item.categoriaProduto.calcado;
                         if (categoriaDeproduto !== undefined) {
@@ -76,7 +72,7 @@ const VizualizacaoDeProdutos = () => {
                             />
                         }
                     })}
-                </Grid>
+                </div>
             </Main>
             <Footer />
         </>
@@ -84,7 +80,7 @@ const VizualizacaoDeProdutos = () => {
         return <>
             <Cabecalho />
             <Main>
-                <Grid>
+                <div className="produtos-grid-container">
                     {produtos.map(item => {
                         const categoriaDeproduto = item.categoriaProduto.roupa;
                         if (categoriaDeproduto !== undefined) {
@@ -102,7 +98,7 @@ const VizualizacaoDeProdutos = () => {
                             />
                         }
                     })}
-                </Grid>
+                </div>
             </Main>
             <Footer />
         </>
@@ -110,7 +106,7 @@ const VizualizacaoDeProdutos = () => {
         return <>
             <Cabecalho />
             <Main>
-                <Grid>
+                <div className="produtos-grid-container">
                     {produtos.map(item => {
                         const categoriaDeproduto = item.categoriaProduto.suplemento;
                         if (categoriaDeproduto !== undefined) {
@@ -128,7 +124,7 @@ const VizualizacaoDeProdutos = () => {
                             />
                         }
                     })}
-                </Grid>
+                </div>
             </Main>
             <Footer />
         </>
@@ -136,7 +132,7 @@ const VizualizacaoDeProdutos = () => {
         return <>
             <Cabecalho />
             <Main>
-                <Grid>
+                <div className="produtos-grid-container">
                     {produtos.map(item => {
                         const categoriaDeproduto = item.categoriaProduto;
                         if (categoriaDeproduto.equipamento !== undefined) {
@@ -195,7 +191,7 @@ const VizualizacaoDeProdutos = () => {
                             return <></>
                         }
                     })}
-                </Grid>
+                </div>
             </Main>
             <Footer />
         </>
