@@ -134,8 +134,8 @@
     @apply
     bg-def_white
     h-[90px] w-[90px] p-2
-    absolute left-auto right-0 mt-[388px] md:mt-[388px] lg:mt-[362px]
-    rounded-tl-3xl
+    absolute left-auto right-0 mt-[202px] md:mt-[208px] lg:mt-[202px]
+    rounded-sm
     flex items-center
 }
 

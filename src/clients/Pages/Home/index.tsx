@@ -50,6 +50,14 @@ const Home = () => {
                 <div className="sec-container">
                     <div className="product-container">
                         <div className="product-banner">
+                            <img src={tenisBanner} alt="" />
+                        </div>
+                    </div>
+                </div>
+                
+                <div className="sec-container">
+                    <div className="product-container">
+                        <div className="product-banner">
                             <img src={roupasBanner} alt="" />
                         </div>
                         {/* <div className="cards-container overflow-x-auto"> */}
@@ -74,13 +82,6 @@ const Home = () => {
                                     }
                                 })}
                             </Slider>
-                        </div>
-                    </div>
-                </div>
-                <div className="sec-container">
-                    <div className="product-container">
-                        <div className="product-banner">
-                            <img src={tenisBanner} alt="" />
                         </div>
                     </div>
                 </div>
