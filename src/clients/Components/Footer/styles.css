@@ -1,0 +1,155 @@
+.footer-container{
+    @apply
+    mt-12
+}
+
+.footer-body{
+    @apply
+    grid grid-flow-col
+    grid-rows-2
+    sm:grid-rows-2
+    md:grid-rows-1
+    lg:grid-rows-1
+    py-6 px-8
+    h-[500px] sm:h-[500px] md:h-auto lg:h-auto 
+    justify-around
+    dark:border-2 dark:border-white
+}
+
+.footer-left-group{
+    @apply
+    justify-start flex gap-16
+}
+
+.footer-item-group{
+    @apply mb-12 sm:mb-12 md:mb-0 lg:mb-0
+}
+
+.footer-news-sub{
+    @apply
+    justify-around
+    grid grid-flow-col
+    grid-rows-2 md:grid-rows-2 lg:grid-rows-1
+    rounded-full
+    mr-auto ml-auto
+    bg-def_green dark:bg-def_dark_blue/10
+    dark:border-[1px] dark:border-white
+    w-[90vw] h-[175px] md:h-[135px] sm:h-[135px] lg:h-[95px]
+    py-3 my-12
+}
+
+.news-sub-desc{
+    @apply
+    mt-2.5
+    text-center sm:text-center md:text-center lg:text-left
+}
+
+.news-sub-desc span{
+    @apply
+    block font-Lato
+}
+
+.news-sub-title{
+    @apply
+    text-txt_size_md font-semibold
+    text-def_white
+}
+
+.news-sub-subt{
+    @apply
+    text-txt_size_nr
+    text-def_white
+}
+
+.footer-item-title{
+    @apply
+    text-txt_size_nr font-semibold
+    text-def_dark_blue
+    dark:text-white
+}
+
+.input-container{
+    @apply
+    relative inline-block
+}
+
+.input-container input{
+    @apply
+    px-3 my-4 mx-12 sm:mx-12 lg:mx-0
+    w-[300px] sm:w-[450px] md:w-[350px] xl:w-[500px] h-[35px]
+    outline-none bg-def_grey/60 rounded-full
+    dark:bg-white
+    focus:bg-def_white focus:text-def_black/80 focus:shadow
+}
+
+.input-container button{
+    @apply
+    absolute hidden sm:hidden md:hidden lg:block
+    px-2 top-4 right-0 w-[35px]
+    bg-transparent hover:bg-zinc-200
+    h-[35px] rounded-r-full
+}
+
+.footer-items a{
+    @apply
+    block py-1
+}
+
+.items-group{
+    @apply
+    pt-2
+    text-left text-txt_size_sm
+    font-Lato text-def_black/80
+    dark:text-white
+}
+
+.footer-right-group{
+    @apply
+    w-auto sm:w-auto lg:w-[195px] md:w-[195px] h-fit
+    justify-center text-center pt-10 sm:pt-10 md:pt-0 lg:pt-0
+}
+
+.brand-container{
+    @apply
+    text-center
+}
+
+.brand-container img{
+    @apply
+    w-[132px] mr-auto ml-auto
+}
+
+.group-specs {
+    @apply
+    py-2
+}
+
+.group-specs span{
+    @apply
+    text-def_black/60 font-Lato
+    dark:text-white
+}
+
+.group-socials{
+    @apply
+    flex py-4 gap-2 justify-center
+}
+
+.group-socials a{
+    @apply
+    cursor-pointer text-def_black/80
+    hover:text-def_black hover:bg-def_black/10
+    dark:bg-def_cont_yellow dark:text-black
+    dark:hover:text-black/80
+    text-2xl
+    bg-def_grey  rounded-full p-1
+}
+
+.footer-bottom-line{
+    @apply
+    w-[100%] h-[45px]
+    dark:text-white text-def_black/80
+    bg-def_grey 
+    dark:bg-black dark:border-2 dark:border-white
+    text-center pt-2
+}

@@ -1,0 +1,48 @@
+
+.home-body{
+    @apply
+    p-6
+    w-full
+}
+
+.home-welcome-card{
+    @apply
+    w-[100%] xl:h-[170px] h-auto md:h-auto sm:h-auto
+    my-8 p-8
+    rounded-[40px]
+    bg-def_dark_blue
+    dark:bg-def_dark_blue/10
+    dark:border-2 dark:border-white
+    text-def_white
+    font-Lato
+}
+
+.home-welcome-card span{
+    @apply block
+}
+
+.dash-desc{
+    @apply
+    font-light
+    py-5
+    md:w-[600px] lg:w-[600px]
+}
+
+.username-welcome{
+    @apply
+    text-txt_size_lg font-semibold
+}
+
+.cards-container{
+    @apply
+    grid grid-flow-col grid-rows-3
+}
+
+.card-statics-dashboard{
+    @apply
+    w-[430px] h-[290px]
+    rounded-xl
+    bg-def_vanilla
+    dark:bg-def_dark_blue/10
+    dark:border-2 dark:border-white
+}

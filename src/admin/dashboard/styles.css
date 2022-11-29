@@ -1,0 +1,184 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components{
+    *{@apply m-0}
+
+    .dashboard-body{
+        width: calc(100% - 430px);
+        @apply p-6 w-full
+    }
+    .form-card{
+        @apply
+        flex justify-center
+    }
+    .form-title{
+        @apply
+        text-txt_size_lg font-semibold
+        text-def_dark_blue/80 text-left
+        dark:text-def_white
+    }
+    .col-form-label{
+        @apply
+        m-0 px-0 py-2
+        text-def_dark_blue/80
+        dark:text-white
+    }
+    .hallow-btn{
+        @apply
+        dark:border-def_cont_yellow 
+        dark:text-def_cont_yellow 
+        border-2 border-def_dark_blue
+        rounded-md text-def_dark_blue
+        bg-transparent
+    }
+    .full-btn{
+        @apply
+        border-2 border-def_dark_blue
+        bg-def_dark_blue
+        rounded-md text-def_white
+        dark:border-def_cont_yellow dark:bg-def_cont_yellow
+        dark:text-def_black
+    }
+    .btn-cad-forms{
+        @apply
+        h-fit
+        w-full sm:w-full
+        md:w-[220px] px-4 py-3
+        hover:shadow-def_lg_shadow transition-transform
+    }
+    .btn-group{
+        @apply
+        grid sm:grid 
+        grid-flow-col
+        grid-rows-2 sm:grid-rows-2
+
+        md:flex gap-2
+        md:justify-end w-full
+    }
+
+    /* form cadastros */
+    .form-cadastro-cliente{
+        @apply
+        dark:bg-def_dark_blue dark:border-2 dark:border-white
+        bg-def_white shadow-def_lg_shadow
+        rounded-xl m-8
+        p-8 h-auto
+    }
+
+    .form-rows{
+        @apply
+        my-2
+    }
+
+    .row-grid{
+        @apply
+        grid grid-flow-col
+        grid-rows-2 sm:grid-rows-2
+        lg:grid-rows-1 gap-2 my-4
+    }
+
+    .txt-form{
+        @apply
+        h-[45px] my-8
+        dark:text-def_white
+    }
+    .MuiOutlinedInput-notchedOutline .css-1d3z3hw-MuiOutlinedInput-notchedOutline{
+        color: #fff !important;
+        border-color: #fff !important;
+    }
+    .row-grid-1{
+        @apply
+        grid grid-flow-col
+        grid-rows-1 gap-2
+    }
+
+    /* tables consulta */
+    .page-body{
+        @apply
+        w-full p-6        
+    }
+
+    .table-container{
+        @apply
+        justify-center text-center
+        p-6
+    }
+    .table-title{
+        @apply py-6
+    }
+    .consulta-titulo{
+        @apply
+        justify-center
+        text-center font-semibold font-Lato
+        text-def_dark_blue/80 text-txt_size_md
+        dark:text-def_white
+        leading-10 
+    }
+    .panel-table{
+        @apply
+        flex ml-auto mr-auto justify-center
+        overflow-x-auto w-[95%]
+        overflow-y-hidden
+    }
+    .table-consulta tr, td, th{
+        @apply
+        border-2 px-4 py-2
+        border-def_black/10 dark:border-def_white
+    }
+    .consulta-img-container img{
+        @apply
+        object-cover w-20 h-20 rounded-full shadow-def_lg_shadow
+    }
+    .table-consulta th{
+        @apply
+        py-5 px-6
+        font-Lato capitalize text-center text-txt_size_nr
+        bg-def_dark_blue/10 dark:text-def_white
+        dark:bg-def_dark_blue/40
+    }
+    .table-consulta tbody {
+        @apply
+        font-Lato capitalize text-center font-normal
+        text-def_dark_blue/80 dark:text-def_white
+        text-txt_size_nr
+        border-2 rounded
+    }
+    .acoes-btn-group{
+        @apply
+        flex gap-4 text-center
+    }
+    .acoes-btn-group button{
+        @apply text-xl py-1
+    }
+    .btn-edit{
+        @apply
+        text-blue-400 hover:shadow-def_lg_shadow
+        dark:text-def_cont_yellow/50
+        dark:hover:text-def_cont_yellow
+        bg-transparent
+    }
+    .btn-exclui{
+        @apply
+        text-red-900 hover:shadow-def_lg_shadow
+        dark:text-def_cont_yellow
+        bg-transparent
+    }
+
+    .estiloMenssagem{
+        @apply
+        absolute mr-auto ml-auto
+        transition-transform w-[400px]
+        bg-def_black/10
+        border-2 border-def_black/10
+        shadow-def_soft_yellow px-4 py-2
+    }
+    .img-consulta{
+        @apply
+        flex justify-center border-none
+    }
+}

@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components{
+
+    body{
+        @apply
+        dark:bg-black
+    }
+
+    .cookies-container{
+        @apply
+        flex items-center justify-center
+    }
+    .aviso-cookies{
+        @apply
+        outline-none
+        mb-10
+        absolute w-[85vw] rounded-lg h-[85px] bottom-0
+        p-4 flex justify-center items-center
+        bg-zinc-200 shadow-def_lg_shadow
+        dark:bg-def_dark_blue dark:border-2 dark:border-def_white
+    }
+    .aviso-cookies span{
+        @apply
+        text-txt_size_md text-def_black
+        dark:text-def_white 
+    } 
+    
+    .aviso-cookies span+button{
+        @apply flex mx-2
+    }
+    .aviso-cookies button{
+        @apply
+        w-20 
+        rounded 
+        justify-center
+        shadow p-1 hover:bg-def_green/80
+        bg-def_green 
+        text-def_dark_blue
+        dark:bg-def_cont_yellow
+        dark:text-def_black
+        dark:hover:bg-def_cont_yellow
+        dark:border-2
+        dark:border-def_white 
+    }
+
+    .body-container{
+        @apply
+        mx-3
+        overflow-hidden
+    }
+    .sec-container{
+        @apply
+        mt-32
+    }
+    .section-title{
+        @apply
+        font-Merriweather font-bold
+        text-def_black/80
+        dark:text-white
+        text-txt_size_xl text-center
+
+    }
+    .overflow-x-auto::-webkit-scrollbar{
+        @apply
+        hidden
+    }
+    /* estilo padrao p/ cards produtos */
+    .card-product-name{
+        @apply
+        font-semibold
+        text-def_black/70
+        dark:text-white
+        text-txt_size_md
+    }
+    .card-old-price{
+        @apply
+        line-through
+        text-def_black/60
+        dark:text-white
+    }
+    .card-product-price{
+        @apply
+        mx-1.5
+        text-def_dark_green
+        dark:text-white
+        font-semibold
+    }
+    .card-product-parce{
+        @apply
+        text-def_black/80
+        bg-zinc-100/60
+        dark:bg-def_white
+        dark:text-black
+        w-fit py-2 px-3
+        rounded-full
+    }
+    .picture-label{
+        @apply
+        py-4
+    }
+    
+    .chose-pic-label{
+        @apply
+        w-[100%] h-[56px]
+        border-[1px] border-def_black/30
+        flex items-center px-3 rounded
+    }
+}
