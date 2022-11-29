@@ -4,7 +4,6 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './clients/Pages/Home';
 import Acessibilidade from './clients/Pages/Acessibilidade';
 import CadastroAdministrador from './admin/dashboard/Pages/Administrador/CadastrarAdministrador';
-import Equipamentos from './clients/Pages/Equipamentos';
 import PageErro404 from './Erro404';
 import DashboardHome from './admin/dashboard/shared/Home';
 import ConsultaAdimistrador from './admin/dashboard/Pages/Administrador/ConsultarAdministrador/index';
@@ -17,13 +16,12 @@ import ConsultaProduto from './admin/dashboard/Pages/Produtos/ConsultarProdutos'
 import AtualizarProduto from './admin/dashboard/Pages/Produtos/AtualizarProduto';
 import AutenticacaoAdmin from './auth';
 import apiFullSports from './api/apiFullSports';
-import { Button, Modal } from '@mui/material';
-import { Box } from '@mui/system';
+import { Modal } from '@mui/material';
 import CadastroCliente from './clients/Pages/cliente/cadastrarCliente';
 import AtualizarCliente from './clients/Pages/cliente/AtualizarCliente';
+import CarrinhoDeCompra from './clients/Pages/produto/CarrinhoDeCompra';
 import VizualizacaoDeProdutos from './clients/Pages/produto/vizualizarProdutos';
 import ComprarProduto from './clients/Pages/produto/ComprarProduto';
-import CarrinhoDeCompra from './clients/Pages/produto/CarrinhoDeCompra';
 import HistoricoPedidos from './clients/Pages/produto/HistoricoPedidos';
 const App = () => {
   const [open, setOpen] = useState(Boolean);
@@ -79,14 +77,9 @@ const App = () => {
 
             <Route path='/acessibilidade' element={<Acessibilidade />} />
 
-            <Route path='/equipamentos' element={<Equipamentos />} />
-
-
             <Route path='/produtos' element={<VizualizacaoDeProdutos />} />
 
             <Route path='/atualizar-cliente/:id' element={<AtualizarCliente />} />
-
-            <Route path='/produtos' element={<VizualizacaoDeProdutos />} />
 
             <Route path='/comprar-produto/:id' element={<ComprarProduto />} />
 
@@ -196,8 +189,6 @@ const App = () => {
           <Route path='/' element={<Home />} />
 
           <Route path='/acessibilidade' element={<Acessibilidade />} />
-
-          <Route path='/equipamentos' element={<Equipamentos />} />
 
           <Route path='/cadastrar-cliente' element={<CadastroCliente />} />
 
