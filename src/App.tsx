@@ -22,8 +22,8 @@ import { Button, Modal } from '@mui/material';
 import { Box } from '@mui/system';
 import CadastroCliente from './clients/Pages/cliente/cadastrarCliente';
 import AtualizarCliente from './clients/Pages/cliente/AtualizarCliente';
-import VizualizacaoDeProdutos from './clients/Pages/produto/vizualizarProdutos';
-import ComprarProduto from './clients/Pages/produto/ComprarProduto';
+import VizualizacaoDeProdutos from './clients/Pages/Produto/VizualizarProdutos';
+import ComprarProduto from './clients/Pages/Produto/ComprarProduto';
 const App = () => {
   const [open, setOpen] = useState(Boolean);
   const handleClose = () => {
@@ -53,7 +53,7 @@ const App = () => {
             <Route path='/login' element={<AutenticacaoAdmin />} />
             {/* DASHBOARD */}
             <Route path='/dashboard/home' element={<DashboardHome />} />
-
+            <Route path='/atualizar-cliente/:id' element={<AtualizarCliente />} />
             {/* crud Administrador */}
             <Route path='/dashboard/cadastrar-admin' element={<CadastroAdministrador />} />
 

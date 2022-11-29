@@ -169,6 +169,7 @@ const AtualizarCliente = () => {
     const [carregandoCep, setCarregandoCep] = useState(false)
     const [carregandoCepMenssagem, setCarregandoCepMessagem] = useState(false)
     const [open, setOpen] = React.useState(false);
+    const user = JSON.parse(localStorage.getItem('user') as string);
     const handleOpen = () => {
         setOpen(true);
     };
@@ -177,6 +178,10 @@ const AtualizarCliente = () => {
     };
     useEffect(() => {
         if (parametros.id) {
+            if(user.login.isAdmin){
+                window.location.href = `/dashboard/atualizar-admin/${parametros.id}`
+                console.log(user)
+            }
             apiFullSports.get<ICliente>(`listar-cliente/${parametros.id}`)
                 .then(resposta => setCpf(resposta.data.cpf))
                 .catch((err) => console.log(err));

@@ -143,7 +143,9 @@ const HomeHeader = () => {
                             </div> 
                             <div className="user-options-home hide">
                                 <ul>
-                                    <li>Editar Perfil</li>
+                                    <li onClick={()=>{
+                                        window.location.href=`/atualizar-cliente/${user._id}`
+                                    }}>Editar Perfil</li>
                                     <li onClick={()=>{
                                         window.localStorage.removeItem("user");
                                         window.location.href="/"
