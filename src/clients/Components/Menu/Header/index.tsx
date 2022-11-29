@@ -166,9 +166,9 @@ const Cabecalho = () => {
                   </a>
                 </li>
                 <li>
-                    <div onClick={editarInfoConta} className="">
+                    <div onClick={editarInfoConta} className="profile-info">
                         <MostrarImagemPerfil />
-                        { user ? user.nome : <Link to="/login">Entrar</Link> }
+                        { user ? user.nome.split(' ').slice(0,1) : <Link to="/login">Entrar</Link> }
                     </div> 
                     <div className="user-options hide">
                         <ul>

@@ -18,10 +18,11 @@
     }
     .aviso-cookies{
         @apply
+        outline-none
         mb-10
         absolute w-[85vw] rounded-lg h-[85px] bottom-0
         p-4 flex justify-center items-center
-        bg-def_dark_blue/20 shadow-def_lg_shadow
+        bg-zinc-200 shadow-def_lg_shadow
         dark:bg-def_dark_blue dark:border-2 dark:border-def_white
     }
     .aviso-cookies span{

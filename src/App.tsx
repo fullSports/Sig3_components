@@ -22,8 +22,8 @@ import { Button, Modal } from '@mui/material';
 import { Box } from '@mui/system';
 import CadastroCliente from './clients/Pages/cliente/cadastrarCliente';
 import AtualizarCliente from './clients/Pages/cliente/AtualizarCliente';
-import VizualizacaoDeProdutos from './clients/Pages/Produto/VizualizarProdutos';
-import ComprarProduto from './clients/Pages/Produto/ComprarProduto';
+import VizualizacaoDeProdutos from './clients/Pages/produto/vizualizarProdutos';
+import ComprarProduto from './clients/Pages/produto/ComprarProduto';
 const App = () => {
   const [open, setOpen] = useState(Boolean);
   const handleClose = () => {
@@ -94,7 +94,7 @@ const App = () => {
           open={open}
           onClose={handleClose}
           id="aviso-cookie">
-            <div className="aviso-cookies">
+          <div className="aviso-cookies">
               <span>Nós usamos cookies e outras tecnologias semelhantes para melhorar sua experiência em nossos serviços.</span>
               <button onClick={()=>{
                 localStorage.setItem('avisoCookie', JSON.stringify('usando cookies'));
@@ -146,7 +146,7 @@ const App = () => {
           open={open}
           onClose={handleClose}
           id="aviso-cookie">
-            <div className="aviso-cookies">
+          <div className="aviso-cookies">
               <span>Nós usamos cookies e outras tecnologias semelhantes para melhorar sua experiência em nossos serviços.</span>
               <button onClick={()=>{
                 localStorage.setItem('avisoCookie', JSON.stringify('usando cookies'));

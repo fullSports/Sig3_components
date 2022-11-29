@@ -100,6 +100,10 @@ export var arrayNavPerfis: INavDashboard[] = [
             {
                 name: 'Consultar Admin',
                 path: '/dashboard/consultar-admin'
+            },
+            {
+                name: 'Atualizar Admin',
+                path: '/dashboard/atualizar-admin/:id'
             }
         ]
     },

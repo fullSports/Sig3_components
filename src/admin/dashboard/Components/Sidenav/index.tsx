@@ -22,7 +22,7 @@ const Icone = styled.div`
 `;
 const DashboardSidenav = () => {
 
-    const [collapsed, setCollapse] = useState(false);
+    const [collapsed, setCollapse] = useState(true);
     const user = JSON.parse(localStorage.getItem('user') as string)
 
     function MostrarImagemPerfil() {
@@ -39,7 +39,7 @@ const DashboardSidenav = () => {
     console.log(user?.length)
     return (
         <>
-            <div className={`${collapsed ? 'w-[140px] mr-3' : 'w-[400px] mr-8'} sidenav-container`}>
+            <div className={`${collapsed ? 'setCollapsedFalse' : 'setCollapsedTrue'} sidenav-container`}>
                 <div className={`${collapsed ? 'sidenav-collapsed' : 'sidenav-open'} sidenav`}>
                     <div className="sidenav-header">
                         <button className="toggle-collapse" onClick={() => setCollapse(!collapsed)}>

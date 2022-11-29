@@ -103,7 +103,6 @@ const AutenticacaoAdmin = () => {
                                         onChange={evento => setEmail(evento.target.value)}
                                         onClick={() => setMensagemErroBolean(false)}
                                         className="txt-form"
-                                        label="email"
                                         id="email"
                                         type="email"
                                         placeholder={'Insira seu e-mail'}
@@ -117,7 +116,6 @@ const AutenticacaoAdmin = () => {
                                         sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
                                         onChange={evento => setPassword(evento.target.value)}
                                         className="txt-form"
-                                        label="password"
                                         id="password"
                                         type="password"
                                         placeholder={'Insira sua senha'}

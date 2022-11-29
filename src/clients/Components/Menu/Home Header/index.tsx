@@ -126,7 +126,7 @@ const HomeHeader = () => {
                     </li> */}
                     </ul>
                 </div>
-                <div className="home-barra-client-items">
+                <div className="home-barra-client-items hide-header">
                     <ul>
                         <li>
                             <img src={carrinhoIcon} alt="Carrinho" />
@@ -139,7 +139,7 @@ const HomeHeader = () => {
                         <li>
                             <div onClick={editarInfoConta} className="flex gap-2">
                                 <MostrarImagemPerfil />
-                                { user ? user.nome : <Link to="/login">Entrar</Link> }
+                                { user ? user.nome.split(' ').slice(0,1) : <Link to="/login">Entrar</Link> }
                             </div> 
                             <div className="user-options-home hide">
                                 <ul>

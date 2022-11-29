@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import './styles.css'
 import styled from 'styled-components';
 import { Button, TextField, FormControl, Select, InputLabel, MenuItem, Box, Modal } from "@mui/material";
 import apiFullSports from "../../../../api/apiFullSports";
@@ -6,86 +7,10 @@ import ApiCep from "../../../../api/apiCep";
 import { useParams } from "react-router-dom";
 import ICliente from "../../../../utils/interfaces/ICliente";
 import Cabecalho from "../../../Components/Menu/Header";
+import Footer from "../../../Components/Footer";
 // import './styles.css'
 const SinalMais = require('../../../../assets/icons/sinalMais.png')
 
-const Main = styled.main`
-    width: 100%;
-    min-height: 600px;
-`;
-const ExibeTitulo = styled.div`
-    margin: 2%;
-    display: flex;
-    justify-content: center;
-    h3{
-        
-        margin-right: 2%;
-        font-size: 25px;
-    }
-`;
-const FormAtualizarCliente = styled.div`
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 20px;
-    margin-top: 20px;
-    box-shadow: 1px 1px 8px rgb(70, 70, 70, 0.2);
-    padding: 2%;
-    width: 40%;
-    height: auto;
-    font-size: 12pt;
-    border-radius: 10px;
-    @media screen and (max-width: 1144px) {
-        width: 90%;
-        height: auto;
-        font-size: 12px;
-        border-radius: 10px;
-    }
-`;
-const Row1grid = styled.div`
-    display: grid;
-    grid-template-columns: repeat(2, auto);
-    grid-auto-rows: minmax(auto, auto);
-    grid-gap: 5px;
-    border-radius: 20px;
-    width: auto;
-    height: auto;
-    margin: 1px;  
-    .col-form-label{
-        font-size: 20px;
-    }
-    #imagemPerfil{
-        box-sizing: border-box;
-        margin: 0 0 15px;
-        width: 100%;
-        padding: 15px;
-        border-radius: 4px;
-        border: 1px solid #aca5a5;
-
-    }
-    #menssagem-erro{
-    color: #a23b3b;
-    font-size: 20x;
-    }
-`;
-const BttCadClienteGrid = styled.div`
-    display: grid;
-    grid-template-columns: repeat(2, auto);
-    grid-auto-rows: minmax(auto, auto);
-    grid-gap: 2px;
-    #btn-cad-forms{
-        justify-content: center;
-        display: block;
-        height: 50px;
-        border-radius: 5px;
-        color: #fff;
-        font-size: 14px;
-        background-color: black;
-        :hover{
-            background-color: #313131;
-            text-decoration: 0.90s;
-        }
-    }
-`;
 const Icone = styled.div`
     background-color: #a49898;
     height: 50px;
@@ -371,7 +296,7 @@ const AtualizarCliente = () => {
         } else {
             return (
                 <Icone className="icone" onClick={handleOpen}>
-                    <img src={imagemPerfilurl} alt="imagem de perfil" />
+                    <img src={imagemPerfilurl} />
                 </Icone>
             )
         }
@@ -387,7 +312,7 @@ const AtualizarCliente = () => {
         } else {
             return (
                 <IconePage className="icone" onClick={handleOpen}>
-                    <img src={imagemPerfilurl} className="foto-perfil-page" alt="imagem de perfil" />
+                    <img src={imagemPerfilurl} className="foto-perfil-page" />
                     <img src={SinalMais} className="sinal-mais-imagem" alt="imagem de sinal de mais" />
                 </IconePage>
             )
@@ -467,192 +392,201 @@ const AtualizarCliente = () => {
 
     return (
         <>
-            <Main id="main">
+            <div id="main">
                 <Cabecalho/>
-                <ExibeTitulo id="exibe-titulo" className="exibe-titulo"><h3>Atualizar dados de {nome}</h3> <IconePerfilPage /></ExibeTitulo>
-                <FormAtualizarCliente id="form-cadastro-cliente" className="form-cadastro-cliente">
-                    <Box component={'form'} onSubmit={aoSubmeterForm} encType="multipart/form-data">
-                        <Row1grid id="row-1-grid" className="row-1-grid">
-                            <label className="col-form-label">CPF</label>
-                            <TextField
-                                sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
-                                onChange={evento => setCpf(evento.target.value)}
-                                className="txt-form"
-                                label="cpf"
-                                id="cpf"
-                                type="text"
-                                placeholder={'00.000.000-00'}
-                                fullWidth
-                                required
-                                value={cpf}
-                            />
+                <div className="my-16">
+                    <div className="profile-details-title">
+                        <span>Atualizar dados de {nome} <IconePerfilPage /></span>
+                    </div>
+                    <div id="form-cadastro-cliente" className="form-cadastro-cliente">
+                        <Box component={'form'} onSubmit={aoSubmeterForm} encType="multipart/form-data">
+                            <div className="row-grid">
+                                <label className="col-form-label">CPF
+                                    <TextField
+                                        sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
+                                        onChange={evento => setCpf(evento.target.value)}
+                                        className="txt-form"
+                                        id="cpf"
+                                        type="text"
+                                        placeholder={'00.000.000-00'}
+                                        fullWidth
+                                        required
+                                        value={cpf}
+                                    />
+                                </label>
 
-                            <label className="col-form-label">Nome</label>
-                            <TextField
-                                sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
-                                onChange={evento => setNome(evento.target.value)}
-                                className="txt-form"
-                                label="Nome"
-                                id="nome"
-                                type="text"
-                                placeholder={'Digite seu nome'}
-                                fullWidth
-                                required
-                                value={nome}
-                            />
+                                <label className="col-form-label">Nome
+                                    <TextField
+                                        sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
+                                        onChange={evento => setNome(evento.target.value)}
+                                        className="txt-form"
+                                        id="nome"
+                                        type="text"
+                                        placeholder={'Digite seu nome'}
+                                        fullWidth
+                                        required
+                                        value={nome}
+                                    />
+                                </label>
+                            </div>
+                            <div className="row-grid">
+                                <label className="col-form-label">Data de Nascimento
+                                    <TextField
+                                        sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
+                                        onChange={evento => setDataNascimento(evento.target.value)}
+                                        className="txt-form"
+                                        id="data"
+                                        type="text"
+                                        placeholder={'__/__/____'}
+                                        fullWidth
+                                        required
+                                        value={dataNascimento}
+                                    />
+                                </label>
 
-                            <label className="col-form-label">Data de Nascimento</label>
-                            <TextField
-                                sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
-                                onChange={evento => setDataNascimento(evento.target.value)}
-                                className="txt-form"
-                                label="Data de Nascimento"
-                                id="data"
-                                type="text"
-                                placeholder={'__/__/____'}
-                                fullWidth
-                                required
-                                value={dataNascimento}
-                            />
+                                <label className="col-form-label">Sexo
+                                    <FormControl fullWidth margin="dense">
+                                        <InputLabel id="sexo">Sexo</InputLabel>
+                                        <Select className="txt-form" labelId="sexo" sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
+                                            value={sexo} onChange={evento => setSexo(evento.target.value)} required>
+                                            <MenuItem key={''} value={''}></MenuItem>
+                                            <MenuItem key={'M'} value={'M'}>Masculino</MenuItem>
+                                            <MenuItem key={'F'} value={'F'}>Feminino</MenuItem>
+                                            <MenuItem key={'O'} value={'O'}>Outros</MenuItem>
+                                            <MenuItem key={'-'} value={'-'}>Prefiro não dizer</MenuItem>
+                                        </Select>
+                                    </FormControl>
+                                </label>
+                            </div>
+                            <div className="row-grid">
+                                <label className="col-form-label">Cep {carregandoCep && <p>buscando cep...</p>}{carregandoCepMenssagem && <p id="menssagem-erro">cep invalido</p>}
+                                    <TextField
+                                        onChange={evento => setCep(evento.target.value)}
+                                        sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
+                                        className="txt-form"
+                                        id="cep"
+                                        type="text"
+                                        placeholder={'00000-000'}
+                                        fullWidth
+                                        required
+                                        onBlur={buscaCep}
+                                        value={cep}
+                                    />
+                                </label>
 
-                            <label className="col-form-label">Sexo</label>
-                            <FormControl fullWidth margin="dense">
-                                <InputLabel id="sexo">Sexo</InputLabel>
-                                <Select className="txt-form" labelId="sexo" sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
-                                    value={sexo} onChange={evento => setSexo(evento.target.value)} required>
-                                    <MenuItem key={''} value={''}></MenuItem>
-                                    <MenuItem key={'M'} value={'M'}>Masculino</MenuItem>
-                                    <MenuItem key={'F'} value={'F'}>Feminino</MenuItem>
-                                    <MenuItem key={'O'} value={'O'}>Outros</MenuItem>
-                                    <MenuItem key={'-'} value={'-'}>Prefiro não dizer</MenuItem>
-                                </Select>
-                            </FormControl>
+                                <label className="col-form-label">Rua
+                                    <TextField
+                                        onChange={evento => setRua(evento.target.value)}
+                                        sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
+                                        className="txt-form"
+                                        id="rua"
+                                        type="text"
+                                        placeholder={'Digite sua rua'}
+                                        fullWidth
+                                        required
+                                        value={rua}
+                                    />
+                                </label>
+                            </div>
+                            
+                            <div className="row-grid">
+                                <label className="col-form-label">Bairro
+                                    <TextField
+                                        onChange={evento => setBairro(evento.target.value)}
+                                        sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
+                                        className="txt-form"
+                                        id="bairro"
+                                        type="text"
+                                        placeholder={'Digite seu Bairro'}
+                                        fullWidth
+                                        required
+                                        value={bairro}
+                                    />
+                                </label>
+                                <label className="col-form-label">Estado
+                                    <TextField
+                                        onChange={evento => setEstado(evento.target.value)}
+                                        sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
+                                        className="txt-form"
+                                        id="estado"
+                                        type="text"
+                                        placeholder={'Digite seu estado'}
+                                        fullWidth
+                                        required
+                                        value={estado}
+                                    />
+                                </label>
+                            </div>
 
-                            <label className="col-form-label">Cep {carregandoCep && <p>buscando cep...</p>}{carregandoCepMenssagem && <p id="menssagem-erro">cep invalido</p>}</label>
-                            <TextField
-                                onChange={evento => setCep(evento.target.value)}
-                                sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
-                                className="txt-form"
-                                label="Cep"
-                                id="cep"
-                                type="text"
-                                placeholder={'00000-000'}
-                                fullWidth
-                                required
-                                onBlur={buscaCep}
-                                value={cep}
-                            />
+                            <div className="row-grid">
+                                <label className="col-form-label">Cidade
+                                    <TextField
+                                        onChange={evento => setCidade(evento.target.value)}
+                                        sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
+                                        className="txt-form"
+                                        id="cidade"
+                                        type="text"
+                                        placeholder={'Digite sua Cidade'}
+                                        fullWidth
+                                        required
+                                        value={cidade}
+                                    />
+                                </label>
+                                <label className="col-form-label">Número
+                                    <TextField
+                                        onChange={evento => setNumero(evento.target.value)}
+                                        sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
+                                        className="txt-form"
+                                        id="numero"
+                                        type="number"
+                                        fullWidth
+                                        required
+                                    />
+                                </label>
 
-                            <label className="col-form-label">Rua</label>
-                            <TextField
-                                onChange={evento => setRua(evento.target.value)}
-                                sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
-                                className="txt-form"
-                                label="Rua"
-                                id="rua"
-                                type="text"
-                                placeholder={'Digite sua rua'}
-                                fullWidth
-                                required
-                                value={rua}
-                            />
+                                <label className="col-form-label">Complemento
+                                    <TextField
+                                        onChange={evento => setComplemento(evento.target.value)}
+                                        sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
+                                        className="txt-form"
+                                        id="complemento"
+                                        type="text"
+                                        placeholder={'casa/apartamento'}
+                                        fullWidth
+                                    />
+                                </label>
 
-                            <label className="col-form-label">Bairro</label>
-                            <TextField
-                                onChange={evento => setBairro(evento.target.value)}
-                                sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
-                                className="txt-form"
-                                label="Bairro"
-                                id="bairro"
-                                type="text"
-                                placeholder={'Digite seu Bairro'}
-                                fullWidth
-                                required
-                                value={bairro}
-                            />
+                                {spinner && (<p>carregando...</p>)}
+                                {mensagemErroBolean && (<span id="menssagem-erro">{menssagemErro}</span>)}
+                            </div>
 
-                            <label className="col-form-label">Estado</label>
-                            <TextField
-                                onChange={evento => setEstado(evento.target.value)}
-                                sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
-                                className="txt-form"
-                                label="Estado"
-                                id="estado"
-                                type="text"
-                                placeholder={'Digite seu estado'}
-                                fullWidth
-                                required
-                                value={estado}
-                            />
-
-                            <label className="col-form-label">Cidade</label>
-                            <TextField
-                                onChange={evento => setCidade(evento.target.value)}
-                                sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
-                                className="txt-form"
-                                label="Cidade"
-                                id="cidade"
-                                type="text"
-                                placeholder={'Digite sua Cidade'}
-                                fullWidth
-                                required
-                                value={cidade}
-                            />
-                            <label className="col-form-label">Número</label>
-                            <TextField
-                                onChange={evento => setNumero(evento.target.value)}
-                                sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
-                                className="txt-form"
-                                label="Nº"
-                                id="numero"
-                                type="number"
-                                fullWidth
-                                required
-                            />
-
-                            <label className="col-form-label">Complemento</label>
-                            <TextField
-                                onChange={evento => setComplemento(evento.target.value)}
-                                sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
-                                className="txt-form"
-                                label="Complemento"
-                                id="complemento"
-                                type="text"
-                                placeholder={'casa/apartamento'}
-                                fullWidth
-                                required
-                            />
-
-                            {spinner && (<p>carregando...</p>)}
-                            {mensagemErroBolean && (<span id="menssagem-erro">{menssagemErro}</span>)}
-                        </Row1grid>
-
-                        <BttCadClienteGrid id="btt-cad-cliente-grid" className="btt-cad-cliente-grid">
-                            <Button type="submit" id="btn-cad-forms" className="btn-cad-forms">
-                                Atualizar Dados
-                            </Button>
-                        </BttCadClienteGrid>
-                    </Box>
-                </FormAtualizarCliente>
-            </Main>
-            <Modal
-                hideBackdrop
-                open={open}
-                onClose={handleClose}
-                id="model"
-            >
-                <Box component={'div'} id="tela-imagem" className="tela-imagem" sx={{
-                    width: '30%', height: '35%',
-                    position: 'absolute' as 'absolute', top: '30%', left: '35%', display: 'flex', justifyContent: 'center',
-                    backgroundColor: '#4e4a4a', border: '3px solid #000', borderRadius: '20px', pt: 2, px: 4, pb: 3
-                }}>
-                    <OpcoesFotoPerfil />
-                    <Box component={'div'} >
-                        {spinner && (<p>carregando...</p>)}
-                    </Box>
-                </Box>
-
-            </Modal>
+                            <div className="btn-group">
+                                <button type="submit" className="btn-cad-forms full-btn">
+                                    Atualizar Dados
+                                </button>
+                            </div>
+                        </Box>
+                    </div>
+                    </div>
+                    <Modal
+                        hideBackdrop
+                        open={open}
+                        onClose={handleClose}
+                        id="model"
+                    >
+                        <Box component={'div'} id="tela-imagem" className="tela-imagem" sx={{
+                            width: '30%', height: '35%',
+                            position: 'absolute' as 'absolute', top: '30%', left: '35%', display: 'flex', justifyContent: 'center',
+                            backgroundColor: '#4e4a4a', border: '3px solid #000', borderRadius: '20px', pt: 2, px: 4, pb: 3
+                        }}>
+                            <OpcoesFotoPerfil />
+                            <Box component={'div'} >
+                                {spinner && (<p>carregando...</p>)}
+                            </Box>
+                        </Box>
+                    </Modal>
+                </div>
+            <Footer/>
         </>
     )
 };

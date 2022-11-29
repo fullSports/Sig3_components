@@ -5,6 +5,16 @@
     items-center
 }
 
+.setCollapsedTrue{
+    @apply
+    w-[400px] mr-8
+}
+
+.setCollapsedFalse{
+    @apply
+    w-[140px] mr-3
+}
+
 .sidenav{
     @apply 
     z-10 fixed
@@ -58,11 +68,11 @@
     overflow-hidden
 }
 
-.sidenav-collapsed .nav-list{
+/* .sidenav-collapsed .nav-list{
     @apply
     hidden sm:hidden md:block lg:block
     mt-16
-}
+} */
 
 .sidenav-collapsed .pfp-container{
     @apply

@@ -22,11 +22,11 @@ const DashboardHome = () =>{
                         </span>
                     </div>
                 </div>
-                <div className="cards-container">
+                {/* <div className="cards-container">
                     <div className="card-statics-dashboard">
 
                     </div>
-                </div>
+                </div> */}
             </div>
             
         </div>

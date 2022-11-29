@@ -85,7 +85,7 @@
     .txt-form{
         @apply
         h-[45px] my-8
-        dark:placeholder:text-def_white
+        dark:text-def_white
     }
     .MuiOutlinedInput-notchedOutline .css-1d3z3hw-MuiOutlinedInput-notchedOutline{
         color: #fff !important;
