@@ -26,11 +26,25 @@ const Icone = styled.div`
     margin-left: auto;
     font-size: 22px;
 `;
+const BotaoNumber = styled.div`
+    background-color: #796969;
+    height: 20px;
+    width: 20px;
+    border-radius: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    cursor: pointer;
+    margin-left: 12px;
+    margin-top: 6px;
+`;
 const HomeHeader = () => {
 
     const [collapsed, setCollapse] = useState(false);
     const { theme, setTheme } = useTheme();
     const user = JSON.parse(localStorage.getItem('user') as string);
+    const carrinho = JSON.parse(localStorage.getItem('carrinho') as string);
 
     function openTeste() {
         let sidebar = document.querySelector('.header-side');
@@ -56,7 +70,18 @@ const HomeHeader = () => {
             return <img src={contaIcon} />
         }
     }
-
+    function MostrarCarrinho(){
+        if(carrinho){
+            return<>
+            <BotaoNumber>{carrinho.pedido.quantidade}</BotaoNumber>
+            <img src={carrinhoIcon} alt="Carrinho" />
+            </>
+        }else{
+            return<>
+            <img src={carrinhoIcon} alt="Carrinho" />
+            </>
+        }
+    }
     function editarInfoConta(){
         if (user) {
            let userDetails = document.querySelector('.user-options-home');
@@ -128,8 +153,8 @@ const HomeHeader = () => {
                 </div>
                 <div className="home-barra-client-items hide-header">
                     <ul>
-                        <li>
-                            <img src={carrinhoIcon} alt="Carrinho" />
+                        <li onClick={()=>window.location.href='/carrinho-de-compra/'}>
+                            <MostrarCarrinho/>
                             Carrinho
                         </li>
                         <li>

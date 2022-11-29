@@ -6,7 +6,6 @@ import Acessibilidade from './clients/Pages/Acessibilidade';
 import CadastroAdministrador from './admin/dashboard/Pages/Administrador/CadastrarAdministrador';
 import Equipamentos from './clients/Pages/Equipamentos';
 import PageErro404 from './Erro404';
-import Tenis from './clients/Pages/Tenis';
 import DashboardHome from './admin/dashboard/shared/Home';
 import ConsultaAdimistrador from './admin/dashboard/Pages/Administrador/ConsultarAdministrador/index';
 import AtualizarAdministrador from './admin/dashboard/Pages/Administrador/AtualizarAdministrador';
@@ -22,8 +21,10 @@ import { Button, Modal } from '@mui/material';
 import { Box } from '@mui/system';
 import CadastroCliente from './clients/Pages/cliente/cadastrarCliente';
 import AtualizarCliente from './clients/Pages/cliente/AtualizarCliente';
-import VizualizacaoDeProdutos from './clients/Pages/produto/vizualizarProdutos';
-import ComprarProduto from './clients/Pages/produto/ComprarProduto';
+import CarrinhoDeCompra from './clients/Pages/Produto/CarrinhoDeCompra';
+import VizualizacaoDeProdutos from './clients/Pages/Produto/VizualizarProdutos/';
+import ComprarProduto from './clients/Pages/Produto/ComprarProduto/';
+import HistoricoPedidos from './clients/Pages/Produto/HistoricoPedidos';
 const App = () => {
   const [open, setOpen] = useState(Boolean);
   const handleClose = () => {
@@ -80,11 +81,18 @@ const App = () => {
 
             <Route path='/equipamentos' element={<Equipamentos />} />
 
-            <Route path='/tenis' element={<Tenis />} />
 
             <Route path='/produtos' element={<VizualizacaoDeProdutos />} />
 
-            <Route path='/comprar-produto/:id' element={<ComprarProduto/>}/>
+            <Route path='/atualizar-cliente/:id' element={<AtualizarCliente />} />
+
+            <Route path='/produtos' element={<VizualizacaoDeProdutos />} />
+
+            <Route path='/comprar-produto/:id' element={<ComprarProduto />} />
+
+            <Route path='/carrinho-de-compra/' element={<CarrinhoDeCompra />} />
+
+            <Route path='/historico-de-pedido' element ={<HistoricoPedidos/>}/>
             {/****************************** */}
             <Route path='*' element={<PageErro404 />} />
           </Routes>
@@ -95,12 +103,12 @@ const App = () => {
           onClose={handleClose}
           id="aviso-cookie">
           <div className="aviso-cookies">
-              <span>Nós usamos cookies e outras tecnologias semelhantes para melhorar sua experiência em nossos serviços.</span>
-              <button onClick={()=>{
-                localStorage.setItem('avisoCookie', JSON.stringify('usando cookies'));
-                handleClose();
-              }} >OK</button>
-            </div>
+            <span>Nós usamos cookies e outras tecnologias semelhantes para melhorar sua experiência em nossos serviços.</span>
+            <button onClick={() => {
+              localStorage.setItem('avisoCookie', JSON.stringify('usando cookies'));
+              handleClose();
+            }} >OK</button>
+          </div>
 
           {/* <Box component={"div"} id='div-menssagem-cookies' className="tela-imagem" sx={{
             width: '50%', height: '10%',
@@ -135,8 +143,17 @@ const App = () => {
             <Route path='/atualizar-cliente/:id' element={<AtualizarCliente />} />
 
             <Route path='/produtos' element={<VizualizacaoDeProdutos />} />
-            
-            <Route path='/comprar-produto/:id' element={<ComprarProduto/>}/>
+
+            <Route path='/atualizar-cliente/:id' element={<AtualizarCliente />} />
+
+            <Route path='/produtos' element={<VizualizacaoDeProdutos />} />
+
+            <Route path='/comprar-produto/:id' element={<ComprarProduto />} />
+
+            <Route path='/carrinho-de-compra/' element={<CarrinhoDeCompra />} />
+
+            <Route path='/historico-de-pedido' element ={<HistoricoPedidos/>}/>
+
             {/****************************** */}
             <Route path='*' element={<PageErro404 />} />
           </Routes>
@@ -147,12 +164,12 @@ const App = () => {
           onClose={handleClose}
           id="aviso-cookie">
           <div className="aviso-cookies">
-              <span>Nós usamos cookies e outras tecnologias semelhantes para melhorar sua experiência em nossos serviços.</span>
-              <button onClick={()=>{
-                localStorage.setItem('avisoCookie', JSON.stringify('usando cookies'));
-                handleClose();
-              }} >OK</button>
-            </div>
+            <span>Nós usamos cookies e outras tecnologias semelhantes para melhorar sua experiência em nossos serviços.</span>
+            <button onClick={() => {
+              localStorage.setItem('avisoCookie', JSON.stringify('usando cookies'));
+              handleClose();
+            }} >OK</button>
+          </div>
           {/* <Box component={"div"} id='div-menssagem-cookies' className="tela-imagem" sx={{
             width: '50%', height: '10%',
             position: 'absolute' as 'absolute', top: '85%', left: '30%', marginBottom: '10%', display: '',
@@ -182,13 +199,11 @@ const App = () => {
 
           <Route path='/equipamentos' element={<Equipamentos />} />
 
-          <Route path='/tenis' element={<Tenis />} />
-
           <Route path='/cadastrar-cliente' element={<CadastroCliente />} />
 
           <Route path='/produtos' element={<VizualizacaoDeProdutos />} />
-          
-          <Route path='/comprar-produto/:id' element={<ComprarProduto/>}/>
+
+          <Route path='/comprar-produto/:id' element={<ComprarProduto />} />
           {/****************************** */}
           <Route path='*' element={<PageErro404 />} />
         </Routes>
@@ -199,13 +214,13 @@ const App = () => {
         onClose={handleClose}
         id="aviso-cookie"
         className="cookies-container">
-          <div className="aviso-cookies">
-              <span>Nós usamos cookies e outras tecnologias semelhantes para melhorar sua experiência em nossos serviços.</span>
-              <button onClick={()=>{
-                localStorage.setItem('avisoCookie', JSON.stringify('usando cookies'));
-                handleClose();
-              }} >OK</button>
-            </div>
+        <div className="aviso-cookies">
+          <span>Nós usamos cookies e outras tecnologias semelhantes para melhorar sua experiência em nossos serviços.</span>
+          <button onClick={() => {
+            localStorage.setItem('avisoCookie', JSON.stringify('usando cookies'));
+            handleClose();
+          }} >OK</button>
+        </div>
         {/* <Box component={"div"} id='div-menssagem-cookies' className="tela-imagem" sx={{
           width: '60%', height: '10%',
           position: 'absolute' as 'absolute', top: '85%', left: '25%', marginBottom: '10%', display: '',
