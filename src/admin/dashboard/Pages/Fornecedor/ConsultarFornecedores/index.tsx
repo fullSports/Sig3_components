@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import '../../../../dashboard/styles.css'
 import {GoTrashcan} from 'react-icons/go';
 import {FiEdit} from 'react-icons/fi';
 import IFornecedor from "../../../../../utils/interfaces/IFornecedor";
@@ -71,8 +72,9 @@ const ConsultarFornecedores = () =>{
                                                     <button className="btn-edit"> <FiEdit/> </button>
                                                 </a>
                                                 <React.Fragment>
-                                                    <button className="btn-exclui" onClick={handleOpen}><GoTrashcan/></button>
+                                                    <button  onClick={handleOpen}><GoTrashcan/></button>
                                                     <Modal
+                                                    className="modal-container"
                                                         hideBackdrop
                                                         open={open}
                                                         onClose={handleClose}
@@ -81,8 +83,10 @@ const ConsultarFornecedores = () =>{
                                                     >
                                                         <Box className="confirma-menesagem">
                                                             <h2 id="child-modal-title">Deseja mesmo excluir a empresa {item.nomeEmpresa} ?</h2>
-                                                            <Button onClick={() => deletar(item)} variant="outlined" color="error" >Excluir</Button>
-                                                            <Button onClick={handleClose} variant="outlined" >Cancelar</Button>
+                                                            <div className="btns-confirma-cont">
+                                                                <Button onClick={() => deletar(item)} variant="outlined" color="error" className="btn-exclui">Excluir</Button>
+                                                                <Button onClick={handleClose} variant="outlined" className="btnCancel">Cancelar</Button>
+                                                            </div>
                                                         </Box>
                                                     </Modal>
                                                 </React.Fragment>

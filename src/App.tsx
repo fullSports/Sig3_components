@@ -21,10 +21,10 @@ import { Button, Modal } from '@mui/material';
 import { Box } from '@mui/system';
 import CadastroCliente from './clients/Pages/cliente/cadastrarCliente';
 import AtualizarCliente from './clients/Pages/cliente/AtualizarCliente';
-import CarrinhoDeCompra from './clients/Pages/Produto/CarrinhoDeCompra';
-import VizualizacaoDeProdutos from './clients/Pages/Produto/VizualizarProdutos/';
-import ComprarProduto from './clients/Pages/Produto/ComprarProduto/';
-import HistoricoPedidos from './clients/Pages/Produto/HistoricoPedidos';
+import VizualizacaoDeProdutos from './clients/Pages/produto/vizualizarProdutos';
+import ComprarProduto from './clients/Pages/produto/ComprarProduto';
+import CarrinhoDeCompra from './clients/Pages/produto/CarrinhoDeCompra';
+import HistoricoPedidos from './clients/Pages/produto/HistoricoPedidos';
 const App = () => {
   const [open, setOpen] = useState(Boolean);
   const handleClose = () => {

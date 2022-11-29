@@ -62,12 +62,15 @@ const TabelaProduto = () => {
                                         onClose={handleClose}
                                         aria-labelledby="child-modal-title"
                                         aria-describedby="child-modal-description"
-                                    >
-                                        <div className="estiloMenssagem">
-                                            <h2 id="child-modal-title">Deseja mesmo excluir esse produto { } ?</h2>
+                                        className="modal-container"
+>
+                                         <Box className="confirma-menesagem">
+                                            <h2 id="child-modal-title">Deseja mesmo  esse produto { } ?</h2>
+                                            <div className="btns-confirma-cont">
                                             <Button onClick={() => deletar(item)} variant="outlined" color="error" >Excluir</Button>
                                             <Button onClick={handleClose} variant="outlined" >Cancelar</Button>
                                         </div>
+                                        </Box>
                                     </Modal>
                                 </React.Fragment>
                             </div>
@@ -105,12 +108,15 @@ const TabelaProduto = () => {
                                             onClose={handleClose}
                                             aria-labelledby="child-modal-title"
                                             aria-describedby="child-modal-description"
-                                        >
-                                            <div className="estiloMenssagem">
-                                                <h2 id="child-modal-title">Deseja mesmo excluir esse produto { } ?</h2>
-                                                <Button onClick={() => deletar(item)} variant="outlined" color="error" >Excluir</Button>
-                                                <Button onClick={handleClose} variant="outlined" >Cancelar</Button>
-                                            </div>
+                                            className="modal-container"
+>
+                                             <Box className="confirma-menesagem">
+                                            <h2 id="child-modal-title">Deseja mesmo  esse produto { } ?</h2>
+                                            <div className="btns-confirma-cont">
+                                            <Button onClick={() => deletar(item)} variant="outlined" color="error" >Excluir</Button>
+                                            <Button onClick={handleClose} variant="outlined" >Cancelar</Button>
+                                        </div>
+                                        </Box>
                                         </Modal>
                                     </React.Fragment>
                                 </div>
@@ -148,12 +154,15 @@ const TabelaProduto = () => {
                                         onClose={handleClose}
                                         aria-labelledby="child-modal-title"
                                         aria-describedby="child-modal-description"
-                                    >
-                                        <div className="estiloMenssagem">
-                                            <h2 id="child-modal-title">Deseja mesmo excluir esse produto { } ?</h2>
+                                        className="modal-container"
+>
+                                         <Box className="confirma-menesagem">
+                                            <h2 id="child-modal-title">Deseja mesmo  esse produto { } ?</h2>
+                                            <div className="btns-confirma-cont">
                                             <Button onClick={() => deletar(item)} variant="outlined" color="error" >Excluir</Button>
                                             <Button onClick={handleClose} variant="outlined" >Cancelar</Button>
                                         </div>
+                                        </Box>
                                     </Modal>
                                 </React.Fragment>
                             </div>
@@ -190,12 +199,15 @@ const TabelaProduto = () => {
                                         onClose={handleClose}
                                         aria-labelledby="child-modal-title"
                                         aria-describedby="child-modal-description"
-                                    >
-                                        <div className="estiloMenssagem">
-                                            <h2 id="child-modal-title">Deseja mesmo excluir esse produto { } ?</h2>
+                                        className="modal-container"
+>
+                                         <Box className="confirma-menesagem">
+                                            <h2 id="child-modal-title">Deseja mesmo  esse produto { } ?</h2>
+                                            <div className="btns-confirma-cont">
                                             <Button onClick={() => deletar(item)} variant="outlined" color="error" >Excluir</Button>
                                             <Button onClick={handleClose} variant="outlined" >Cancelar</Button>
                                         </div>
+                                        </Box>
                                     </Modal>
                                 </React.Fragment>
                             </div>
@@ -233,12 +245,15 @@ const TabelaProduto = () => {
                                         onClose={handleClose}
                                         aria-labelledby="child-modal-title"
                                         aria-describedby="child-modal-description"
-                                    >
-                                        <div className="estiloMenssagem">
-                                            <h2 id="child-modal-title">Deseja mesmo excluir esse produto { } ?</h2>
+                                        className="modal-container"
+>
+                                         <Box className="confirma-menesagem">
+                                            <h2 id="child-modal-title">Deseja mesmo  esse produto { } ?</h2>
+                                            <div className="btns-confirma-cont">
                                             <Button onClick={() => deletar(item)} variant="outlined" color="error" >Excluir</Button>
                                             <Button onClick={handleClose} variant="outlined" >Cancelar</Button>
                                         </div>
+                                        </Box>
                                     </Modal>
                                 </React.Fragment>
                             </div>
@@ -268,12 +283,15 @@ const TabelaProduto = () => {
                                         onClose={handleClose}
                                         aria-labelledby="child-modal-title"
                                         aria-describedby="child-modal-description"
-                                    >
-                                        <div className="estiloMenssagem">
-                                            <h2 id="child-modal-title">Deseja mesmo excluir esse produto { } ?</h2>
+                                        className="modal-container"
+>
+                                         <Box className="confirma-menesagem">
+                                            <h2 id="child-modal-title">Deseja mesmo  esse produto { } ?</h2>
+                                            <div className="btns-confirma-cont">
                                             <Button onClick={() => deletar(item)} variant="outlined" color="error" >Excluir</Button>
                                             <Button onClick={handleClose} variant="outlined" >Cancelar</Button>
                                         </div>
+                                        </Box>
                                     </Modal>
                                 </React.Fragment>
                             </div>
@@ -303,12 +321,15 @@ const TabelaProduto = () => {
                                         onClose={handleClose}
                                         aria-labelledby="child-modal-title"
                                         aria-describedby="child-modal-description"
-                                    >
-                                        <div className="estiloMenssagem">
-                                            <h2 id="child-modal-title">Deseja mesmo excluir esse produto { } ?</h2>
+                                        className="modal-container"
+>
+                                         <Box className="confirma-menesagem">
+                                            <h2 id="child-modal-title">Deseja mesmo  esse produto { } ?</h2>
+                                            <div className="btns-confirma-cont">
                                             <Button onClick={() => deletar(item)} variant="outlined" color="error" >Excluir</Button>
                                             <Button onClick={handleClose} variant="outlined" >Cancelar</Button>
                                         </div>
+                                        </Box>
                                     </Modal>
                                 </React.Fragment>
                             </div>
@@ -338,12 +359,15 @@ const TabelaProduto = () => {
                                         onClose={handleClose}
                                         aria-labelledby="child-modal-title"
                                         aria-describedby="child-modal-description"
-                                    >
-                                        <div className="estiloMenssagem">
-                                            <h2 id="child-modal-title">Deseja mesmo excluir esse produto { } ?</h2>
+                                        className="modal-container"
+>
+                                        <Box className="confirma-menesagem">
+                                            <h2 id="child-modal-title">Deseja mesmo  esse produto { } ?</h2>
+                                            <div className="btns-confirma-cont">
                                             <Button onClick={() => deletar(item)} variant="outlined" color="error" >Excluir</Button>
                                             <Button onClick={handleClose} variant="outlined" >Cancelar</Button>
                                         </div>
+                                        </Box>
                                     </Modal>
                                 </React.Fragment>
                             </div>
