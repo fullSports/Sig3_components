@@ -103,7 +103,7 @@ const AtualizarCliente = () => {
     };
     useEffect(() => {
         if (parametros.id) {
-            if(user.login.isAdmin){
+            if (user.login.isAdmin) {
                 window.location.href = `/dashboard/atualizar-admin/${parametros.id}`
                 console.log(user)
             }
@@ -224,7 +224,7 @@ const AtualizarCliente = () => {
                     // setCadastrarNovaFoto(false);
                     // setImagemID(response.data.imagemPerfil._id);
                     // setImagemPerfilurl(response.data.imagemPerfil.url);
-                   
+
                     window.location.reload();
                 }).catch(erro => console.log(erro))
 
@@ -234,39 +234,42 @@ const AtualizarCliente = () => {
     }
 
     const deletarFoto = () => {
-        apiFullSports.delete(`imagem/${imagemId}`)
-        setImagemID('');
-        window.location.reload();
+        apiFullSports.delete(`imagem/${imagemId}`).then(() => {
+            setImagemID('');
+            setTimeout(function(){
+                window.location.reload();
+            },100)
+        })
     }
     function buscaCep() {
         setCarregandoCep(true)
         setCarregandoCepMessagem(false)
         console.log(cep)
-        if(cep===''){
+        if (cep === '') {
             setCarregandoCep(false)
             setRua('');
             setBairro('');
             setEstado('');
             setCidade('')
-        }else{
-        ApiCep.request({
-            method: 'GET',
-            url: cep,
-            headers: {
-                'Access-Control-Allow-Origin': '*'
-            },
-        }).then(evento => {
-            setCarregandoCep(false)
-            setRua(evento.data.street);
-            setBairro(evento.data.neighborhood);
-            setEstado(evento.data.state);
-            setCidade(evento.data.city)
-        }).catch(err => {
-            setCarregandoCep(false)
-            setCarregandoCepMessagem(true)
-            console.log(err)
-        })
-    }
+        } else {
+            ApiCep.request({
+                method: 'GET',
+                url: cep,
+                headers: {
+                    'Access-Control-Allow-Origin': '*'
+                },
+            }).then(evento => {
+                setCarregandoCep(false)
+                setRua(evento.data.street);
+                setBairro(evento.data.neighborhood);
+                setEstado(evento.data.state);
+                setCidade(evento.data.city)
+            }).catch(err => {
+                setCarregandoCep(false)
+                setCarregandoCepMessagem(true)
+                console.log(err)
+            })
+        }
     }
     function buscaCepCarregarPage() {
         console.log(cep)
@@ -393,7 +396,7 @@ const AtualizarCliente = () => {
     return (
         <>
             <div id="main">
-                <Cabecalho/>
+                <Cabecalho />
                 <div className="my-16">
                     <div className="profile-details-title">
                         <span>Atualizar dados de {nome} <IconePerfilPage /></span>
@@ -488,7 +491,7 @@ const AtualizarCliente = () => {
                                     />
                                 </label>
                             </div>
-                            
+
                             <div className="row-grid">
                                 <label className="col-form-label">Bairro
                                     <TextField
@@ -567,26 +570,26 @@ const AtualizarCliente = () => {
                             </div>
                         </Box>
                     </div>
-                    </div>
-                    <Modal
-                        hideBackdrop
-                        open={open}
-                        onClose={handleClose}
-                        id="model"
-                    >
-                        <Box component={'div'} id="tela-imagem" className="tela-imagem" sx={{
-                            width: '30%', height: '35%',
-                            position: 'absolute' as 'absolute', top: '30%', left: '35%', display: 'flex', justifyContent: 'center',
-                            backgroundColor: '#4e4a4a', border: '3px solid #000', borderRadius: '20px', pt: 2, px: 4, pb: 3
-                        }}>
-                            <OpcoesFotoPerfil />
-                            <Box component={'div'} >
-                                {spinner && (<p>carregando...</p>)}
-                            </Box>
-                        </Box>
-                    </Modal>
                 </div>
-            <Footer/>
+                <Modal
+                    hideBackdrop
+                    open={open}
+                    onClose={handleClose}
+                    id="model"
+                >
+                    <Box component={'div'} id="tela-imagem" className="tela-imagem" sx={{
+                        width: '30%', height: '35%',
+                        position: 'absolute' as 'absolute', top: '30%', left: '35%', display: 'flex', justifyContent: 'center',
+                        backgroundColor: '#4e4a4a', border: '3px solid #000', borderRadius: '20px', pt: 2, px: 4, pb: 3
+                    }}>
+                        <OpcoesFotoPerfil />
+                        <Box component={'div'} >
+                            {spinner && (<p>carregando...</p>)}
+                        </Box>
+                    </Box>
+                </Modal>
+            </div>
+            <Footer />
         </>
     )
 };
