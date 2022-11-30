@@ -15,15 +15,14 @@ const Sidebar = () => {
                 <div className="sidebar-navegacao">
                     <span className="sidebar-sec-title">Minha Conta</span>
                     <ul>
-                        {user ? <li>{user.nome.split(' ').slice(0,2).join(' ')}</li> : <li><Link to="/login">Entrar</Link></li>}
-                        <li onClick={()=>{
+                        {user ? <><li>{user.nome.split(' ').slice(0,2).join(' ')}</li> 
+                         <li onClick={()=>{
                             window.location.href=`/atualizar-cliente/${user._id}`
-                        }}
-                        >Editar Perfil</li>
+                        }}>Editar Perfil</li>
                         <li onClick={()=>{
                             window.localStorage.removeItem("user");
                             window.location.href="/"
-                        }}> Sair </li>
+                        }}> Sair </li> </> : <li><Link to="/login">Entrar</Link></li>}
                     </ul>
                 </div>
                 <div className="sidebar-navegacao">
