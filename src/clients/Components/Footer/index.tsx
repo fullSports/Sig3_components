@@ -54,7 +54,7 @@ const Footer = () => {
                             {arrayNavItems.map((el: any) => {
                                 return (
                                     <li className="footer-items">
-                                        <a href="#" className="footer-link">
+                                        <a href={el.path} className="footer-link">
                                             {el.title}
                                         </a>
                                     </li>
@@ -85,13 +85,13 @@ const Footer = () => {
                     <div className="group-specs">
                         <span>O melhor dos artigos esportivos para você.</span>
                         <div className="group-socials">
-                            <a href="">
+                            <a href="https://twitter.com/">
                                 <AiFillTwitterCircle />
                             </a>
-                            <a href="">
+                            <a href="https://www.instagram.com/">
                                 <AiOutlineInstagram />
                             </a>
-                            <a href="">
+                            <a href="https://www.facebook.com/">
                                 <AiFillFacebook />
                             </a>
                         </div>
