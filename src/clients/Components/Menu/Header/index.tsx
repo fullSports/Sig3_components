@@ -25,10 +25,25 @@ const Icone = styled.div`
     margin-left: auto;
     font-size: 22px;
 `;
+const BotaoNumber = styled.div`
+    background-color: #796969;
+    height: 16px;
+    width: 16px;
+    border-radius: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    cursor: pointer;
+`;
+const DivCarrinho = styled.div`
+cursor: pointer;
+`;
 const Cabecalho = () => {
 
   const { theme, setTheme } = useTheme();
   const user = JSON.parse(localStorage.getItem('user') as string);
+  const carrinho = JSON.parse(localStorage.getItem('carrinho') as string);
   function openTeste() {
     let sidebar = document.querySelector('.sidebar-header');
     var isSideOpen = sidebar?.classList.contains('hideShow')
@@ -53,13 +68,28 @@ const Cabecalho = () => {
       return <img src={contaIcon} />
     }
   }
-  function editarInfoConta(){
+  function editarInfoConta() {
     if (user) {
-       let userDetails = document.querySelector('.user-options');
-       let isDisplayed = userDetails?.classList.contains('hide');
-       isDisplayed ? userDetails?.classList.remove("hide") : userDetails?.classList.toggle('hide')
+      let userDetails = document.querySelector('.user-options');
+      let isDisplayed = userDetails?.classList.contains('hide');
+      isDisplayed ? userDetails?.classList.remove("hide") : userDetails?.classList.toggle('hide')
     }
   }
+  function MostrarCarrinho(){
+    if(carrinho){
+        return<DivCarrinho>
+        <BotaoNumber>{carrinho.pedido.quantidade}</BotaoNumber>
+        <img src={carrinhoIcon} alt="Carrinho" />
+        Carrinho
+        </DivCarrinho>
+    }else{
+        return<DivCarrinho>
+        <img src={carrinhoIcon} alt="Carrinho" />
+        Carrinho
+        </DivCarrinho>
+    }
+}
+  
 
   return (
     <>
@@ -153,12 +183,9 @@ const Cabecalho = () => {
             </div>
             <div className="header-help-icons header-resp">
               <ul className="help-icons">
-                <li>
-                  <a href="#">
-                    <img src={carrinhoIcon} alt="Suporte" />
-                    Carrinho
-                  </a>
-                </li>
+                  <li onClick={() => window.location.href = '/carrinho-de-compra/'}>
+                  <MostrarCarrinho />
+                  </li>
                 <li>
                   <a href="#">
                     <img src={suporteIcon} alt="Suporte" />
@@ -166,19 +193,19 @@ const Cabecalho = () => {
                   </a>
                 </li>
                 <li>
-                    <div onClick={editarInfoConta} className="profile-info">
-                        <MostrarImagemPerfil />
-                        { user ? user.nome.split(' ').slice(0,1) : <Link to="/login">Entrar</Link> }
-                    </div> 
-                    <div className="user-options hide">
-                        <ul>
-                            <li>Editar Perfil</li>
-                            <li onClick={()=>{
-                                window.localStorage.removeItem("user");
-                                window.location.href="/"
-                            }}>Sair</li>
-                        </ul>
-                    </div> 
+                  <div onClick={editarInfoConta} className="profile-info">
+                    <MostrarImagemPerfil />
+                    {user ? user.nome.split(' ').slice(0, 1) : <Link to="/login">Entrar</Link>}
+                  </div>
+                  <div className="user-options hide">
+                    <ul>
+                      <li>Editar Perfil</li>
+                      <li onClick={() => {
+                        window.localStorage.removeItem("user");
+                        window.location.href = "/"
+                      }}>Sair</li>
+                    </ul>
+                  </div>
                 </li>
               </ul>
             </div>
