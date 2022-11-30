@@ -5,7 +5,7 @@ const ThemeContext = createContext();
 export default function ThemeContextProvider({children}){
     
     const [theme, setTheme] = useState(
-        localStorage.getItem("theme") !== "light" ? "dark" : "dark"
+        localStorage.getItem("theme") !== "light" ? "dark" : "light"
     );
 
     console.log(theme)
@@ -17,7 +17,7 @@ export default function ThemeContextProvider({children}){
 
         root.classList.add(removeOldTheme)
         root.classList.remove(theme)
-
+        localStorage.removeItem("theme")
         localStorage.setItem("theme", theme)
     },[theme]);
     
