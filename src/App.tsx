@@ -194,6 +194,8 @@ const App = () => {
 
           <Route path='/produtos' element={<VizualizacaoDeProdutos />} />
 
+          <Route path='/carrinho-de-compra/' element={<CarrinhoDeCompra />} />
+
           <Route path='/comprar-produto/:id' element={<ComprarProduto />} />
           {/****************************** */}
           <Route path='*' element={<PageErro404 />} />

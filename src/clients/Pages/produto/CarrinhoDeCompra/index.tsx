@@ -22,7 +22,7 @@ display: grid;
     grid-template-columns: repeat(3, 30px);
     height: auto;
 `;
-const Botoes =styled.div`
+const Botoes = styled.div`
 margin-top: 3%;
 display: grid;
 justify-content: center;
@@ -41,13 +41,14 @@ const CarrinhoDeCompra = () => {
     const [spinner, setSpinner] = useState(false);
     const [quantidadeProd, setQuantidadeProd] = useState('')
     useEffect(() => {
-        setSpinner(true)
-        console.log(carrinho)
-        apiFullSports.get<IProduto>(`listar-produto/${carrinho.pedido.produtoID}`).then(resposta => {
-            setProduto(resposta.data);
-            setSpinner(false);
-        }).catch((err) => console.log(err));
-        setQuantidadeProd(carrinho.pedido.quantidade)
+        if (carrinho) {
+            setSpinner(true)
+            apiFullSports.get<IProduto>(`listar-produto/${carrinho.pedido.produtoID}`).then(resposta => {
+                setProduto(resposta.data);
+                setSpinner(false);
+            }).catch((err) => console.log(err));
+            setQuantidadeProd(carrinho.pedido.quantidade)
+        }
     }, [])
     function MostraProduto() {
 
@@ -146,60 +147,81 @@ const CarrinhoDeCompra = () => {
                 <th>{precoCategoria * precoProd}</th>
             </tr>
         } else {
-            return <></>
+            return <>
+
+            </>
         }
     }
 
-    function cancelarPedido(){
+    function cancelarPedido() {
         localStorage.removeItem("carrinho");
-        window.location.href='/';
+        window.location.href = '/';
     }
-    function realizarPedido(){
+    function realizarPedido() {
+        setSpinner(true);
         apiFullSports.request({
-            method:"POST",
-            url:"realizar-pedido/",
+            method: "POST",
+            url: "realizar-pedido/",
             headers: {
                 'Access-Control-Allow-Origin': '*',
             },
-            data:{
+            data: {
                 quantidadePedido: quantidadeProd,
                 produto: carrinho.pedido.produtoID,
                 cliente: carrinho.clienteID
             }
-        }).then(reposta=>{
+        }).then(reposta => {
+            setSpinner(false);
             localStorage.removeItem("carrinho");
-            window.location.href='/historico-de-pedido';
-        }).catch((err)=>console.log(err))
+            window.location.href = '/historico-de-pedido';
+        }).catch((err) => console.log(err))
     }
-    return <>
-        <Cabecalho />
+    if (!carrinho) {
+        return <>
+            <Cabecalho />
 
-        <div className="table-container">
-            <div className="table-title">
-                <span className="consulta-titulo">Meu Carrinho</span>
-                <div className="panel-table">
-                    <table className="table-consulta">
-                        <thead>
-                            <tr>
-                                <th>Produto</th>
-                                <th>Quantidade</th>
-                                <th>Total do Pedido</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <MostraProduto />
-                        </tbody>
-                    </table>
+            <div className="table-container">
+                <div className="table-title">
+                    <Botoes>
+                        <span className="consulta-titulo">O Carrinho estar Vazio</span>
+                        <button className="btn-edit" onClick={() => window.location.href = '/'}>Voltar Para Home</button>
+                    </Botoes>
                 </div>
-                <Botoes>
-                <button className="btn-exclui" onClick={cancelarPedido}>Cancelar Pedido</button>
-                <button className="btn-edit"onClick={realizarPedido}>Realizar Pedido</button>
-                
-                </Botoes>
             </div>
-        </div>
 
-        <Footer />
-    </>
+            <Footer />
+        </>
+    } else {
+        return <>
+            <Cabecalho />
+
+            <div className="table-container">
+                <div className="table-title">
+                    <span className="consulta-titulo">Meu Carrinho</span>
+                    <div className="panel-table">
+                        <table className="table-consulta">
+                            <thead>
+                                <tr>
+                                    <th>Produto</th>
+                                    <th>Quantidade</th>
+                                    <th>Total do Pedido</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <MostraProduto />
+                            </tbody>
+                        </table>
+                    </div>
+                    <Botoes>
+                        <button className="btn-exclui" onClick={cancelarPedido}>Cancelar Pedido</button>
+                        <button className="btn-edit" onClick={realizarPedido}>Realizar Pedido</button>
+                    </Botoes>
+                    {spinner && <p>carregando...</p>}
+                </div>
+            </div>
+
+            <Footer />
+        </>
+    }
 }
 export default CarrinhoDeCompra;
