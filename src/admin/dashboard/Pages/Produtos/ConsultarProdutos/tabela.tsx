@@ -29,9 +29,11 @@ const TabelaProduto = () => {
     }, [])
 
     const deletar = (DeletarProduto: IProduto) => {
-        apiFullSports.delete(`deletar-produto/${DeletarProduto._id}/`);
-        window.location.reload();
+        apiFullSports.delete(`deletar-produto/${DeletarProduto._id}/`).then(() => {
+            window.location.reload();
+        }).catch((err)=>console.log(err))
     }
+
 
 
     if (categoriaParam?.toString() === 'equipamento') {
