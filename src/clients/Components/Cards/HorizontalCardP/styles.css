@@ -31,7 +31,7 @@
 .Hcard-link{
     @apply flex
 }
-.Hcard-link:hover span{
+.Hcard-link span{
     @apply
     dark:text-def_cont_yellow
 }

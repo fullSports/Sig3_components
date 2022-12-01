@@ -1,7 +1,7 @@
 .sidebar-container{
     @apply
     z-10 font-Lato
-    h-[100%] w-[320px] top-[160px]
+    h-[100%] w-[320px] top-[110px]
     bg-def_white shadow-lg
     dark:bg-black
     dark:border-2 dark:border-white
@@ -33,12 +33,12 @@
 
 .sidebar-navegacao ul{
     @apply
-    pt-2 mb-8 
+    pt-1 mb-2 
 }
 
 .sidebar-navegacao ul li{
     @apply
-    py-3 px-2
+    py-2 px-2
     mt-2
     rounded-md
     transition-all
@@ -46,7 +46,11 @@
     hover:bg-def_grey/20
     dark:hover:bg-def_dark_blue/10
 }
-
+.sidebar-navegacao li{
+    @apply
+    dark:text-white
+    
+}
 .sidebar-navegacao ul li a{
     @apply
     text-def_black/80 text-txt_size_nr font-normal

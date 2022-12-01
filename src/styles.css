@@ -75,7 +75,7 @@
         @apply
         font-semibold
         text-def_black/70
-        dark:text-white
+
         text-txt_size_md
     }
     .card-old-price{
@@ -88,7 +88,7 @@
         @apply
         mx-1.5
         text-def_dark_green
-        dark:text-white
+        dark:text-def_dark_green
         font-semibold
     }
     .card-product-parce{

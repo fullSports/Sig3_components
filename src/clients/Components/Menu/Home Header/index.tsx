@@ -100,12 +100,12 @@ const HomeHeader = () => {
             </div>
             <div className="toggle-group hideShow">
                 <div className="toggle-opts">
-                    <button className='toggle-opt-btn'>
+                    <button className='toggle-opt-btn' id='aumentaFonte'>
                     <TbArrowBigTop />
                     </button>
                 </div>
                 <div className="toggle-opts">
-                    <button className='toggle-opt-btn'>
+                    <button className='toggle-opt-btn' id="diminuiFonte">
                     <TbArrowBigDown />
                     </button>
                 </div>

@@ -76,10 +76,7 @@ const Home = () => {
                                             precoParcelado={newParcela.toString().replace(".", ",")}
                                             src={item.categoriaProduto.roupa.imagemProduto[0].url}
                                         />
-                                    } else {
-                                        return <>
-                                        </>
-                                    }
+                                    } 
                                 })}
                             </Slider>
                         </div>

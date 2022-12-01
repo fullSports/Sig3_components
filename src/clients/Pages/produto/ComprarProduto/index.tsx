@@ -306,19 +306,19 @@ const ComprarProduto = () => {
                                         <p>Quantidade</p>
                                         <ThTabela>
                                             <BotaoNumber onClick={() => {
+                                                if (quantidadeCategoria !== 1) {
+                                                    const newquantidade = quantidadeCategoria - 1;
+                                                    console.log(newquantidade)
+                                                    setQuantidade(newquantidade.toString());
+                                                }
+                                            }}><button type='button'>-</button></BotaoNumber>
+                                            <input type="number" value={quantidade} placeholder="Nº" min='1'
+                                                required max={categoria.calcado.quantidade} onChange={evento => setQuantidade(evento.target.value)} />
+                                            <BotaoNumber onClick={() => {
                                                 const newquantidade = quantidadeCategoria + 1;
                                                 console.log(newquantidade)
                                                 setQuantidade(newquantidade.toString());
-                                            }}>+</BotaoNumber>
-                                            <input type="number" value={quantidade} placeholder="Nº" min='1' 
-                                            required max={categoria.calcado.quantidade} onChange={evento => setQuantidade(evento.target.value)} />
-                                            <BotaoNumber onClick={() => {
-                                                if(quantidadeCategoria !==1){
-                                                const newquantidade = quantidadeCategoria - 1;
-                                                console.log(newquantidade)
-                                                setQuantidade(newquantidade.toString());
-                                                }
-                                            }}>-</BotaoNumber>
+                                            }}><button type="button">+</button></BotaoNumber>
                                         </ThTabela>
                                     </div>
                                     <div id="btnLinkPrd" className="btnLinkPrd">
@@ -377,21 +377,21 @@ const ComprarProduto = () => {
                                     <p id="subTitPrd" className="subTitPrd">em até 12x de R${newParcela.toString().replace(".", ",")}</p>
                                     <div id="tmnhQtd" className="tmnhQtd">
                                         <p>Quantidade</p>
-                                         <ThTabela>
+                                        <ThTabela>
+                                            <BotaoNumber onClick={() => {
+                                                if (quantidadeCategoria !== 1) {
+                                                    const newquantidade = quantidadeCategoria - 1;
+                                                    console.log(newquantidade)
+                                                    setQuantidade(newquantidade.toString());
+                                                }
+                                            }}><button type='button'>-</button></BotaoNumber>
+                                            <input type="number" value={quantidade} placeholder="Nº" min='1'
+                                                required max={categoria.equipamento.quantidade} onChange={evento => setQuantidade(evento.target.value)} />
                                             <BotaoNumber onClick={() => {
                                                 const newquantidade = quantidadeCategoria + 1;
                                                 console.log(newquantidade)
                                                 setQuantidade(newquantidade.toString());
-                                            }}>+</BotaoNumber>
-                                            <input type="number" value={quantidade} placeholder="Nº" min='1' 
-                                            required max={categoria.equipamento.quantidade} onChange={evento => setQuantidade(evento.target.value)} />
-                                            <BotaoNumber onClick={() => {
-                                                if(quantidadeCategoria !==1){
-                                                const newquantidade = quantidadeCategoria - 1;
-                                                console.log(newquantidade)
-                                                setQuantidade(newquantidade.toString());
-                                                }
-                                            }}>-</BotaoNumber>
+                                            }}><button type="button">+</button></BotaoNumber>
                                         </ThTabela>
                                     </div>
                                     <div id="btnLinkPrd" className="btnLinkPrd">
@@ -451,19 +451,19 @@ const ComprarProduto = () => {
                                         <p>Quantidade</p>
                                         <ThTabela>
                                             <BotaoNumber onClick={() => {
+                                                if (quantidadeCategoria !== 1) {
+                                                    const newquantidade = quantidadeCategoria - 1;
+                                                    console.log(newquantidade)
+                                                    setQuantidade(newquantidade.toString());
+                                                }
+                                            }}><button type='button'>-</button></BotaoNumber>
+                                            <input type="number" value={quantidade} placeholder="Nº" min='1'
+                                                required max={categoria.roupa.quantidade} onChange={evento => setQuantidade(evento.target.value)} />
+                                            <BotaoNumber onClick={() => {
                                                 const newquantidade = quantidadeCategoria + 1;
                                                 console.log(newquantidade)
                                                 setQuantidade(newquantidade.toString());
-                                            }}>+</BotaoNumber>
-                                            <input type="number" value={quantidade} placeholder="Nº" min='1' 
-                                            required max={categoria.roupa.quantidade} onChange={evento => setQuantidade(evento.target.value)} />
-                                            <BotaoNumber onClick={() => {
-                                                if(quantidadeCategoria !==1){
-                                                const newquantidade = quantidadeCategoria - 1;
-                                                console.log(newquantidade)
-                                                setQuantidade(newquantidade.toString());
-                                                }
-                                            }}>-</BotaoNumber>
+                                            }}><button type="button">+</button></BotaoNumber>
                                         </ThTabela>
                                     </div>
                                     <div id="btnLinkPrd" className="btnLinkPrd">
@@ -525,19 +525,19 @@ const ComprarProduto = () => {
                                         <p>Quantidade</p>
                                         <ThTabela>
                                             <BotaoNumber onClick={() => {
+                                                if (quantidadeCategoria !== 1) {
+                                                    const newquantidade = quantidadeCategoria - 1;
+                                                    console.log(newquantidade)
+                                                    setQuantidade(newquantidade.toString());
+                                                }
+                                            }}><button type='button'>-</button></BotaoNumber>
+                                            <input type="number" value={quantidade} placeholder="Nº" min='1'
+                                                required max={categoria.suplemento.quantidade} onChange={evento => setQuantidade(evento.target.value)} />
+                                            <BotaoNumber onClick={() => {
                                                 const newquantidade = quantidadeCategoria + 1;
                                                 console.log(newquantidade)
                                                 setQuantidade(newquantidade.toString());
-                                            }}>+</BotaoNumber>
-                                            <input type="number" value={quantidade} placeholder="Nº" min='1' 
-                                            required max={categoria.suplemento.quantidade} onChange={evento => setQuantidade(evento.target.value)} />
-                                            <BotaoNumber onClick={() => {
-                                                if(quantidadeCategoria !==1){
-                                                const newquantidade = quantidadeCategoria - 1;
-                                                console.log(newquantidade)
-                                                setQuantidade(newquantidade.toString());
-                                                }
-                                            }}>-</BotaoNumber>
+                                            }}><button type="button">+</button></BotaoNumber>
                                         </ThTabela>
                                     </div>
                                     <div id="btnLinkPrd" className="btnLinkPrd">

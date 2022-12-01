@@ -184,7 +184,7 @@
     @apply
     z-30
     block lg:hidden xl:hidden
-    fixed right-0 top-[340px] 
+    fixed right-0 top-[300px] 
 }
 
 .toggle-main{

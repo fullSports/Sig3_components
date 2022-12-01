@@ -15,12 +15,16 @@ const BotaoNumber = styled.div`
     align-items: center;
     font-size: 22px;
     cursor: pointer;
-    margin-left: 5px;
+    margin-left: 13px;
 `;
 const ThTabela = styled.th`
 display: grid;
-    grid-template-columns: repeat(3, 30px);
+    grid-template-columns: repeat(3, 50px);
     height: auto;
+    input{
+        width: 50px;
+        text-align: center;
+    }
 `;
 const Botoes = styled.div`
 margin-top: 3%;
@@ -61,19 +65,19 @@ const CarrinhoDeCompra = () => {
                 <th><img src={categoria.calcado.imagemProduto[0].url} alt="imagem do produto" width='100' /></th>
                 <ThTabela>
                     <BotaoNumber onClick={() => {
-                        const newquantidade = quantidadeCategoria + 1;
-                        console.log(newquantidade)
-                        setQuantidadeProd(newquantidade.toString());
-                    }}>+</BotaoNumber>
-                    <input value={precoProd} type="number" placeholder="Nº"
-                        min='1' required max={categoria.calcado.quantidade}
-                        onChange={evento => setQuantidadeProd(evento.target.value)}
-                    />
-                    <BotaoNumber onClick={() => {
+                        if(quantidadeCategoria >1){
                         const newquantidade = quantidadeCategoria - 1;
                         console.log(newquantidade)
                         setQuantidadeProd(newquantidade.toString());
-                    }}>-</BotaoNumber>
+                        }
+                    }}><button type="button">-</button></BotaoNumber>
+                    <input type="number" value={quantidadeProd} placeholder="Nº" min='1'
+                        required max={categoria.calcado.quantidade} onChange={evento => setQuantidadeProd(evento.target.value)} />
+                    <BotaoNumber onClick={() => {
+                        const newquantidade = quantidadeCategoria + 1;
+                        console.log(newquantidade)
+                        setQuantidadeProd(newquantidade.toString());
+                    }}><button type="button">+ </button></BotaoNumber>
                 </ThTabela>
                 <th>{precoCategoria * precoProd}</th>
             </tr>
@@ -85,18 +89,19 @@ const CarrinhoDeCompra = () => {
                 <th><img src={categoria.equipamento.imagemProduto[0].url} alt="imagem do produto" width='100' /></th>
                 <ThTabela>
                     <BotaoNumber onClick={() => {
-                        const newquantidade = quantidadeCategoria + 1;
-                        console.log(newquantidade)
-                        setQuantidadeProd(newquantidade.toString());
-                    }}>+</BotaoNumber>
-                    <input value={precoProd} type="number"
-                        placeholder="Nº" min='1' required max={categoria.equipamento.quantidade}
-                        onChange={evento => setQuantidadeProd(evento.target.value)} />
-                    <BotaoNumber onClick={() => {
+                        if(quantidadeCategoria >1){
                         const newquantidade = quantidadeCategoria - 1;
                         console.log(newquantidade)
                         setQuantidadeProd(newquantidade.toString());
-                    }}>-</BotaoNumber>
+                        }
+                    }}><button type="button">-</button></BotaoNumber>
+                    <input type="number" value={quantidadeProd} placeholder="Nº" min='1'
+                        required max={categoria.equipamento.quantidade} onChange={evento => setQuantidadeProd(evento.target.value)} />
+                    <BotaoNumber onClick={() => {
+                        const newquantidade = quantidadeCategoria + 1;
+                        console.log(newquantidade)
+                        setQuantidadeProd(newquantidade.toString());
+                    }}><button type="button">+ </button></BotaoNumber>
                 </ThTabela>
                 <th>{precoCategoria * precoProd}</th>
             </tr>
@@ -108,18 +113,19 @@ const CarrinhoDeCompra = () => {
                 <th><img src={categoria.roupa.imagemProduto[0].url} alt="imagem do produto" width='100' /></th>
                 <ThTabela>
                     <BotaoNumber onClick={() => {
-                        const newquantidade = quantidadeCategoria + 1;
-                        console.log(newquantidade)
-                        setQuantidadeProd(newquantidade.toString());
-                    }}>+</BotaoNumber>
-                    <input value={precoProd} type="number"
-                        placeholder="Nº" min='1' required max={categoria.roupa.quantidade}
-                        onChange={evento => setQuantidadeProd(evento.target.value)} />
-                    <BotaoNumber onClick={() => {
+                        if(quantidadeCategoria >1){
                         const newquantidade = quantidadeCategoria - 1;
                         console.log(newquantidade)
                         setQuantidadeProd(newquantidade.toString());
-                    }}>-</BotaoNumber>
+                        }
+                    }}><button type="button">-</button></BotaoNumber>
+                    <input type="number" value={quantidadeProd} placeholder="Nº" min='1'
+                        required max={categoria.roupa.quantidade} onChange={evento => setQuantidadeProd(evento.target.value)} />
+                    <BotaoNumber onClick={() => {
+                        const newquantidade = quantidadeCategoria + 1;
+                        console.log(newquantidade)
+                        setQuantidadeProd(newquantidade.toString());
+                    }}><button type="button">+ </button></BotaoNumber>
                 </ThTabela>
                 <th>{precoCategoria * precoProd}</th>
             </tr>
@@ -131,19 +137,20 @@ const CarrinhoDeCompra = () => {
                 <th><img src={categoria.suplemento.imagemProduto[0].url} alt="imagem do produto" width='100' /></th>
                 <ThTabela>
                     <BotaoNumber onClick={() => {
-                        const newquantidade = quantidadeCategoria + 1;
+                        if(quantidadeCategoria >1){
+                        const newquantidade = quantidadeCategoria - 1;
                         console.log(newquantidade)
                         setQuantidadeProd(newquantidade.toString());
-                    }}>+</BotaoNumber>
-                    <input value={precoProd} type="number" placeholder="Nº"
-                        min='1' required max={categoria.suplemento.quantidade}
-                        onChange={evento => setQuantidadeProd(evento.target.value)} />
+                        }
+                    }}><button type="button">-</button></BotaoNumber>
+                    <input type="number" value={quantidadeProd} placeholder="Nº" min='1'
+                        required max={categoria.suplemento.quantidade} onChange={evento => setQuantidadeProd(evento.target.value)} />
                 </ThTabela>
                 <BotaoNumber onClick={() => {
-                    const newquantidade = quantidadeCategoria - 1;
+                    const newquantidade = quantidadeCategoria + 1;
                     console.log(newquantidade)
                     setQuantidadeProd(newquantidade.toString());
-                }}>-</BotaoNumber>
+                }}><button type="button">+ </button></BotaoNumber>
                 <th>{precoCategoria * precoProd}</th>
             </tr>
         } else {

@@ -2,11 +2,11 @@
 export  var arrayNavItems = [
     {
         title: 'Feminino',
-        path: ''
+        path: '/produtos/'
     },
     {
         title: 'Masculino',
-        path: ''
+        path: '/produtos/'
     },
     {
         title: 'Roupas',

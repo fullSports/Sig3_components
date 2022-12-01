@@ -130,7 +130,7 @@ const AutenticacaoAdmin = () => {
                         <div className="btn-group">
                             <button
                                 onClick={() => window.location.href = '/cadastrar-cliente'}
-                                className="btn-cad-forms hallow-btn">
+                                className="btn-cad-forms hallow-btn" type='button'>
                                 Criar Conta
                             </button>
                             <button

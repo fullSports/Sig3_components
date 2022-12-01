@@ -20,6 +20,7 @@
     @apply
     w-full h-full object-cover
 }
+
 /* .cards-container{
     @apply
     flex flex-row flex-nowrap

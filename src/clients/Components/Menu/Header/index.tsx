@@ -27,8 +27,8 @@ const Icone = styled.div`
 `;
 const BotaoNumber = styled.div`
     background-color: #796969;
-    height: 16px;
-    width: 16px;
+    height: 20px;
+    width: 20px;
     border-radius: 100px;
     display: flex;
     justify-content: center;
@@ -75,21 +75,23 @@ const Cabecalho = () => {
       isDisplayed ? userDetails?.classList.remove("hide") : userDetails?.classList.toggle('hide')
     }
   }
-  function MostrarCarrinho(){
-    if(carrinho){
-        return<DivCarrinho>
-        <BotaoNumber>{carrinho.pedido.quantidade}</BotaoNumber>
-        <img src={carrinhoIcon} alt="Carrinho" />
-        Carrinho
-        </DivCarrinho>
-    }else{
-        return<DivCarrinho>
-        <img src={carrinhoIcon} alt="Carrinho" />
-        Carrinho
-        </DivCarrinho>
+  function MostrarCarrinho() {
+    if (carrinho) {
+      return <DivCarrinho>
+        <a href='/carrinho-de-compra/'>
+          <BotaoNumber>{carrinho.pedido.quantidade}</BotaoNumber>
+          <img src={carrinhoIcon} alt="Carrinho" />
+        </a>
+      </DivCarrinho>
+    } else {
+      return <DivCarrinho>
+        <a href='/carrinho-de-compra/'>
+          <img src={carrinhoIcon} alt="Carrinho" />
+        </a>
+      </DivCarrinho>
     }
-}
-  
+  }
+
 
   return (
     <>
@@ -161,7 +163,9 @@ const Cabecalho = () => {
           </div>
         </div>
         <div className="header-resp-logo">
-          <img src={brandLogo} alt="" />
+          <a href='/'>
+          <img src={brandLogo} alt="imagem do logo da loja" />
+          </a>
         </div>
         <div className="header-items-container">
           <div className="header-items-group">
@@ -183,9 +187,12 @@ const Cabecalho = () => {
             </div>
             <div className="header-help-icons header-resp">
               <ul className="help-icons">
-                  <li onClick={() => window.location.href = '/carrinho-de-compra/'}>
+                <li>
+
                   <MostrarCarrinho />
-                  </li>
+
+
+                </li>
                 <li>
                   <a href="#">
                     <img src={suporteIcon} alt="Suporte" />
