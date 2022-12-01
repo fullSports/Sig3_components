@@ -58,6 +58,12 @@
         @apply
         mt-32
     }
+    @media screen and (max-width: 1040px) {
+        
+        .product-banner{
+            display: none;
+        }
+    }
     .section-title{
         @apply
         font-Merriweather font-bold

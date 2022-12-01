@@ -15,4 +15,8 @@ export var DevNames = [
         name: 'Renan Figueredo',
         linkedin: 'https://www.linkedin.com/in/renan-figueiredo-3794b0224/'
     },
+    {
+        name: 'Paulo Henrique Cardoso De Jesus',
+        linkedin: 'https://www.linkedin.com/in/paulo-henrique-cardoso-de-jesus-680b7b16a/'
+    },
 ]
