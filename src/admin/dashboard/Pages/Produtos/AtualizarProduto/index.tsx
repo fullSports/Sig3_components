@@ -266,8 +266,9 @@ const AtualizarProduto = () => {
         }
     }
     const deletarImagem = (DeletarImagem: string) => {
-        apiFullSports.delete(`imagem/${DeletarImagem}/`)
-        window.location.reload();
+        apiFullSports.delete(`imagem/${DeletarImagem}/`).then(() => {
+            window.location.reload();
+        })
         setOpen(true)
     }
     function OpcoentesFotoProduto() {
@@ -311,7 +312,7 @@ const AtualizarProduto = () => {
                         const categoria = respostaProduto.data.categoriaProduto;
                         if (categoria.calcado !== undefined) {
                             apiFullSports.delete<ICacados>(`deletar-calcado/${categoria.calcado._id}`)
-                                .then(() =>{
+                                .then(() => {
                                     if (categoriaProduto === 'roupa') {
                                         return setTimeout(function () {
                                             console.log(ImagensID)
@@ -344,7 +345,7 @@ const AtualizarProduto = () => {
                                                 }).catch(err => console.log(err))
                                             }).catch(err => console.log(err))
                                         }, 200)
-                        
+
                                     } else if (categoriaProduto === 'equipamento') {
                                         return setTimeout(function () {
                                             console.log(ImagensID)
@@ -377,7 +378,7 @@ const AtualizarProduto = () => {
                                                 }).catch(err => console.log(err))
                                             }).catch(err => console.log(err))
                                         }, 200)
-                        
+
                                     } else if (categoriaProduto === 'suplemento') {
                                         return setTimeout(function () {
                                             console.log(ImagensID)
@@ -410,7 +411,7 @@ const AtualizarProduto = () => {
                                                 }).catch(err => console.log(err))
                                             }).catch(err => console.log(err))
                                         }, 200)
-                        
+
                                     } else if (categoriaProduto === 'calcado') {
                                         return setTimeout(function () {
                                             console.log(ImagensID);
@@ -443,13 +444,13 @@ const AtualizarProduto = () => {
                                                 }).catch(err => console.log(err))
                                             }).catch(err => console.log(err))
                                         }, 200)
-                        
+
                                     }
                                 })
                                 .catch((err) => console.log(err));
                         } else if (categoria.equipamento !== undefined) {
                             apiFullSports.delete<IEquipamentos>(`deletar-equipamento/${categoria.equipamento._id}`)
-                                .then(() =>{
+                                .then(() => {
                                     if (categoriaProduto === 'roupa') {
                                         return setTimeout(function () {
                                             console.log(ImagensID)
@@ -482,7 +483,7 @@ const AtualizarProduto = () => {
                                                 }).catch(err => console.log(err))
                                             }).catch(err => console.log(err))
                                         }, 200)
-                        
+
                                     } else if (categoriaProduto === 'equipamento') {
                                         return setTimeout(function () {
                                             console.log(ImagensID)
@@ -515,7 +516,7 @@ const AtualizarProduto = () => {
                                                 }).catch(err => console.log(err))
                                             }).catch(err => console.log(err))
                                         }, 200)
-                        
+
                                     } else if (categoriaProduto === 'suplemento') {
                                         return setTimeout(function () {
                                             console.log(ImagensID)
@@ -548,7 +549,7 @@ const AtualizarProduto = () => {
                                                 }).catch(err => console.log(err))
                                             }).catch(err => console.log(err))
                                         }, 200)
-                        
+
                                     } else if (categoriaProduto === 'calcado') {
                                         return setTimeout(function () {
                                             console.log(ImagensID);
@@ -581,7 +582,7 @@ const AtualizarProduto = () => {
                                                 }).catch(err => console.log(err))
                                             }).catch(err => console.log(err))
                                         }, 200)
-                        
+
                                     }
                                 })
                                 .catch((err) => console.log(err));
@@ -620,7 +621,7 @@ const AtualizarProduto = () => {
                                                 }).catch(err => console.log(err))
                                             }).catch(err => console.log(err))
                                         }, 200)
-                        
+
                                     } else if (categoriaProduto === 'equipamento') {
                                         return setTimeout(function () {
                                             console.log(ImagensID)
@@ -653,7 +654,7 @@ const AtualizarProduto = () => {
                                                 }).catch(err => console.log(err))
                                             }).catch(err => console.log(err))
                                         }, 200)
-                        
+
                                     } else if (categoriaProduto === 'suplemento') {
                                         return setTimeout(function () {
                                             console.log(ImagensID)
@@ -686,7 +687,7 @@ const AtualizarProduto = () => {
                                                 }).catch(err => console.log(err))
                                             }).catch(err => console.log(err))
                                         }, 200)
-                        
+
                                     } else if (categoriaProduto === 'calcado') {
                                         return setTimeout(function () {
                                             console.log(ImagensID);
@@ -719,13 +720,13 @@ const AtualizarProduto = () => {
                                                 }).catch(err => console.log(err))
                                             }).catch(err => console.log(err))
                                         }, 200)
-                        
+
                                     }
                                 })
                                 .catch((err) => console.log(err));
                         } else if (categoria.suplemento !== undefined) {
                             apiFullSports.delete<ISuplementos>(`deletar-suplemento/${categoria.suplemento._id}`)
-                                .then(() =>{
+                                .then(() => {
                                     if (categoriaProduto === 'roupa') {
                                         return setTimeout(function () {
                                             console.log(ImagensID)
@@ -758,7 +759,7 @@ const AtualizarProduto = () => {
                                                 }).catch(err => console.log(err))
                                             }).catch(err => console.log(err))
                                         }, 200)
-                        
+
                                     } else if (categoriaProduto === 'equipamento') {
                                         return setTimeout(function () {
                                             console.log(ImagensID)
@@ -791,7 +792,7 @@ const AtualizarProduto = () => {
                                                 }).catch(err => console.log(err))
                                             }).catch(err => console.log(err))
                                         }, 200)
-                        
+
                                     } else if (categoriaProduto === 'suplemento') {
                                         return setTimeout(function () {
                                             console.log(ImagensID)
@@ -824,7 +825,7 @@ const AtualizarProduto = () => {
                                                 }).catch(err => console.log(err))
                                             }).catch(err => console.log(err))
                                         }, 200)
-                        
+
                                     } else if (categoriaProduto === 'calcado') {
                                         return setTimeout(function () {
                                             console.log(ImagensID);
@@ -857,7 +858,7 @@ const AtualizarProduto = () => {
                                                 }).catch(err => console.log(err))
                                             }).catch(err => console.log(err))
                                         }, 200)
-                        
+
                                     }
                                 })
                                 .catch((err) => console.log(err));
