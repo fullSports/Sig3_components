@@ -22,6 +22,7 @@ app.use('/carrinho-de-compra/',express.static(resolve(__dirname,"./build")));
 app.use('/historico-de-pedido',express.static(resolve(__dirname,"./build")));
 app.use('/cadastrar-cliente',express.static(resolve(__dirname,"./build")));
 app.use('*',express.static(resolve(__dirname,"./build")));
+
 app.listen(process.env.PORT || 3000, (err) => {
     if (err) {
       return console.log(err)
