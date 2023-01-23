@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import apiFullSports from "../../../../../api/apiFullSports";
 
-import { Button, TextField} from "@mui/material";
+import { Button, TextField } from "@mui/material";
 import ApiCep from "../../../../../api/apiCep";
 import IFornecedor from "../../../../../utils/interfaces/IFornecedor";
 import { Box } from "@mui/system";
@@ -81,54 +81,68 @@ const AtualizarFornecedor = () => {
     const [spinner, setSpinner] = useState(false);
     const [carregandoCep, setCarregandoCep] = useState(false);
     const [carregandoCepMenssagem, setCarregandoCepMessagem] = useState(false);
+    const [mensagemErroBolean, setMensagemErroBolean] = useState(false);
+    const [menssagemErro, setMenssagemErro] = useState('');
     useEffect(() => {
         if (parametros.id) {
             apiFullSports.get<IFornecedor>(`listar-fornecedor/${parametros.id}`)
-                .then(resposta =>{setSpinner(false); setCnpj(resposta.data.cnpj)})
-                .catch((err) => console.log(err));
+                .then(resposta => { setSpinner(false); setCnpj(resposta.data.cnpj) })
+                .catch(err => {
+                    console.log(err)
+                    setMensagemErroBolean(true)
+                    setMenssagemErro("Erro na requisição")
+                })
 
             apiFullSports.get<IFornecedor>(`listar-fornecedor/${parametros.id}`)
-                .then(resposta =>{setSpinner(false); setNomeEmpresa(resposta.data.nomeEmpresa)})
-                .catch((err) => console.log(err));
+                .then(resposta => { setSpinner(false); setNomeEmpresa(resposta.data.nomeEmpresa) })
+                .catch(err => {
+                    console.log(err)
+                    setMensagemErroBolean(true)
+                    setMenssagemErro("Erro na requisição")
+                })
 
-                apiFullSports.get<IFornecedor>(`listar-fornecedor/${parametros.id}`)
-                .then(resposta =>{setSpinner(false); setCep(resposta.data.cep)})
-                .catch((err) => console.log(err));
+            apiFullSports.get<IFornecedor>(`listar-fornecedor/${parametros.id}`)
+                .then(resposta => { setSpinner(false); setCep(resposta.data.cep) })
+                .catch(err => {
+                    console.log(err)
+                    setMensagemErroBolean(true)
+                    setMenssagemErro("Erro na requisição")
+                })
         }
     }, [parametros])
     function buscaCep() {
         setCarregandoCep(true)
         setCarregandoCepMessagem(false)
         console.log(cep)
-        if(cep===''){
+        if (cep === '') {
             setCarregandoCep(false)
             setRua('');
             setBairro('');
             setEstado('');
             setCidade('')
-        }else{
-        ApiCep.request({
-            method: 'GET',
-            url: cep,
-            headers: {
-                'Access-Control-Allow-Origin': '*'
-            },
-        }).then(evento => {
-            setCarregandoCep(false)
-            setRua(evento.data.street);
-            setBairro(evento.data.neighborhood);
-            setEstado(evento.data.state);
-            setCidade(evento.data.city)
-        }).catch(err => {
-            setCarregandoCep(false)
-            setCarregandoCepMessagem(true)
-            console.log(err)
-        })
-    }
+        } else {
+            ApiCep.request({
+                method: 'GET',
+                url: cep,
+                headers: {
+                    'Access-Control-Allow-Origin': '*'
+                },
+            }).then(evento => {
+                setCarregandoCep(false)
+                setRua(evento.data.street);
+                setBairro(evento.data.neighborhood);
+                setEstado(evento.data.state);
+                setCidade(evento.data.city)
+            }).catch(err => {
+                console.log(err)
+                setMensagemErroBolean(true)
+                setMenssagemErro("Erro ao buscar o cep")
+            })
+        }
     }
     function buscaCepCarregarPage() {
         console.log(cep)
-    
+
         ApiCep.request({
             method: 'GET',
             url: cep,
@@ -143,10 +157,12 @@ const AtualizarFornecedor = () => {
             setCidade(evento.data.city)
         }).catch(err => {
             console.log(err)
+            setMensagemErroBolean(true)
+            setMenssagemErro("Erro ao buscar o cep")
         })
-    
+
     }
-    setTimeout(buscaCepCarregarPage,222)
+    setTimeout(buscaCepCarregarPage, 222)
 
     function aoSubmeterForm(evento: React.FormEvent<HTMLFormElement>) {
         setSpinner(true)
@@ -161,7 +177,7 @@ const AtualizarFornecedor = () => {
                 .then(() => {
                     setSpinner(false);
                     // alert("Fornecedor atualizado com sucesso");
-                    window.location.href='/dashboard/consultar-fornecedores'
+                    window.location.href = '/dashboard/consultar-fornecedores'
                 }).catch(err => console.log(err));
         } else {
             apiFullSports.post('cadastrar-fornecedor/', {
@@ -184,8 +200,8 @@ const AtualizarFornecedor = () => {
             <Main>
                 <ExibeTitulo id="exibe-titulo" className="exibe-titulo">Atualizar Fornecedor</ExibeTitulo>
                 <FormCadastroFornecedor id="form-fornecedor" className="form=fornecedor">
-                <Box component={'form'} onSubmit={aoSubmeterForm}>
-                <Row2grid id="row-2-grid" className="row-1-grid">
+                    <Box component={'form'} onSubmit={aoSubmeterForm}>
+                        <Row2grid id="row-2-grid" className="row-1-grid">
                             <label className="col-form-label">CNPJ do Fornecedor</label>
                             <TextField
                                 sx={{ boxSizing: 'border-box', margin: '0 0 15px', width: '100%' }}
@@ -209,7 +225,7 @@ const AtualizarFornecedor = () => {
                                 fullWidth
                                 onChange={evento => setNomeEmpresa(evento.target.value)}
                                 value={nomeEmpresa}
-                          />
+                            />
                             <label className="col-form-label">Cep {carregandoCep && <p>buscando cep...</p>}{carregandoCepMenssagem && <p id="menssagem-erro">cep invalido</p>}</label>
                             <TextField
                                 onChange={evento => setCep(evento.target.value)}
@@ -306,6 +322,7 @@ const AtualizarFornecedor = () => {
                                 value={complemento}
                             />
                             {spinner && (<p>carregando...</p>)}
+                            {mensagemErroBolean && (<span id="menssagem-erro">{menssagemErro}</span>)}
                         </Row2grid>
                         <BttCadClienteGrid id="btt-cad-fornecedor-grid" className="btt-cad-fornecedor-grid">
                             <Button
@@ -317,7 +334,7 @@ const AtualizarFornecedor = () => {
                                 Atualizar Fornecedor
                             </Button>
                             <Button
-                                onClick={() => window.location.href ='/dashboard/consultar-fornecedores'}
+                                onClick={() => window.location.href = '/dashboard/consultar-fornecedores'}
                                 sx={{
                                     justifyContent: 'center', display: 'block', height: '50px', borderRadius: '5px', color: '#fff',
                                     fontSize: '14px', backgroundColor: 'black', ":hover": 'backgroundColor: #313131, transform:translate(0.8s)'
@@ -325,7 +342,7 @@ const AtualizarFornecedor = () => {
                                 Consulta de Fornecedores
                             </Button>
                         </BttCadClienteGrid>
-                </Box>
+                    </Box>
                 </FormCadastroFornecedor>
             </Main>
         </>

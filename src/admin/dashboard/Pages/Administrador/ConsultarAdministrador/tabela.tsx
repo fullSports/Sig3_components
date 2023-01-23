@@ -23,14 +23,19 @@ const TabelaAdimistrador = () => {
     // const handleClose = () => {
     //     setOpen(false);
     // };
-
+    const [mensagemErroBolean, setMensagemErroBolean] = useState(false);
+    const [menssagemErro, setMenssagemErro] = useState('');
     const [spinner, setSpinner] = useState(false);
     const [clientes, setClientes] = useState<ICliente[]>([]);
     useEffect(() => {
         setSpinner(true);
         apiFullSports.get<ICliente[]>('listar-clientes/')
             .then(resposta => { setSpinner(false); setClientes(resposta.data) })
-            .catch((err) => console.log(err));
+            .catch(err => {
+                console.log(err)
+                setMensagemErroBolean(true)
+                setMenssagemErro("Erro na requisição")
+            })
     }, []);
 
     // const deletar = (DeletarCliente: ICliente) => {
@@ -40,6 +45,8 @@ const TabelaAdimistrador = () => {
 
     return <>
         {spinner && (<p>carregando...</p>)}
+        {mensagemErroBolean && (<span id="menssagem-erro">{menssagemErro}</span>)}
+
         {
 
             clientes.map(item => {
@@ -93,7 +100,7 @@ const TabelaAdimistrador = () => {
 
                                     <td>
                                         <div className="consulta-img-container">
-                                            <img src={item.imagemPerfil.url}/>
+                                            <img src={item.imagemPerfil.url} />
                                         </div>
                                     </td>
                                     <td>{`${item.dataCadastro.toLocaleString()}`}</td>

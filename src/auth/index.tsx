@@ -1,8 +1,9 @@
-import React, {useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import './styles.css';
-import {  TextField,Box } from "@mui/material";
+import { TextField, Box } from "@mui/material";
 import styled from "styled-components";
 import apiFullSports from "../api/apiFullSports";
+import ILogin from "../utils/interfaces/ILogin";
 const Main = styled.main`
     width: 100%;
     min-height: 600px;
@@ -44,48 +45,43 @@ const AutenticacaoAdmin = () => {
     const [mensagemErroBolean, setMensagemErroBolean] = useState(false);
     const [menssagemErro, setMenssagemErro] = useState('');
     const emailCookies = JSON.parse(localStorage.getItem('email') as string)
-   useEffect(()=>{
-    if(emailCookies){
-        console.log(emailCookies.toString())
-        setEmail(emailCookies.toString())
-    }
-   },[emailCookies])
+    useEffect(() => {
+        if (emailCookies) {
+            console.log(emailCookies.toString())
+            setEmail(emailCookies.toString())
+        }
+    }, [emailCookies])
     function realizarLogin(evento: React.FormEvent<HTMLFormElement>) {
         evento.preventDefault();
         setMensagemErroBolean(false)
         setSpinner(true);
-        apiFullSports.request({
-            method: "POST",
-            url: "realizar-login/",
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Content-Type': 'application/json'
-            },
-            data: {
-                email: email,
-                password: password
-            }
+        apiFullSports.post("realizar-login", {
+            email: email,
+            password: password
         }).then(resposta => {
-            if (resposta.data.message !== undefined) {
+            if (resposta.data.emailAndPassword === false) {
                 setSpinner(false)
                 setMensagemErroBolean(true);
                 setMenssagemErro('email ou senha invalida!');
             } else {
-                apiFullSports.post("pesquisar-email-cliente/", { email: email }).then(resposta => {
-                    console.log(resposta.data)
-                    localStorage.setItem('user', JSON.stringify(resposta.data));
-                    if(resposta.data.login.isAdmin){
-                        localStorage.removeItem("email");
-                        window.location.href='/dashboard/home/'
-                    }else{
-                        localStorage.removeItem("email");
-                        window.location.href='/';
-                    }
-                }).catch((err) => console.log(err));
+                setMensagemErroBolean(false)
+                localStorage.setItem('user', JSON.stringify(resposta.data.result));
+                if (resposta.data.result.login.isAdmin) {
+                    localStorage.removeItem("email");
+                    window.location.href = '/dashboard/home/'
+                } else {
+                    localStorage.removeItem("email");
+                    window.location.href = '/';
+                }
             }
-        }).catch((err) => console.log(err));
+        }).catch(err => {
+            console.log(err)
+            setSpinner(false)
+            setMensagemErroBolean(true)
+            setMenssagemErro("erro na requisição")
+        })
     }
-    if(localStorage.getItem('user')){
+    if (localStorage.getItem('user')) {
         console.log(JSON.parse(localStorage.getItem('user') as string));
     }
 

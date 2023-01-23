@@ -236,9 +236,9 @@ const AtualizarCliente = () => {
     const deletarFoto = () => {
         apiFullSports.delete(`imagem/${imagemId}`).then(() => {
             setImagemID('');
-            setTimeout(function(){
+            setTimeout(function () {
                 window.location.reload();
-            },100)
+            }, 100)
         })
     }
     function buscaCep() {
@@ -388,7 +388,7 @@ const AtualizarCliente = () => {
             }).then(() => {
                 setSpinner(false)
                 // alert("cliente atualizado com suceeso");
-                window.location.href = "/dashboard/consultar-admin";
+                window.location.href = "/";
             }).catch(erro => console.log(erro))
         }
     }

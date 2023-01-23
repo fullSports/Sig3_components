@@ -78,61 +78,21 @@ const CadastroCliente = () => {
         setSpinner(true);
         event.preventDefault();
         console.log(email, password)
-        apiFullSports.request({
-            method: "POST",
-            url: 'login/',
-            headers: {
-                'Access-Control-Allow-Origin': '*'
-            },
-            data: {
-                email: email,
-                password: password,
-                isAdmin: false
-            }
-        }).then(respostaLogin => {
-            if (respostaLogin.data.message) {
-                setSpinner(false)
-                setMensagemErroBolean(true);
-                setMenssagemErro(respostaLogin.data.message);
-            } else {
-                console.log(respostaLogin.data._id)
-                const formData = new FormData();
-                if (file) {
-                    formData.append("file", file);
-                    apiFullSports.request({
-                        method: "POST",
-                        url: "imagem/",
-                        headers: {
-                            'Access-Control-Allow-Origin': '*',
-                            'Content-Type': 'multipart/form-data'
-                        },
-                        data: formData
-                    })
-                        .then(respostaImagem => {
-                            apiFullSports.request({
-                                method: "POST",
-                                url: "cadastrar-cliente/",
-                                headers: {
-                                    'Access-Control-Allow-Origin': '*'
-                                },
-                                data: {
-                                    cpf: cpf,
-                                    nome: nome,
-                                    login: respostaLogin.data._id,
-                                    dataNascimento: dataNascimento,
-                                    sexo: sexo,
-                                    cep: cep,
-                                    endereco: `${rua},${numero} -${complemento}- ${estado}, ${cidade}, ${bairro}`,
-                                    dataCadastro: dataAtual,
-                                    imagemPerfil: respostaImagem.data._id
-                                }
-                            }).then(() => {
-                                setSpinner(false)
-                                localStorage.removeItem("email")
-                                window.location.href = '/login'
-                            }).catch(err => { console.log(err) })
-                        }).catch(err => { console.log(err) })
-                } else {
+
+
+        const formData = new FormData();
+        if (file) {
+            formData.append("file", file);
+            apiFullSports.request({
+                method: "POST",
+                url: "imagem/",
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                    'Content-Type': 'multipart/form-data'
+                },
+                data: formData
+            })
+                .then(respostaImagem => {
                     apiFullSports.request({
                         method: "POST",
                         url: "cadastrar-cliente/",
@@ -142,27 +102,69 @@ const CadastroCliente = () => {
                         data: {
                             cpf: cpf,
                             nome: nome,
-                            login: respostaLogin.data._id,
+                            login: {
+                                email: email,
+                                password: password,
+                                isAdmin: false
+                            },
                             dataNascimento: dataNascimento,
                             sexo: sexo,
                             cep: cep,
                             endereco: `${rua},${numero} -${complemento}- ${estado}, ${cidade}, ${bairro}`,
-                            dataCadastro: dataAtual
+                            imagemPerfil: respostaImagem.data.image._id
                         }
                     }).then(() => {
-                        setSpinner(false);
-                        localStorage.removeItem("email");
-                        window.location.href = '/login';
+                        setSpinner(false)
+                        localStorage.removeItem("email")
+                        window.location.href = '/login'
                     }).catch(err => { console.log(err) })
+                }).catch(err => { console.log(err) })
+        } else {
+            apiFullSports.request({
+                method: "POST",
+                url: "cadastrar-cliente/",
+                headers: {
+                    'Access-Control-Allow-Origin': '*'
+                },
+                data: {
+                    cpf: cpf,
+                    nome: nome,
+                    login: {
+                        email: email,
+                        password: password,
+                        isAdmin: false
+                    },
+                    dataNascimento: dataNascimento,
+                    sexo: sexo,
+                    cep: cep,
+                    endereco: `${rua},${numero} -${complemento}- ${estado}, ${cidade}, ${bairro}`,
+                    imagemPerfil: null
                 }
-            }
-        }).catch(err => { console.log(err) })
+            }).then((res) => {
+                if (res.data.registeredSuccess === false) {
+                    setSpinner(false);
 
+                    setMensagemErroBolean(true)
+                    setMenssagemErro(res.data.messsagem)
+                } else {
+                    setSpinner(false);
+                    localStorage.removeItem("email");
+                    window.location.href = '/login';
+                }
+            }).catch(err => {
+                console.log(err)
+                setSpinner(false)
+                setMensagemErroBolean(true)
+                setMenssagemErro("erro na requisição")
+            })
+        }
     }
+
+
 
     return (
         <>
-        <Cabecalho/>
+            <Cabecalho />
             <div className="flex">
                 <div id="main" className="dashboard-body">
                     <div className="form-card">
@@ -379,7 +381,7 @@ const CadastroCliente = () => {
                     </div>
                 </div>
             </div>
-        <Footer/>
+            <Footer />
         </>
     )
 }

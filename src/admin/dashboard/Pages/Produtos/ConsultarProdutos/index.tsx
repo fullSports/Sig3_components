@@ -8,9 +8,9 @@ const ConsultaProduto = () => {
     return (
         <>
             <div className="flex">
-                <DashboardSidenav/>
+                <DashboardSidenav />
                 <div id="main" className="page-body">
-                    <DashboardHeader/>
+                    <DashboardHeader />
                     <div className="table-container">
                         <div className="table-title">
                             <span className="consulta-titulo">Lista de Produtos</span>
@@ -25,8 +25,9 @@ const ConsultaProduto = () => {
                                         <th>Sexo alvo</th>
                                         <th>Cor</th>
                                         <th>Preço</th>
-                                        <th>Dt.Cadastro</th>
+                                        <th>Tamanho</th>
                                         <th>Qtd.Estoque</th>
+                                        <th>Dt.Cadastro</th>
                                         <th>1º ImagemProduto</th>
                                         <th>Ações</th>
                                     </tr>
