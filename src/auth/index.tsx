@@ -59,10 +59,10 @@ const AutenticacaoAdmin = () => {
             email: email,
             password: password
         }).then(resposta => {
-            if (resposta.data.emailAndPassword === false) {
+            if (resposta.data.emailAndPassword === false || resposta.data.emailExists === false) {
                 setSpinner(false)
                 setMensagemErroBolean(true);
-                setMenssagemErro('email ou senha invalida!');
+                setMenssagemErro(resposta.data.messagem);
             } else {
                 setMensagemErroBolean(false)
                 localStorage.setItem('user', JSON.stringify(resposta.data.result));

@@ -4,7 +4,7 @@ import apiFullSports from "../../../../../api/apiFullSports";
 import styled from "styled-components";
 
 const Icone = styled.div`
-    background-color: white;
+    background-color: #796969;
     height: 50px;
     width: 50px;
     border-radius: 100px;

@@ -27,7 +27,7 @@ const CadastrarFornecedor = () => {
 
         apiFullSports.request({
             method: 'POST',
-            url: 'cadastrar-fornecedor/',
+            url: 'cadastrar-fornecedor',
             data: {
                 cnpj: cnpj,
                 nomeEmpresa: nomeEmpresa,
@@ -35,7 +35,6 @@ const CadastrarFornecedor = () => {
                 endereco: `${rua},${numero} -${complemento}- ${estado}, ${cidade}, ${bairro}`,
             }
         }).then(resposta => {
-            setSpinner(false);
             if (resposta.data.message) {
                 setSpinner(false)
                 setMensagemErroBolean(true);
@@ -52,7 +51,6 @@ const CadastrarFornecedor = () => {
     function buscaCep() {
         setCarregandoCep(true)
         setCarregandoCepMessagem(false)
-        console.log(cep)
         if (cep === '') {
             setCarregandoCep(false)
             setRua('');

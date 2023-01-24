@@ -173,27 +173,18 @@ const AtualizarCliente = () => {
                 data: formData1
             }).then(evento => {
                 apiFullSports.request({
-                    url: `imagem/${evento.data._id}`,
-                    method: 'GET',
-                    headers: {
-                        'Access-Control-Allow-Origin': '*'
-                    },
-                }).then(respostaImagem => {
-                    apiFullSports.request({
-                        url: `atualizar-cliente/${parametros.id}`,
-                        method: 'PUT',
-                        data: {
-                            imagemPerfil: respostaImagem.data._id
-                        }
-                    })
-                }).then(() => {
-                    setSpinner(false)
-                    setCadastrarNovaFoto(false)
-                    window.location.reload()
-                }).catch(erro => console.log(erro))
-
-                // handleClose()
+                    url: `atualizar-cliente/${parametros.id}`,
+                    method: 'PUT',
+                    data: {
+                        imagemPerfil: evento.data.image._id
+                    }
+                })
+            }).then(() => {
+                setSpinner(false)
+                setCadastrarNovaFoto(false)
+                window.location.reload()
             }).catch(erro => console.log(erro))
+
         }
         else {
             apiFullSports.delete(`imagem/${imagemId}`)
@@ -217,13 +208,13 @@ const AtualizarCliente = () => {
                     method: "PUT",
                     url: `atualizar-cliente/${parametros.id}`,
                     data: {
-                        imagemPerfil: evento.data._id
+                        imagemPerfil: evento.data.image._id
                     }
                 }).then((response) => {
-                    // setSpinner(false);
-                    // setCadastrarNovaFoto(false);
-                    // setImagemID(response.data.imagemPerfil._id);
-                    // setImagemPerfilurl(response.data.imagemPerfil.url);
+                    setSpinner(false);
+                    setCadastrarNovaFoto(false);
+                    setImagemID(response.data.user.imagemPerfil._id);
+                    setImagemPerfilurl(response.data.user.imagemPerfil.url);
 
                     window.location.reload();
                 }).catch(erro => console.log(erro))
@@ -385,6 +376,7 @@ const AtualizarCliente = () => {
                 sexo: sexo,
                 cep: cep,
                 endereco: `${rua},${numero} -${complemento}- ${estado}, ${cidade}, ${bairro}`,
+                imagemPerfil: imagemId
             }).then(() => {
                 setSpinner(false)
                 // alert("cliente atualizado com suceeso");
@@ -578,8 +570,8 @@ const AtualizarCliente = () => {
                     id="model"
                 >
                     <Box component={'div'} id="tela-imagem" className="tela-imagem" sx={{
-                        width: '30%', height: '35%',
-                        position: 'absolute' as 'absolute', top: '30%', left: '35%', display: 'flex', justifyContent: 'center',
+                        width: '30%', height: '55%',
+                        position: 'absolute' as 'absolute', top: '20%', left: '35%', display: 'flex', justifyContent: 'center',
                         backgroundColor: '#4e4a4a', border: '3px solid #000', borderRadius: '20px', pt: 2, px: 4, pb: 3
                     }}>
                         <OpcoesFotoPerfil />
