@@ -20,14 +20,25 @@ const Footer = () => {
     }, [])
     function pesquisaEmail(evento: React.FormEvent<HTMLFormElement>) {
         evento.preventDefault();
-        apiFullSports.post('pesquisar-email/', { email: email }).then(reposta => {
-            if (reposta.data.emailExiste) {
+        apiFullSports.request({
+            url: "realizar-login",
+            method:"POST",
+            data:{
+                email:email,
+                password: "eeeeee"
+            }
+        })
+        .then(reposta => {
+            if (reposta.data.emailExists) {
                 localStorage.setItem('email', JSON.stringify(email));
                 window.location.href = "/login";
             } else {
                 localStorage.setItem('email', JSON.stringify(email));
                 window.location.href = "/cadastrar-cliente";
             }
+        }).catch((err)=>{
+            console.log(err)
+            window.location.href = "/cadastrar-cliente";
         })
     }
     return (

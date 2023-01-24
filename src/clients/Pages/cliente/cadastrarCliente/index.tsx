@@ -76,23 +76,79 @@ const CadastroCliente = () => {
 
     function aoSubmeterForm(event: React.FormEvent<HTMLFormElement>) {
         setSpinner(true);
+        setMensagemErroBolean(false)
         event.preventDefault();
         console.log(email, password)
 
 
         const formData = new FormData();
-        if (file) {
-            formData.append("file", file);
-            apiFullSports.request({
-                method: "POST",
-                url: "imagem/",
-                headers: {
-                    'Access-Control-Allow-Origin': '*',
-                    'Content-Type': 'multipart/form-data'
-                },
-                data: formData
-            })
-                .then(respostaImagem => {
+        apiFullSports.request({
+            method: "POST",
+            url: "realizar-login",
+            data: {
+                email: email,
+                password: "eee"
+            }
+        }).then(res => {
+            if (res.data.emailExists) {
+                setSpinner(false)
+                setMensagemErroBolean(true)
+                setMenssagemErro("email já cadastrado")
+            } else
+                if (file) {
+                    formData.append("file", file);
+                    apiFullSports.request({
+                        method: "POST",
+                        url: "imagem/",
+                        headers: {
+                            'Access-Control-Allow-Origin': '*',
+                            'Content-Type': 'multipart/form-data'
+                        },
+                        data: formData
+                    })
+                        .then(respostaImagem => {
+                            apiFullSports.request({
+                                method: "POST",
+                                url: "cadastrar-cliente/",
+                                headers: {
+                                    'Access-Control-Allow-Origin': '*'
+                                },
+                                data: {
+                                    cpf: cpf,
+                                    nome: nome,
+                                    login: {
+                                        email: email,
+                                        password: password,
+                                        isAdmin: false
+                                    },
+                                    dataNascimento: dataNascimento,
+                                    sexo: sexo,
+                                    cep: cep,
+                                    endereco: `${rua},${numero} -${complemento}- ${estado}, ${cidade}, ${bairro}`,
+                                    imagemPerfil: respostaImagem.data.image._id
+                                }
+                            }).then((res) => {
+                                if (!res.data.registeredSuccess) {
+                                    setSpinner(false)
+                                    setMensagemErroBolean(true)
+                                    setMenssagemErro(res.data.messagem)
+                                }
+                                setSpinner(false)
+                                localStorage.removeItem("email")
+                                window.location.href = '/login'
+                            }).catch(err => {
+                                console.log(err)
+                                setSpinner(false)
+                                setMensagemErroBolean(true)
+                                setMenssagemErro("erro na requisição")
+                            })
+                        }).catch(err => {
+                            console.log(err)
+                            setSpinner(false)
+                            setMensagemErroBolean(true)
+                            setMenssagemErro("erro na requisição")
+                        })
+                } else {
                     apiFullSports.request({
                         method: "POST",
                         url: "cadastrar-cliente/",
@@ -111,57 +167,32 @@ const CadastroCliente = () => {
                             sexo: sexo,
                             cep: cep,
                             endereco: `${rua},${numero} -${complemento}- ${estado}, ${cidade}, ${bairro}`,
-                            imagemPerfil: respostaImagem.data.image._id
+                            imagemPerfil: null
                         }
-                    }).then(() => {
+                    }).then((res) => {
+                        if (res.data.registeredSuccess === false) {
+                            setSpinner(false);
+                            setMensagemErroBolean(true)
+                            setMenssagemErro(res.data.messsagem)
+                        } else {
+                            setSpinner(false);
+                            localStorage.removeItem("email");
+                            window.location.href = '/login';
+                        }
+                    }).catch(err => {
+                        console.log(err)
                         setSpinner(false)
-                        localStorage.removeItem("email")
-                        window.location.href = '/login'
-                    }).catch(err => { console.log(err) })
-                }).catch(err => { console.log(err) })
-        } else {
-            apiFullSports.request({
-                method: "POST",
-                url: "cadastrar-cliente/",
-                headers: {
-                    'Access-Control-Allow-Origin': '*'
-                },
-                data: {
-                    cpf: cpf,
-                    nome: nome,
-                    login: {
-                        email: email,
-                        password: password,
-                        isAdmin: false
-                    },
-                    dataNascimento: dataNascimento,
-                    sexo: sexo,
-                    cep: cep,
-                    endereco: `${rua},${numero} -${complemento}- ${estado}, ${cidade}, ${bairro}`,
-                    imagemPerfil: null
+                        setMensagemErroBolean(true)
+                        setMenssagemErro("erro na requisição")
+                    })
                 }
-            }).then((res) => {
-                if (res.data.registeredSuccess === false) {
-                    setSpinner(false);
-
-                    setMensagemErroBolean(true)
-                    setMenssagemErro(res.data.messsagem)
-                } else {
-                    setSpinner(false);
-                    localStorage.removeItem("email");
-                    window.location.href = '/login';
-                }
-            }).catch(err => {
-                console.log(err)
-                setSpinner(false)
-                setMensagemErroBolean(true)
-                setMenssagemErro("erro na requisição")
-            })
-        }
+        }).catch(err => {
+            console.log(err)
+            setSpinner(false)
+            setMensagemErroBolean(true)
+            setMenssagemErro("erro na requisição")
+        })
     }
-
-
-
     return (
         <>
             <Cabecalho />
