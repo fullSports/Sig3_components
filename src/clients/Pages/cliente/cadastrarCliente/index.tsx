@@ -76,27 +76,25 @@ const CadastroCliente = () => {
 
     function aoSubmeterForm(event: React.FormEvent<HTMLFormElement>) {
         setSpinner(true);
+        setMensagemErroBolean(false)
         event.preventDefault();
         console.log(email, password)
+
+
+        const formData = new FormData();
         apiFullSports.request({
             method: "POST",
-            url: 'login/',
-            headers: {
-                'Access-Control-Allow-Origin': '*'
-            },
+            url: "realizar-login",
             data: {
                 email: email,
-                password: password,
-                isAdmin: false
+                password: "eee"
             }
-        }).then(respostaLogin => {
-            if (respostaLogin.data.message) {
+        }).then(res => {
+            if (res.data.emailExists) {
                 setSpinner(false)
-                setMensagemErroBolean(true);
-                setMenssagemErro(respostaLogin.data.message);
-            } else {
-                console.log(respostaLogin.data._id)
-                const formData = new FormData();
+                setMensagemErroBolean(true)
+                setMenssagemErro("email já cadastrado")
+            } else
                 if (file) {
                     formData.append("file", file);
                     apiFullSports.request({
@@ -118,20 +116,38 @@ const CadastroCliente = () => {
                                 data: {
                                     cpf: cpf,
                                     nome: nome,
-                                    login: respostaLogin.data._id,
+                                    login: {
+                                        email: email,
+                                        password: password,
+                                        isAdmin: false
+                                    },
                                     dataNascimento: dataNascimento,
                                     sexo: sexo,
                                     cep: cep,
                                     endereco: `${rua},${numero} -${complemento}- ${estado}, ${cidade}, ${bairro}`,
-                                    dataCadastro: dataAtual,
-                                    imagemPerfil: respostaImagem.data._id
+                                    imagemPerfil: respostaImagem.data.image._id
                                 }
-                            }).then(() => {
+                            }).then((res) => {
+                                if (!res.data.registeredSuccess) {
+                                    setSpinner(false)
+                                    setMensagemErroBolean(true)
+                                    setMenssagemErro(res.data.messagem)
+                                }
                                 setSpinner(false)
                                 localStorage.removeItem("email")
                                 window.location.href = '/login'
-                            }).catch(err => { console.log(err) })
-                        }).catch(err => { console.log(err) })
+                            }).catch(err => {
+                                console.log(err)
+                                setSpinner(false)
+                                setMensagemErroBolean(true)
+                                setMenssagemErro("erro na requisição")
+                            })
+                        }).catch(err => {
+                            console.log(err)
+                            setSpinner(false)
+                            setMensagemErroBolean(true)
+                            setMenssagemErro("erro na requisição")
+                        })
                 } else {
                     apiFullSports.request({
                         method: "POST",
@@ -142,27 +158,44 @@ const CadastroCliente = () => {
                         data: {
                             cpf: cpf,
                             nome: nome,
-                            login: respostaLogin.data._id,
+                            login: {
+                                email: email,
+                                password: password,
+                                isAdmin: false
+                            },
                             dataNascimento: dataNascimento,
                             sexo: sexo,
                             cep: cep,
                             endereco: `${rua},${numero} -${complemento}- ${estado}, ${cidade}, ${bairro}`,
-                            dataCadastro: dataAtual
+                            imagemPerfil: null
                         }
-                    }).then(() => {
-                        setSpinner(false);
-                        localStorage.removeItem("email");
-                        window.location.href = '/login';
-                    }).catch(err => { console.log(err) })
+                    }).then((res) => {
+                        if (res.data.registeredSuccess === false) {
+                            setSpinner(false);
+                            setMensagemErroBolean(true)
+                            setMenssagemErro(res.data.messsagem)
+                        } else {
+                            setSpinner(false);
+                            localStorage.removeItem("email");
+                            window.location.href = '/login';
+                        }
+                    }).catch(err => {
+                        console.log(err)
+                        setSpinner(false)
+                        setMensagemErroBolean(true)
+                        setMenssagemErro("erro na requisição")
+                    })
                 }
-            }
-        }).catch(err => { console.log(err) })
-
+        }).catch(err => {
+            console.log(err)
+            setSpinner(false)
+            setMensagemErroBolean(true)
+            setMenssagemErro("erro na requisição")
+        })
     }
-
     return (
         <>
-        <Cabecalho/>
+            <Cabecalho />
             <div className="flex">
                 <div id="main" className="dashboard-body">
                     <div className="form-card">
@@ -379,7 +412,7 @@ const CadastroCliente = () => {
                     </div>
                 </div>
             </div>
-        <Footer/>
+            <Footer />
         </>
     )
 }

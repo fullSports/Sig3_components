@@ -4,30 +4,41 @@ import { DevNames } from '../../../utils/devNames';
 import { AiFillTwitterCircle, AiOutlineInstagram, AiFillFacebook } from 'react-icons/ai';
 import '../../../../src/styles.css';
 import './styles.css';
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import apiFullSports from '../../../api/apiFullSports';
 const brandLogo = require('../../../assets/images/fullSportLogo.png');
 const Footer = () => {
     const [email, setEmail] = useState('');
-    const [isLogin,setIsLogin] = useState(true);
+    const [isLogin, setIsLogin] = useState(true);
     const user = JSON.parse(localStorage.getItem('user') as string);
-    useEffect(()=>{
-        if(user){
+    useEffect(() => {
+        if (user) {
             setIsLogin(false)
-        }else{
+        } else {
             setIsLogin(true)
         }
-    },[])
-    function pesquisaEmail(evento: React.FormEvent<HTMLFormElement>){
+    }, [])
+    function pesquisaEmail(evento: React.FormEvent<HTMLFormElement>) {
         evento.preventDefault();
-        apiFullSports.post('pesquisar-email/', { email: email }).then(reposta => {
-            if (reposta.data.emailExiste) {
+        apiFullSports.request({
+            url: "realizar-login",
+            method:"POST",
+            data:{
+                email:email,
+                password: "eeeeee"
+            }
+        })
+        .then(reposta => {
+            if (reposta.data.emailExists) {
                 localStorage.setItem('email', JSON.stringify(email));
                 window.location.href = "/login";
-            } else{
+            } else {
                 localStorage.setItem('email', JSON.stringify(email));
                 window.location.href = "/cadastrar-cliente";
             }
+        }).catch((err)=>{
+            console.log(err)
+            window.location.href = "/cadastrar-cliente";
         })
     }
     return (
@@ -39,7 +50,7 @@ const Footer = () => {
                     <span className="news-sub-subt">Assine nossa newsletter e continue atualizado sobre nossos lançamentos.</span>
                 </div>
                 <div className="input-container">
-                    <form action="" method="post"   onSubmit={pesquisaEmail}>
+                    <form action="" method="post" onSubmit={pesquisaEmail}>
                         <input placeholder="Insira seu e-mail" type="email" onChange={evento => setEmail(evento.target.value)} />
                         <button type="submit"  ><BiSend color={'#09080980'} /></button>
                     </form>
@@ -99,7 +110,7 @@ const Footer = () => {
                 </div>
             </div>
             <div className="footer-bottom-line">
-                Full Sports &copy; Todos os direitos reservados.
+                Full Sports &copy;{new Date().getFullYear()} Todos os direitos reservados.
             </div>
         </div>
     );

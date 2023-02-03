@@ -153,62 +153,24 @@ const AtualizarProduto = () => {
 
             apiFullSports.get<IProduto>(`listar-produto/${parametros.id}`)
                 .then(resposta => {
+
+                    const categoria = resposta.data.categoriaProduto as any
+                    const obj = Object.keys(categoria)[0].toString()
+
+                    setFornecedorID(categoria[obj].fornecedor._id);
+                    setNomeProduto(categoria[obj].nome);
+                    setSexo(categoria[obj].sexo);
+                    setCategoriaProduto(obj);
+                    setCategoriaID(resposta.data._id.toString());
+                    setCorProduto(categoria[obj].cor);
+                    setPreco(categoria[obj].preco);
+                    setQuantidade(categoria[obj].quantidate);
+                    setTamanhoProduto(categoria[obj].tamanho);
+                    setImagemProduto(categoria[obj].imagemProduto)
                     setDataCadastro(resposta.data.dataCadastro)
-                    const categoria = resposta.data.categoriaProduto
-                    if (categoria.calcado !== undefined) {
-                        setFornecedorID(categoria.calcado.fornecedor._id);
-                        setNomeProduto(categoria.calcado.nome);
-                        setSexo(categoria.calcado.sexo);
-                        setCategoriaProduto("calcado");
-                        setCategoriaID(categoria.calcado._id);
-                        setCorProduto(categoria.calcado.cor);
-                        setPreco(categoria.calcado.preco);
-                        setQuantidade(categoria.calcado.quantidade.toString());
-                        setTamanhoProduto(categoria.calcado.tamanho.toString());
-                        setImagemProduto(categoria.calcado.imagemProduto)
-
-                    } else if (categoria.equipamento !== undefined) {
-                        setFornecedorID(categoria.equipamento.fornecedor._id);
-                        setNomeProduto(categoria.equipamento.nome);
-                        setSexo(categoria.equipamento.sexo);
-                        setCategoriaProduto("equipamento");
-                        setCategoriaID(categoria.equipamento._id);
-                        setCorProduto(categoria.equipamento.cor);
-                        setPreco(categoria.equipamento.preco);
-                        setQuantidade(categoria.equipamento.quantidade.toString());
-                        setTamanhoProduto(categoria.equipamento.tamanho.toString());
-                        setImagemProduto(categoria.equipamento.imagemProduto)
-
-                    } else if (categoria.roupa !== undefined) {
-                        setFornecedorID(categoria.roupa.fornecedor._id);
-                        setNomeProduto(categoria.roupa.nome);
-                        setSexo(categoria.roupa.sexo);
-                        setCategoriaProduto("roupa");
-                        setCategoriaID(categoria.roupa._id);
-                        setCorProduto(categoria.roupa.cor);
-                        setPreco(categoria.roupa.preco)
-                        setQuantidade(categoria.roupa.quantidade.toString());
-                        setTamanhoProduto(categoria.roupa.tamanho.toString());
-                        setImagemProduto(categoria.roupa.imagemProduto)
-                    } else if (categoria.suplemento !== undefined) {
-                        setFornecedorID(categoria.suplemento.fornecedor._id);
-                        setNomeProduto(categoria.suplemento.nome);
-                        setSexo(categoria.suplemento.sexo);
-                        setCategoriaProduto("suplemento");
-                        setCategoriaID(categoria.suplemento._id);
-                        setCorProduto(categoria.suplemento.cor);
-                        setQuantidade(categoria.suplemento.quantidade.toString());
-                        setTamanhoProduto(categoria.suplemento.tamanho.toString());
-                        setImagemProduto(categoria.suplemento.imagemProduto)
 
 
-                    } else {
-                        return null
-                    }
-
-                    console.log(ImagemProduto)
                 }).catch((err) => console.log(err));
-
         }
     }, [parametros])
 
@@ -216,7 +178,6 @@ const AtualizarProduto = () => {
         setmessagemErroFoto(false)
         setSpinner(true)
         if (imagens.length > 1) {
-            imagens.pop();
             console.log(imagens);
             ImagemProduto?.map(item => {
                 return ImagensID.unshift(item._id);
@@ -233,29 +194,22 @@ const AtualizarProduto = () => {
                         file: item
                     }
                 }).then(response => {
-                    apiFullSports.request({
-                        url: `imagem/${response.data._id}`,
-                        method: 'GET',
-                        headers: {
-                            'Access-Control-Allow-Origin': '*'
-                        },
-                    }).then(response => {
-                        ImagensID.unshift(response.data._id)
-                    }).catch(err => console.log(err))
+                    ImagensID.unshift(response.data.image._id)
                 }).catch(err => console.log(err))
             })
             ImagensID.pop();
             console.log(ImagensID)
             setTimeout(function () {
-                console.log(`atualizar-${categoriaProduto}/${categoriaID}`)
+                console.log(`atualizar-produto/${categoriaID}`)
                 apiFullSports.request({
-                    url: `atualizar-${categoriaProduto}/${categoriaID}`,
+                    url: `atualizar-produto/${categoriaID}`,
                     method: "PUT",
-                    headers: {
-                        'Access-Control-Allow-Origin': '*'
-                    },
                     data: {
-                        imagemProduto: ImagensID
+                        categoriaProduto: {
+                            [categoriaProduto]: {
+                                imagemProduto: ImagensID
+                            }
+                        }
                     }
                 }).then(() => { window.location.reload(); setSpinner(false) })
                     .catch(err => console.log(err));
@@ -265,21 +219,32 @@ const AtualizarProduto = () => {
             setmessagemErroFoto(true)
         }
     }
-    const deletarImagem = (DeletarImagem: string) => {
-        apiFullSports.delete(`imagem/${DeletarImagem}/`).then(() => {
-            window.location.reload();
-        })
-        setOpen(true)
+    const deletarImagem = (DeletarImagem: Iimagem) => {
+        if (DeletarImagem) {
+            apiFullSports.delete(`imagem/${DeletarImagem._id}/`).then(() => {
+                window.location.reload();
+            })
+            setOpen(true)
+        }
+    }
+    function EscreveImagens() {
+        return <>{
+            ImagemProduto?.map(item => {
+                if (item === null) {
+                    return <> </>
+                } else return <Box component={'div'} sx={{ display: 'grid', margin: '1%', width: "20%", height: "10%" }}>
+                    <img src={item.url} alt="imagem de produto" />
+                    <Button onClick={() => deletarImagem(item)} color="error" variant="outlined" sx={{ border: "2px solid alert", margin: "2%" }} >Excluir foto</Button>
+                </Box>
+            }
+            )
+        }
+        </>
     }
     function OpcoentesFotoProduto() {
         return <>
             <Box component={'div'} sx={{ display: 'flex', justifyContent: 'center' }}>
-                {ImagemProduto?.map(item =>
-                    <Box component={'div'} sx={{ display: 'grid', margin: '1%', width: "20%", height: "10%" }}>
-                        <img src={item.url} alt="imagem de produto" />
-                        <Button onClick={() => deletarImagem(item._id)} color="error" variant="outlined" sx={{ border: "2px solid alert", margin: "2%" }} >Excluir foto</Button>
-                    </Box>
-                )}
+                <EscreveImagens />
             </Box>
         </>
     }
@@ -300,571 +265,31 @@ const AtualizarProduto = () => {
             setMenssagemErro('escolha uma sexo de produto');
             setMensagemErroBolean(true);
         } else {
-            ImagensID = [{},];
-            ImagemProduto?.map(item => {
-                return ImagensID.unshift(item._id);
-            });
-            ImagensID.pop();
-            console.log(ImagensID);
-            setTimeout(function () {
-                apiFullSports.get<IProduto>(`listar-produto/${parametros.id}`)
-                    .then(respostaProduto => {
-                        const categoria = respostaProduto.data.categoriaProduto;
-                        if (categoria.calcado !== undefined) {
-                            apiFullSports.delete<ICacados>(`deletar-calcado/${categoria.calcado._id}`)
-                                .then(() => {
-                                    if (categoriaProduto === 'roupa') {
-                                        return setTimeout(function () {
-                                            console.log(ImagensID)
-                                            console.log("request")
-                                            apiFullSports.request({
-                                                url: 'cadastrar-roupa/',
-                                                method: 'POST',
-                                                data: {
-                                                    nome: nomeProduto,
-                                                    fornecedor: fornecedorID,
-                                                    cor: corProduto,
-                                                    sexo: sexo,
-                                                    tamanho: tamanhoProduto,
-                                                    preco: preco,
-                                                    quantidade: quantidade,
-                                                    imagemProduto: ImagensID
-                                                }
-                                            }).then(resposta => {
-                                                apiFullSports.request({
-                                                    method: "PUT",
-                                                    url: `atualizar-produto/${parametros.id}`,
-                                                    data: {
-                                                        categoriaProduto: {
-                                                            roupa: resposta.data._id
-                                                        }
-                                                    }
-                                                }).then(() => {
-                                                    setSpinner(false);
-                                                    window.location.href = '/dashboard/consultar-produtos'
-                                                }).catch(err => console.log(err))
-                                            }).catch(err => console.log(err))
-                                        }, 200)
-
-                                    } else if (categoriaProduto === 'equipamento') {
-                                        return setTimeout(function () {
-                                            console.log(ImagensID)
-                                            console.log("request")
-                                            apiFullSports.request({
-                                                url: 'cadastrar-equipamento/',
-                                                method: 'POST',
-                                                data: {
-                                                    nome: nomeProduto,
-                                                    fornecedor: fornecedorID,
-                                                    cor: corProduto,
-                                                    sexo: sexo,
-                                                    tamanho: tamanhoProduto,
-                                                    preco: preco,
-                                                    quantidade: quantidade,
-                                                    imagemProduto: ImagensID
-                                                }
-                                            }).then(resposta => {
-                                                apiFullSports.request({
-                                                    method: "PUT",
-                                                    url: `atualizar-produto/${parametros.id}`,
-                                                    data: {
-                                                        categoriaProduto: {
-                                                            equipamento: resposta.data._id
-                                                        }
-                                                    }
-                                                }).then(() => {
-                                                    setSpinner(false);
-                                                    window.location.href = '/dashboard/consultar-produtos'
-                                                }).catch(err => console.log(err))
-                                            }).catch(err => console.log(err))
-                                        }, 200)
-
-                                    } else if (categoriaProduto === 'suplemento') {
-                                        return setTimeout(function () {
-                                            console.log(ImagensID)
-                                            console.log("request")
-                                            apiFullSports.request({
-                                                url: 'cadastrar-suplemento/',
-                                                method: 'POST',
-                                                data: {
-                                                    nome: nomeProduto,
-                                                    fornecedor: fornecedorID,
-                                                    cor: corProduto,
-                                                    sexo: sexo,
-                                                    tamanho: tamanhoProduto,
-                                                    preco: preco,
-                                                    quantidade: quantidade,
-                                                    imagemProduto: ImagensID
-                                                }
-                                            }).then(resposta => {
-                                                apiFullSports.request({
-                                                    method: "PUT",
-                                                    url: `atualizar-produto/${parametros.id}`,
-                                                    data: {
-                                                        categoriaProduto: {
-                                                            suplemento: resposta.data._id
-                                                        }
-                                                    }
-                                                }).then(() => {
-                                                    setSpinner(false);
-                                                    window.location.href = '/dashboard/consultar-produtos'
-                                                }).catch(err => console.log(err))
-                                            }).catch(err => console.log(err))
-                                        }, 200)
-
-                                    } else if (categoriaProduto === 'calcado') {
-                                        return setTimeout(function () {
-                                            console.log(ImagensID);
-                                            console.log("request")
-                                            apiFullSports.request({
-                                                url: 'cadastrar-calcado/',
-                                                method: 'POST',
-                                                data: {
-                                                    nome: nomeProduto,
-                                                    fornecedor: fornecedorID,
-                                                    cor: corProduto,
-                                                    sexo: sexo,
-                                                    tamanho: tamanhoProduto,
-                                                    preco: preco,
-                                                    quantidade: quantidade,
-                                                    imagemProduto: ImagensID
-                                                }
-                                            }).then(resposta => {
-                                                apiFullSports.request({
-                                                    method: "PUT",
-                                                    url: `atualizar-produto/${parametros.id}`,
-                                                    data: {
-                                                        categoriaProduto: {
-                                                            calcado: resposta.data._id
-                                                        }
-                                                    }
-                                                }).then(() => {
-                                                    setSpinner(false);
-                                                    window.location.href = '/dashboard/consultar-produtos'
-                                                }).catch(err => console.log(err))
-                                            }).catch(err => console.log(err))
-                                        }, 200)
-
-                                    }
-                                })
-                                .catch((err) => console.log(err));
-                        } else if (categoria.equipamento !== undefined) {
-                            apiFullSports.delete<IEquipamentos>(`deletar-equipamento/${categoria.equipamento._id}`)
-                                .then(() => {
-                                    if (categoriaProduto === 'roupa') {
-                                        return setTimeout(function () {
-                                            console.log(ImagensID)
-                                            console.log("request")
-                                            apiFullSports.request({
-                                                url: 'cadastrar-roupa/',
-                                                method: 'POST',
-                                                data: {
-                                                    nome: nomeProduto,
-                                                    fornecedor: fornecedorID,
-                                                    cor: corProduto,
-                                                    sexo: sexo,
-                                                    tamanho: tamanhoProduto,
-                                                    preco: preco,
-                                                    quantidade: quantidade,
-                                                    imagemProduto: ImagensID
-                                                }
-                                            }).then(resposta => {
-                                                apiFullSports.request({
-                                                    method: "PUT",
-                                                    url: `atualizar-produto/${parametros.id}`,
-                                                    data: {
-                                                        categoriaProduto: {
-                                                            roupa: resposta.data._id
-                                                        }
-                                                    }
-                                                }).then(() => {
-                                                    setSpinner(false);
-                                                    window.location.href = '/dashboard/consultar-produtos'
-                                                }).catch(err => console.log(err))
-                                            }).catch(err => console.log(err))
-                                        }, 200)
-
-                                    } else if (categoriaProduto === 'equipamento') {
-                                        return setTimeout(function () {
-                                            console.log(ImagensID)
-                                            console.log("request")
-                                            apiFullSports.request({
-                                                url: 'cadastrar-equipamento/',
-                                                method: 'POST',
-                                                data: {
-                                                    nome: nomeProduto,
-                                                    fornecedor: fornecedorID,
-                                                    cor: corProduto,
-                                                    sexo: sexo,
-                                                    tamanho: tamanhoProduto,
-                                                    preco: preco,
-                                                    quantidade: quantidade,
-                                                    imagemProduto: ImagensID
-                                                }
-                                            }).then(resposta => {
-                                                apiFullSports.request({
-                                                    method: "PUT",
-                                                    url: `atualizar-produto/${parametros.id}`,
-                                                    data: {
-                                                        categoriaProduto: {
-                                                            equipamento: resposta.data._id
-                                                        }
-                                                    }
-                                                }).then(() => {
-                                                    setSpinner(false);
-                                                    window.location.href = '/dashboard/consultar-produtos'
-                                                }).catch(err => console.log(err))
-                                            }).catch(err => console.log(err))
-                                        }, 200)
-
-                                    } else if (categoriaProduto === 'suplemento') {
-                                        return setTimeout(function () {
-                                            console.log(ImagensID)
-                                            console.log("request")
-                                            apiFullSports.request({
-                                                url: 'cadastrar-suplemento/',
-                                                method: 'POST',
-                                                data: {
-                                                    nome: nomeProduto,
-                                                    fornecedor: fornecedorID,
-                                                    cor: corProduto,
-                                                    sexo: sexo,
-                                                    tamanho: tamanhoProduto,
-                                                    preco: preco,
-                                                    quantidade: quantidade,
-                                                    imagemProduto: ImagensID
-                                                }
-                                            }).then(resposta => {
-                                                apiFullSports.request({
-                                                    method: "PUT",
-                                                    url: `atualizar-produto/${parametros.id}`,
-                                                    data: {
-                                                        categoriaProduto: {
-                                                            suplemento: resposta.data._id
-                                                        }
-                                                    }
-                                                }).then(() => {
-                                                    setSpinner(false);
-                                                    window.location.href = '/dashboard/consultar-produtos'
-                                                }).catch(err => console.log(err))
-                                            }).catch(err => console.log(err))
-                                        }, 200)
-
-                                    } else if (categoriaProduto === 'calcado') {
-                                        return setTimeout(function () {
-                                            console.log(ImagensID);
-                                            console.log("request")
-                                            apiFullSports.request({
-                                                url: 'cadastrar-calcado/',
-                                                method: 'POST',
-                                                data: {
-                                                    nome: nomeProduto,
-                                                    fornecedor: fornecedorID,
-                                                    cor: corProduto,
-                                                    sexo: sexo,
-                                                    tamanho: tamanhoProduto,
-                                                    preco: preco,
-                                                    quantidade: quantidade,
-                                                    imagemProduto: ImagensID
-                                                }
-                                            }).then(resposta => {
-                                                apiFullSports.request({
-                                                    method: "PUT",
-                                                    url: `atualizar-produto/${parametros.id}`,
-                                                    data: {
-                                                        categoriaProduto: {
-                                                            calcado: resposta.data._id
-                                                        }
-                                                    }
-                                                }).then(() => {
-                                                    setSpinner(false);
-                                                    window.location.href = '/dashboard/consultar-produtos'
-                                                }).catch(err => console.log(err))
-                                            }).catch(err => console.log(err))
-                                        }, 200)
-
-                                    }
-                                })
-                                .catch((err) => console.log(err));
-                        } else if (categoria.roupa !== undefined) {
-                            apiFullSports.delete<IRoupa>(`deletar-roupa/${categoria.roupa._id}`)
-                                .then(() => {
-                                    if (categoriaProduto === 'roupa') {
-                                        return setTimeout(function () {
-                                            console.log(ImagensID)
-                                            console.log("request")
-                                            apiFullSports.request({
-                                                url: 'cadastrar-roupa/',
-                                                method: 'POST',
-                                                data: {
-                                                    nome: nomeProduto,
-                                                    fornecedor: fornecedorID,
-                                                    cor: corProduto,
-                                                    sexo: sexo,
-                                                    tamanho: tamanhoProduto,
-                                                    preco: preco,
-                                                    quantidade: quantidade,
-                                                    imagemProduto: ImagensID
-                                                }
-                                            }).then(resposta => {
-                                                apiFullSports.request({
-                                                    method: "PUT",
-                                                    url: `atualizar-produto/${parametros.id}`,
-                                                    data: {
-                                                        categoriaProduto: {
-                                                            roupa: resposta.data._id
-                                                        }
-                                                    }
-                                                }).then(() => {
-                                                    setSpinner(false);
-                                                    window.location.href = '/dashboard/consultar-produtos'
-                                                }).catch(err => console.log(err))
-                                            }).catch(err => console.log(err))
-                                        }, 200)
-
-                                    } else if (categoriaProduto === 'equipamento') {
-                                        return setTimeout(function () {
-                                            console.log(ImagensID)
-                                            console.log("request")
-                                            apiFullSports.request({
-                                                url: 'cadastrar-equipamento/',
-                                                method: 'POST',
-                                                data: {
-                                                    nome: nomeProduto,
-                                                    fornecedor: fornecedorID,
-                                                    cor: corProduto,
-                                                    sexo: sexo,
-                                                    tamanho: tamanhoProduto,
-                                                    preco: preco,
-                                                    quantidade: quantidade,
-                                                    imagemProduto: ImagensID
-                                                }
-                                            }).then(resposta => {
-                                                apiFullSports.request({
-                                                    method: "PUT",
-                                                    url: `atualizar-produto/${parametros.id}`,
-                                                    data: {
-                                                        categoriaProduto: {
-                                                            equipamento: resposta.data._id
-                                                        }
-                                                    }
-                                                }).then(() => {
-                                                    setSpinner(false);
-                                                    window.location.href = '/dashboard/consultar-produtos'
-                                                }).catch(err => console.log(err))
-                                            }).catch(err => console.log(err))
-                                        }, 200)
-
-                                    } else if (categoriaProduto === 'suplemento') {
-                                        return setTimeout(function () {
-                                            console.log(ImagensID)
-                                            console.log("request")
-                                            apiFullSports.request({
-                                                url: 'cadastrar-suplemento/',
-                                                method: 'POST',
-                                                data: {
-                                                    nome: nomeProduto,
-                                                    fornecedor: fornecedorID,
-                                                    cor: corProduto,
-                                                    sexo: sexo,
-                                                    tamanho: tamanhoProduto,
-                                                    preco: preco,
-                                                    quantidade: quantidade,
-                                                    imagemProduto: ImagensID
-                                                }
-                                            }).then(resposta => {
-                                                apiFullSports.request({
-                                                    method: "PUT",
-                                                    url: `atualizar-produto/${parametros.id}`,
-                                                    data: {
-                                                        categoriaProduto: {
-                                                            suplemento: resposta.data._id
-                                                        }
-                                                    }
-                                                }).then(() => {
-                                                    setSpinner(false);
-                                                    window.location.href = '/dashboard/consultar-produtos'
-                                                }).catch(err => console.log(err))
-                                            }).catch(err => console.log(err))
-                                        }, 200)
-
-                                    } else if (categoriaProduto === 'calcado') {
-                                        return setTimeout(function () {
-                                            console.log(ImagensID);
-                                            console.log("request")
-                                            apiFullSports.request({
-                                                url: 'cadastrar-calcado/',
-                                                method: 'POST',
-                                                data: {
-                                                    nome: nomeProduto,
-                                                    fornecedor: fornecedorID,
-                                                    cor: corProduto,
-                                                    sexo: sexo,
-                                                    tamanho: tamanhoProduto,
-                                                    preco: preco,
-                                                    quantidade: quantidade,
-                                                    imagemProduto: ImagensID
-                                                }
-                                            }).then(resposta => {
-                                                apiFullSports.request({
-                                                    method: "PUT",
-                                                    url: `atualizar-produto/${parametros.id}`,
-                                                    data: {
-                                                        categoriaProduto: {
-                                                            calcado: resposta.data._id
-                                                        }
-                                                    }
-                                                }).then(() => {
-                                                    setSpinner(false);
-                                                    window.location.href = '/dashboard/consultar-produtos'
-                                                }).catch(err => console.log(err))
-                                            }).catch(err => console.log(err))
-                                        }, 200)
-
-                                    }
-                                })
-                                .catch((err) => console.log(err));
-                        } else if (categoria.suplemento !== undefined) {
-                            apiFullSports.delete<ISuplementos>(`deletar-suplemento/${categoria.suplemento._id}`)
-                                .then(() => {
-                                    if (categoriaProduto === 'roupa') {
-                                        return setTimeout(function () {
-                                            console.log(ImagensID)
-                                            console.log("request")
-                                            apiFullSports.request({
-                                                url: 'cadastrar-roupa/',
-                                                method: 'POST',
-                                                data: {
-                                                    nome: nomeProduto,
-                                                    fornecedor: fornecedorID,
-                                                    cor: corProduto,
-                                                    sexo: sexo,
-                                                    tamanho: tamanhoProduto,
-                                                    preco: preco,
-                                                    quantidade: quantidade,
-                                                    imagemProduto: ImagensID
-                                                }
-                                            }).then(resposta => {
-                                                apiFullSports.request({
-                                                    method: "PUT",
-                                                    url: `atualizar-produto/${parametros.id}`,
-                                                    data: {
-                                                        categoriaProduto: {
-                                                            roupa: resposta.data._id
-                                                        }
-                                                    }
-                                                }).then(() => {
-                                                    setSpinner(false);
-                                                    window.location.href = '/dashboard/consultar-produtos'
-                                                }).catch(err => console.log(err))
-                                            }).catch(err => console.log(err))
-                                        }, 200)
-
-                                    } else if (categoriaProduto === 'equipamento') {
-                                        return setTimeout(function () {
-                                            console.log(ImagensID)
-                                            console.log("request")
-                                            apiFullSports.request({
-                                                url: 'cadastrar-equipamento/',
-                                                method: 'POST',
-                                                data: {
-                                                    nome: nomeProduto,
-                                                    fornecedor: fornecedorID,
-                                                    cor: corProduto,
-                                                    sexo: sexo,
-                                                    tamanho: tamanhoProduto,
-                                                    preco: preco,
-                                                    quantidade: quantidade,
-                                                    imagemProduto: ImagensID
-                                                }
-                                            }).then(resposta => {
-                                                apiFullSports.request({
-                                                    method: "PUT",
-                                                    url: `atualizar-produto/${parametros.id}`,
-                                                    data: {
-                                                        categoriaProduto: {
-                                                            equipamento: resposta.data._id
-                                                        }
-                                                    }
-                                                }).then(() => {
-                                                    setSpinner(false);
-                                                    window.location.href = '/dashboard/consultar-produtos'
-                                                }).catch(err => console.log(err))
-                                            }).catch(err => console.log(err))
-                                        }, 200)
-
-                                    } else if (categoriaProduto === 'suplemento') {
-                                        return setTimeout(function () {
-                                            console.log(ImagensID)
-                                            console.log("request")
-                                            apiFullSports.request({
-                                                url: 'cadastrar-suplemento/',
-                                                method: 'POST',
-                                                data: {
-                                                    nome: nomeProduto,
-                                                    fornecedor: fornecedorID,
-                                                    cor: corProduto,
-                                                    sexo: sexo,
-                                                    tamanho: tamanhoProduto,
-                                                    preco: preco,
-                                                    quantidade: quantidade,
-                                                    imagemProduto: ImagensID
-                                                }
-                                            }).then(resposta => {
-                                                apiFullSports.request({
-                                                    method: "PUT",
-                                                    url: `atualizar-produto/${parametros.id}`,
-                                                    data: {
-                                                        categoriaProduto: {
-                                                            suplemento: resposta.data._id
-                                                        }
-                                                    }
-                                                }).then(() => {
-                                                    setSpinner(false);
-                                                    window.location.href = '/dashboard/consultar-produtos'
-                                                }).catch(err => console.log(err))
-                                            }).catch(err => console.log(err))
-                                        }, 200)
-
-                                    } else if (categoriaProduto === 'calcado') {
-                                        return setTimeout(function () {
-                                            console.log(ImagensID);
-                                            console.log("request")
-                                            apiFullSports.request({
-                                                url: 'cadastrar-calcado/',
-                                                method: 'POST',
-                                                data: {
-                                                    nome: nomeProduto,
-                                                    fornecedor: fornecedorID,
-                                                    cor: corProduto,
-                                                    sexo: sexo,
-                                                    tamanho: tamanhoProduto,
-                                                    preco: preco,
-                                                    quantidade: quantidade,
-                                                    imagemProduto: ImagensID
-                                                }
-                                            }).then(resposta => {
-                                                apiFullSports.request({
-                                                    method: "PUT",
-                                                    url: `atualizar-produto/${parametros.id}`,
-                                                    data: {
-                                                        categoriaProduto: {
-                                                            calcado: resposta.data._id
-                                                        }
-                                                    }
-                                                }).then(() => {
-                                                    setSpinner(false);
-                                                    window.location.href = '/dashboard/consultar-produtos'
-                                                }).catch(err => console.log(err))
-                                            }).catch(err => console.log(err))
-                                        }, 200)
-
-                                    }
-                                })
-                                .catch((err) => console.log(err));
+            const quantidadeNumber = parseFloat(quantidade)
+            const tamanhoNumber = parseFloat(tamanhoProduto)
+            apiFullSports.request({
+                method: "PUT",
+                url: `atualizar-produto/${parametros.id}`,
+                data: {
+                    categoriaProduto: {
+                        [categoriaProduto]: {
+                            nome: nomeProduto,
+                            fornecedor: fornecedorID,
+                            cor: corProduto,
+                            sexo: sexo,
+                            tamanho: tamanhoNumber,
+                            preco: preco,
+                            quantidate: quantidade
                         }
-                    }).catch((err) => console.log(err))
-            }, 200)
+                    }
+                }
+            }).then(() => {
+                setSpinner(false);
+                window.location.href = '/dashboard/consultar-produtos'
+            }).catch(err => console.log(err))
+
+
+
         }
 
     }

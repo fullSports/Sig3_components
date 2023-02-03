@@ -23,7 +23,6 @@ const CadastroAdministrador = () => {
     const [cpf, setCpf] = useState('');
     const [nome, setNome] = useState('');
     const [dataNascimento, setDataNascimento] = useState('');
-    const dataAtual = new Date().toLocaleDateString();
     const [sexo, setSexo] = useState('');
     const [cep, setCep] = useState('');
     const [rua, setRua] = useState('');
@@ -38,7 +37,7 @@ const CadastroAdministrador = () => {
     const [carregandoCepMenssagem, setCarregandoCepMessagem] = useState(false)
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
+    let ID: any;
     const [mensagemErroBolean, setMensagemErroBolean] = useState(false);
     const [menssagemErro, setMenssagemErro] = useState('');
     const selecionarArquivo = (evento: React.ChangeEvent<HTMLInputElement>) => {
@@ -84,78 +83,52 @@ const CadastroAdministrador = () => {
         setSpinner(true);
         event.preventDefault();
         console.log(email, password)
-        apiFullSports.request({
-            method: "POST",
-            url: 'login/',
-            headers: {
-                'Access-Control-Allow-Origin': '*'
-            },
-            data: {
-                email: email,
-                password: password,
-                isAdmin: true
-            }
-        }).then(respostaLogin => {
-            if (respostaLogin.data.message) {
-                setSpinner(false)
-                setMensagemErroBolean(true);
-                setMenssagemErro(respostaLogin.data.message);
-            } else {
-                console.log(respostaLogin.data._id)
-                const formData = new FormData();
-                if (file) {
-                    formData.append("file", file);
-                    apiFullSports.request({
-                        method: "POST",
-                        url: "imagem/",
-                        headers: {
-                            'Access-Control-Allow-Origin': '*',
-                            'Content-Type': 'multipart/form-data'
-                        },
-                        data: formData
-                    })
-                        .then(respostaImagem => {
-                            apiFullSports.request({
-                                method: "POST",
-                                url: "cadastrar-cliente/",
-                                headers: {
-                                    'Access-Control-Allow-Origin': '*'
-                                },
-                                data: {
-                                    cpf: cpf,
-                                    nome: nome,
-                                    login: respostaLogin.data._id,
-                                    dataNascimento: dataNascimento,
-                                    sexo: sexo,
-                                    cep: cep,
-                                    endereco: `${rua},${numero} -${complemento}- ${estado}, ${cidade}, ${bairro}`,
-                                    dataCadastro: dataAtual,
-                                    imagemPerfil: respostaImagem.data._id
-                                }
-                            }).then(() => setSpinner(false)).catch(err => { console.log(err) })
-                        }).catch(err => { console.log(err) })
-                } else {
-                    apiFullSports.request({
-                        method: "POST",
-                        url: "cadastrar-cliente/",
-                        headers: {
-                            'Access-Control-Allow-Origin': '*'
-                        },
-                        data: {
-                            cpf: cpf,
-                            nome: nome,
-                            login: respostaLogin.data._id,
-                            dataNascimento: dataNascimento,
-                            sexo: sexo,
-                            cep: cep,
-                            endereco: `${rua},${numero} -${complemento}- ${estado}, ${cidade}, ${bairro}`,
-                            dataCadastro: dataAtual
-                        }
-                    }).then(() => setSpinner(false)).catch(err => { console.log(err) })
+        if (file) {
+            apiFullSports.request({
+                url: 'imagem/',
+                method: 'POST',
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                    'Content-Type': 'multipart/form-data'
+                },
+                data: {
+                    file: file
                 }
+            }).then(reposta => ID = reposta.data.image._id)
+                .catch(err => {
+                    console.log(err)
+                    setMensagemErroBolean(true)
+                    setMenssagemErro("Erro na requisição")
+                })
+        }
+        apiFullSports.request({
+            url: "/cadastrar-cliente",
+            method: "POST",
+            data: {
+                cpf: cpf,
+                nome: nome,
+                login: {
+                    email: email,
+                    password: password,
+                    isAdmin: true
+                },
+                dataNascimento: dataNascimento,
+                sexo: sexo,
+                cep: cep,
+                endereco: `${rua},${numero} -${complemento}- ${estado}, ${cidade}, ${bairro}`,
+                imagemPerfil: ID ? ID : null
             }
-        }).catch(err => { console.log(err) })
-
+        }).then(reposta => {
+            if (reposta.data.registeredSuccess === false) {
+                setSpinner(false);
+                setMensagemErroBolean(true)
+                setMenssagemErro(reposta.data.messagem)
+            }
+        }).catch(err => {
+            console.log(err)
+            setMensagemErroBolean(true)
+            setMenssagemErro("Erro na requisição")
+        })
     }
 
     return (
