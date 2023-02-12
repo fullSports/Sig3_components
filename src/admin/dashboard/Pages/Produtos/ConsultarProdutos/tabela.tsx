@@ -40,6 +40,9 @@ const TabelaProduto = () => {
         {produto.map(item => {
             const categoriaDeproduto = item.categoriaProduto as any;
             const obj = Object.keys(categoriaDeproduto)[0].toString()
+            let urImg 
+            if(categoriaDeproduto[obj].imagemProduto.length === 0) urImg = ""
+            else urImg = categoriaDeproduto[obj].imagemProduto[0].url
             return <tr key={item._id.toString()}>
                 <td>{categoriaDeproduto[obj].fornecedor.cnpj}</td>
                 <td>{categoriaDeproduto[obj].nome}</td>
@@ -47,11 +50,11 @@ const TabelaProduto = () => {
                 <td>{categoriaDeproduto[obj].sexo}</td>
                 <td>{categoriaDeproduto[obj].cor}</td>
                 <td>{categoriaDeproduto[obj].preco}</td>
-                <td>{categoriaDeproduto[obj].tamanho}</td>
-                <td>{categoriaDeproduto[obj].quantidate}</td>
+                <td>{categoriaDeproduto[obj].tamanho as number}</td>
+                <td>{categoriaDeproduto[obj].quantidade as number}</td>
 
                 <td>{item.dataCadastro}</td>
-                <td className="img-consulta"><img src={categoriaDeproduto[obj].imagemProduto[0].url} width='100' alt="primeira imagem de produto" /></td>
+                <td className="img-consulta"><img src={urImg} width='100' alt="primeira imagem de produto" /></td>
                 <td>
                     <div className="acoes-btn-group">
                         <a href={`/dashboard/atualizar-produto/${item._id}`} >

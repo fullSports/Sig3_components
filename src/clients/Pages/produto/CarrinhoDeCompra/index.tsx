@@ -40,8 +40,8 @@ button{
 }
 `;
 const CarrinhoDeCompra = () => {
-    const [produto, setProduto] = useState<IProduto>();
-    const carrinho = JSON.parse(localStorage.getItem('carrinho') as string);
+    const [produto, setProduto] = useState<IProduto>() as any;
+    let carrinho = JSON.parse(localStorage.getItem('carrinho') as string);
     const [spinner, setSpinner] = useState(false);
     const [quantidadeProd, setQuantidadeProd] = useState('')
     useEffect(() => {
@@ -52,113 +52,44 @@ const CarrinhoDeCompra = () => {
                 setSpinner(false);
             }).catch((err) => console.log(err));
             setQuantidadeProd(carrinho.pedido.quantidade)
+            setSpinner(false);
+        }else {
+            carrinho = null;
+            setSpinner(false);
         }
-    }, [])
-    function MostraProduto() {
+    }, [carrinho])
 
-        const categoria = produto?.categoriaProduto;
-        if (categoria?.calcado !== undefined) {
-            const precoProd = parseFloat(quantidadeProd);
-            const precoCategoria = parseFloat(categoria.calcado.preco);
-            const quantidadeCategoria = parseFloat(quantidadeProd);
-            return <tr>
-                <th><img src={categoria.calcado.imagemProduto[0].url} alt="imagem do produto" width='100' /></th>
-                <ThTabela>
-                    <BotaoNumber onClick={() => {
-                        if(quantidadeCategoria >1){
+
+    function MostraProduto() {
+        if(produto !== undefined){
+        const categoria = produto?.categoriaProduto as any;
+        const obj = Object.keys(categoria)[0].toString();
+        const precoProd = parseFloat(quantidadeProd);
+        const precoCategoria = parseFloat(categoria[obj].preco);
+        const quantidadeCategoria = parseFloat(quantidadeProd);
+        return <tr>
+            <th><img src={categoria[obj].imagemProduto[0].url} alt="imagem do produto" width='100' /></th>
+            <ThTabela>
+                <BotaoNumber onClick={() => {
+                    if (quantidadeCategoria > 1) {
                         const newquantidade = quantidadeCategoria - 1;
                         console.log(newquantidade)
                         setQuantidadeProd(newquantidade.toString());
-                        }
-                    }}><button type="button">-</button></BotaoNumber>
-                    <input type="number" value={quantidadeProd} placeholder="Nº" min='1'
-                        required max={categoria.calcado.quantidade} onChange={evento => setQuantidadeProd(evento.target.value)} />
-                    <BotaoNumber onClick={() => {
-                        const newquantidade = quantidadeCategoria + 1;
-                        console.log(newquantidade)
-                        setQuantidadeProd(newquantidade.toString());
-                    }}><button type="button">+ </button></BotaoNumber>
-                </ThTabela>
-                <th>{precoCategoria * precoProd}</th>
-            </tr>
-        } else if (categoria?.equipamento !== undefined) {
-            const precoProd = parseFloat(quantidadeProd);
-            const precoCategoria = parseFloat(categoria.equipamento.preco);
-            const quantidadeCategoria = parseFloat(quantidadeProd);
-            return <tr>
-                <th><img src={categoria.equipamento.imagemProduto[0].url} alt="imagem do produto" width='100' /></th>
-                <ThTabela>
-                    <BotaoNumber onClick={() => {
-                        if(quantidadeCategoria >1){
-                        const newquantidade = quantidadeCategoria - 1;
-                        console.log(newquantidade)
-                        setQuantidadeProd(newquantidade.toString());
-                        }
-                    }}><button type="button">-</button></BotaoNumber>
-                    <input type="number" value={quantidadeProd} placeholder="Nº" min='1'
-                        required max={categoria.equipamento.quantidade} onChange={evento => setQuantidadeProd(evento.target.value)} />
-                    <BotaoNumber onClick={() => {
-                        const newquantidade = quantidadeCategoria + 1;
-                        console.log(newquantidade)
-                        setQuantidadeProd(newquantidade.toString());
-                    }}><button type="button">+ </button></BotaoNumber>
-                </ThTabela>
-                <th>{precoCategoria * precoProd}</th>
-            </tr>
-        } else if (categoria?.roupa !== undefined) {
-            const precoProd = parseFloat(quantidadeProd);
-            const precoCategoria = parseFloat(categoria.roupa.preco);
-            const quantidadeCategoria = parseFloat(quantidadeProd);
-            return <tr>
-                <th><img src={categoria.roupa.imagemProduto[0].url} alt="imagem do produto" width='100' /></th>
-                <ThTabela>
-                    <BotaoNumber onClick={() => {
-                        if(quantidadeCategoria >1){
-                        const newquantidade = quantidadeCategoria - 1;
-                        console.log(newquantidade)
-                        setQuantidadeProd(newquantidade.toString());
-                        }
-                    }}><button type="button">-</button></BotaoNumber>
-                    <input type="number" value={quantidadeProd} placeholder="Nº" min='1'
-                        required max={categoria.roupa.quantidade} onChange={evento => setQuantidadeProd(evento.target.value)} />
-                    <BotaoNumber onClick={() => {
-                        const newquantidade = quantidadeCategoria + 1;
-                        console.log(newquantidade)
-                        setQuantidadeProd(newquantidade.toString());
-                    }}><button type="button">+ </button></BotaoNumber>
-                </ThTabela>
-                <th>{precoCategoria * precoProd}</th>
-            </tr>
-        } else if (categoria?.suplemento !== undefined) {
-            const precoProd = parseFloat(quantidadeProd);
-            const precoCategoria = parseFloat(categoria.suplemento.preco);
-            const quantidadeCategoria = parseFloat(quantidadeProd);
-            return <tr>
-                <th><img src={categoria.suplemento.imagemProduto[0].url} alt="imagem do produto" width='100' /></th>
-                <ThTabela>
-                    <BotaoNumber onClick={() => {
-                        if(quantidadeCategoria >1){
-                        const newquantidade = quantidadeCategoria - 1;
-                        console.log(newquantidade)
-                        setQuantidadeProd(newquantidade.toString());
-                        }
-                    }}><button type="button">-</button></BotaoNumber>
-                    <input type="number" value={quantidadeProd} placeholder="Nº" min='1'
-                        required max={categoria.suplemento.quantidade} onChange={evento => setQuantidadeProd(evento.target.value)} />
-                </ThTabela>
+                    }
+                }}><button type="button">-</button></BotaoNumber>
+                <input type="number" value={quantidadeProd} placeholder="Nº" min='1'
+                    required max={categoria[obj].quantidade} onChange={evento => setQuantidadeProd(evento.target.value)} />
                 <BotaoNumber onClick={() => {
                     const newquantidade = quantidadeCategoria + 1;
                     console.log(newquantidade)
                     setQuantidadeProd(newquantidade.toString());
-                }}><button type="button">+ </button></BotaoNumber>
-                <th>{precoCategoria * precoProd}</th>
-            </tr>
-        } else {
-            return <>
-
-            </>
-        }
+                }}><button type="button">+</button></BotaoNumber>
+            </ThTabela>
+            <th>{precoCategoria * precoProd}</th>
+        </tr>
+        }else return <></>
     }
+    
 
     function cancelarPedido() {
         localStorage.removeItem("carrinho");
@@ -168,10 +99,7 @@ const CarrinhoDeCompra = () => {
         setSpinner(true);
         apiFullSports.request({
             method: "POST",
-            url: "realizar-pedido/",
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-            },
+            url: "realizar-pedido",
             data: {
                 quantidadePedido: quantidadeProd,
                 produto: carrinho.pedido.produtoID,
@@ -183,6 +111,7 @@ const CarrinhoDeCompra = () => {
             window.location.href = '/historico-de-pedido';
         }).catch((err) => console.log(err))
     }
+
     if (!carrinho) {
         return <>
             <Cabecalho />
@@ -199,6 +128,7 @@ const CarrinhoDeCompra = () => {
             <Footer />
         </>
     } else {
+        if (produto?.categoriaProduto !== undefined) {
         return <>
             <Cabecalho />
 
@@ -229,6 +159,7 @@ const CarrinhoDeCompra = () => {
 
             <Footer />
         </>
+        }else return <></>
     }
 }
 export default CarrinhoDeCompra;

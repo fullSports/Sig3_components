@@ -132,6 +132,8 @@ const AtualizarProduto = () => {
     const [open, setOpen] = React.useState(false);
     const [messagemErroFoto, setmessagemErroFoto] = useState(false)
     const [categoriaID, setCategoriaID] = useState('');
+    const [imageSelecionado, setimageSelecionado] = useState(true);
+    const [botaoCadastrarNovaFoto, setbotaoCadastrarNovaFoto] = useState(true)
     const handleClose = () => {
         setOpen(false);
     };
@@ -161,10 +163,10 @@ const AtualizarProduto = () => {
                     setNomeProduto(categoria[obj].nome);
                     setSexo(categoria[obj].sexo);
                     setCategoriaProduto(obj);
-                    setCategoriaID(resposta.data._id.toString());
+                    setCategoriaID(resposta.data._id);
                     setCorProduto(categoria[obj].cor);
                     setPreco(categoria[obj].preco);
-                    setQuantidade(categoria[obj].quantidate);
+                    setQuantidade(categoria[obj].quantidade);
                     setTamanhoProduto(categoria[obj].tamanho);
                     setImagemProduto(categoria[obj].imagemProduto)
                     setDataCadastro(resposta.data.dataCadastro)
@@ -176,26 +178,30 @@ const AtualizarProduto = () => {
 
     function cadastrarNovasFotos() {
         setmessagemErroFoto(false)
+        setbotaoCadastrarNovaFoto(false)
         setSpinner(true)
         if (imagens.length > 1) {
-            console.log(imagens);
             ImagemProduto?.map(item => {
                 return ImagensID.unshift(item._id);
             });
-            imagens.map(item => {
-                return apiFullSports.request({
-                    url: 'imagem/',
-                    method: 'POST',
-                    headers: {
-                        'Access-Control-Allow-Origin': '*',
-                        'Content-Type': 'multipart/form-data'
-                    },
-                    data: {
-                        file: item
-                    }
-                }).then(response => {
-                    ImagensID.unshift(response.data.image._id)
-                }).catch(err => console.log(err))
+            imagens.map(async item => {
+                try {
+                    const response = await apiFullSports.request({
+                        url: 'imagem/',
+                        method: 'POST',
+                        headers: {
+                            'Access-Control-Allow-Origin': '*',
+                            'Content-Type': 'multipart/form-data'
+                        },
+                        data: {
+                            file: item
+                        }
+                    });
+                    ImagensID.unshift(response.data.image._id);
+                } catch (err) {
+                    console.log(err);
+                    setbotaoCadastrarNovaFoto(true);
+                }
             })
             ImagensID.pop();
             console.log(ImagensID)
@@ -212,11 +218,15 @@ const AtualizarProduto = () => {
                         }
                     }
                 }).then(() => { window.location.reload(); setSpinner(false) })
-                    .catch(err => console.log(err));
+                    .catch(err => {
+                        console.log(err);
+                        setbotaoCadastrarNovaFoto(true)
+                    });
             }, 5000)
         } else {
             setSpinner(false)
             setmessagemErroFoto(true)
+            setbotaoCadastrarNovaFoto(true)
         }
     }
     const deletarImagem = (DeletarImagem: Iimagem) => {
@@ -226,6 +236,7 @@ const AtualizarProduto = () => {
             })
             setOpen(true)
         }
+        window.location.reload();
     }
     function EscreveImagens() {
         return <>{
@@ -279,7 +290,7 @@ const AtualizarProduto = () => {
                             sexo: sexo,
                             tamanho: tamanhoNumber,
                             preco: preco,
-                            quantidate: quantidade
+                            quantidade: quantidade
                         }
                     }
                 }
@@ -287,11 +298,7 @@ const AtualizarProduto = () => {
                 setSpinner(false);
                 window.location.href = '/dashboard/consultar-produtos'
             }).catch(err => console.log(err))
-
-
-
         }
-
     }
     return <>
         <Main>
@@ -454,18 +461,20 @@ const AtualizarProduto = () => {
             }}>
                 <OpcoentesFotoProduto />
 
-                <CadastrarNovaFotoInpult htmlFor='file'>Escolher novas fotos...</CadastrarNovaFotoInpult>
-                <input
-                    onChange={selecionarArquivo}
-                    className="txt-form"
-                    id="file"
-                    type="file"
-                    name="file"
-                    accept="image/jpeg, image/pjpeg, image/png, image/gif"
-                    multiple
-                />
+                {imageSelecionado && (<><CadastrarNovaFotoInpult htmlFor='file'>Escolher novas fotos...</CadastrarNovaFotoInpult>
+                    <input
+                        onChange={selecionarArquivo}
+                        className="txt-form"
+                        id="file"
+                        type="file"
+                        name="file"
+                        accept="image/jpeg, image/pjpeg, image/png, image/gif"
+                        multiple
+                    />
+                </>)
+                }
                 <Box component={'div'} sx={{ display: 'flex', justifyContent: 'center' }}>
-                    <Button variant="outlined" sx={{ border: "2px solid", margin: "1%" }} onClick={cadastrarNovasFotos}>Cadastrar Nova Foto</Button>
+                    {botaoCadastrarNovaFoto && (<Button variant="outlined" sx={{ border: "2px solid", margin: "1%" }} onClick={cadastrarNovasFotos}>Cadastrar Nova Foto</Button>)}
                     <Button variant="outlined" sx={{ border: "2px solid", margin: "1%" }} onClick={handleClose}>Fechar</Button>
                 </Box>
                 <Box component={'div'} sx={{ display: 'flex', fontSize: '23px' }}>

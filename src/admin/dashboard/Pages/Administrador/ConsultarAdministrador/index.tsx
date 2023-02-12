@@ -19,7 +19,7 @@ const ConsultaAdimistrador = () =>{
                             <thead>
                                 <tr>
                                     <th>foto de perfil</th>
-                                    <th>Data de Cadastro</th>
+                                    {/* <th>Data de Cadastro</th> */}
                                     <th>CPF</th>
                                     <th>Nome</th>
                                     <th>Dt. Nascimento</th>

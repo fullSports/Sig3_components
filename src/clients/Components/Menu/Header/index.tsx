@@ -207,8 +207,12 @@ const Cabecalho = () => {
                   <div className="user-options hide">
                     <ul>
                       <li>Editar Perfil</li>
+                      <li onClick={()=>{
+                        window.location.href = "/historico-de-pedido"
+                      }}>Histórico de Pedido</li>
                       <li onClick={() => {
                         window.localStorage.removeItem("user");
+                        window.localStorage.removeItem("carrinho");
                         window.location.href = "/"
                       }}>Sair</li>
                     </ul>

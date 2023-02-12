@@ -214,7 +214,9 @@ const AtualizarAdministrador = () => {
             }).catch(erro => console.log(erro))
         }
         else {
-            apiFullSports.delete(`imagem/${imagemId}`)
+            apiFullSports.delete(`imagem/${imagemId}`).then(()=>{
+
+           
             setSpinner(true)
             setImagemID('');
 
@@ -235,19 +237,25 @@ const AtualizarAdministrador = () => {
                     method: "PUT",
                     url: `atualizar-cliente/${parametros.id}`,
                     data: {
-                        imagemPerfil: evento.data.image_id
+                        imagemPerfil: evento.data.image._id
                     }
                 }).then((response) => {
-                    // setSpinner(false);
-                    // setCadastrarNovaFoto(false);
-                    // setImagemID(response.data.imagemPerfil._id);
-                    // setImagemPerfilurl(response.data.imagemPerfil.url);
+                    setSpinner(false);
+                    setCadastrarNovaFoto(false);
+                    setImagemID(response.data.user.imagemPerfil._id);
+                    setImagemPerfilurl(response.data.user.imagemPerfil.url);
 
                     window.location.reload();
                 }).catch(erro => console.log(erro))
 
                 // handleClose()
             }).catch(erro => console.log(erro))
+
+            
+        }).catch((err)=>{
+            console.log(err)
+            window.location.reload()
+        })
         }
     }
 

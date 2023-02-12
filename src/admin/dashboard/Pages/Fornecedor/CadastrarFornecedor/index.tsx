@@ -24,7 +24,8 @@ const CadastrarFornecedor = () => {
     function aoSubmit(evento: React.FormEvent<HTMLFormElement>) {
         evento.preventDefault();
         setSpinner(true);
-
+        setMensagemErroBolean(false)
+        setMenssagemErro('')
         apiFullSports.request({
             method: 'POST',
             url: 'cadastrar-fornecedor',
@@ -35,7 +36,7 @@ const CadastrarFornecedor = () => {
                 endereco: `${rua},${numero} -${complemento}- ${estado}, ${cidade}, ${bairro}`,
             }
         }).then(resposta => {
-            if (resposta.data.message) {
+            if (!resposta.data.registeredSuccess) {
                 setSpinner(false)
                 setMensagemErroBolean(true);
                 setMenssagemErro(resposta.data.message)
@@ -45,7 +46,12 @@ const CadastrarFornecedor = () => {
                 setMensagemErroBolean(false)
                 window.location.href = '/dashboard/consultar-fornecedores'
             }
-        }).catch((err) => console.log(err))
+        }).catch((err) => {
+            console.log(err)
+            setSpinner(false)
+            setMensagemErroBolean(true);
+            setMenssagemErro("Erro na Requisição")
+        })
     }
 
     function buscaCep() {

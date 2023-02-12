@@ -63,20 +63,22 @@ const Home = () => {
                         {/* <div className="cards-container overflow-x-auto"> */}
                         <div className="Hcard-container">
                             <Slider {...sliderHorizontalCards}>
-                                {produtos.map(item => {
-                                    if (item.categoriaProduto.roupa !== undefined) {
-                                        var newPrecoProduto = parseFloat(item.categoriaProduto.roupa.preco.replace(',', '.'));
+                                {produtos.map((item: any )=> {
+                                    
+                                        const obj = Object.keys(item.categoriaProduto)[0].toString();
+
+                                        var newPrecoProduto = parseFloat(item.categoriaProduto[obj].preco.replace(',', '.'));
                                         var parcela = newPrecoProduto / 12;
                                         var newParcela = parcela.toFixed(2);
                                         return <HorizontalCardProduct
-                                            tamanho={item.categoriaProduto.roupa.tamanho}
+                                            tamanho={item.categoriaProduto[obj].tamanho}
                                             produtoID={item._id}
-                                            nome={item.categoriaProduto.roupa.nome}
-                                            preco={item.categoriaProduto.roupa.preco}
+                                            nome={item.categoriaProduto[obj].nome}
+                                            preco={item.categoriaProduto[obj].preco}
                                             precoParcelado={newParcela.toString().replace(".", ",")}
-                                            src={item.categoriaProduto.roupa.imagemProduto[0].url}
+                                            src={item.categoriaProduto[obj].imagemProduto[0].url}
                                         />
-                                    } 
+                                    
                                 })}
                             </Slider>
                         </div>

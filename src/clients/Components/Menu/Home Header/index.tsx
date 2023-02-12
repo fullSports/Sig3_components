@@ -70,57 +70,57 @@ const HomeHeader = () => {
             return <img src={contaIcon} />
         }
     }
-    function MostrarCarrinho(){
-        if(carrinho){
-            return<>
-            <BotaoNumber>{carrinho.pedido.quantidade}</BotaoNumber>
-            <img src={carrinhoIcon} alt="Carrinho" />
+    function MostrarCarrinho() {
+        if (carrinho) {
+            return <>
+                <BotaoNumber>{carrinho.pedido.quantidade}</BotaoNumber>
+                <img src={carrinhoIcon} alt="Carrinho" />
             </>
-        }else{
-            return<>
-            <img src={carrinhoIcon} alt="Carrinho" />
+        } else {
+            return <>
+                <img src={carrinhoIcon} alt="Carrinho" />
             </>
         }
     }
-    function editarInfoConta(){
+    function editarInfoConta() {
         if (user) {
-           let userDetails = document.querySelector('.user-options-home');
-           let isDisplayed = userDetails?.classList.contains('hide');
-           isDisplayed ? userDetails?.classList.remove("hide") : userDetails?.classList.toggle('hide')
+            let userDetails = document.querySelector('.user-options-home');
+            let isDisplayed = userDetails?.classList.contains('hide');
+            isDisplayed ? userDetails?.classList.remove("hide") : userDetails?.classList.toggle('hide')
         }
     }
     return (
         <>
-            
-        <div className="toggle-acess">
-            <div className="toggle-main">
-                <button onClick={showToggleOpts} className='toggle-btn'>
-                    <ImAccessibility size={30} />
-                </button>
-            </div>
-            <div className="toggle-group hideShow">
-                <div className="toggle-opts">
-                    <button className='toggle-opt-btn' id='aumentaFonte'>
-                    <TbArrowBigTop />
+
+            <div className="toggle-acess">
+                <div className="toggle-main">
+                    <button onClick={showToggleOpts} className='toggle-btn'>
+                        <ImAccessibility size={30} />
                     </button>
                 </div>
-                <div className="toggle-opts">
-                    <button className='toggle-opt-btn' id="diminuiFonte">
-                    <TbArrowBigDown />
-                    </button>
-                </div>
-                <div className="toggle-opts">
-                    {theme === 'light' ?
-                    (<button onClick={() => setTheme("dark")} className='toggle-opt-btn'>
-                        <ImContrast />
-                    </button>)
-                    :
-                    (<button onClick={() => setTheme("light")} className='toggle-opt-btn'>
-                        <ImContrast />
-                    </button>)}
+                <div className="toggle-group hideShow">
+                    <div className="toggle-opts">
+                        <button className='toggle-opt-btn' id='aumentaFonte'>
+                            <TbArrowBigTop />
+                        </button>
+                    </div>
+                    <div className="toggle-opts">
+                        <button className='toggle-opt-btn' id="diminuiFonte">
+                            <TbArrowBigDown />
+                        </button>
+                    </div>
+                    <div className="toggle-opts">
+                        {theme === 'light' ?
+                            (<button onClick={() => setTheme("dark")} className='toggle-opt-btn'>
+                                <ImContrast />
+                            </button>)
+                            :
+                            (<button onClick={() => setTheme("light")} className='toggle-opt-btn'>
+                                <ImContrast />
+                            </button>)}
+                    </div>
                 </div>
             </div>
-        </div>
             <div className="header-side show-sidebar">
                 <button className="toggleSidebar" onClick={openTeste}>
                     <RiMenuFill size={30} />
@@ -153,8 +153,8 @@ const HomeHeader = () => {
                 </div>
                 <div className="home-barra-client-items hide-header">
                     <ul>
-                        <li onClick={()=>window.location.href='/carrinho-de-compra/'}>
-                            <MostrarCarrinho/>
+                        <li onClick={() => window.location.href = '/carrinho-de-compra/'}>
+                            <MostrarCarrinho />
                             Carrinho
                         </li>
                         <li>
@@ -164,21 +164,24 @@ const HomeHeader = () => {
                         <li>
                             <div onClick={editarInfoConta} className="flex gap-2">
                                 <MostrarImagemPerfil />
-                                { user ? user.nome.split(' ').slice(0,1) : <Link to="/login">Entrar</Link> }
-                            </div> 
+                                {user ? user.nome.split(' ').slice(0, 1) : <Link to="/login">Entrar</Link>}
+                            </div>
                             <div className="user-options-home hide">
                                 <ul>
-                                    <li onClick={()=>{
-                                        window.location.href=`/atualizar-cliente/${user._id}`
+                                    <li onClick={() => {
+                                        window.location.href = `/atualizar-cliente/${user._id}`
                                     }}>Editar Perfil</li>
-                                    <li onClick={()=>{
+                                    <li onClick={() => {
+                                        window.location.href = "/historico-de-pedido"
+                                    }}>Histórico de Pedido</li>
+                                    <li onClick={() => {
                                         window.localStorage.removeItem("user");
-                                        window.location.href="/"
+                                        window.location.href = "/"
                                     }}>Sair</li>
                                 </ul>
-                            </div>  
+                            </div>
                         </li>
-                        
+
                     </ul>
                 </div>
             </div>
@@ -203,7 +206,7 @@ const HomeHeader = () => {
                                 </li>
                             )
                         })}
-                        
+
                     </ul>
                 </div>
             </div>

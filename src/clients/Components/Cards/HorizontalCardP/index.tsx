@@ -24,7 +24,7 @@ const HorizontalCardProduct: React.FC<Props> = ({tamanho,produtoID,nome,preco,sr
                         <span className="card-product-price">R$ {preco}</span>    
                         <span className="card-product-parce">12x de R${precoParcelado}</span>    
                     </div>
-                    <span className="card-product-price">tamanho: {tamanho.toString()}</span>
+                    <span className="card-product-price">tamanho: {tamanho}</span>
                 </div>
             </a>
         </div>

@@ -61,7 +61,7 @@ const TabelaAdimistrador = () => {
                                     </Icone>
                                 </td>
 
-                                <td>{`${item.dataCadastro.toLocaleString()}`}</td>
+                                {/* <td>{`${item.dataCadastro}`}</td> */}
                                 <td>{`${item.cpf.charAt(0)}${item.cpf.charAt(1)}${item.cpf.charAt(2)}. *** . *** -${item.cpf.charAt(12)}${item.cpf.charAt(13)}`}</td>
                                 <td>{item.nome}</td>
                                 <td>{item.dataNascimento}</td>
@@ -103,7 +103,7 @@ const TabelaAdimistrador = () => {
                                             <img src={item.imagemPerfil.url} />
                                         </div>
                                     </td>
-                                    <td>{`${item.dataCadastro.toLocaleString()}`}</td>
+                                    {/* <td>{`${item.dataCadastro}`}</td> */}
                                     <td>{item.cpf}</td>
                                     <td>{item.nome}</td>
                                     <td>{item.dataNascimento}</td>

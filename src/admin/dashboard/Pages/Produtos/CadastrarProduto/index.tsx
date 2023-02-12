@@ -106,9 +106,9 @@ const CadastrarProduto = () => {
                                 fornecedor: fornecedorID,
                                 cor: corProduto,
                                 sexo: sexo,
-                                tamanho: tamanhoProduto,
+                                tamanho: parseFloat(tamanhoProduto),
                                 preco: preco,
-                                quantidade: quantidade,
+                                quantidade: parseFloat(quantidade),
                                 imagemProduto: ImagensID
                             }
                         }
