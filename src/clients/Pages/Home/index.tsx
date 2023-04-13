@@ -54,7 +54,7 @@ const Home = () => {
                         </div>
                     </div>
                 </div>
-                
+
                 <div className="sec-container">
                     <div className="product-container">
                         <div className="product-banner">
@@ -63,13 +63,14 @@ const Home = () => {
                         {/* <div className="cards-container overflow-x-auto"> */}
                         <div className="Hcard-container">
                             <Slider {...sliderHorizontalCards}>
-                                {produtos.map((item: any )=> {
-                                    
-                                        const obj = Object.keys(item.categoriaProduto)[0].toString();
+                                {produtos.map((item: any) => {
 
-                                        var newPrecoProduto = parseFloat(item.categoriaProduto[obj].preco.replace(',', '.'));
-                                        var parcela = newPrecoProduto / 12;
-                                        var newParcela = parcela.toFixed(2);
+                                    const obj = Object.keys(item.categoriaProduto)[0].toString();
+
+                                    var newPrecoProduto = parseFloat(item.categoriaProduto[obj].preco.replace(',', '.'));
+                                    var parcela = newPrecoProduto / 12;
+                                    var newParcela = parcela.toFixed(2);
+                                    if (item.categoriaProduto[obj].imagemProduto[0].url) {
                                         return <HorizontalCardProduct
                                             tamanho={item.categoriaProduto[obj].tamanho}
                                             produtoID={item._id}
@@ -78,7 +79,7 @@ const Home = () => {
                                             precoParcelado={newParcela.toString().replace(".", ",")}
                                             src={item.categoriaProduto[obj].imagemProduto[0].url}
                                         />
-                                    
+                                    } else return <></>
                                 })}
                             </Slider>
                         </div>
