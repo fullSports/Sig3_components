@@ -369,7 +369,7 @@ const AtualizarAdministrador = () => {
                             />
                         </div>
                         {cadastrarNovaFoto && (<Button variant="outlined" sx={{ border: "2px solid" }} onClick={cadastrarFotoPerfil}>Cadastrar Nova Foto</Button>)}
-                        {spinner && (<p>carregando...</p>)}
+                      
                         {mensagemErroBolean && (<span id="menssagem-erro">{menssagemErro}</span>)}
                         <Button variant="outlined" sx={{ border: "2px solid" }} onClick={handleClose}>Fechar</Button>
                     </Box>
