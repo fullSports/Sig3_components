@@ -1,7 +1,11 @@
 import {useContext, createContext, useState, useEffect} from 'react';
-
+import React from "react"
+import PropTypes from 'prop-types';
 const ThemeContext = createContext();
-
+ThemeContextProvider.propTypes = {
+    children: PropTypes.node.isRequired,
+  };
+  
 export default function ThemeContextProvider({children}){
     
     const [theme, setTheme] = useState(
