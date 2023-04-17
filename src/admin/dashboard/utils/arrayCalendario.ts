@@ -1,19 +1,19 @@
-export var arrayMonthsPTBR = [
-  "Janeiro",
-  "Fevereiro",
-  "Março",
-  "Abril",
-  "Maio",
-  "Junho",
-  "Julho",
-  "Agosto",
-  "Setembro",
-  "Outubro",
-  "Novembro",
-  "Dezembro" 
-]
+export const arrayMonthsPTBR = [
+    "Janeiro",
+    "Fevereiro",
+    "Março",
+    "Abril",
+    "Maio",
+    "Junho",
+    "Julho",
+    "Agosto",
+    "Setembro",
+    "Outubro",
+    "Novembro",
+    "Dezembro" 
+];
 
-export var arrayDaysPTBR =[
+export const arrayDaysPTBR =[
     "Domingo",
     "Segunda-Feira",
     "Terça-Feira",
@@ -21,4 +21,4 @@ export var arrayDaysPTBR =[
     "Quinta-Feira",
     "Sexta-Feira",
     "Sábado"
-]
+];

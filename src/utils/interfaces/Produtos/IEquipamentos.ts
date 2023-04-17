@@ -1,5 +1,5 @@
-import IFornecedor from "../IFornecedor"
-import Iimagem from "../Iimagem"
+import IFornecedor from "../IFornecedor";
+import Iimagem from "../Iimagem";
 export default interface IEquipamentos{
     _id: string,
     nome: string,

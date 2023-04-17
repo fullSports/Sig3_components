@@ -1,5 +1,5 @@
-import IFornecedor from "../IFornecedor"
-import Iimagem from "../Iimagem"
+import IFornecedor from "../IFornecedor";
+import Iimagem from "../Iimagem";
 export default interface ICacados{
     _id: string,
     nome: string,

@@ -1,5 +1,5 @@
-import IFornecedor from "../IFornecedor"
-import Iimagem from "../Iimagem"
+import IFornecedor from "../IFornecedor";
+import Iimagem from "../Iimagem";
 export default interface IRoupa{
     _id: string,
     nome: string,
@@ -11,5 +11,5 @@ export default interface IRoupa{
     quantidade: number,
     imagemProduto: [
     Iimagem
-    ]
+    ],
 }
