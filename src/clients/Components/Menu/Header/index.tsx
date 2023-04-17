@@ -6,7 +6,7 @@ import Sidebar from '../Sidebar/index'
 import styled from 'styled-components';
 import { RiMenuFill } from 'react-icons/ri';
 import { BiSearch } from 'react-icons/bi';
-import { TbArrowBigDown, TbArrowBigTop } from 'react-icons/tb';
+import { TbArrowBigDown, TbArrowBigUp } from 'react-icons/tb';
 import { ImAccessibility, ImContrast } from 'react-icons/im';
 import { Link } from 'react-router-dom';
 const brandLogo = require('../../../../assets/images/fullSportLogo.png');
@@ -116,7 +116,7 @@ const Cabecalho = () => {
         <div className="toggle-group hideShow">
           <div className="toggle-opts">
             <button className='toggle-opt-btn'>
-              <TbArrowBigTop />
+              <TbArrowBigUp />
             </button>
           </div>
           <div className="toggle-opts">
