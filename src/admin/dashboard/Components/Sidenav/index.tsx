@@ -76,9 +76,9 @@ const DashboardSidenav = () => {
                             </li>
                         </Link>
                         <span className="sidenav-title">Gerenciar cadastros</span>
-                        {(arrayNavCadastros).map((item: any, index: any) => <SubMenu key={index} item={item} />)}
+                        {(arrayNavCadastros).map((item: any, index: any) => <SubMenu  item={item} />)}
                         <span className="sidenav-title">Gerenciar Perfis</span>
-                        {(arrayNavPerfis).map((item: any, index: any) => <SubMenu key={index} item={item} />)}
+                        {(arrayNavPerfis).map((item: any, index: any) => <SubMenu  item={item} />)}
                     </ul>
                 </div>
             </div>
