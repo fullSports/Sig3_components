@@ -1,11 +1,7 @@
 
 export  const arrayNavItems = [
     {
-        title: "Feminino",
-        path: "/produtos/"
-    },
-    {
-        title: "Masculino",
+        title: "Produtos",
         path: "/produtos/"
     },
     {

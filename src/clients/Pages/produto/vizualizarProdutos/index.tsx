@@ -24,103 +24,26 @@ const VizualizacaoDeProdutos = () => {
         }).catch((err) => console.log(err))
     }, []);
 
-    if (categoriaParam?.toString() === 'equipamento') {
+    if (categoriaParam) {
         return <>
             <Cabecalho />
             <Main>
                 <div className="produtos-grid-container">
                     {produtos.map(item => {
-                        const categoriaDeproduto = item.categoriaProduto.equipamento;
-                        if (categoriaDeproduto !== undefined) {
-                            var newPrecoProduto = parseFloat(categoriaDeproduto.preco.replace(',', '.'));
+                        const categoriaDeproduto = item.categoriaProduto as any;
+                        const obj = Object.keys(categoriaDeproduto)[0].toString();
+                        if (obj == categoriaParam) {
+                            var newPrecoProduto = parseFloat(categoriaDeproduto[obj].preco.replace(',', '.'));
                             var parcela = newPrecoProduto / 12;
                             var newParcela = parcela.toFixed(2);
                             return <VerticalCardProduct
-                                tamanho={item.categoriaProduto.equipamento.tamanho}
-                                precoParcelado={newParcela.toString().replace(".",",")}
-                                produtoId={item._id}
-                                src={categoriaDeproduto.imagemProduto[0].url}
-                                produtoName={categoriaDeproduto.nome}
+                                tamanho={categoriaDeproduto[obj].tamanho}
+                                precoParcelado={newParcela.toString().replace(".", ",")}
+                                produtoId={categoriaDeproduto[obj]._id}
+                                src={categoriaDeproduto[obj].imagemProduto[0].url}
+                                produtoName={categoriaDeproduto[obj].nome}
                                 PrecoAnterior={""}
-                                PrecoAtual={categoriaDeproduto.preco}
-                            />
-                        }
-                    })}
-                </div>
-            </Main>
-            <Footer />
-        </>
-    } else if (categoriaParam?.toString() === 'calcado') {
-        return <>
-            <Cabecalho />
-            <Main>
-                <div className="produtos-grid-container">
-                    {produtos.map(item => {
-                        const categoriaDeproduto = item.categoriaProduto.calcado;
-                        if (categoriaDeproduto !== undefined) {
-                            var newPrecoProduto = parseFloat(categoriaDeproduto.preco.replace(',', '.'));
-                            var parcela = newPrecoProduto / 12;
-                            var newParcela = parcela.toFixed(2);
-                            return <VerticalCardProduct
-                                tamanho={item.categoriaProduto.calcado.tamanho}
-                                precoParcelado={newParcela.toString().replace(".",",")}
-                                produtoId={item._id}
-                                src={categoriaDeproduto.imagemProduto[0].url}
-                                produtoName={categoriaDeproduto.nome}
-                                PrecoAnterior={""}
-                                PrecoAtual={categoriaDeproduto.preco}
-                            />
-                        }
-                    })}
-                </div>
-            </Main>
-            <Footer />
-        </>
-    } else if (categoriaParam?.toString() === 'roupa') {
-        return <>
-            <Cabecalho />
-            <Main>
-                <div className="produtos-grid-container">
-                    {produtos.map(item => {
-                        const categoriaDeproduto = item.categoriaProduto.roupa;
-                        if (categoriaDeproduto !== undefined) {
-                            var newPrecoProduto = parseFloat(categoriaDeproduto.preco.replace(',', '.'));
-                            var parcela = newPrecoProduto / 12;
-                            var newParcela = parcela.toFixed(2);
-                            return <VerticalCardProduct
-                                tamanho={item.categoriaProduto.roupa.tamanho}
-                                precoParcelado={newParcela.toString().replace(".",",")}
-                                produtoId={item._id}
-                                src={categoriaDeproduto.imagemProduto[0].url}
-                                produtoName={categoriaDeproduto.nome}
-                                PrecoAnterior={""}
-                                PrecoAtual={categoriaDeproduto.preco}
-                            />
-                        }
-                    })}
-                </div>
-            </Main>
-            <Footer />
-        </>
-    } else if (categoriaParam?.toString() === 'suplemento') {
-        return <>
-            <Cabecalho />
-            <Main>
-                <div className="produtos-grid-container">
-                    {produtos.map(item => {
-                        const categoriaDeproduto = item.categoriaProduto.suplemento;
-                        if (categoriaDeproduto !== undefined) {
-                            var newPrecoProduto = parseFloat(categoriaDeproduto.preco.replace(',', '.'));
-                            var parcela = newPrecoProduto / 12;
-                            var newParcela = parcela.toFixed(2);
-                            return <VerticalCardProduct
-                                tamanho={item.categoriaProduto.suplemento.tamanho}
-                                precoParcelado={newParcela.toString().replace(".",",")}
-                                produtoId={item._id}
-                                src={categoriaDeproduto.imagemProduto[0].url}
-                                produtoName={categoriaDeproduto.nome}
-                                PrecoAnterior={""}
-                                PrecoAtual={categoriaDeproduto.preco}
+                                PrecoAtual={categoriaDeproduto[obj].preco}
                             />
                         }
                     })}
@@ -141,7 +64,7 @@ const VizualizacaoDeProdutos = () => {
                             var newParcela = parcela.toFixed(2);
                             return <VerticalCardProduct
                                 tamanho={item.categoriaProduto.equipamento.tamanho}
-                                precoParcelado={newParcela.toString().replace(".",",")}
+                                precoParcelado={newParcela.toString().replace(".", ",")}
                                 produtoId={item._id}
                                 src={categoriaDeproduto.equipamento.imagemProduto[0].url}
                                 produtoName={categoriaDeproduto.equipamento.nome}
@@ -154,7 +77,7 @@ const VizualizacaoDeProdutos = () => {
                             var newParcela = parcela.toFixed(2);
                             return <VerticalCardProduct
                                 tamanho={item.categoriaProduto.calcado.tamanho}
-                                precoParcelado={newParcela.toString().replace(".",",")}
+                                precoParcelado={newParcela.toString().replace(".", ",")}
                                 produtoId={item._id}
                                 src={categoriaDeproduto.calcado.imagemProduto[0].url}
                                 produtoName={categoriaDeproduto.calcado.nome}
@@ -167,7 +90,7 @@ const VizualizacaoDeProdutos = () => {
                             var newParcela = parcela.toFixed(2);
                             return <VerticalCardProduct
                                 tamanho={item.categoriaProduto.roupa.tamanho}
-                                precoParcelado={newParcela.toString().replace(".",",")}
+                                precoParcelado={newParcela.toString().replace(".", ",")}
                                 produtoId={item._id}
                                 src={categoriaDeproduto.roupa.imagemProduto[0].url}
                                 produtoName={categoriaDeproduto.roupa.nome}
@@ -180,7 +103,7 @@ const VizualizacaoDeProdutos = () => {
                             var newParcela = parcela.toFixed(2);
                             return <VerticalCardProduct
                                 tamanho={item.categoriaProduto.suplemento.tamanho}
-                                precoParcelado={newParcela.toString().replace(".",",")}
+                                precoParcelado={newParcela.toString().replace(".", ",")}
                                 produtoId={item._id}
                                 src={categoriaDeproduto.suplemento.imagemProduto[0].url}
                                 produtoName={categoriaDeproduto.suplemento.nome}
