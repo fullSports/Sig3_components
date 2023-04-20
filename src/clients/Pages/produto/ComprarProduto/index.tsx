@@ -16,7 +16,7 @@ const GridVisuPrd = styled.div`
     margin-right: auto;
     justify-content: center;
     /* POSSIVEL MUDANÇA PARA 1200PX */
-    width: 90%;
+    width: 100%;
     display: grid;
     grid-template-columns: repeat(3, auto);
     /* grid-gap: 25px; */
@@ -32,6 +32,8 @@ const FotosAdcPrd = styled.div`
         height: 124px;
     }
     @media screen and (max-width: 1040px){
+        display: flex;
+        justify-content: center;
         img{
         width: 75px;
         height: 65px;
@@ -104,6 +106,11 @@ const ConteudoDescAnunPrd = styled.div`
     #tmnhQtd input:focus{
     outline: none;
     }
+    #tmnhQtd th {
+        display: flex;
+        justify-content: space-between;
+        width: 40%;
+    }
     #btnLinkPrd{
     line-height: 50px;
     margin: 15px 0 ;
@@ -149,13 +156,18 @@ const BotaoNumber = styled.div`
     align-items: center;
     font-size: 22px;
     cursor: pointer;
-    margin-left: 12px;
-    margin-top: 6px;
 `;
-const ThTabela = styled.th`
-display: grid;
-    grid-template-columns: repeat(3,40px);
+const ThTabela = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 140px;
     height: auto;
+    border: 1.8px solid #000;
+    padding: 16px 8px;
+    input[type=number]::-webkit-inner-spin-button { 
+    -webkit-appearance: none;
+    }
 `;
 const DivCarregando = styled.div`
 display: flex;
@@ -168,7 +180,6 @@ const ComprarProduto = () => {
     const [spinner, setSpinner] = useState(true);
     const [estiloImgProd1Array, setEstiloImgProd1Array] = useState(Array);
     const [quantidade, setQuantidade] = useState("");
-    const [carregdo, setCarregado] = useState(false);
     useEffect(() => {
         apiFullSports.get<IProduto>(`listar-produto/${parametro.id}`).then(resposta => {
             setProduto(resposta.data);
@@ -233,10 +244,12 @@ const ComprarProduto = () => {
                     transition: all 0.3s;
                 }
                 @media screen and (max-width: 1040px){
+                    display: flex;
+                    justify-content: center;
                     img{
                     margin: 10px 0 10px;
-                    width: 90%;
-                    height: 160px;
+                    width: 100%;
+                    height: 260px;
                     -moz-transition: all 0.3s;
                     -webkit-transition: all 0.3s;
                     transition: all 0.3s;
@@ -279,7 +292,9 @@ const ComprarProduto = () => {
                                         }
                                         setEstiloImgProd1Array(estiloImgProd);
 
-                                    }}>
+                                    }}
+                                        key={"opcImg-" + item._id}
+                                    >
                                         <img src={item.url} id={"imgProd-" + item._id} alt="imagem produto" />
                                     </button>
                                 } else return <></>
@@ -288,7 +303,7 @@ const ComprarProduto = () => {
                         <FotoPrd id="fotoPrd" className="fotoPrd">
                             {produto?.categoriaProduto[obj].imagemProduto.map((item: { url: string | undefined; _id: string; }) => {
                                 if (item.url !== undefined) {
-                                    return <FotoPrd id="fotoPrd" className="fotoPrd">
+                                    return <FotoPrd id="fotoPrd" className="fotoPrd" key={`fotoPrd-${item._id}`}>
                                         <img src={item.url} alt="imagem produto" id={"imgPrd-" + item._id} />
                                     </FotoPrd>
                                 } else return <></>
@@ -312,7 +327,10 @@ const ComprarProduto = () => {
                                                 }
                                             }}><button type="button">-</button></BotaoNumber>
                                             <input type="number" value={quantidade} placeholder="Nº" min="1"
-                                                required max={categoria[obj].quantidade} onChange={evento => setQuantidade(evento.target.value)} />
+                                                required max={categoria[obj].quantidade} onChange={evento => setQuantidade(evento.target.value)}
+                                                id="quantidade-produto-input"
+                                                
+                                            />
                                             <BotaoNumber onClick={() => {
                                                 const newquantidade = quantidadeCategoria + 1;
                                                 setQuantidade(newquantidade.toString());
@@ -321,7 +339,7 @@ const ComprarProduto = () => {
                                     </div>
                                     <div id="btnLinkPrd" className="btnLinkPrd">
                                         <input type="submit" value="Comprar" />
-                                        <a href={""}>Calcular frete</a>
+                                        <a href={"#"}>Calcular frete</a>
                                     </div>
                                 </ConteudoDescAnunPrd>
                             </DescAnunPrd>

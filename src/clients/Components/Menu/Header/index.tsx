@@ -225,7 +225,7 @@ const Cabecalho = () => {
             <ul className="nav-items">
               {arrayNavItems.map((el: any) => {
                 return (
-                  <li className="header-nav-item">
+                  <li className="header-nav-item" key={`header-nav-item-${el.title}`}>
                     <a href={el.path} className='nav-item-btn'>
                       {el.title}
                     </a>

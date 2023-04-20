@@ -14,7 +14,7 @@ const DashboardHeader = () =>{
 
     return(
         <>
-        <div className="home-header">
+        <div className="home-header" key={"home-header"}>
             <div className="time-display">
                 <span>{dateNow}</span>
             </div>

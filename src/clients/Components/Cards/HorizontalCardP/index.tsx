@@ -1,7 +1,5 @@
 import './styles.css';
 import '../../../../../src/styles.css';
-import Iimagem from '../../../../utils/interfaces/Iimagem';
-const imgPrd = require('../../../../assets/images/produtos/produto-teste.png')
 interface Props{
     nome: string,
     preco: string,

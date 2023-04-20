@@ -26,10 +26,10 @@ const DashboardSidenav = () => {
     const user = JSON.parse(localStorage.getItem('user') as string)
 
     function MostrarImagemPerfil() {
-        if (user.imagemPerfil === null|| user.imagemPerfil === undefined) {
+        if (user.imagemPerfil === null || user.imagemPerfil === undefined) {
             return <Icone className="icone">
-            <p className="text-black">{user.nome.charAt(0)}</p>
-           </Icone>
+                <p className="text-black">{user.nome.charAt(0)}</p>
+            </Icone>
         } else {
             return <div className={`${collapsed ? 'h-[50px] w-[50px]' : "h-[80px] w-[80px]"} pfp-container`}>
                 <img src={user.imagemPerfil.url} alt="" />
@@ -45,7 +45,7 @@ const DashboardSidenav = () => {
                         <button className="toggle-collapse" onClick={() => setCollapse(!collapsed)}>
                             <GiHamburgerMenu />
                         </button>
-                       <MostrarImagemPerfil />
+                        <MostrarImagemPerfil />
                         <div className={`${collapsed ? 'hide-item' : ''} user-info`}>
                             <span>{ }</span>
                             <div className="user-role">
@@ -76,9 +76,9 @@ const DashboardSidenav = () => {
                             </li>
                         </Link>
                         <span className="sidenav-title">Gerenciar cadastros</span>
-                        {(arrayNavCadastros).map((item: any, index: any) => <SubMenu  item={item} />)}
+                        {(arrayNavCadastros).map((item: any, index: any) => <SubMenu item={item} key={`SubMenu-${index}`} />)}
                         <span className="sidenav-title">Gerenciar Perfis</span>
-                        {(arrayNavPerfis).map((item: any, index: any) => <SubMenu  item={item} />)}
+                        {(arrayNavPerfis).map((item: any, index: any) => <SubMenu item={item} key={`SubMenu-${index}`} />)}
                     </ul>
                 </div>
             </div>

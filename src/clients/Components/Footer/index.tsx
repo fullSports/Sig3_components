@@ -64,7 +64,7 @@ const Footer = () => {
                         <ul className="items-group">
                             {arrayNavItems.map((el: any) => {
                                 return (
-                                    <li className="footer-items">
+                                    <li className="footer-items" key={`items-group_li_${el.title}`}>
                                         <a href={el.path} className="footer-link">
                                             {el.title}
                                         </a>
@@ -78,7 +78,7 @@ const Footer = () => {
                         <ul className="items-group">
                             {DevNames.map((el: any) => {
                                 return (
-                                    <li className="footer-items">
+                                    <li className="footer-items" key={`items-group_${el.name}`}>
                                         <a target="_blank" href={el.linkedin}>
                                             {el.name}
                                         </a>

@@ -199,7 +199,7 @@ const HomeHeader = () => {
                     <ul className="menu-items">
                         {arrayNavItems.map((el: any) => {
                             return (
-                                <li className="menu-item">
+                                <li className="menu-item" key={`menu-item-${el.title}`}>
                                     <a href={el.path} className='menu-item-btn'>
                                         {el.title}
                                     </a>

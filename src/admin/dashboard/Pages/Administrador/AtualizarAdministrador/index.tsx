@@ -103,7 +103,6 @@ const AtualizarAdministrador = () => {
         if (parametros.id) {
             apiFullSports.get<ICliente>(`listar-cliente/${parametros.id}`)
                 .then(resposta => {
-                    console.log(resposta)
                     setCpf(resposta.data.cpf);
                     setNome(resposta.data.nome);
                     setDataNascimento(resposta.data.dataNascimento);
@@ -128,14 +127,11 @@ const AtualizarAdministrador = () => {
     const selecionarArquivo = (evento: React.ChangeEvent<HTMLInputElement>) => {
         if (evento.target.files?.length) {
             setImagem(evento.target.files[0]);
-            setCadastrarNovaFoto(true)
+            setCadastrarNovaFoto(true);
         } else {
-            setImagem(null)
-        }
-
-    }
-    console.log(file)
-
+            setImagem(null);
+        };
+    };
     function cadastrarFotoPerfil() {
         if (imagemId === '') {
             const formData1 = new FormData()
@@ -165,53 +161,47 @@ const AtualizarAdministrador = () => {
                     setImagemPerfilurl(response.data.user.imagemPerfil.url);
 
                     window.location.reload();
-                }).catch(erro => console.log(erro))
+                }).catch(erro => console.log(erro));
+            }).catch(erro => console.log(erro));
+        } else {
+            apiFullSports.delete(`imagem/${imagemId}`).then(() => {
+                setSpinner(true)
+                setImagemID('');
 
-                // handleClose()
-            }).catch(erro => console.log(erro))
-
-        }
-        else {
-            apiFullSports.delete(`imagem/${imagemId}`).then(()=>{
-            setSpinner(true)
-            setImagemID('');
-
-            const formData1 = new FormData()
-            if (file) {
-                formData1.append('file', file)
-            }
-            apiFullSports.request({
-                url: "imagem/",
-                method: 'POST',
-                headers: {
-                    'Access-Control-Allow-Origin': '*',
-                    'Content-Type': 'multipart/form-data'
-                },
-                data: formData1
-            }).then(evento => {
+                const formData1 = new FormData();
+                if (file) {
+                    formData1.append('file', file)
+                };
                 apiFullSports.request({
-                    method: "PUT",
-                    url: `atualizar-cliente/${parametros.id}`,
-                    data: {
-                        imagemPerfil: evento.data.image._id
-                    }
-                }).then((response) => {
-                    setSpinner(false);
-                    setCadastrarNovaFoto(false);
-                    setImagemID(response.data.user.imagemPerfil._id);
-                    setImagemPerfilurl(response.data.user.imagemPerfil.url);
+                    url: "imagem/",
+                    method: 'POST',
+                    headers: {
+                        'Access-Control-Allow-Origin': '*',
+                        'Content-Type': 'multipart/form-data'
+                    },
+                    data: formData1
+                }).then(evento => {
+                    apiFullSports.request({
+                        method: "PUT",
+                        url: `atualizar-cliente/${parametros.id}`,
+                        data: {
+                            imagemPerfil: evento.data.image._id
+                        }
+                    }).then((response) => {
+                        setSpinner(false);
+                        setCadastrarNovaFoto(false);
+                        setImagemID(response.data.user.imagemPerfil._id);
+                        setImagemPerfilurl(response.data.user.imagemPerfil.url);
 
-                    window.location.reload();
-                }).catch(erro => console.log(erro))
+                        window.location.reload();
+                    }).catch(erro => console.log(erro));
+                }).catch(erro => console.log(erro));
 
-                // handleClose()
-            }).catch(erro => console.log(erro))
 
-            
-        }).catch((err)=>{
-            console.log(err)
-            window.location.reload()
-        })
+            }).catch((err) => {
+                console.log(err)
+                window.location.reload()
+            })
         }
     }
 
@@ -224,11 +214,10 @@ const AtualizarAdministrador = () => {
         })
     }
     function buscaCep() {
-        setCarregandoCep(true)
-        setCarregandoCepMessagem(false)
-        console.log(cep)
+        setCarregandoCep(true);
+        setCarregandoCepMessagem(false);
         if (cep === '') {
-            setCarregandoCep(false)
+            setCarregandoCep(false);
             setRua('');
             setBairro('');
             setEstado('');
@@ -241,20 +230,19 @@ const AtualizarAdministrador = () => {
                     'Access-Control-Allow-Origin': '*'
                 },
             }).then(evento => {
-                setCarregandoCep(false)
+                setCarregandoCep(false);
                 setRua(evento.data.street.split("-")[0]);
                 setBairro(evento.data.neighborhood);
                 setEstado(evento.data.state);
-                setCidade(evento.data.city)
+                setCidade(evento.data.city);
             }).catch(err => {
-                setCarregandoCep(false)
-                setCarregandoCepMessagem(true)
+                setCarregandoCep(false);
+                setCarregandoCepMessagem(true);
                 console.log(err)
             })
         }
     }
     function buscaCepCarregarPage() {
-        console.log(cep)
         ApiCep.request({
             method: 'GET',
             url: cep,
@@ -262,103 +250,86 @@ const AtualizarAdministrador = () => {
                 'Access-Control-Allow-Origin': '*',
             },
         }).then(evento => {
-            console.log(evento)
             setRua(evento.data.street.split("-")[0]);
             setBairro(evento.data.neighborhood);
             setEstado(evento.data.state);
-            setCidade(evento.data.city)
+            setCidade(evento.data.city);
         })
     }
     setTimeout(buscaCepCarregarPage, 222)
 
     const IconePerfil = () => {
         if (imagemId === '') {
-            return (
-                <Icone className="icone" onClick={handleOpen}>
-                    <p className="texto-imagem-pergil">{nome.charAt(0)}</p>
-
-                </Icone>
-            )
+            return <Icone className="icone" onClick={handleOpen} key={"icone-perfil-letra"}>
+                <p className="texto-imagem-pergil">{nome.charAt(0)}</p>
+            </Icone>
         } else {
-            return (
-                <Icone className="icone" onClick={handleOpen}>
-                    <img src={imagemPerfilurl} alt="imagem de perfil" />
-                </Icone>
-            )
-        }
-    }
+            return <Icone className="icone" onClick={handleOpen} key={"icone-perfil-foto"}>
+                <img src={imagemPerfilurl} alt="imagem de perfil" />
+            </Icone>
+        };
+    };
     const IconePerfilPage = () => {
         if (imagemId === '') {
-            return (
-                <IconePage className="icone" onClick={handleOpen}>
-                    <p className="texto-imagem-pergil">{nome.charAt(0)}</p>
-                    <img src={SinalMais} className="sinal-mais-imagem" alt="imagem de sinal de mais" />
-                </IconePage>
-            )
+            return <IconePage className="icone" onClick={handleOpen} key={"icone-perfil"}>
+                <p className="texto-imagem-pergil">{nome.charAt(0)}</p>
+                <img src={SinalMais} className="sinal-mais-imagem" alt="imagem de sinal de mais" />
+            </IconePage>
         } else {
-            return (
-                <IconePage className="icone" onClick={handleOpen}>
-                    <img src={imagemPerfilurl} className="foto-perfil-page" alt="imagem de perfil" />
-                    <img src={SinalMais} className="sinal-mais-imagem" alt="imagem de sinal de mais" />
-                </IconePage>
-            )
-        }
-    }
-
+            return <IconePage className="icone" onClick={handleOpen} key={"icone-perfil"}>
+                <img src={imagemPerfilurl} className="foto-perfil-page" alt="imagem de perfil" />
+                <img src={SinalMais} className="sinal-mais-imagem" alt="imagem de sinal de mais" />
+            </IconePage>
+        };
+    };
     const OpcoesFotoPerfil = () => {
         if (imagemId === '' || imagemPerfilurl === '') {
-
-            return (
-                <Box component={"div"} sx={{ marginTop: '5.5%', marginRight: '3%' }}>
-                    <Box component={"div"} sx={{ display: 'flex', justifyContent: "center", paddingBottom: "1%" }}>
-                        <IconePerfil />
-                    </Box>
-                    <Box component={"div"} sx={{ display: 'grid' }} id="tela-imagem-opcoes">
-                        <div>
-                            <AtualizarImagemLabel htmlFor="file" >Escolher foto...</AtualizarImagemLabel>
-                            <input
-                                onChange={selecionarArquivo}
-                                className="txt-form"
-                                id="file"
-                                type="file"
-                                name="file"
-                                accept="image/jpeg, image/pjpeg, image/png, image/gif"
-                            />
-                        </div>
-                        {cadastrarNovaFoto && (<Button variant="outlined" sx={{ border: "2px solid" }} onClick={cadastrarFotoPerfil}>Cadastrar Nova Foto</Button>)}
-                      
-                        {mensagemErroBolean && (<span id="menssagem-erro">{menssagemErro}</span>)}
-                        <Button variant="outlined" sx={{ border: "2px solid" }} onClick={handleClose}>Fechar</Button>
-                    </Box>
+            return <Box component={"div"} sx={{ marginTop: '5.5%', marginRight: '3%' }} key={"div-upload-imagem"}>
+                <Box component={"div"} sx={{ display: 'flex', justifyContent: "center", paddingBottom: "1%" }}>
+                    <IconePerfil />
                 </Box>
-            )
+                <Box component={"div"} sx={{ display: 'grid' }} id="tela-imagem-opcoes">
+                    <div>
+                        <AtualizarImagemLabel htmlFor="file" >Escolher foto...</AtualizarImagemLabel>
+                        <input
+                            onChange={selecionarArquivo}
+                            className="txt-form"
+                            id="file"
+                            type="file"
+                            name="file"
+                            accept="image/jpeg, image/pjpeg, image/png, image/gif"
+                        />
+                    </div>
+                    {cadastrarNovaFoto && (<Button variant="outlined" sx={{ border: "2px solid" }} onClick={cadastrarFotoPerfil}>Cadastrar Nova Foto</Button>)}
+
+                    {mensagemErroBolean && (<span id="menssagem-erro">{menssagemErro}</span>)}
+                    <Button variant="outlined" sx={{ border: "2px solid" }} onClick={handleClose}>Fechar</Button>
+                </Box>
+            </Box>
         } else {
-            return (
-                <Box component={"div"} sx={{ marginTop: '5.5%', marginRight: '3%' }}>
-                    <Box component={"div"} sx={{ display: 'flex', justifyContent: "center", paddingBottom: "1%" }}>
-                        <IconePerfil />
-                    </Box>
-                    <Box component={"div"} sx={{ display: 'grid' }} id="tela-imagem-opcoes">
-                        <Button color="error" variant="outlined" sx={{ border: "2px solid alert" }} onClick={deletarFoto} >Excluir Foto</Button>
-                        <div>
-                            <AtualizarImagemLabel htmlFor="file" >Escolher foto...</AtualizarImagemLabel>
-                            <input
-                                onChange={selecionarArquivo}
-                                className="txt-form"
-                                id="file"
-                                type="file"
-                                name="file"
-                                accept="image/jpeg, image/pjpeg, image/png, image/gif"
-                            />
-                        </div>
-                        {cadastrarNovaFoto && (<Button variant="outlined" sx={{ border: "2px solid" }} onClick={cadastrarFotoPerfil}>Cadastrar Nova Foto</Button>)}
-                        <Button variant="outlined" sx={{ border: "2px solid" }} onClick={handleClose}>Fechar</Button>
-                    </Box>
+            return <Box component={"div"} sx={{ marginTop: '5.5%', marginRight: '3%' }} key={"div-upload-imagem"}>
+                <Box component={"div"} sx={{ display: 'flex', justifyContent: "center", paddingBottom: "1%" }}>
+                    <IconePerfil />
                 </Box>
-            )
-        }
-    }
-
+                <Box component={"div"} sx={{ display: 'grid' }} id="tela-imagem-opcoes">
+                    <Button color="error" variant="outlined" sx={{ border: "2px solid alert" }} onClick={deletarFoto} >Excluir Foto</Button>
+                    <div>
+                        <AtualizarImagemLabel htmlFor="file" >Escolher foto...</AtualizarImagemLabel>
+                        <input
+                            onChange={selecionarArquivo}
+                            className="txt-form"
+                            id="file"
+                            type="file"
+                            name="file"
+                            accept="image/jpeg, image/pjpeg, image/png, image/gif"
+                        />
+                    </div>
+                    {cadastrarNovaFoto && (<Button variant="outlined" sx={{ border: "2px solid" }} onClick={cadastrarFotoPerfil}>Cadastrar Nova Foto</Button>)}
+                    <Button variant="outlined" sx={{ border: "2px solid" }} onClick={handleClose}>Fechar</Button>
+                </Box>
+            </Box>
+        };
+    };
     function aoSubmeterForm(evento: React.FormEvent<HTMLFormElement>) {
         evento.preventDefault();
         setSpinner(true);
@@ -384,10 +355,10 @@ const AtualizarAdministrador = () => {
 
     return (
         <>
-            <div className="flex">
-                <DashboardSidenav />
+            <div className="flex" key={"atualizar-admin-flex"}>
+                <DashboardSidenav key={"subMenu-atualizar-admin"} />
                 <div id="main" className="dashboard-body">
-                    <DashboardHeader />
+                    <DashboardHeader key={"Header-atualizar-admin"} />
                     <div className="my-16">
                         <div className="profile-details-title">
                             <span className="exibe-titulo">Atualizar dados de {nome} <IconePerfilPage /></span>
@@ -570,6 +541,7 @@ const AtualizarAdministrador = () => {
                         open={open}
                         onClose={handleClose}
                         id="model"
+                        key={"model-perfil"}
                     >
                         <Box component={'div'} id="tela-imagem" className="tela-imagem" sx={{
                             width: '30%', height: '60%',

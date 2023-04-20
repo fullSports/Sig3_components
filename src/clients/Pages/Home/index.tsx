@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-
+import { useEffect, useState } from 'react';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
@@ -8,17 +7,11 @@ import styled from "styled-components";
 import './styles.css';
 import '../../../styles.css';
 import Footer from '../../Components/Footer';
-import Cabecalho from "../../Components/Menu/Header";
 import VerticalCardProduct from "../../Components/Cards/VerticalCardP/index";
 import HorizontalCardProduct from '../../Components/Cards/HorizontalCardP';
 import HomeHeader from '../../Components/Menu/Home Header';
-// import { render } from "@testing-library/react";
 import IProduto from '../../../utils/interfaces/IProduto';
 import apiFullSports from '../../../api/apiFullSports';
-// import ICacados from '../../../utils/interfaces/Produtos/ICalcados';
-// import IEquipamentos from '../../../utils/interfaces/Produtos/IEquipamentos';
-import IRoupa from '../../../utils/interfaces/Produtos/IRoupa';
-// import ISuplementos from '../../../utils/interfaces/Produtos/ISuplementos';
 const tenisBanner = require('../../../assets/images/banners/transparent-shoes-banner.png');
 const roupasBanner = require('../../../assets/images/banners/transparent-clothes-banner.png');
 
@@ -61,7 +54,7 @@ const Home = () => {
                             <img src={roupasBanner} alt="" />
                         </div>
                         {/* <div className="cards-container overflow-x-auto"> */}
-                        <div className="Hcard-container">
+                        {/* <div className="Hcard-container">
                             <Slider {...sliderHorizontalCards}>
                                 {produtos.map((item: any) => {
 
@@ -72,6 +65,7 @@ const Home = () => {
                                     var newParcela = parcela.toFixed(2);
                                     if (item.categoriaProduto[obj].imagemProduto[0].url) {
                                         return <HorizontalCardProduct
+                                            key={item._id}
                                             tamanho={item.categoriaProduto[obj].tamanho}
                                             produtoID={item._id}
                                             nome={item.categoriaProduto[obj].nome}
@@ -82,6 +76,30 @@ const Home = () => {
                                     } else return <></>
                                 })}
                             </Slider>
+                        </div> */}
+           
+                        <div className="produtos-grid-container-home">
+                                {produtos.map((item: any) => {
+
+                                    const obj = Object.keys(item.categoriaProduto)[0].toString();
+
+                                    var newPrecoProduto = parseFloat(item.categoriaProduto[obj].preco.replace(',', '.'));
+                                    var parcela = newPrecoProduto / 12;
+                                    var newParcela = parcela.toFixed(2);
+                                    if (item.categoriaProduto[obj].imagemProduto[0].url) {
+                                        return <VerticalCardProduct
+                                            key={item._id}
+                                            tamanho={item.categoriaProduto[obj].tamanho}
+                                            produtoId={item._id}
+                                            produtoName={item.categoriaProduto[obj].nome}
+                                            PrecoAtual={item.categoriaProduto[obj].preco}
+                                            precoParcelado={newParcela.toString().replace(".", ",")}
+                                            src={item.categoriaProduto[obj].imagemProduto[0].url}
+                                            PrecoAnterior=""
+                                        />
+                                    } else return <></>
+                                })}
+                   
                         </div>
                     </div>
                 </div>

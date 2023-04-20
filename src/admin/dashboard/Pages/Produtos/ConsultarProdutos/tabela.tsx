@@ -38,7 +38,7 @@ const TabelaProduto = () => {
         return <>
             {produto.map(item => {
                 const categoriaDeproduto = item.categoriaProduto as any;
-                const obj = Object.keys(categoriaDeproduto)[0].toString()
+                const obj = Object.keys(categoriaDeproduto)[0].toString();
                 let urImg
 
                 if (categoriaDeproduto[obj].imagemProduto.length === 0) urImg = ""

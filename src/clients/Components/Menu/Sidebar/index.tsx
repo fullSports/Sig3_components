@@ -47,7 +47,7 @@ const Sidebar = () => {
                     <ul className="sidenav-items">
                         {arrayNavItems.map((el: any) => {
                             return (
-                                <li className="nav-item">
+                                <li className="nav-item" key={`nav-item_${el.title}`}>
                                     <a href={el.path} className='sidenav-item-btn'>
                                         {el.title}
                                     </a>
