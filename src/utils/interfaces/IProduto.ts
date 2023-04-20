@@ -10,7 +10,7 @@ export default interface IProduto {
         equipamento: IEquipamentos,
         suplemento: ISuplementos,
         calcado: ICacados,
-    }
+    },
     _id: string,
     dataCadastro: string
 }

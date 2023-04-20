@@ -1,12 +1,12 @@
-import { arrayDaysPTBR, arrayMonthsPTBR } from '../../utils/arrayCalendario';
+import { arrayDaysPTBR, arrayMonthsPTBR } from "../../utils/arrayCalendario";
 
-export function formatDate(date: any){
-    let dateSplited = date.split('/').map(Number);
-    let currentData = new Date(0 + dateSplited[2], dateSplited[1] -1, dateSplited[0]);
-    let weekDay = String(arrayDaysPTBR[currentData.getDay()]);
-    let month = String(arrayMonthsPTBR[currentData.getMonth()]);
-    let year = String(currentData.getFullYear())
+export function formatDate(date: string){
+    const dateSplited = date.split("/").map(Number);
+    const currentData = new Date(0 + dateSplited[2], dateSplited[1] -1, dateSplited[0]);
+    const weekDay = String(arrayDaysPTBR[currentData.getDay()]);
+    const month = String(arrayMonthsPTBR[currentData.getMonth()]);
+    const year = String(currentData.getFullYear());
 
-    let day = String(currentData.getDate())
-    return (weekDay + ", " + day + " de " + month + " de " + year)
+    const day = String(currentData.getDate());
+    return (weekDay + ", " + day + " de " + month + " de " + year);
 }
