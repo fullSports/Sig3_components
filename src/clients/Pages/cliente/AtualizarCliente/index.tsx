@@ -162,9 +162,8 @@ const AtualizarCliente = () => {
             if (file) {
                 formData1.append('file', file)
             }
-            setSpinner(true)
             apiFullSports.request({
-                url: 'imagem/',
+                url: "imagem/",
                 method: 'POST',
                 headers: {
                     'Access-Control-Allow-Origin': '*',
@@ -173,18 +172,22 @@ const AtualizarCliente = () => {
                 data: formData1
             }).then(evento => {
                 apiFullSports.request({
+                    method: "PUT",
                     url: `atualizar-cliente/${parametros.id}`,
-                    method: 'PUT',
                     data: {
                         imagemPerfil: evento.data.image._id
                     }
-                })
-            }).then(() => {
-                setSpinner(false)
-                setCadastrarNovaFoto(false)
-                window.location.reload()
-            }).catch(erro => console.log(erro))
+                }).then((response) => {
+                    setSpinner(false);
+                    setCadastrarNovaFoto(false);
+                    setImagemID(response.data.user.imagemPerfil._id);
+                    setImagemPerfilurl(response.data.user.imagemPerfil.url);
 
+                    window.location.reload();
+                }).catch(erro => console.log(erro))
+
+                // handleClose()
+            }).catch(erro => console.log(erro))
         }
         else {
             apiFullSports.delete(`imagem/${imagemId}`)
