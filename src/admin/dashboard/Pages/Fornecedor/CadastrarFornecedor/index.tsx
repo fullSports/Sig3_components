@@ -36,10 +36,11 @@ const CadastrarFornecedor = () => {
                 endereco: `${rua},${numero} -${complemento}- ${estado}, ${cidade}, ${bairro}`,
             }
         }).then(resposta => {
+            console.log(resposta)
             if (!resposta.data.registeredSuccess) {
                 setSpinner(false)
                 setMensagemErroBolean(true);
-                setMenssagemErro(resposta.data.message)
+                setMenssagemErro(resposta.data.messagem)
             } else {
                 // alert("Fornecedor cadastrado com sucesso")
                 setSpinner(false)

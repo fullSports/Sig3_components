@@ -9,6 +9,6 @@ export default interface ICliente{
     sexo: string,
     cep: string,
     endereco: string,
-    dataCadastro: string,
+    dataCadastro: Date,
     imagemPerfil: Iimagem,
 }

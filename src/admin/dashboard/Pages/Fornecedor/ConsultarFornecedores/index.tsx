@@ -69,13 +69,17 @@ const ConsultarFornecedores = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {fornecedores.map(item =>
-                                        <tr key={item._id.toString()}>
+                                    {fornecedores.map(item => {
+                                        const dataCadastro = new Date(item.dataCadastro);
+                                        const dia = dataCadastro.getUTCDate().toLocaleString().length == 1 ? "0" + dataCadastro.getUTCDate().toLocaleString().length : dataCadastro.getUTCDate();
+                                        const mes = (dataCadastro.getMonth() + 1).toString().length == 1 ? "0" +(dataCadastro.getMonth() + 1).toString() : (dataCadastro.getMonth() + 1).toString();
+                                        const ano = dataCadastro.getFullYear().toString();
+                                        return <tr key={item._id.toString()}>
                                             <td>{item.cnpj}</td>
                                             <td>{item.nomeEmpresa}</td>
                                             <td>{item.cep}</td>
                                             <td>{item.endereco}</td>
-                                            <td>{item.dataCadastro}</td>
+                                            <td>{`${dia}/${mes}/${ano}`}</td>
                                             <td>
                                                 <div className="acoes-btn-group">
                                                     <a href={`/dashboard/atualizar-fornecedor/${item._id}`} >
@@ -102,7 +106,8 @@ const ConsultarFornecedores = () => {
                                                     </React.Fragment>
                                                 </div>
                                             </td>
-                                        </tr>)}
+                                        </tr>
+                                    })}
                                 </tbody>
                                 {spinner && (<p>carregando...</p>)}
                                 {mensagemErroBolean && (<span id="menssagem-erro">{menssagemErro}</span>)}
