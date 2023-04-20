@@ -9,7 +9,7 @@ import { RiMenuFill } from 'react-icons/ri';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { ImAccessibility, ImContrast } from 'react-icons/im';
-import { TbArrowBigDown, TbArrowBigTop } from 'react-icons/tb';
+import { TbArrowBigDown, TbArrowBigUp } from 'react-icons/tb';
 const brandLogo = require('../../../../assets/images/fullSportLogo.png');
 const carrinhoIcon = require('../../../../assets/icons/carrinho-icon.png');
 const suporteIcon = require('../../../../assets/icons/help-icon.png');
@@ -101,7 +101,7 @@ const HomeHeader = () => {
                 <div className="toggle-group hideShow">
                     <div className="toggle-opts">
                         <button className='toggle-opt-btn' id='aumentaFonte'>
-                            <TbArrowBigTop />
+                            <TbArrowBigUp />
                         </button>
                     </div>
                     <div className="toggle-opts">

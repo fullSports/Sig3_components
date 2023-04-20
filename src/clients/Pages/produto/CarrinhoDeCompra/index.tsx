@@ -57,11 +57,11 @@ const CarrinhoDeCompra = () => {
             carrinho = null;
             setSpinner(false);
         }
-    }, [carrinho])
+    }, [])
 
 
     function MostraProduto() {
-        if(produto !== undefined){
+        if(produto){
         const categoria = produto?.categoriaProduto as any;
         const obj = Object.keys(categoria)[0].toString();
         const precoProd = parseFloat(quantidadeProd);
@@ -78,7 +78,7 @@ const CarrinhoDeCompra = () => {
                     }
                 }}><button type="button">-</button></BotaoNumber>
                 <input type="number" value={quantidadeProd} placeholder="Nº" min='1'
-                    required max={categoria[obj].quantidade} onChange={evento => setQuantidadeProd(evento.target.value)} />
+                     max={categoria[obj].quantidade} onChange={(e)=> setQuantidadeProd(e.target.value)}/>
                 <BotaoNumber onClick={() => {
                     const newquantidade = quantidadeCategoria + 1;
                     console.log(newquantidade)
@@ -101,7 +101,7 @@ const CarrinhoDeCompra = () => {
             method: "POST",
             url: "realizar-pedido",
             data: {
-                quantidadePedido: quantidadeProd,
+                quantidadePedido: parseInt(quantidadeProd),
                 produto: carrinho.pedido.produtoID,
                 cliente: carrinho.clienteID
             }

@@ -72,7 +72,7 @@ const CadastrarFornecedor = () => {
                 },
             }).then(evento => {
                 setCarregandoCep(false)
-                setRua(evento.data.street);
+                setRua(evento.data.street.split("-")[0]);
                 setBairro(evento.data.neighborhood);
                 setEstado(evento.data.state);
                 setCidade(evento.data.city)

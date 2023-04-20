@@ -4,12 +4,12 @@ export const login = async (creds:{
     isAdmin: boolean
 }):Promise<void> => {
     return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        if (creds.email === "harry" && creds.password === "password") {
-          resolve();
-        } else {
-          reject();
-        }
-      }, 1000);
+        setTimeout(() => {
+            if (creds.email === "harry" && creds.password === "password") {
+                resolve();
+            } else {
+                reject();
+            }
+        }, 1000);
     });
-  };
+};

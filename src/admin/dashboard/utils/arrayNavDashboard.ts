@@ -1,109 +1,109 @@
 import { INavDashboard } from "./interfaces/INavDashboard";
 
-export var arrayNavCadastros: INavDashboard[] = [
+export const arrayNavCadastros: INavDashboard[] = [
     {
-        name: 'Fornecedores',
-        icon: 'bi bi-people-fill',
+        name: "Fornecedores",
+        icon: "bi bi-people-fill",
         subMenu: [
             {
-                name: 'Cadastrar Fornecedores',
-                path: '/dashboard/cadastrar-fornecedor'
+                name: "Cadastrar Fornecedores",
+                path: "/dashboard/cadastrar-fornecedor"
             },
             {
-                name: 'Consultar Fornecedores',
-                path: '/dashboard/consultar-fornecedores'
+                name: "Consultar Fornecedores",
+                path: "/dashboard/consultar-fornecedores"
             }
         ]
     },
     {
-        name: 'Produtos',
-        icon: 'bi bi-inboxes-fill',
+        name: "Produtos",
+        icon: "bi bi-inboxes-fill",
         subMenu: [
             {
-                name: 'Cadastrar Produtos',
-                path: '/dashboard/cadastrar-produto'
+                name: "Cadastrar Produtos",
+                path: "/dashboard/cadastrar-produto"
             },
             {
-                name: 'Consultar Produtos',
-                path: '/dashboard/consultar-produtos'
+                name: "Consultar Produtos",
+                path: "/dashboard/consultar-produtos"
             }
         ]
     },
     {
-        name: 'Suplementos',
-        icon: 'bi bi-capsule',
+        name: "Suplementos",
+        icon: "bi bi-capsule",
         subMenu: [
             {
-                name: 'Cadastrar Suplementos',
-                path: '/dashboard/cadastrar-produto/?categoria=suplemento'
+                name: "Cadastrar Suplementos",
+                path: "/dashboard/cadastrar-produto/?categoria=suplemento"
             },
             {
-                name: 'Consultar Suplementos',
-                path: '/dashboard/consultar-produtos/?categoria=suplemento'
+                name: "Consultar Suplementos",
+                path: "/dashboard/consultar-produtos/?categoria=suplemento"
             }
         ]
     },
     {
-        name: 'Roupas',
-        icon: 'bi bi-binoculars',
+        name: "Roupas",
+        icon: "bi bi-binoculars",
         subMenu: [
             {
-                name: 'Cadastrar Roupas',
-                path: '/dashboard/cadastrar-produto/?categoria=roupa'
+                name: "Cadastrar Roupas",
+                path: "/dashboard/cadastrar-produto/?categoria=roupa"
             },
             {
-                name: 'Consultar Roupas',
-                path: '/dashboard/consultar-produtos/?categoria=roupa'
+                name: "Consultar Roupas",
+                path: "/dashboard/consultar-produtos/?categoria=roupa"
             }
         ]
     },
     {
-        name: 'Calçado',
-        icon: '',
+        name: "Calçado",
+        icon: "",
         subMenu:[
             {
-                name: 'Cadastrar Calçado',
-                path: '/dashboard/cadastrar-produto/?categoria=calcado'
+                name: "Cadastrar Calçado",
+                path: "/dashboard/cadastrar-produto/?categoria=calcado"
             },
             {
-                name: 'Consultar Calçados',
-                path: '/dashboard/consultar-produtos/?categoria=calcado'
+                name: "Consultar Calçados",
+                path: "/dashboard/consultar-produtos/?categoria=calcado"
             }
         ]
 
     },
     {
-        name: 'Equipamentos',
-        icon: 'bi bi-bicycle',
+        name: "Equipamentos",
+        icon: "bi bi-bicycle",
         subMenu: [
             {
-                name: 'Cadastrar Equipamentos',
-                path: '/dashboard/cadastrar-produto/?categoria=equipamento'
+                name: "Cadastrar Equipamentos",
+                path: "/dashboard/cadastrar-produto/?categoria=equipamento"
             },
             {
-                name: 'Consultar Equipamentos',
-                path: '/dashboard/consultar-produtos/?categoria=equipamento'
+                name: "Consultar Equipamentos",
+                path: "/dashboard/consultar-produtos/?categoria=equipamento"
             }
         ]
     },
-]
+];
 
-export var arrayNavPerfis: INavDashboard[] = [
+export const arrayNavPerfis: INavDashboard[] = [
     {
-        name: 'Admin',
-        icon: 'bi bi-person-fill-gear',
+        name: "Admin",
+        icon: "bi bi-person-fill-gear",
         subMenu: [
             {
-                name: 'Cadastrar Admin',
-                path: '/dashboard/cadastrar-admin'
+                name: "Cadastrar Admin",
+                path: "/dashboard/cadastrar-admin"
             },
             {
-                name: 'Consultar Admin',
-                path: '/dashboard/consultar-admin'
+                name: "Consultar Admin",
+                path: "/dashboard/consultar-admin"
             },
             {
-                name: 'Atualizar Admin',
-                path: '/dashboard/atualizar-admin/:id'
+                name: "Atualizar Admin",
+                path: "/dashboard/atualizar-admin/:id"
             }
         ]
     },
@@ -121,4 +121,4 @@ export var arrayNavPerfis: INavDashboard[] = [
     //         }
     //     ]
     // },
-]
+];

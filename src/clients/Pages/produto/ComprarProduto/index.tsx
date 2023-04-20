@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import styled from 'styled-components';
-import apiFullSports from '../../../../api/apiFullSports';
-import IProduto from '../../../../utils/interfaces/IProduto';
-import Footer from '../../../Components/Footer';
-import Cabecalho from '../../../Components/Menu/Header';
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import styled from "styled-components";
+import apiFullSports from "../../../../api/apiFullSports";
+import IProduto from "../../../../utils/interfaces/IProduto";
+import Footer from "../../../Components/Footer";
+import Cabecalho from "../../../Components/Menu/Header";
 const VisualizacaoPrd = styled.section`
     margin: 40px 0;
     margin-left: auto;
@@ -157,121 +157,130 @@ display: grid;
     grid-template-columns: repeat(3,40px);
     height: auto;
 `;
+const DivCarregando = styled.div`
+display: flex;
+justify-content: center;
+`;
 const ComprarProduto = () => {
-    const user = JSON.parse(localStorage.getItem('user') as string);
+    const user = JSON.parse(localStorage.getItem("user") as string);
     const parametro = useParams();
     const [produto, setProduto] = useState<IProduto>() as any;
-    const [spinner, setSpinner] = useState(false);
-    const [estiloImgProd1, setEstiloImgProd1] = useState('');
+    const [spinner, setSpinner] = useState(true);
     const [estiloImgProd1Array, setEstiloImgProd1Array] = useState(Array);
-    const [estiloInicial, setEstiloInicial] = useState(true);
-    const [quantidade, setQuantidade] = useState('');
-    const [open, setOpen] = useState(Boolean);
-    const handleClose = () => {
-        setOpen(false);
-    };
+    const [quantidade, setQuantidade] = useState("");
+    const [carregdo, setCarregado] = useState(false);
     useEffect(() => {
-        setSpinner(true)
         apiFullSports.get<IProduto>(`listar-produto/${parametro.id}`).then(resposta => {
-            setProduto(resposta.data)
-            setSpinner(false)
-
-            const categoria = resposta.data.categoriaProduto as any;
-            const obj = Object.keys(categoria)[0].toString()
-            var estiloImgProd = [{},]
-            for (var i = 1; i < categoria[obj].imagemProduto.length; i++) {
-                if (produto?.categoriaProduto[obj].imagemProduto[i] !== undefined || produto?.categoriaProduto[obj].imagemProduto[i] !== null) {
-                    estiloImgProd.unshift(`${'imgPrd-' + produto?.categoriaProduto[obj].imagemProduto[i]._id}`)
+            setProduto(resposta.data);
+            if (estiloImgProd1Array.length === 0) {
+                const categoria = resposta.data.categoriaProduto as any;
+                const obj = Object.keys(categoria)[0].toString()
+                const estiloImgProd = [];
+                for (let i = 0; i < categoria[obj].imagemProduto.length; i++) {
+                    if (produto?.categoriaProduto[obj].imagemProduto[i]) {
+                        if (i === 0) {
+                            estiloImgProd.push({
+                                styles: `${"imgPrd-" + produto?.categoriaProduto[obj].imagemProduto[i]._id}`,
+                                display: true
+                            })
+                        } else {
+                            estiloImgProd.push({
+                                styles: `${"imgPrd-" + produto?.categoriaProduto[obj].imagemProduto[i]._id}`,
+                                display: false
+                            })
+                        }
+                    }
                 }
+                setEstiloImgProd1Array(estiloImgProd);
             }
-            setEstiloImgProd1(`${'imgPrd-' + produto?.categoriaProduto[obj].imagemProduto[0]._id}`);
-            estiloImgProd.pop();
-            setEstiloImgProd1Array(estiloImgProd);
-
-
+            setTimeout(function () {
+                setSpinner(false);
+            }, 900)
         }).catch((err) => {
             console.log(err)
         })
-        setQuantidade('1');
+        setQuantidade("1");
 
-    }, [parametro, estiloImgProd1]);
+    }, [parametro, estiloImgProd1Array]);
     function comprarItem(evento: React.FormEvent<HTMLFormElement>) {
         evento.preventDefault();
 
-        localStorage.setItem('carrinho', JSON.stringify({ pedido: { quantidade: quantidade, produtoID: produto._id }, clienteID: user._id }));
+        localStorage.setItem("carrinho", JSON.stringify({ pedido: { quantidade: quantidade, produtoID: produto._id }, clienteID: user._id }));
 
         setTimeout(function () {
-            window.location.href = '/carrinho-de-compra/'
+            window.location.href = "/carrinho-de-compra/"
         }, 100)
     }
 
     if (produto?.categoriaProduto !== undefined) {
         if (user) {
             const categoria = produto?.categoriaProduto;
-            console.log(categoria)
             const obj = Object.keys(categoria)[0].toString();
-            const FotoPrd = styled.div`
-        overflow: hidden;
-        img{
-            margin: 10px 0 10px;
-            width: 550px;
-            height: 460px;
-            -moz-transition: all 0.3s;
-            -webkit-transition: all 0.3s;
-            transition: all 0.3s;
-        }
-        @media screen and (max-width: 1040px){
-            img{
-            margin: 10px 0 10px;
-            width: 90%;
-            height: 160px;
-            -moz-transition: all 0.3s;
-            -webkit-transition: all 0.3s;
-            transition: all 0.3s;
-        }
-        }
-        :hover img{
-            -moz-transform: scale(1.1);
-            -webkit-transform: scale(1.1);
-            transform: scale(1.3);
-            cursor: zoom-in;
-        }
-        #${estiloImgProd1}{
-            display: block;
-        }
-        ${estiloImgProd1Array.map(item =>
-                `#${item}{display: none;}`
-            )}
-        `;
-            var newPrecoProduto = parseFloat(categoria[obj].preco.replace(",", "."))
-            var parcela = newPrecoProduto / 12;
-            var newParcela = parcela.toFixed(2);
+
+            const newPrecoProduto = parseFloat(categoria[obj].preco.replace(",", "."))
+            const parcela = newPrecoProduto / 12;
+            const newParcela = parcela.toFixed(2);
             const quantidadeCategoria = parseFloat(quantidade);
+
+            const FotoPrd = styled.div`
+                overflow: hidden;
+                img{
+                    margin: 10px 0 10px;
+                    width: 550px;
+                    height: 460px;
+                    -moz-transition: all 0.3s;
+                    -webkit-transition: all 0.3s;
+                    transition: all 0.3s;
+                }
+                @media screen and (max-width: 1040px){
+                    img{
+                    margin: 10px 0 10px;
+                    width: 90%;
+                    height: 160px;
+                    -moz-transition: all 0.3s;
+                    -webkit-transition: all 0.3s;
+                    transition: all 0.3s;
+                }
+                }
+                :hover img{
+                    -moz-transform: scale(1.1);
+                    -webkit-transform: scale(1.1);
+                    transform: scale(1.3);
+                    cursor: zoom-in;
+                }
+                ${estiloImgProd1Array.map((item: any) =>
+                `#${item.styles}{display: ${item.display ? "block" : "none"}}`
+            )}
+            `;
+
             return <>
                 <Cabecalho />
-                <VisualizacaoPrd id="visualizacaoPrd" className="visualizacaoPrd">
+                {(!spinner && <VisualizacaoPrd id="visualizacaoPrd" className="visualizacaoPrd" style={{ display: `${spinner ? "none" : "block"}` }}>
                     <GridVisuPrd id="gridVisuPrd" className="gridVisuPrd">
                         <FotosAdcPrd id="fotosAdcPrd" className="fotosAdcPrd">
                             {produto?.categoriaProduto[obj].imagemProduto.map((item: { _id: string; url: string | undefined; }) => {
                                 if (item._id !== undefined) {
                                     return <button id={"opcImg-" + item._id} className="opcImg" onClick={() => {
-                                        var estiloImgProd = [{},];
-                                        setEstiloInicial(false);
-                                        for (var i = 0; i < categoria[obj].imagemProduto.length; i++) {
-                                            if (categoria[obj].imagemProduto[i]._id === item._id) {
-                                                if (produto?.categoriaProduto[obj].imagemProduto[i]) {
-                                                    setEstiloImgProd1(`${'imgPrd-' + produto?.categoriaProduto[obj].imagemProduto[i]._id}`);
-                                                }
-                                            } else {
-                                                if (produto?.categoriaProduto[obj].imagemProduto[i]) {
-                                                    estiloImgProd.unshift(`${'imgPrd-' + produto?.categoriaProduto[obj].imagemProduto[i]._id}`)
+                                        const estiloImgProd = []
+                                        for (let i = 0; i < categoria[obj].imagemProduto.length; i++) {
+                                            if (produto?.categoriaProduto[obj].imagemProduto[i]) {
+                                                if (produto?.categoriaProduto[obj].imagemProduto[i]._id === item._id) {
+                                                    estiloImgProd.push({
+                                                        styles: `${"imgPrd-" + produto?.categoriaProduto[obj].imagemProduto[i]._id}`,
+                                                        display: true
+                                                    })
+                                                } else {
+                                                    estiloImgProd.push({
+                                                        styles: `${"imgPrd-" + produto?.categoriaProduto[obj].imagemProduto[i]._id}`,
+                                                        display: false
+                                                    })
                                                 }
                                             }
                                         }
-                                        estiloImgProd.pop();
-                                        setEstiloImgProd1Array(estiloImgProd)
+                                        setEstiloImgProd1Array(estiloImgProd);
+
                                     }}>
-                                        <img src={item.url} alt="imagem produto" />
+                                        <img src={item.url} id={"imgProd-" + item._id} alt="imagem produto" />
                                     </button>
                                 } else return <></>
                             })}
@@ -298,34 +307,110 @@ const ComprarProduto = () => {
                                             <BotaoNumber onClick={() => {
                                                 if (quantidadeCategoria !== 1) {
                                                     const newquantidade = quantidadeCategoria - 1;
-                                                    console.log(newquantidade)
+
                                                     setQuantidade(newquantidade.toString());
                                                 }
-                                            }}><button type='button'>-</button></BotaoNumber>
-                                            <input type="number" value={quantidade} placeholder="Nº" min='1'
+                                            }}><button type="button">-</button></BotaoNumber>
+                                            <input type="number" value={quantidade} placeholder="Nº" min="1"
                                                 required max={categoria[obj].quantidade} onChange={evento => setQuantidade(evento.target.value)} />
                                             <BotaoNumber onClick={() => {
                                                 const newquantidade = quantidadeCategoria + 1;
-                                                console.log(newquantidade)
                                                 setQuantidade(newquantidade.toString());
                                             }}><button type="button">+</button></BotaoNumber>
                                         </ThTabela>
                                     </div>
                                     <div id="btnLinkPrd" className="btnLinkPrd">
                                         <input type="submit" value="Comprar" />
-                                        <a href={''}>Calcular frete</a>
+                                        <a href={""}>Calcular frete</a>
                                     </div>
                                 </ConteudoDescAnunPrd>
                             </DescAnunPrd>
                         </form>
                     </GridVisuPrd>
-                </VisualizacaoPrd>
+                </VisualizacaoPrd>)}
+                {(spinner && <DivCarregando>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="200px" height="200px" viewBox="0 0 100 100"
+                        preserveAspectRatio="xMidYMid">
+                        <g transform="rotate(0 50 50)">
+                            <rect x="47" y="26" rx="2.48" ry="2.48" width="6" height="8" fill="#0a0a0a">
+                                <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s"
+                                    begin="-0.9166666666666666s" repeatCount="indefinite"></animate>
+                            </rect>
+                        </g>
+                        <g transform="rotate(30 50 50)">
+                            <rect x="47" y="26" rx="2.48" ry="2.48" width="6" height="8" fill="#0a0a0a">
+                                <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s"
+                                    begin="-0.8333333333333334s" repeatCount="indefinite"></animate>
+                            </rect>
+                        </g>
+                        <g transform="rotate(60 50 50)">
+                            <rect x="47" y="26" rx="2.48" ry="2.48" width="6" height="8" fill="#0a0a0a">
+                                <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.75s"
+                                    repeatCount="indefinite"></animate>
+                            </rect>
+                        </g>
+                        <g transform="rotate(90 50 50)">
+                            <rect x="47" y="26" rx="2.48" ry="2.48" width="6" height="8" fill="#0a0a0a">
+                                <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s"
+                                    begin="-0.6666666666666666s" repeatCount="indefinite"></animate>
+                            </rect>
+                        </g>
+                        <g transform="rotate(120 50 50)">
+                            <rect x="47" y="26" rx="2.48" ry="2.48" width="6" height="8" fill="#0a0a0a">
+                                <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s"
+                                    begin="-0.5833333333333334s" repeatCount="indefinite"></animate>
+                            </rect>
+                        </g>
+                        <g transform="rotate(150 50 50)">
+                            <rect x="47" y="26" rx="2.48" ry="2.48" width="6" height="8" fill="#0a0a0a">
+                                <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.5s"
+                                    repeatCount="indefinite"></animate>
+                            </rect>
+                        </g>
+                        <g transform="rotate(180 50 50)">
+                            <rect x="47" y="26" rx="2.48" ry="2.48" width="6" height="8" fill="#0a0a0a">
+                                <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s"
+                                    begin="-0.4166666666666667s" repeatCount="indefinite"></animate>
+                            </rect>
+                        </g>
+                        <g transform="rotate(210 50 50)">
+                            <rect x="47" y="26" rx="2.48" ry="2.48" width="6" height="8" fill="#0a0a0a">
+                                <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s"
+                                    begin="-0.3333333333333333s" repeatCount="indefinite"></animate>
+                            </rect>
+                        </g>
+                        <g transform="rotate(240 50 50)">
+                            <rect x="47" y="26" rx="2.48" ry="2.48" width="6" height="8" fill="#0a0a0a">
+                                <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.25s"
+                                    repeatCount="indefinite"></animate>
+                            </rect>
+                        </g>
+                        <g transform="rotate(270 50 50)">
+                            <rect x="47" y="26" rx="2.48" ry="2.48" width="6" height="8" fill="#0a0a0a">
+                                <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s"
+                                    begin="-0.16666666666666666s" repeatCount="indefinite"></animate>
+                            </rect>
+                        </g>
+                        <g transform="rotate(300 50 50)">
+                            <rect x="47" y="26" rx="2.48" ry="2.48" width="6" height="8" fill="#0a0a0a">
+                                <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s"
+                                    begin="-0.08333333333333333s" repeatCount="indefinite"></animate>
+                            </rect>
+                        </g>
+                        <g transform="rotate(330 50 50)">
+                            <rect x="47" y="26" rx="2.48" ry="2.48" width="6" height="8" fill="#0a0a0a">
+                                <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="0s"
+                                    repeatCount="indefinite"></animate>
+                            </rect>
+                        </g>
+                    </svg>
+                </DivCarregando>)}
                 <Footer />
             </>
 
         } else {
             return <>
-                {window.location.href = '/login'}
+                {window.location.href = "/login"}
             </>
         }
     } else return <></>
