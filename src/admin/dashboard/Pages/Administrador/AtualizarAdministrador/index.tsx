@@ -102,63 +102,25 @@ const AtualizarAdministrador = () => {
     useEffect(() => {
         if (parametros.id) {
             apiFullSports.get<ICliente>(`listar-cliente/${parametros.id}`)
-                .then(resposta => setCpf(resposta.data.cpf))
-                .catch(err => {
-                    console.log(err)
-                    setMensagemErroBolean(true)
-                    setMenssagemErro("Erro na requisição")
-                })
-
-            apiFullSports.get<ICliente>(`listar-cliente/${parametros.id}`)
-                .then(resposta => setNome(resposta.data.nome))
-                .catch(err => {
-                    console.log(err)
-                    setMensagemErroBolean(true)
-                    setMenssagemErro("Erro na requisição")
-                })
-
-            apiFullSports.get<ICliente>(`listar-cliente/${parametros.id}`)
-                .then(resposta => setDataNascimento(resposta.data.dataNascimento))
-                .catch(err => {
-                    console.log(err)
-                    setMensagemErroBolean(true)
-                    setMenssagemErro("Erro na requisição")
-                })
-
-            apiFullSports.get<ICliente>(`listar-cliente/${parametros.id}`)
-                .then(resposta => setSexo(resposta.data.sexo))
-                .catch(err => {
-                    console.log(err)
-                    setMensagemErroBolean(true)
-                    setMenssagemErro("Erro na requisição")
-                })
-
-            apiFullSports.get<ICliente>(`listar-cliente/${parametros.id}`)
-                .then(resposta => setCep(resposta.data.cep))
-                .catch(err => {
-                    console.log(err)
-                    setMensagemErroBolean(true)
-                    setMenssagemErro("Erro na requisição")
-                })
-
-            apiFullSports.get<ICliente>(`listar-cliente/${parametros.id}`)
                 .then(resposta => {
-
-                    if (resposta.data.imagemPerfil === null || resposta.data.imagemPerfil === undefined) {
+                    console.log(resposta)
+                    setCpf(resposta.data.cpf);
+                    setNome(resposta.data.nome);
+                    setDataNascimento(resposta.data.dataNascimento);
+                    setSexo(resposta.data.sexo);
+                    setCep(resposta.data.cep);
+                    if (!resposta.data.imagemPerfil) {
                         setImagemID('')
                         setImagemPerfilurl('')
                     } else {
                         setImagemID(resposta.data.imagemPerfil._id)
                         setImagemPerfilurl(resposta.data.imagemPerfil.url)
                     }
-
-                })
-
-                .catch(err => {
+                }).catch(err => {
                     console.log(err)
                     setMensagemErroBolean(true)
                     setMenssagemErro("Erro na requisição")
-                })
+                });
         }
 
     }, [parametros]);
@@ -180,9 +142,9 @@ const AtualizarAdministrador = () => {
             if (file) {
                 formData1.append('file', file)
             }
-            setSpinner(true)
+            setSpinner(true);
             apiFullSports.request({
-                url: 'imagem/',
+                url: "imagem/",
                 method: 'POST',
                 headers: {
                     'Access-Control-Allow-Origin': '*',
@@ -191,32 +153,26 @@ const AtualizarAdministrador = () => {
                 data: formData1
             }).then(evento => {
                 apiFullSports.request({
-                    url: `imagem/${evento.data.image._id}`,
-                    method: 'GET',
-                    headers: {
-                        'Access-Control-Allow-Origin': '*'
-                    },
-                }).then(respostaImagem => {
-                    apiFullSports.request({
-                        url: `atualizar-cliente/${parametros.id}`,
-                        method: 'PUT',
-                        data: {
-                            imagemPerfil: respostaImagem.data._id
-                        }
-                    })
-                }).then(() => {
-                    setSpinner(false)
-                    setCadastrarNovaFoto(false)
-                    window.location.reload()
+                    method: "PUT",
+                    url: `atualizar-cliente/${parametros.id}`,
+                    data: {
+                        imagemPerfil: evento.data.image._id
+                    }
+                }).then((response) => {
+                    setSpinner(false);
+                    setCadastrarNovaFoto(false);
+                    setImagemID(response.data.user.imagemPerfil._id);
+                    setImagemPerfilurl(response.data.user.imagemPerfil.url);
+
+                    window.location.reload();
                 }).catch(erro => console.log(erro))
 
                 // handleClose()
             }).catch(erro => console.log(erro))
+
         }
         else {
             apiFullSports.delete(`imagem/${imagemId}`).then(()=>{
-
-           
             setSpinner(true)
             setImagemID('');
 
@@ -286,7 +242,7 @@ const AtualizarAdministrador = () => {
                 },
             }).then(evento => {
                 setCarregandoCep(false)
-                setRua(evento.data.street);
+                setRua(evento.data.street.split("-")[0]);
                 setBairro(evento.data.neighborhood);
                 setEstado(evento.data.state);
                 setCidade(evento.data.city)
@@ -306,7 +262,8 @@ const AtualizarAdministrador = () => {
                 'Access-Control-Allow-Origin': '*',
             },
         }).then(evento => {
-            setRua(evento.data.street);
+            console.log(evento)
+            setRua(evento.data.street.split("-")[0]);
             setBairro(evento.data.neighborhood);
             setEstado(evento.data.state);
             setCidade(evento.data.city)
