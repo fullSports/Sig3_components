@@ -8,11 +8,13 @@
     "@mui/base": "^5.0.0-alpha.100",
     "@mui/material": "^5.10.8",
     "@mui/styled-engine-sc": "^5.10.6",
+    "@mui/system": "^5.12.1",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^27.5.2",
     "@types/node": "^16.18.24",
+    "@types/prop-types": "^15.7.5",
     "@types/react": "^18.0.21",
     "@types/react-autosuggest": "^10.1.5",
     "@types/react-dom": "^18.0.6",
@@ -37,7 +39,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint . --ext .ts"
+    "lint": "tsc --noEmit && eslint src/**/*.ts{,x} --cache --max-warnings=0",
+    "lint:fix": "eslint src/**/*.ts{,x} --fix"
   },
   "browserslist": {
     "production": [
@@ -54,6 +57,19 @@
   "devDependencies": {
     "@types/react-slick": "^0.23.10",
     "@types/styled-components": "^5.1.26",
+    "@typescript-eslint/eslint-plugin": "^5.59.0",
+    "@typescript-eslint/parser": "^5.59.0",
+    "eslint": "^8.38.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-airbnb-typescript": "^17.0.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-import-resolver-typescript": "^3.5.5",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-jsx-a11y": "^6.7.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "prettier": "^2.8.7",
     "tailwindcss": "^3.2.1",
     "typescript": "^5.0.4",
     "web-vitals": "^2.1.4"
