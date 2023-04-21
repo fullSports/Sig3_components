@@ -1,8 +1,6 @@
 import React from "react";
 import './styles.css';
-import '../../../../styles.css'
-// const imgPrd = require('../../../assets/images/produtos/produto-teste.png')
-
+import '../../../../styles.css';
 interface Props {
     src: string
     produtoName: string

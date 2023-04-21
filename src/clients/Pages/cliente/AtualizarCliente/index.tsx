@@ -8,8 +8,7 @@ import { useParams } from "react-router-dom";
 import ICliente from "../../../../utils/interfaces/ICliente";
 import Cabecalho from "../../../Components/Menu/Header";
 import Footer from "../../../Components/Footer";
-// import './styles.css'
-const SinalMais = require('../../../../assets/icons/sinalMais.png')
+import SinalMais from '../../../../assets/icons/sinalMais.png';
 
 const Icone = styled.div`
     background-color: #a49898;

@@ -8,7 +8,7 @@ import ICliente from "../../../../../utils/interfaces/ICliente";
 import './styles.css'
 import DashboardHeader from "../../../Components/Header";
 import DashboardSidenav from "../../../Components/Sidenav";
-const SinalMais = require('../../../../../assets/icons/sinalMais.png')
+import SinalMais from "../../../../../assets/icons/sinalMais.png"
 
 const Icone = styled.div`
     background-color: #a49898;

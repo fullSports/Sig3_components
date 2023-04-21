@@ -1,5 +1,5 @@
 import styled from "styled-components";
-const Img404 = require('./../assets/images/5680361.png')
+import Img404 from './../assets/images/5680361.png';
 const DivImg = styled.div`
 justify-content: center;
 display: flex;

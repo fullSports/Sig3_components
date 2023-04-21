@@ -7,7 +7,6 @@ import SubMenu from './SubMenu';
 import styled from 'styled-components';
 import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
-const ex_pfp = require('../../../../assets/images/pfp-dashboard-ex.png');
 const Icone = styled.div`
     background-color: #796969;
     height: 50px;

@@ -12,8 +12,8 @@ import HorizontalCardProduct from '../../Components/Cards/HorizontalCardP';
 import HomeHeader from '../../Components/Menu/Home Header';
 import IProduto from '../../../utils/interfaces/IProduto';
 import apiFullSports from '../../../api/apiFullSports';
-const tenisBanner = require('../../../assets/images/banners/transparent-shoes-banner.png');
-const roupasBanner = require('../../../assets/images/banners/transparent-clothes-banner.png');
+import tenisBanner from '../../../assets/images/banners/transparent-shoes-banner.png';
+import roupasBanner from '../../../assets/images/banners/transparent-clothes-banner.png';
 
 const Grid = styled.div`
     margin: 40px 10px 40px 40px;

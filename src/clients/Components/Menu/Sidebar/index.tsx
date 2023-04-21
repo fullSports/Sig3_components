@@ -3,7 +3,6 @@ import '../../../../styles.css';
 import './styles.css';
 import { arrayNavItems } from '../../../../utils/NavItems';
 import { Link } from "react-router-dom";
-const brandLogo = require('../../../../assets/images/fullSportLogo.png');
 
 const Sidebar = () => {
 

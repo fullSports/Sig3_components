@@ -1,18 +1,19 @@
-import './styles.css';
-import '../../../../styles.css';
-import { arrayNavItems } from '../../../../utils/NavItems';
-import { useTheme } from '../../../../utils/Hooks/useTheme';
-import Sidebar from '../Sidebar/index'
-import styled from 'styled-components';
-import { RiMenuFill } from 'react-icons/ri';
-import { BiSearch } from 'react-icons/bi';
-import { TbArrowBigDown, TbArrowBigUp } from 'react-icons/tb';
-import { ImAccessibility, ImContrast } from 'react-icons/im';
-import { Link } from 'react-router-dom';
-const brandLogo = require('../../../../assets/images/fullSportLogo.png');
-const carrinhoIcon = require('../../../../assets/icons/carrinho-icon.png');
-const suporteIcon = require('../../../../assets/icons/help-icon.png');
-const contaIcon = require('../../../../assets/icons/conta-icon.png');
+import "./styles.css";
+import "../../../../styles.css";
+import { arrayNavItems } from "../../../../utils/NavItems";
+import { useTheme } from "../../../../utils/Hooks/useTheme";
+import Sidebar from "../Sidebar/index"
+import styled from "styled-components";
+import { RiMenuFill } from "react-icons/ri";
+import { BiSearch } from "react-icons/bi";
+import { TbArrowBigDown, TbArrowBigUp } from "react-icons/tb";
+import { ImAccessibility, ImContrast } from "react-icons/im";
+import { Link } from "react-router-dom";
+import brandLogo from "../../../../assets/images/fullSportLogo.svg";
+import carrinhoIcon  from "../../../../assets/icons/carrinho-icon.png";
+import suporteIcon  from "../../../../assets/icons/help-icon.png";
+import contaIcon  from "../../../../assets/icons/conta-icon.png";
+import SVG from "react-inlinesvg";
 const Icone = styled.div`
     background-color: #796969;
     height: 27px;
@@ -42,17 +43,17 @@ cursor: pointer;
 const Cabecalho = () => {
 
   const { theme, setTheme } = useTheme();
-  const user = JSON.parse(localStorage.getItem('user') as string);
-  const carrinho = JSON.parse(localStorage.getItem('carrinho') as string);
+  const user = JSON.parse(localStorage.getItem("user") as string);
+  const carrinho = JSON.parse(localStorage.getItem("carrinho") as string);
   function openTeste() {
-    let sidebar = document.querySelector('.sidebar-header');
-    var isSideOpen = sidebar?.classList.contains('hideShow')
+    let sidebar = document.querySelector(".sidebar-header");
+    var isSideOpen = sidebar?.classList.contains("hideShow")
     isSideOpen ? sidebar?.classList.remove("hideShow") : sidebar?.classList.toggle("hideShow")
   }
 
   function showToggleOpts() {
-    let toggleAcess = document.querySelector('.toggle-group');
-    var isDisplayed = toggleAcess?.classList.contains('hideShow')
+    let toggleAcess = document.querySelector(".toggle-group");
+    var isDisplayed = toggleAcess?.classList.contains("hideShow")
     isDisplayed ? toggleAcess?.classList.remove("hideShow") : toggleAcess?.classList.toggle("hideShow")
   }
   function MostrarImagemPerfil() {
@@ -70,22 +71,22 @@ const Cabecalho = () => {
   }
   function editarInfoConta() {
     if (user) {
-      let userDetails = document.querySelector('.user-options');
-      let isDisplayed = userDetails?.classList.contains('hide');
-      isDisplayed ? userDetails?.classList.remove("hide") : userDetails?.classList.toggle('hide')
+      let userDetails = document.querySelector(".user-options");
+      let isDisplayed = userDetails?.classList.contains("hide");
+      isDisplayed ? userDetails?.classList.remove("hide") : userDetails?.classList.toggle("hide")
     }
   }
   function MostrarCarrinho() {
     if (carrinho) {
       return <DivCarrinho>
-        <a href='/carrinho-de-compra/'>
+        <a href="/carrinho-de-compra/">
           <BotaoNumber>{carrinho.pedido.quantidade}</BotaoNumber>
           <img src={carrinhoIcon} alt="Carrinho" />
         </a>
       </DivCarrinho>
     } else {
       return <DivCarrinho>
-        <a href='/carrinho-de-compra/'>
+        <a href="/carrinho-de-compra/">
           <img src={carrinhoIcon} alt="Carrinho" />
         </a>
       </DivCarrinho>
@@ -101,7 +102,7 @@ const Cabecalho = () => {
         </button>
         <div className="sidebar-logo">
           <Link to="/">
-            <img src={brandLogo} alt="" />
+            <img src={brandLogo} alt="Logo do fullSports que redireiona para home"/>
           </Link>
         </div>
         <Sidebar />
@@ -109,28 +110,28 @@ const Cabecalho = () => {
 
       <div className="toggle-acess">
         <div className="toggle-main">
-          <button onClick={showToggleOpts} className='toggle-btn'>
+          <button onClick={showToggleOpts} className="toggle-btn">
             <ImAccessibility />
           </button>
         </div>
         <div className="toggle-group hideShow">
           <div className="toggle-opts">
-            <button className='toggle-opt-btn'>
+            <button className="toggle-opt-btn">
               <TbArrowBigUp />
             </button>
           </div>
           <div className="toggle-opts">
-            <button className='toggle-opt-btn'>
+            <button className="toggle-opt-btn">
               <TbArrowBigDown />
             </button>
           </div>
           <div className="toggle-opts">
-            {theme === 'light' ?
-              (<button onClick={() => setTheme("dark")} className='toggle-opt-btn'>
+            {theme === "light" ?
+              (<button onClick={() => setTheme("dark")} className="toggle-opt-btn">
                 <ImContrast />
               </button>)
               :
-              (<button onClick={() => setTheme("light")} className='toggle-opt-btn'>
+              (<button onClick={() => setTheme("light")} className="toggle-opt-btn">
                 <ImContrast />
               </button>)}
 
@@ -143,14 +144,14 @@ const Cabecalho = () => {
         <div className="header-acess header-resp">
           <div className="acess-props">
             <ul>
-              <li id='aumentaFonte'>
-                <span id='aumentaFonte'>Aumentar Fonte</span>
+              <li id="aumentaFonte">
+                <span id="aumentaFonte">Aumentar Fonte</span>
               </li>
-              <li id='diminuiFonte'>
-                <span id='diminuiFonte'>Diminuir Fonte</span>
+              <li id="diminuiFonte">
+                <span id="diminuiFonte">Diminuir Fonte</span>
               </li>
               <li>
-                {theme === 'light' ?
+                {theme === "light" ?
                   (<span onClick={() => setTheme("dark")} className="cursor-pointer"> Sem Contraste</span>)
                   :
                   (<span onClick={() => setTheme("light")} className="cursor-pointer">  Alto Contraste</span>)
@@ -163,7 +164,7 @@ const Cabecalho = () => {
           </div>
         </div>
         <div className="header-resp-logo">
-          <a href='/'>
+          <a href="/">
           <img src={brandLogo} alt="imagem do logo da loja" />
           </a>
         </div>
@@ -176,22 +177,19 @@ const Cabecalho = () => {
             </div>
             <div className="header-search-bar">
               <div className="search-bar">
-                <input type="text" className='search-input' placeholder='O que você busca?' />
-                <button className="input-search-btn"><BiSearch size={20} color={'#09080990'} /></button>
+                <input type="text" className="search-input" placeholder="O que você busca?" />
+                <button className="input-search-btn"><BiSearch size={20} color={"#09080990"} /></button>
               </div>
             </div>
             <div className="header-logo header-resp">
-              <a href='/'>
-                <img src={brandLogo} alt="" />
+              <a href="/">
+                <img src={brandLogo} alt="Logo do fullSports que redireiona para home" />
               </a>
             </div>
             <div className="header-help-icons header-resp">
               <ul className="help-icons">
                 <li>
-
                   <MostrarCarrinho />
-
-
                 </li>
                 <li>
                   <a href="#">
@@ -202,7 +200,7 @@ const Cabecalho = () => {
                 <li>
                   <div onClick={editarInfoConta} className="profile-info">
                     <MostrarImagemPerfil />
-                    {user ? user.nome.split(' ').slice(0, 1) : <Link to="/login">Entrar</Link>}
+                    {user ? user.nome.split(" ").slice(0, 1) : <Link to="/login">Entrar</Link>}
                   </div>
                   <div className="user-options hide">
                     <ul>
@@ -226,7 +224,7 @@ const Cabecalho = () => {
               {arrayNavItems.map((el: any) => {
                 return (
                   <li className="header-nav-item" key={`header-nav-item-${el.title}`}>
-                    <a href={el.path} className='nav-item-btn'>
+                    <a href={el.path} className="nav-item-btn">
                       {el.title}
                     </a>
                   </li>

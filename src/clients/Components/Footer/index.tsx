@@ -6,7 +6,7 @@ import '../../../../src/styles.css';
 import './styles.css';
 import { useState, useEffect } from 'react';
 import apiFullSports from '../../../api/apiFullSports';
-const brandLogo = require('../../../assets/images/fullSportLogo.png');
+import brandLogo  from  "../../../assets/images/fullSportLogo.svg";
 const Footer = () => {
     const [email, setEmail] = useState('');
     const [isLogin, setIsLogin] = useState(true);
