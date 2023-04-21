@@ -1,5 +1,24 @@
 {
-    "githubPullRequests.ignoredPullRequestBranches": [
-        "main"
-    ]
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "prettier.trailingComma": "es5",
+    "prettier.requireConfig": false,
+    "prettier.singleQuote": true,
+    "prettier.useTabs": true,
+    "prettier.tabWidth": 2,
+    "prettier.printWidth": 80,
+    "editor.tabSize": 2,
+    "editor.codeActionsOnSave": [
+        "source.formatDocument",
+        "source.fixAll.eslint"
+    ],
+    "[typescript]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "[jsonc]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
 }
