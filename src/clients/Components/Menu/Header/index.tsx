@@ -46,7 +46,7 @@ const Cabecalho = () => {
 	function openTeste() {
 		const sidebar = document.querySelector('.sidebar-header');
 		const isSideOpen = sidebar?.classList.contains('hideShow');
-		isSideOpen
+		return isSideOpen
 			? sidebar?.classList.remove('hideShow')
 			: sidebar?.classList.toggle('hideShow');
 	}
@@ -54,7 +54,7 @@ const Cabecalho = () => {
 	function showToggleOpts() {
 		const toggleAcess = document.querySelector('.toggle-group');
 		const isDisplayed = toggleAcess?.classList.contains('hideShow');
-		isDisplayed
+		return isDisplayed
 			? toggleAcess?.classList.remove('hideShow')
 			: toggleAcess?.classList.toggle('hideShow');
 	}
@@ -77,7 +77,7 @@ const Cabecalho = () => {
 		if (user) {
 			const userDetails = document.querySelector('.user-options');
 			const isDisplayed = userDetails?.classList.contains('hide');
-			isDisplayed
+			return isDisplayed
 				? userDetails?.classList.remove('hide')
 				: userDetails?.classList.toggle('hide');
 		}
@@ -271,7 +271,7 @@ const Cabecalho = () => {
 					</div>
 					<div className="nav-items-group header-resp">
 						<ul className="nav-items">
-							{arrayNavItems.map((el: any) => {
+							{arrayNavItems.map((el) => {
 								return (
 									<li
 										className="header-nav-item"
