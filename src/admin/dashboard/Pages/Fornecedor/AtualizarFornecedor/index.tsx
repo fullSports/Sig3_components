@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import apiFullSports from '../../../../../api/apiFullSports';
-
 import { Button, TextField } from '@mui/material';
 import ApiCep from '../../../../../api/apiCep';
 import IFornecedor from '../../../../../utils/interfaces/IFornecedor';
