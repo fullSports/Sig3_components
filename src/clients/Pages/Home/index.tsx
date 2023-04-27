@@ -17,7 +17,7 @@ import IProduto from '../../../utils/interfaces/IProduto';
 import apiFullSports from '../../../api/apiFullSports';
 import tenisBanner from '../../../assets/images/banners/transparent-shoes-banner.png';
 import roupasBanner from '../../../assets/images/banners/transparent-clothes-banner.png';
-
+import SvgCarregando from '../../../assets/icons/caarregando.svg';
 // const Grid = styled.div`
 // 	margin: 40px 10px 40px 40px;
 // 	display: grid;
@@ -26,7 +26,6 @@ import roupasBanner from '../../../assets/images/banners/transparent-clothes-ban
 // `;
 const Home = () => {
 	//Exemplo de requisição por categorias
-
 	const [, setSpinner] = useState(false);
 	const [produtos, setProdutos] = useState<IProduto[]>([]);
 
@@ -84,7 +83,7 @@ const Home = () => {
                                 })}
                             </Slider>
                         </div> */}
-
+						<img src={SvgCarregando} />
 						<div className="produtos-grid-container-home">
 							{produtos.map((item: IProduto) => {
 								const obj = Object.keys(item.categoriaProduto)[0].toString() as
