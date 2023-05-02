@@ -3,7 +3,7 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 ## Node version
-### `v14.20.0`
+### `v16.20.0`
 ## Available Scripts
 installing the dependencies
 ## Install pnpn
