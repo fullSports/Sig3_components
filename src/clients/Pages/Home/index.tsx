@@ -61,7 +61,7 @@ const Home = () => {
 						</div>
 						{spinner ? (
 							<div style={{ display: 'flex', justifyContent: 'center' }}>
-								<img src={SvgCarregando} />
+								<img src={SvgCarregando} alt="imagem de spinner, carregando" />
 							</div>
 						) : (
 							/* <div className="cards-container overflow-x-auto"> */

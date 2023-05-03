@@ -12,7 +12,7 @@ export const DevNames = [
 		linkedin: 'https://www.linkedin.com/in/lisandraferrazs/',
 	},
 	{
-		name: 'Renan Figueredo',
+		name: 'Renan Figueiredo',
 		linkedin: 'https://www.linkedin.com/in/renan-figueiredo-3794b0224/',
 	},
 	{

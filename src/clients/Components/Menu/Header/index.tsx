@@ -246,7 +246,13 @@ const Cabecalho = () => {
 									</div>
 									<div className="user-options hide">
 										<ul>
-											<li>Editar Perfil</li>
+											<li
+												onClick={() => {
+													window.location.href = `/atualizar-cliente/${user._id}`;
+												}}
+											>
+												Editar Perfil
+											</li>
 											<li
 												onClick={() => {
 													window.location.href = '/historico-de-pedido';
