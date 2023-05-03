@@ -16,6 +16,7 @@ import apiFullSports from '../../../../../api/apiFullSports';
 import IFornecedor from '../../../../../utils/interfaces/IFornecedor';
 import IProduto from '../../../../../utils/interfaces/IProduto';
 import Iimagem from '../../../../../utils/interfaces/Iimagem';
+import SvgCarregando from '../../../../../assets/icons/caarregando.svg';
 import './styles.css';
 const Main = styled.main`
 	width: 100%;
@@ -104,14 +105,14 @@ const CadastrarNovaFotoInpult = styled.label`
 	color: #0b0b0b;
 	border: solid 1px #7b7777;
 	margin-top: 4%;
-	margin-bottom: 4%;
 	display: flex;
 	text-align: center;
 	padding: 10px 10px;
 	border-radius: 5px;
-	margin-left: auto;
-	margin-right: auto;
-	width: 20%;
+	width: 100%;
+	align-items: center;
+	margin-bottom: 2%;
+	height: auto;
 `;
 const AtualizarProduto = () => {
 	const parametros = useParams();
@@ -128,8 +129,8 @@ const AtualizarProduto = () => {
 	const [quantidade, setQuantidade] = useState('');
 	const [tamanhoProduto, setTamanhoProduto] = useState('');
 	const [sexo, setSexo] = useState('');
-	let imagens = [{}];
-	const ImagensID = [{}];
+	const [imagens, setImagens] = useState(Array);
+	const [ImagensID, setImagensID] = useState(Array);
 	const [ImagemProduto, setImagemProduto] = useState<Iimagem[]>();
 	const [spinner, setSpinner] = useState(false);
 	const [mensagemErroBolean, setMensagemErroBolean] = useState(false);
@@ -138,17 +139,29 @@ const AtualizarProduto = () => {
 	const [messagemErroFoto, setmessagemErroFoto] = useState(false);
 	const [categoriaID, setCategoriaID] = useState('');
 	const [imageSelecionado] = useState(true);
-	const [botaoCadastrarNovaFoto, setbotaoCadastrarNovaFoto] = useState(true);
+	const [botaoCadastrarNovaFoto, setbotaoCadastrarNovaFoto] = useState(false);
+	const [LimiteImg, setLimitImg] = useState(false);
+	const [QuantImg, setQuantImg] = useState(Number);
+
 	const handleClose = () => {
 		setOpen(false);
 	};
 	const selecionarArquivo = (evento: React.ChangeEvent<HTMLInputElement>) => {
-		imagens = [{}];
+		setLimitImg(false);
+		const img = [];
 		if (evento.target.files?.length) {
 			for (let i = 0; i < evento.target.files.length; i++) {
-				imagens.unshift(evento.target.files[i]);
+				img.unshift(evento.target.files[i]);
 			}
-			console.log(imagens);
+		}
+		console.log(QuantImg);
+		if (img.length + QuantImg > 4) {
+			setLimitImg(true);
+		} else {
+			setImagens(img);
+			console.log(img);
+			setmessagemErroFoto(false);
+			setbotaoCadastrarNovaFoto(true);
 		}
 	};
 
@@ -180,20 +193,27 @@ const AtualizarProduto = () => {
 					setQuantidade(categoria[obj].quantidade.toString());
 					setTamanhoProduto(categoria[obj].tamanho.toString());
 					setImagemProduto(categoria[obj].imagemProduto);
+					const ArryIdImg: string[] = [];
+					for (const id of categoria[obj].imagemProduto) {
+						if (id) {
+							ArryIdImg.push(id?._id);
+						}
+					}
+					console.log(ArryIdImg);
+					setQuantImg(ArryIdImg.length);
+					setImagensID(ArryIdImg);
 				})
 				.catch((err) => console.log(err));
 		}
 	}, [parametros]);
-
-	function cadastrarNovasFotos() {
+	const cadastrarNovasFotos = async () => {
 		setmessagemErroFoto(false);
 		setbotaoCadastrarNovaFoto(false);
 		setSpinner(true);
-		if (imagens.length > 1) {
-			ImagemProduto?.map((item) => {
-				return ImagensID.unshift(item._id);
-			});
-			imagens.map(async (item) => {
+		console.log(imagens);
+
+		if (imagens.length > 0) {
+			await imagens.map(async (item) => {
 				try {
 					const response = await apiFullSports.request({
 						url: 'imagem/',
@@ -206,79 +226,86 @@ const AtualizarProduto = () => {
 							file: item,
 						},
 					});
-					ImagensID.unshift(response.data.image._id);
+					console.log(response);
+					ImagensID.push(response.data.image._id);
 				} catch (err) {
 					console.log(err);
 					setbotaoCadastrarNovaFoto(true);
 				}
 			});
-			ImagensID.pop();
-			console.log(ImagensID);
-			setTimeout(function () {
-				console.log(`atualizar-produto/${categoriaID}`);
-				apiFullSports
-					.request({
-						url: `atualizar-produto/${categoriaID}`,
-						method: 'PUT',
-						data: {
-							categoriaProduto: {
-								[categoriaProduto]: {
-									imagemProduto: ImagensID,
-								},
+
+			console.log(`atualizar-produto/${categoriaID}`);
+			await apiFullSports
+				.request({
+					url: `atualizar-produto/${categoriaID}`,
+					method: 'PUT',
+					data: {
+						categoriaProduto: {
+							[categoriaProduto]: {
+								imagemProduto: ImagensID,
 							},
 						},
-					})
-					.then(() => {
-						window.location.reload();
-						setSpinner(false);
-					})
-					.catch((err) => {
-						console.log(err);
-						setbotaoCadastrarNovaFoto(true);
-					});
-			}, 5000);
+					},
+				})
+				.then(() => {
+					window.location.reload();
+					setSpinner(false);
+				})
+				.catch((err) => {
+					console.log(err);
+					setbotaoCadastrarNovaFoto(true);
+				});
 		} else {
 			setSpinner(false);
 			setmessagemErroFoto(true);
 			setbotaoCadastrarNovaFoto(true);
 		}
-	}
-	const deletarImagem = (DeletarImagem: Iimagem) => {
+	};
+	const deletarImagem = async (DeletarImagem: Iimagem) => {
 		if (DeletarImagem) {
-			apiFullSports.delete(`imagem/${DeletarImagem._id}/`).then(() => {
+			await apiFullSports.delete(`imagem/${DeletarImagem._id}/`).then(() => {
 				window.location.reload();
+				setOpen(true);
 			});
-			setOpen(true);
 		}
-		window.location.reload();
 	};
 	function EscreveImagens() {
 		return (
 			<>
-				{ImagemProduto?.map((item) => {
-					if (item === null) {
+				{ImagemProduto?.map((item, index: number) => {
+					if (!item) {
 						return <> </>;
 					} else
 						return (
-							<Box
-								component={'div'}
-								sx={{
-									display: 'grid',
+							<div
+								style={{
 									margin: '1%',
-									width: '20%',
+									width: '50%',
 									height: '10%',
 								}}
+								key={`Mostrar-Img-${index}`}
 							>
-								<img src={item.url} alt="imagem de produto" />
-								<Button
-									onClick={() => deletarImagem(item)}
-									color="error"
-									variant="outlined"
-									sx={{ border: '2px solid alert', margin: '2%' }}
-								>
-									Excluir foto
-								</Button>
-							</Box>
+								<img
+									src={item.url}
+									alt="imagem de produto"
+									key={`Mostrar-Img-${index}-${item._id}`}
+								/>
+								{!spinner && (
+									<Button
+										onClick={() => deletarImagem(item)}
+										color="error"
+										variant="outlined"
+										style={{
+											border: '2px solid alert',
+											margin: '1%',
+											width: '10%',
+										}}
+										className="vizualizacao-produto-editar-produto-buttao-excluir"
+									>
+										Excluir foto
+									</Button>
+								)}
+							</div>
 						);
 				})}
 			</>
@@ -287,12 +314,9 @@ const AtualizarProduto = () => {
 	function OpcoentesFotoProduto() {
 		return (
 			<>
-				<Box
-					component={'div'}
-					sx={{ display: 'flex', justifyContent: 'center' }}
-				>
+				<div className="vizualizacao-produto-editar-produto">
 					<EscreveImagens />
-				</Box>
+				</div>
 			</>
 		);
 	}
@@ -607,63 +631,95 @@ const AtualizarProduto = () => {
 					id="tela-imagem"
 					className="tela-imagem"
 					sx={{
-						width: '70%',
+						width: '60%',
 						height: '80%',
 						position: 'absolute' as const,
 						top: '10%',
-						left: '15%',
-						display: '',
+						left: '20%',
 						backgroundColor: '#4e4a4a',
 						border: '3px solid #000',
 						borderRadius: '20px',
-						pt: 2,
-						px: 4,
-						pb: 3,
+						pt: 1,
+						px: 1,
+						pb: 1,
 					}}
 				>
-					<OpcoentesFotoProduto />
-
-					{imageSelecionado && (
-						<>
-							<CadastrarNovaFotoInpult htmlFor="file">
-								Escolher novas fotos...
-							</CadastrarNovaFotoInpult>
-							<input
-								onChange={selecionarArquivo}
-								className="txt-form"
-								id="file"
-								type="file"
-								name="file"
-								accept="image/jpeg, image/pjpeg, image/png, image/gif"
-								multiple
-							/>
-						</>
-					)}
+					<div
+						style={{
+							display: 'grid',
+							gridTemplateColumns: 'repeat(2,auto)',
+						}}
+					>
+						<OpcoentesFotoProduto />
+						<div>
+							{imageSelecionado && !spinner && (
+								<>
+									<CadastrarNovaFotoInpult htmlFor="file">
+										Escolher novas fotos...
+									</CadastrarNovaFotoInpult>
+									<input
+										onChange={selecionarArquivo}
+										className="txt-form"
+										id="file"
+										type="file"
+										name="file"
+										accept="image/jpeg, image/pjpeg, image/png, image/gif"
+										multiple
+										max={QuantImg.toString()}
+										maxLength={QuantImg}
+									/>
+								</>
+							)}
+							<div>
+								{botaoCadastrarNovaFoto && !LimiteImg && (
+									<Button
+										variant="outlined"
+										sx={{ border: '2px solid', margin: '1%', width: '100%' }}
+										onClick={cadastrarNovasFotos}
+									>
+										Cadastrar Nova Foto
+									</Button>
+								)}
+							</div>
+						</div>
+					</div>
 					<Box
 						component={'div'}
-						sx={{ display: 'flex', justifyContent: 'center' }}
+						sx={{
+							display: 'flex',
+							fontSize: '23px',
+							marginTop: '5%',
+							justifyContent: 'center',
+						}}
 					>
-						{botaoCadastrarNovaFoto && (
-							<Button
-								variant="outlined"
-								sx={{ border: '2px solid', margin: '1%' }}
-								onClick={cadastrarNovasFotos}
-							>
-								Cadastrar Nova Foto
-							</Button>
+						{spinner && (
+							<div style={{ display: 'flex', justifyContent: 'center' }}>
+								<img
+									src={SvgCarregando}
+									width="100"
+									height="100"
+									alt="imagem de spinner, carregando"
+								/>
+							</div>
 						)}
-						<Button
-							variant="outlined"
-							sx={{ border: '2px solid', margin: '1%' }}
-							onClick={handleClose}
-						>
-							Fechar
-						</Button>
-					</Box>
-					<Box component={'div'} sx={{ display: 'flex', fontSize: '23px' }}>
-						{spinner && <p>carregando...</p>}
 						{messagemErroFoto && (
 							<p id="menssagem-erro">selecione uma imagem...</p>
+						)}
+						{LimiteImg && (
+							<p id="menssagem-erro">
+								Número Maximo de Imagens do Produto permitidas são 4
+							</p>
+						)}
+						{!spinner ? (
+							<Button
+								variant="outlined"
+								sx={{ border: '2px solid', margin: '1%', width: '100px' }}
+								onClick={handleClose}
+							>
+								Fechar
+							</Button>
+						) : (
+							<></>
 						)}
 					</Box>
 				</Box>

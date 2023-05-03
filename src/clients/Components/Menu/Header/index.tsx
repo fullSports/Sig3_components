@@ -161,11 +161,11 @@ const Cabecalho = () => {
 				<div className="header-acess header-resp">
 					<div className="acess-props">
 						<ul>
-							<li id="aumentaFonte">
-								<span id="aumentaFonte">Aumentar Fonte</span>
+							<li>
+								<span id="aumentaFonteDesktop">Aumentar Fonte</span>
 							</li>
-							<li id="diminuiFonte">
-								<span id="diminuiFonte">Diminuir Fonte</span>
+							<li>
+								<span id="diminuiFonteDesktop">Diminuir Fonte</span>
 							</li>
 							<li>
 								{theme === 'light' ? (
@@ -246,7 +246,13 @@ const Cabecalho = () => {
 									</div>
 									<div className="user-options hide">
 										<ul>
-											<li>Editar Perfil</li>
+											<li
+												onClick={() => {
+													window.location.href = `/atualizar-cliente/${user._id}`;
+												}}
+											>
+												Editar Perfil
+											</li>
 											<li
 												onClick={() => {
 													window.location.href = '/historico-de-pedido';

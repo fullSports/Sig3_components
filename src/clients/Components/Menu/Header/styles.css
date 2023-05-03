@@ -240,7 +240,6 @@
 .user-options{
     @apply
     absolute top-32
-    right-56
 }
 
 .user-options ul{

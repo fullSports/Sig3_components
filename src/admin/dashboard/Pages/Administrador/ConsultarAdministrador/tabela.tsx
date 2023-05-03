@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import ICliente from '../../../../../utils/interfaces/ICliente';
 import apiFullSports from '../../../../../api/apiFullSports';
 import styled from 'styled-components';
-
+import SvgCarregando from '../../../../../assets/icons/caarregando.svg';
 const Icone = styled.div`
 	background-color: #796969;
 	height: 50px;
@@ -49,7 +49,11 @@ const TabelaAdimistrador = () => {
 
 	return (
 		<>
-			{spinner && <p>carregando...</p>}
+			{spinner && (
+				<div style={{ display: 'flex', justifyContent: 'center' }}>
+					<img src={SvgCarregando} alt="imagem de spinner, carregando" />
+				</div>
+			)}
 			{mensagemErroBolean && <span id="menssagem-erro">{menssagemErro}</span>}
 
 			{clientes.map((item) => {
