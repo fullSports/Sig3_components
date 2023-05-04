@@ -86,7 +86,7 @@ manipular uma operação de sistema.
 | Teste | Será considerada concluída quando 100% dos casos de teste prioritários (complexidade, funções mais utilizadas) rastreáveis para os requisitos obtiverem satisfatório |
 
 
-
+<!--
 ##### Estudo de Caso - SIG de Vendas e Suprimentos 
 ##### Concepção - análise de requisitos 
 > Considere que uma organização está iniciando um projeto para implantar um Sistema Integrado de Gestão de Vendas e Suprimentos. 
@@ -168,3 +168,4 @@ APIClienteController -->> Usuario: ResponseEntity
 - [3] ERL, Thomas. SOA principles of service design (the Prentice Hall service-oriented computing series from Thomas Erl). Prentice Hall PTR, 2007.
 - [4] LARMAN, Craig. Utilizando UML e padrões. 2aed., Porto Alegre: Bookman Editora, 2006 (pag. 147).
 
+-->
