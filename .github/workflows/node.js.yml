@@ -16,11 +16,11 @@ jobs:
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
-          node-version: 16.20.0
-          cache: 'npm'
-      - run: npm ci
-      - run: npm run build --if-present
-      - name: Run eslint
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
+      - run: pnpm ci
+      - run: pnpm build --if-present
+      - name: pnpm eslint
         run: |
-          npm run lint:fix
+          pnpm lint:fix
 
