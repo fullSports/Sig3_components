@@ -54,7 +54,11 @@ const CadastrarFornecedor = () => {
 				console.log(err);
 				setSpinner(false);
 				setMensagemErroBolean(true);
-				setMenssagemErro('Erro na Requisição');
+				if (err.response.status === 400) {
+					setMenssagemErro(err.response.data.message[0]);
+				} else {
+					setMenssagemErro('erro naa requisição');
+				}
 			});
 	}
 

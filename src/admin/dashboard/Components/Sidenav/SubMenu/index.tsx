@@ -21,7 +21,7 @@ const SubMenu = ({
 		<li
 			className={closed ? 'nav-item open' : 'nav-item '}
 			onClick={() => setClose(!closed)}
-			key={key}
+			key={key ? key : 'li-submenu'}
 		>
 			<i className={`${item.icon} navlist-icon`}></i>
 			<span>{item.name}</span>
@@ -31,10 +31,10 @@ const SubMenu = ({
 					<Link
 						to="#"
 						onClick={() => (window.location.href = `${child.path}`)}
-						key={index}
+						key={`sub-menu-li-${index}`}
 					>
-						<p className="nav-subitem">
-							<span> {child.name} </span>
+						<p className="nav-subitem" key={`sub-menu-p-${index}`}>
+							<span key={`sub-menu-span-${index}`}> {child.name} </span>
 						</p>
 					</Link>
 				))}

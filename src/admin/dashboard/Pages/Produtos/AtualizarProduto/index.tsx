@@ -213,7 +213,7 @@ const AtualizarProduto = () => {
 		console.log(imagens);
 
 		if (imagens.length > 0) {
-			await imagens.map(async (item) => {
+			imagens.map(async (item) => {
 				try {
 					const response = await apiFullSports.request({
 						url: 'imagem/',
@@ -235,26 +235,28 @@ const AtualizarProduto = () => {
 			});
 
 			console.log(`atualizar-produto/${categoriaID}`);
-			await apiFullSports
-				.request({
-					url: `atualizar-produto/${categoriaID}`,
-					method: 'PUT',
-					data: {
-						categoriaProduto: {
-							[categoriaProduto]: {
-								imagemProduto: ImagensID,
+			setTimeout(() => {
+				apiFullSports
+					.request({
+						url: `atualizar-produto/${categoriaID}`,
+						method: 'PUT',
+						data: {
+							categoriaProduto: {
+								[categoriaProduto]: {
+									imagemProduto: ImagensID,
+								},
 							},
 						},
-					},
-				})
-				.then(() => {
-					window.location.reload();
-					setSpinner(false);
-				})
-				.catch((err) => {
-					console.log(err);
-					setbotaoCadastrarNovaFoto(true);
-				});
+					})
+					.then(() => {
+						window.location.reload();
+						setSpinner(false);
+					})
+					.catch((err) => {
+						console.log(err);
+						setbotaoCadastrarNovaFoto(true);
+					});
+			}, 2000);
 		} else {
 			setSpinner(false);
 			setmessagemErroFoto(true);
