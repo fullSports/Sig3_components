@@ -9,18 +9,26 @@ import DashboardSidenav from '../../../Components/Sidenav';
 import DashboardHeader from '../../../Components/Header';
 import SvgCarregando from '../../../../../assets/icons/caarregando.svg';
 const ConsultarFornecedores = () => {
+	interface EsolherFornecedor {
+		_id: string;
+		nome: string;
+	}
 	const [open, setOpen] = useState(false);
-	const handleOpen = () => {
-		setOpen(true);
-	};
-	const handleClose = () => {
-		setOpen(false);
-	};
+	const [fornercertoEscolhido, setFornercertoEscolhido] =
+		useState<EsolherFornecedor | null>(null);
 	const [mensagemErroBolean, setMensagemErroBolean] = useState(false);
 	const [menssagemErro, setMenssagemErro] = useState('');
 	const [spinner, setSpinner] = useState(false);
 	const [fornecedores, setFornecedores] = useState<IFornecedor[]>([]);
 
+	const handleOpen = (idFornecedor: EsolherFornecedor) => {
+		setFornercertoEscolhido(idFornecedor);
+		setOpen(true);
+	};
+	const handleClose = () => {
+		setFornercertoEscolhido(null);
+		setOpen(false);
+	};
 	useEffect(() => {
 		setSpinner(true);
 		apiFullSports
@@ -36,12 +44,13 @@ const ConsultarFornecedores = () => {
 			});
 	}, []);
 
-	const deletar = (DeletarFornecedor: IFornecedor) => {
+	const deletar = (DeletarFornecedor: string | undefined) => {
 		setSpinner(true);
 		apiFullSports
-			.delete(`deletar-fornecedor/${DeletarFornecedor._id}`)
+			.delete(`deletar-fornecedor/${DeletarFornecedor}`)
 			.then(() => {
 				setSpinner(false);
+				setFornercertoEscolhido(null);
 				window.location.reload();
 			})
 			.catch((err) => {
@@ -111,7 +120,14 @@ const ConsultarFornecedores = () => {
 																</button>
 															</a>
 															<Fragment>
-																<button onClick={handleOpen}>
+																<button
+																	onClick={() =>
+																		handleOpen({
+																			_id: item._id,
+																			nome: item.nomeEmpresa,
+																		})
+																	}
+																>
 																	<GoTrashcan />
 																</button>
 																<Modal
@@ -125,11 +141,13 @@ const ConsultarFornecedores = () => {
 																	<Box className="confirma-menesagem">
 																		<h2 id="child-modal-title">
 																			Deseja mesmo excluir a empresa{' '}
-																			{item.nomeEmpresa} ?
+																			{fornercertoEscolhido?.nome}
 																		</h2>
 																		<div className="btns-confirma-cont">
 																			<Button
-																				onClick={() => deletar(item)}
+																				onClick={() =>
+																					deletar(fornercertoEscolhido?._id)
+																				}
 																				variant="outlined"
 																				color="error"
 																				className="btn-exclui"

@@ -116,7 +116,11 @@ const AtualizarFornecedor = () => {
 				.catch((err) => {
 					console.log(err);
 					setMensagemErroBolean(true);
-					setMenssagemErro('Erro na requisição');
+					if (err.response.status === 400) {
+						setMenssagemErro(err.response.data.message[0]);
+					} else {
+						setMenssagemErro('erro naa requisição');
+					}
 				});
 		}
 	}, [parametros]);
@@ -154,7 +158,6 @@ const AtualizarFornecedor = () => {
 	}
 	function buscaCepCarregarPage() {
 		console.log(cep);
-
 		ApiCep.request({
 			method: 'GET',
 			url: cep,
@@ -171,8 +174,6 @@ const AtualizarFornecedor = () => {
 			})
 			.catch((err) => {
 				console.log(err);
-				setMensagemErroBolean(true);
-				setMenssagemErro('Erro ao buscar o cep');
 			});
 	}
 	setTimeout(buscaCepCarregarPage, 222);
