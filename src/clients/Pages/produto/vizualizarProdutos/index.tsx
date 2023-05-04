@@ -6,6 +6,7 @@ import './styles.css';
 import VerticalCardProduct from '../../../Components/Cards/VerticalCardP';
 import Cabecalho from '../../../Components/Menu/Header';
 import Footer from '../../../Components/Footer';
+import SvgCarregando from '../../../../assets/icons/caarregando.svg';
 const Main = styled.main`
 	width: 100%;
 	min-height: 600px;
@@ -13,7 +14,7 @@ const Main = styled.main`
 
 const VizualizacaoDeProdutos = () => {
 	const [produtos, setProdutos] = useState<IProduto[]>([]);
-	const [, setSpinner] = useState(false);
+	const [spinner, setSpinner] = useState(false);
 	const urlParams = new URLSearchParams(window.location.search);
 	const categoriaParam = urlParams.get('categoria');
 	useEffect(() => {
@@ -32,15 +33,63 @@ const VizualizacaoDeProdutos = () => {
 			<>
 				<Cabecalho />
 				<Main>
-					<div className="produtos-grid-container">
-						{produtos.map((item) => {
-							const categoriaDeproduto = item.categoriaProduto;
-							const obj = Object.keys(categoriaDeproduto)[0].toString() as
-								| 'roupa'
-								| 'equipamento'
-								| 'suplemento'
-								| 'calcado';
-							if (obj == categoriaParam) {
+					{spinner ? (
+						<div style={{ display: 'flex', justifyContent: 'center' }}>
+							<img src={SvgCarregando} alt="imagem de spinner, carregando" />
+						</div>
+					) : (
+						<div className="produtos-grid-container">
+							{produtos.map((item) => {
+								const categoriaDeproduto = item.categoriaProduto;
+								const obj = Object.keys(categoriaDeproduto)[0].toString() as
+									| 'roupa'
+									| 'equipamento'
+									| 'suplemento'
+									| 'calcado';
+								if (obj == categoriaParam) {
+									const newPrecoProduto = parseFloat(
+										categoriaDeproduto[obj].preco.replace(',', '.')
+									);
+									const parcela = newPrecoProduto / 12;
+									const newParcela = parcela.toFixed(2);
+									return (
+										<VerticalCardProduct
+											key={item._id}
+											tamanho={categoriaDeproduto[obj].tamanho}
+											precoParcelado={newParcela.toString().replace('.', ',')}
+											produtoId={categoriaDeproduto[obj]._id}
+											src={categoriaDeproduto[obj].imagemProduto[0].url}
+											produtoName={categoriaDeproduto[obj].nome}
+											PrecoAnterior={''}
+											PrecoAtual={categoriaDeproduto[obj].preco}
+										/>
+									);
+								}
+							})}
+						</div>
+					)}
+				</Main>
+				<Footer />
+			</>
+		);
+	} else {
+		return (
+			<>
+				<Cabecalho />
+				<Main>
+					{spinner ? (
+						<div style={{ display: 'flex', justifyContent: 'center' }}>
+							<img src={SvgCarregando} alt="imagem de spinner, carregando" />
+						</div>
+					) : (
+						<div className="produtos-grid-container">
+							{produtos.map((item) => {
+								const categoriaDeproduto = item.categoriaProduto;
+								const obj = Object.keys(categoriaDeproduto)[0].toString() as
+									| 'roupa'
+									| 'equipamento'
+									| 'suplemento'
+									| 'calcado';
 								const newPrecoProduto = parseFloat(
 									categoriaDeproduto[obj].preco.replace(',', '.')
 								);
@@ -51,52 +100,16 @@ const VizualizacaoDeProdutos = () => {
 										key={item._id}
 										tamanho={categoriaDeproduto[obj].tamanho}
 										precoParcelado={newParcela.toString().replace('.', ',')}
-										produtoId={categoriaDeproduto[obj]._id}
+										produtoId={item._id}
 										src={categoriaDeproduto[obj].imagemProduto[0].url}
 										produtoName={categoriaDeproduto[obj].nome}
 										PrecoAnterior={''}
 										PrecoAtual={categoriaDeproduto[obj].preco}
 									/>
 								);
-							}
-						})}
-					</div>
-				</Main>
-				<Footer />
-			</>
-		);
-	} else {
-		return (
-			<>
-				<Cabecalho />
-				<Main>
-					<div className="produtos-grid-container">
-						{produtos.map((item) => {
-							const categoriaDeproduto = item.categoriaProduto;
-							const obj = Object.keys(categoriaDeproduto)[0].toString() as
-								| 'roupa'
-								| 'equipamento'
-								| 'suplemento'
-								| 'calcado';
-							const newPrecoProduto = parseFloat(
-								categoriaDeproduto[obj].preco.replace(',', '.')
-							);
-							const parcela = newPrecoProduto / 12;
-							const newParcela = parcela.toFixed(2);
-							return (
-								<VerticalCardProduct
-									key={item._id}
-									tamanho={categoriaDeproduto[obj].tamanho}
-									precoParcelado={newParcela.toString().replace('.', ',')}
-									produtoId={item._id}
-									src={categoriaDeproduto[obj].imagemProduto[0].url}
-									produtoName={categoriaDeproduto[obj].nome}
-									PrecoAnterior={''}
-									PrecoAtual={categoriaDeproduto[obj].preco}
-								/>
-							);
-						})}
-					</div>
+							})}
+						</div>
+					)}
 				</Main>
 				<Footer />
 			</>

@@ -4,7 +4,7 @@ import Cabecalho from '../../../Components/Menu/Header';
 import IProduto from '../../../../utils/interfaces/IProduto';
 import apiFullSports from '../../../../api/apiFullSports';
 import styled from 'styled-components';
-
+import SvgCarregando from '../../../../assets/icons/caarregando.svg';
 const BotaoNumber = styled.div`
 	background-color: #796969;
 	height: 20px;
@@ -70,7 +70,7 @@ const CarrinhoDeCompra = () => {
 				| 'equipamento'
 				| 'suplemento';
 			const precoProd = parseFloat(quantidadeProd);
-			const precoCategoria = parseFloat(categoria[obj].preco);
+			const precoCategoria = parseFloat(categoria[obj].preco.replace(',', '.'));
 			const quantidadeCategoria = parseFloat(quantidadeProd);
 			return (
 				<tr>
@@ -111,7 +111,7 @@ const CarrinhoDeCompra = () => {
 							<button type="button">+</button>
 						</BotaoNumber>
 					</ThTabela>
-					<th>{precoCategoria * precoProd}</th>
+					<th>{(precoCategoria * precoProd).toFixed(2).replace('.', ',')}</th>
 				</tr>
 			);
 		} else return <></>;
@@ -194,7 +194,14 @@ const CarrinhoDeCompra = () => {
 									Realizar Pedido
 								</button>
 							</Botoes>
-							{spinner && <p>carregando...</p>}
+							{spinner && (
+								<div style={{ display: 'flex', justifyContent: 'center' }}>
+									<img
+										src={SvgCarregando}
+										alt="imagem de spinner, carregando"
+									/>
+								</div>
+							)}
 						</div>
 					</div>
 

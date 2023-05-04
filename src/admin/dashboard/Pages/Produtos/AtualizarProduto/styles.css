@@ -1,4 +1,14 @@
 #menssagem-erro {
-    color: #a23b3b;
-    font-size: 20x;
+	color: #a23b3b;
+	font-size: 12x;
+}
+.vizualizacao-produto-editar-produto {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 100px));
+	/* @apply flex
+    justify-items-center
+    grid
+    xl:grid-cols-5
+    lg:grid-cols-4 */
+
 }

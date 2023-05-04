@@ -102,7 +102,7 @@
 .header-desc{
     @apply
     absolute z-10
-    top-[22%] md:top-[22%] lg:top-[25%]
+    top-[25%] md:top-[22%] lg:top-[25%]
     text-def_white font-Lato
     flex w-full justify-between
 }

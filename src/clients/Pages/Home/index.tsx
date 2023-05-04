@@ -17,7 +17,7 @@ import IProduto from '../../../utils/interfaces/IProduto';
 import apiFullSports from '../../../api/apiFullSports';
 import tenisBanner from '../../../assets/images/banners/transparent-shoes-banner.png';
 import roupasBanner from '../../../assets/images/banners/transparent-clothes-banner.png';
-
+import SvgCarregando from '../../../assets/icons/caarregando.svg';
 // const Grid = styled.div`
 // 	margin: 40px 10px 40px 40px;
 // 	display: grid;
@@ -26,8 +26,7 @@ import roupasBanner from '../../../assets/images/banners/transparent-clothes-ban
 // `;
 const Home = () => {
 	//Exemplo de requisição por categorias
-
-	const [, setSpinner] = useState(false);
+	const [spinner, setSpinner] = useState(false);
 	const [produtos, setProdutos] = useState<IProduto[]>([]);
 
 	useEffect(() => {
@@ -60,59 +59,66 @@ const Home = () => {
 						<div className="product-banner">
 							<img src={roupasBanner} alt="" />
 						</div>
-						{/* <div className="cards-container overflow-x-auto"> */}
-						{/* <div className="Hcard-container">
-                            <Slider {...sliderHorizontalCards}>
-                                {produtos.map((item: any) => {
-
-                                    const obj = Object.keys(item.categoriaProduto)[0].toString();
-
-                                    var newPrecoProduto = parseFloat(item.categoriaProduto[obj].preco.replace(',', '.'));
-                                    var parcela = newPrecoProduto / 12;
-                                    var newParcela = parcela.toFixed(2);
-                                    if (item.categoriaProduto[obj].imagemProduto[0].url) {
-                                        return <HorizontalCardProduct
-                                            key={item._id}
-                                            tamanho={item.categoriaProduto[obj].tamanho}
-                                            produtoID={item._id}
-                                            nome={item.categoriaProduto[obj].nome}
-                                            preco={item.categoriaProduto[obj].preco}
-                                            precoParcelado={newParcela.toString().replace(".", ",")}
-                                            src={item.categoriaProduto[obj].imagemProduto[0].url}
-                                        />
-                                    } else return <></>
-                                })}
-                            </Slider>
-                        </div> */}
-
-						<div className="produtos-grid-container-home">
-							{produtos.map((item: IProduto) => {
-								const obj = Object.keys(item.categoriaProduto)[0].toString() as
-									| 'roupa'
-									| 'equipamento'
-									| 'suplemento'
-									| 'calcado';
-								const newPrecoProduto = parseFloat(
-									item.categoriaProduto[obj].preco.replace(',', '.')
-								);
-								const parcela = newPrecoProduto / 12;
-								const newParcela = parcela.toFixed(2);
-								if (item.categoriaProduto[obj].imagemProduto[0].url) {
-									return (
-										<VerticalCardProduct
-											key={item._id}
-											tamanho={item.categoriaProduto[obj].tamanho}
-											produtoId={item._id}
-											produtoName={item.categoriaProduto[obj].nome}
-											PrecoAtual={item.categoriaProduto[obj].preco}
-											precoParcelado={newParcela.toString().replace('.', ',')}
-											src={item.categoriaProduto[obj].imagemProduto[0].url}
-											PrecoAnterior=""
-										/>
+						{spinner ? (
+							<div style={{ display: 'flex', justifyContent: 'center' }}>
+								<img src={SvgCarregando} alt="imagem de spinner, carregando" />
+							</div>
+						) : (
+							/* <div className="cards-container overflow-x-auto"> */
+							/* <div className="Hcard-container">
+															<Slider {...sliderHorizontalCards}>
+																	{produtos.map((item: any) => {
+	
+																			const obj = Object.keys(item.categoriaProduto)[0].toString();
+	
+																			var newPrecoProduto = parseFloat(item.categoriaProduto[obj].preco.replace(',', '.'));
+																			var parcela = newPrecoProduto / 12;
+																			var newParcela = parcela.toFixed(2);
+																			if (item.categoriaProduto[obj].imagemProduto[0].url) {
+																					return <HorizontalCardProduct
+																							key={item._id}
+																							tamanho={item.categoriaProduto[obj].tamanho}
+																							produtoID={item._id}
+																							nome={item.categoriaProduto[obj].nome}
+																							preco={item.categoriaProduto[obj].preco}
+																							precoParcelado={newParcela.toString().replace(".", ",")}
+																							src={item.categoriaProduto[obj].imagemProduto[0].url}
+																					/>
+																			} else return <></>
+																	})}
+															</Slider>
+													</div> */
+							<div className="produtos-grid-container-home">
+								{produtos.map((item: IProduto) => {
+									const obj = Object.keys(
+										item.categoriaProduto
+									)[0].toString() as
+										| 'roupa'
+										| 'equipamento'
+										| 'suplemento'
+										| 'calcado';
+									const newPrecoProduto = parseFloat(
+										item.categoriaProduto[obj].preco.replace(',', '.')
 									);
-								} else return <></>;
-							})}
-						</div>
+									const parcela = newPrecoProduto / 12;
+									const newParcela = parcela.toFixed(2);
+									if (item.categoriaProduto[obj].imagemProduto[0].url) {
+										return (
+											<VerticalCardProduct
+												key={item._id}
+												tamanho={item.categoriaProduto[obj].tamanho}
+												produtoId={item._id}
+												produtoName={item.categoriaProduto[obj].nome}
+												PrecoAtual={item.categoriaProduto[obj].preco}
+												precoParcelado={newParcela.toString().replace('.', ',')}
+												src={item.categoriaProduto[obj].imagemProduto[0].url}
+												PrecoAnterior=""
+											/>
+										);
+									} else return <></>;
+								})}
+							</div>
+						)}
 					</div>
 				</div>
 			</div>

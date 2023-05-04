@@ -13,7 +13,7 @@ import DashboardSidenav from '../../../Components/Sidenav';
 import DashboardHeader from '../../../Components/Header';
 import IRESCadastrarImagem from '../../../../../utils/interfaces/Res/IRESCadastrarImagem';
 import IRESConsultarImagem from '../../../../../utils/interfaces/Res/IRESConsultarImagem';
-
+import SvgCarregando from '../../../../../assets/icons/caarregando.svg';
 const CadastrarProduto = () => {
 	const [listaFornecedores, setListaFornecedores] = useState<IFornecedor[]>([]);
 	const [fornecedorID, setFornecedorID] = useState<string | undefined>(
@@ -149,7 +149,17 @@ const CadastrarProduto = () => {
 					<DashboardHeader />
 					<div className="form-card">
 						<div className="form-cadastro-cliente">
-							<span className="form-title">Cadastrar Produto</span>
+							<span className="form-title">
+								Cadastrar Produto
+								{spinner && (
+									<img
+										width="35"
+										height="35"
+										src={SvgCarregando}
+										alt="imagem de spinner, carregando"
+									/>
+								)}
+							</span>
 							<div id="form-cadastro-produto" className="form-cadastro-produto">
 								<form
 									action=""
@@ -269,7 +279,7 @@ const CadastrarProduto = () => {
 														Outros
 													</MenuItem>
 													<MenuItem key={'-'} value={'-'}>
-														Prefiro não dizer
+														Indefinido
 													</MenuItem>
 												</Select>
 											</FormControl>
@@ -370,7 +380,6 @@ const CadastrarProduto = () => {
 											/>
 										</label>
 									</div>
-									{spinner && <p>carregando...</p>}
 									{mensagemErroBolean && (
 										<span id="menssagem-erro">{menssagemErro}</span>
 									)}

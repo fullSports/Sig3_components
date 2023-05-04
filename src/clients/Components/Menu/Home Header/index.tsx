@@ -149,10 +149,10 @@ const HomeHeader = () => {
 				<div className="home-barra-acess-props hide-header">
 					<ul>
 						<li>
-							<span id="aumentaFonte">Aumentar Fonte</span>
+							<span id="aumentaFonteDesktop">Aumentar Fonte</span>
 						</li>
 						<li>
-							<span id="diminuiFonte">Diminuir Fonte</span>
+							<span id="diminuiFonteDesktop">Diminuir Fonte</span>
 						</li>
 						<li>
 							{theme === 'light' ? (
@@ -255,11 +255,9 @@ const HomeHeader = () => {
 			</div>
 			<div className="header-desc">
 				<div className="header-txt">
-					<span className="txt-light">o melhor dos</span>
-					<span className="txt-bold">artigos esportivos</span>
-					<span className="txt-light">
-						para <span className="underline">você.</span>
-					</span>
+					<h4 className="txt-light">o melhor dos</h4>
+					<h4 className="txt-bold">artigos esportivos</h4>
+					<h4 className="txt-light">para você.</h4>
 				</div>
 				<div className="header-brand-container">
 					<img src={brandLogo} alt="Full Sports" />
