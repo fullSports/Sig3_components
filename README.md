@@ -4,6 +4,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 ## Description
 [pnpm] `npm install -g pnpm`
+
 [docker](https://docs.docker.com/get-docker/) install Docker.
 
 [docker compose](https://docs.docker.com/compose/install/) install Docker Componse.
@@ -19,9 +20,9 @@ $ docker compose down -v
 ## Node version
 ### `v16.20.0`
 
-installing the dependencies
+
 ### `pnpm install `
-In the project directory, you can run:
+installing the dependencies
 
 ### `pnpm dev`
 
