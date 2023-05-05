@@ -53,7 +53,6 @@ const Home = () => {
 						</div>
 					</div>
 				</div>
-
 				<div className="sec-container">
 					<div className="product-container">
 						<div className="product-banner">
