@@ -2,12 +2,24 @@
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Description
+[pnpm] `npm install -g pnpm`
+[docker](https://docs.docker.com/get-docker/) install Docker.
+
+[docker compose](https://docs.docker.com/compose/install/) install Docker Componse.
+## Automatic installation with docker
+```bash
+# run local api
+$ docker compose up or $ docker compose up --build
+# DELETE THE CONTAINERS
+$ docker compose down -v
+```
+
+## Running the app and Installation manual
 ## Node version
 ### `v16.20.0`
-## Available Scripts
+
 installing the dependencies
-## Install pnpn
-### `npm install -g pnpm`
 ### `pnpm install `
 In the project directory, you can run:
 
@@ -23,6 +35,10 @@ You will also see any lint errors in the console.
 
 Launches the test runner in the interactive watch mode.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+
+
+## `pnpm lint:fix`
+Code indentation as per design pattern
 
 ### `pnpm build`
 
