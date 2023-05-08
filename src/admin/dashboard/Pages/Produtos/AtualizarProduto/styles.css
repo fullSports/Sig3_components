@@ -3,12 +3,11 @@
 	font-size: 12x;
 }
 .vizualizacao-produto-editar-produto {
-    display: grid;
-    grid-template-columns: repeat(7, minmax(0, 100px));
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 100px));
 	/* @apply flex
     justify-items-center
     grid
     xl:grid-cols-5
     lg:grid-cols-4 */
-
 }

@@ -1,4 +1,5 @@
 .sidenav-container{
+    padding-right: 12%;
     @apply
     flex
     h-screen
