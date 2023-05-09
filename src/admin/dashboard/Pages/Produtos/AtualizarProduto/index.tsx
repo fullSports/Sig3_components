@@ -18,26 +18,6 @@ import Iimagem from '../../../../../utils/interfaces/Iimagem';
 import SvgCarregando from '../../../../../assets/icons/caarregando.svg';
 import DashboardSidenav from '../../../Components/Sidenav';
 import DashboardHeader from '../../../Components/Header';
-import './styles.css';
-const BttCadPrdutoGrid = styled.div`
-	display: grid;
-	grid-template-columns: repeat(2, auto);
-	grid-auto-rows: minmax(auto, auto);
-	grid-gap: 2px;
-	#btn-cad-forms {
-		justify-content: center;
-		display: block;
-		height: 50px;
-		border-radius: 5px;
-		color: #fff;
-		font-size: 14px;
-		background-color: black;
-		:hover {
-			background-color: #313131;
-			text-decoration: 0.9s;
-		}
-	}
-`;
 const CadatrarImagemLabel = styled.label`
 	cursor: pointer;
 	border: solid 1px #7b7777;
@@ -247,17 +227,19 @@ const AtualizarProduto = () => {
 					if (item) {
 						return (
 							<div
-								style={{
-									margin: '2%',
-									width: '90%',
-									marginRight: '10%',
-								}}
 								key={`Mostrar-Img-${index}`}
+								style={{
+									paddingRight: '10%',
+								}}
 							>
 								<img
 									src={item.url}
 									alt="imagem de produto"
 									key={`Mostrar-Img-${index}-${item._id}`}
+									style={{
+										borderRadius: '5%',
+										paddingBottom: '5%',
+									}}
 								/>
 								{!spinner && (
 									<Button
@@ -266,8 +248,6 @@ const AtualizarProduto = () => {
 										variant="outlined"
 										style={{
 											border: '2px solid alert',
-											margin: '1%',
-											width: '10%',
 										}}
 										className="vizualizacao-produto-editar-produto-buttao-excluir"
 									>
@@ -373,10 +353,19 @@ const AtualizarProduto = () => {
 													boxSizing: 'border-box',
 													margin: '0 0 15px',
 													width: '100%',
-													textAlign: 'center',
+													textAlign: 'start',
 												}}
 												renderInput={(params) => (
-													<TextField {...params} id="Auto-complete" />
+													<TextField
+														{...params}
+														sx={{
+															boxSizing: 'border-box',
+															margin: '0 0 15px',
+														}}
+														fullWidth
+														placeholder={'Pesquise o Fornecedor'}
+														id="Auto-complete"
+													/>
 												)}
 											/>
 										</label>
@@ -403,15 +392,9 @@ const AtualizarProduto = () => {
 										</label>
 										<label className="col-form-label">
 											Categoria do Produto
-											<FormControl fullWidth margin="dense">
+											<FormControl fullWidth>
 												<Select
-													className="text-form"
 													labelId="categoria-produto"
-													sx={{
-														boxSizing: 'border-box',
-														margin: '0 0 15px',
-														width: '100%',
-													}}
 													value={categoriaProduto}
 													onChange={(envento) =>
 														setCategoriaProduto(envento.target.value)
@@ -668,10 +651,19 @@ const AtualizarProduto = () => {
 								Número Maximo de Imagens do Produto permitidas são 4
 							</p>
 						)}
+					</Box>
+					<div
+						style={{
+							paddingTop: '60%',
+							justifyContent: 'center',
+							display: 'flex',
+							width: '100%',
+						}}
+					>
 						{!spinner ? (
 							<Button
 								variant="outlined"
-								sx={{ border: '2px solid', margin: '1%', width: '100px' }}
+								sx={{ border: '2px solid' }}
 								onClick={handleClose}
 							>
 								Fechar
@@ -679,7 +671,7 @@ const AtualizarProduto = () => {
 						) : (
 							<></>
 						)}
-					</Box>
+					</div>
 				</Box>
 			</Modal>
 		</>

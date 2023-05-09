@@ -101,7 +101,10 @@ const Home = () => {
 									);
 									const parcela = newPrecoProduto / 12;
 									const newParcela = parcela.toFixed(2);
-									if (item.categoriaProduto[obj].imagemProduto[0].url) {
+									if (
+										item.categoriaProduto[obj].imagemProduto.length > 0 &&
+										item.categoriaProduto[obj].imagemProduto[0].url
+									) {
 										return (
 											<VerticalCardProduct
 												key={item._id}

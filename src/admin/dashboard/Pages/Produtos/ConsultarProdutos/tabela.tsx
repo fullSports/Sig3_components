@@ -81,11 +81,15 @@ const TabelaProduto = () => {
 								<td>{categoriaDeproduto[obj].quantidade as number}</td>
 								<td>{`${dia}/${mes}/${ano}`}</td>
 								<td className="img-consulta">
-									<img
-										src={urImg}
-										width="100"
-										alt="primeira imagem de produto"
-									/>
+									{urImg ? (
+										<img
+											src={urImg}
+											width="100"
+											alt="primeira imagem de produto"
+										/>
+									) : (
+										<p>sem imagem cadastrada</p>
+									)}
 								</td>
 								<td>
 									<div className="acoes-btn-group">

@@ -9,7 +9,9 @@
 	* {
 		@apply m-0;
 	}
-
+	input[type='file'] {
+		display: none;
+	}
 	.dashboard-body {
 		width: calc(100% - 430px);
 		@apply p-6 w-full;
@@ -73,18 +75,6 @@
 		@apply my-2;
 	}
 
-	.row-grid {
-		@apply grid grid-flow-col
-        grid-rows-2 sm:grid-rows-2
-        lg:grid-rows-1 gap-2 my-4;
-	}
-	input::placeholder {
-		@apply dark:text-def_white
-	}
-	.txt-form {
-		@apply h-[45px] my-8
-        dark:text-def_white;
-	}
 	.MuiOutlinedInput-notchedOutline
 		.css-1d3z3hw-MuiOutlinedInput-notchedOutline {
 		color: #fff !important;
@@ -185,5 +175,18 @@
 	}
 	.btns-confirma-cont {
 		@apply flex gap-2 justify-center;
+	}
+	#menssagem-erro {
+		color: #a23b3b;
+		font-size: 12x;
+	}
+	.vizualizacao-produto-editar-produto {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 100px));
+		/* @apply flex
+		justify-items-center
+		grid
+		xl:grid-cols-5
+		lg:grid-cols-4 */
 	}
 }

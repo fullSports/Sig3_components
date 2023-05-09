@@ -14,7 +14,6 @@ import apiFullSports from '../../../../../api/apiFullSports';
 import ApiCep from '../../../../../api/apiCep';
 import { useParams } from 'react-router-dom';
 import ICliente from '../../../../../utils/interfaces/ICliente';
-import './styles.css';
 import DashboardHeader from '../../../Components/Header';
 import DashboardSidenav from '../../../Components/Sidenav';
 import SinalMais from '../../../../../assets/icons/sinalMais.png';
