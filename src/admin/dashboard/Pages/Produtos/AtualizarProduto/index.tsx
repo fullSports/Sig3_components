@@ -665,7 +665,7 @@ const AtualizarProduto = () => {
 							width: '100%',
 						}}
 					>
-						{!spinner ? (
+						{spinner ? (
 							<Button
 								variant="outlined"
 								sx={{ border: '2px solid' }}
