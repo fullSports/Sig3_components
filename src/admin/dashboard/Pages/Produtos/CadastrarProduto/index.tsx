@@ -13,6 +13,7 @@ import DashboardHeader from '../../../Components/Header';
 import IRESCadastrarImagem from '../../../../../utils/interfaces/Res/IRESCadastrarImagem';
 import IRESConsultarImagem from '../../../../../utils/interfaces/Res/IRESConsultarImagem';
 import SvgCarregando from '../../../../../assets/icons/caarregando.svg';
+import SvgLoddingDarkMode from '../../../../../assets/icons/SvgCarregandoDarkMode.svg';
 const CadastrarProduto = () => {
 	const [listaFornecedores, setListaFornecedores] = useState<IFornecedor[]>([]);
 	const [fornecedorID, setFornecedorID] = useState<string | undefined>(
@@ -151,12 +152,18 @@ const CadastrarProduto = () => {
 							<span className="form-title">
 								Cadastrar Produto
 								{spinner && (
-									<img
-										width="35"
-										height="35"
-										src={SvgCarregando}
-										alt="imagem de spinner, carregando"
-									/>
+									<div id="contenner-lodding" className="contenner-logging">
+										<img
+											src={SvgCarregando}
+											className="svg-loddin-lingt"
+											alt="animação de carregando"
+										/>
+										<img
+											src={SvgLoddingDarkMode}
+											className="svg-loddin-dark-mode"
+											alt="animação de carregando"
+										/>
+									</div>
 								)}
 							</span>
 							<form

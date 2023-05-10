@@ -1,63 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import styled from 'styled-components';
 import apiFullSports from '../../../../../api/apiFullSports';
-import { Button, TextField } from '@mui/material';
+import { TextField } from '@mui/material';
 import ApiCep from '../../../../../api/apiCep';
 import IFornecedor from '../../../../../utils/interfaces/IFornecedor';
-import { Box } from '@mui/system';
 import DashboardSidenav from '../../../Components/Sidenav';
 import DashboardHeader from '../../../Components/Header';
-const FormCadastroFornecedor = styled.div`
-	margin-left: auto;
-	margin-right: auto;
-	margin-bottom: 20px;
-	margin-top: 20px;
-	box-shadow: 1px 1px 8px rgb(70, 70, 70, 0.2);
-	padding: 2%;
-	width: 40%;
-	height: auto;
-	font-size: 12pt;
-	border-radius: 10px;
-	@media screen and (max-width: 1144px) {
-		width: 90%;
-		height: auto;
-		font-size: 12px;
-		border-radius: 10px;
-	}
-`;
-const Row2grid = styled.div`
-	display: grid;
-	grid-template-columns: repeat(2, auto);
-	grid-auto-rows: minmax(auto, auto);
-	grid-gap: 5px;
-	border-radius: 20px;
-	width: auto;
-	height: auto;
-	margin: 1px;
-	.col-form-label {
-		font-size: 20px;
-	}
-`;
-const BttCadClienteGrid = styled.div`
-	display: grid;
-	grid-template-columns: repeat(2, auto);
-	grid-auto-rows: minmax(auto, auto);
-	grid-gap: 2px;
-	#btn-cad-forms {
-		justify-content: center;
-		display: block;
-		height: 50px;
-		border-radius: 5px;
-		color: #fff;
-		font-size: 14px;
-		background-color: black;
-		:hover {
-			background-color: #313131;
-			text-decoration: 0.9s;
-		}
-	}
-`;
 const AtualizarFornecedor = () => {
 	const parametros = useParams();
 	const [cnpj, setCnpj] = useState('');

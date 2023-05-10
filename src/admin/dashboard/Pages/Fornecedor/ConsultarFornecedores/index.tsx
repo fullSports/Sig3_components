@@ -8,6 +8,7 @@ import { Box, Button, Modal } from '@mui/material';
 import DashboardSidenav from '../../../Components/Sidenav';
 import DashboardHeader from '../../../Components/Header';
 import SvgCarregando from '../../../../../assets/icons/caarregando.svg';
+import SvgLoddingDarkMode from '../../../../../assets/icons/SvgCarregandoDarkMode.svg';
 const ConsultarFornecedores = () => {
 	interface EsolherFornecedor {
 		_id: string;
@@ -73,8 +74,17 @@ const ConsultarFornecedores = () => {
 							</span>
 						</div>
 						{spinner ? (
-							<div style={{ display: 'flex', justifyContent: 'center' }}>
-								<img src={SvgCarregando} alt="imagem de spinner, carregando" />
+							<div id="contenner-lodding" className="contenner-logging">
+								<img
+									src={SvgCarregando}
+									className="svg-loddin-lingt"
+									alt="animação de carregando"
+								/>
+								<img
+									src={SvgLoddingDarkMode}
+									className="svg-loddin-dark-mode"
+									alt="animação de carregando"
+								/>
 							</div>
 						) : (
 							<div className="panel-table">

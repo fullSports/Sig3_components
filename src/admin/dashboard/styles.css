@@ -12,6 +12,10 @@
 	input[type='file'] {
 		display: none;
 	}
+	input {
+		@apply text-def_dark_blue/80 text-left
+        dark:text-def_white;
+	}
 	.dashboard-body {
 		width: calc(100% - 430px);
 		@apply p-6 w-full;
@@ -138,14 +142,13 @@
 	}
 	.btn-edit {
 		@apply text-blue-400 hover:shadow-def_lg_shadow
-        dark:text-def_cont_yellow/50
+        dark:text-def_cont_yellow/75
         dark:hover:text-def_cont_yellow
         bg-transparent;
 	}
 	.btn-exclui {
 		@apply text-red-900 hover:shadow-def_lg_shadow
-        dark:text-def_cont_yellow
-        bg-transparent;
+		dark:text-red-500/75;
 	}
 
 	.estiloMenssagem {

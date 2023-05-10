@@ -16,6 +16,7 @@ import IFornecedor from '../../../../../utils/interfaces/IFornecedor';
 import IProduto from '../../../../../utils/interfaces/IProduto';
 import Iimagem from '../../../../../utils/interfaces/Iimagem';
 import SvgCarregando from '../../../../../assets/icons/caarregando.svg';
+import SvgLoddingDarkMode from '../../../../../assets/icons/SvgCarregandoDarkMode.svg';
 import DashboardSidenav from '../../../Components/Sidenav';
 import DashboardHeader from '../../../Components/Header';
 const CadatrarImagemLabel = styled.label`
@@ -634,12 +635,16 @@ const AtualizarProduto = () => {
 						}}
 					>
 						{spinner && (
-							<div style={{ display: 'flex', justifyContent: 'center' }}>
+							<div id="contenner-lodding" className="contenner-logging">
 								<img
 									src={SvgCarregando}
-									width="100"
-									height="100"
-									alt="imagem de spinner, carregando"
+									className="svg-loddin-lingt"
+									alt="animação de carregando"
+								/>
+								<img
+									src={SvgLoddingDarkMode}
+									className="svg-loddin-dark-mode"
+									alt="animação de carregando"
 								/>
 							</div>
 						)}

@@ -6,6 +6,7 @@ import { Box, Button, Modal } from '@mui/material';
 import { GoTrashcan } from 'react-icons/go';
 import { FiEdit } from 'react-icons/fi';
 import SvgCarregando from '../../../../../assets/icons/caarregando.svg';
+import SvgLoddingDarkMode from '../../../../../assets/icons/SvgCarregandoDarkMode.svg';
 const TabelaProduto = () => {
 	const [open, setOpen] = useState(false);
 	const handleOpen = () => {
@@ -45,7 +46,18 @@ const TabelaProduto = () => {
 			<>
 				{spinner ? (
 					<div>
-						<img src={SvgCarregando} alt="imagem de spinner, carregando" />
+						<div id="contenner-lodding" className="contenner-logging">
+							<img
+								src={SvgCarregando}
+								className="svg-loddin-lingt"
+								alt="animação de carregando"
+							/>
+							<img
+								src={SvgLoddingDarkMode}
+								className="svg-loddin-dark-mode"
+								alt="animação de carregando"
+							/>
+						</div>
 					</div>
 				) : (
 					produto.map((item) => {
@@ -143,8 +155,17 @@ const TabelaProduto = () => {
 		return (
 			<>
 				{spinner ? (
-					<div>
-						<img src={SvgCarregando} alt="imagem de spinner, carregando" />
+					<div id="contenner-lodding" className="contenner-logging">
+						<img
+							src={SvgCarregando}
+							className="svg-loddin-lingt"
+							alt="animação de carregando"
+						/>
+						<img
+							src={SvgLoddingDarkMode}
+							className="svg-loddin-dark-mode"
+							alt="animação de carregando"
+						/>
 					</div>
 				) : (
 					produto.map((item) => {

@@ -1,17 +1,11 @@
 import { useState, useEffect } from 'react';
 import apiFullSports from '../../../../api/apiFullSports';
 import IProduto from '../../../../utils/interfaces/IProduto';
-import styled from 'styled-components';
-import './styles.css';
 import VerticalCardProduct from '../../../Components/Cards/VerticalCardP';
 import Cabecalho from '../../../Components/Menu/Header';
 import Footer from '../../../Components/Footer';
 import SvgCarregando from '../../../../assets/icons/caarregando.svg';
-const Main = styled.main`
-	width: 100%;
-	min-height: 600px;
-`;
-
+import SvgLoddingDarkMode from '../../../../assets/icons/SvgCarregandoDarkMode.svg';
 const VizualizacaoDeProdutos = () => {
 	const [produtos, setProdutos] = useState<IProduto[]>([]);
 	const [spinner, setSpinner] = useState(false);
@@ -32,10 +26,19 @@ const VizualizacaoDeProdutos = () => {
 		return (
 			<>
 				<Cabecalho />
-				<Main>
+				<main>
 					{spinner ? (
-						<div style={{ display: 'flex', justifyContent: 'center' }}>
-							<img src={SvgCarregando} alt="imagem de spinner, carregando" />
+						<div id="contenner-lodding" className="contenner-logging">
+							<img
+								src={SvgCarregando}
+								className="svg-loddin-lingt"
+								alt="animação de carregando"
+							/>
+							<img
+								src={SvgLoddingDarkMode}
+								className="svg-loddin-dark-mode"
+								alt="animação de carregando"
+							/>
 						</div>
 					) : (
 						<div className="produtos-grid-container">
@@ -68,7 +71,7 @@ const VizualizacaoDeProdutos = () => {
 							})}
 						</div>
 					)}
-				</Main>
+				</main>
 				<Footer />
 			</>
 		);
@@ -76,10 +79,19 @@ const VizualizacaoDeProdutos = () => {
 		return (
 			<>
 				<Cabecalho />
-				<Main>
+				<main>
 					{spinner ? (
-						<div style={{ display: 'flex', justifyContent: 'center' }}>
-							<img src={SvgCarregando} alt="imagem de spinner, carregando" />
+						<div id="contenner-lodding" className="contenner-logging">
+							<img
+								src={SvgCarregando}
+								className="svg-loddin-lingt"
+								alt="animação de carregando"
+							/>
+							<img
+								src={SvgLoddingDarkMode}
+								className="svg-loddin-dark-mode"
+								alt="animação de carregando"
+							/>
 						</div>
 					) : (
 						<div className="produtos-grid-container">
@@ -110,7 +122,7 @@ const VizualizacaoDeProdutos = () => {
 							})}
 						</div>
 					)}
-				</Main>
+				</main>
 				<Footer />
 			</>
 		);
