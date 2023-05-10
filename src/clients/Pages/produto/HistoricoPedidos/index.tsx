@@ -1,4 +1,4 @@
-import { useState, useEffect, Suspense } from 'react';
+import { useState, useEffect } from 'react';
 import Footer from '../../../Components/Footer';
 import Cabecalho from '../../../Components/Menu/Header';
 import IPedido from '../../../../utils/interfaces/IPedido';
