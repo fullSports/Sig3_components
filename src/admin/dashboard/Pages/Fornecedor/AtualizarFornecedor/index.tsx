@@ -6,14 +6,8 @@ import { Button, TextField } from '@mui/material';
 import ApiCep from '../../../../../api/apiCep';
 import IFornecedor from '../../../../../utils/interfaces/IFornecedor';
 import { Box } from '@mui/system';
-const Main = styled.main`
-	width: 100%;
-	min-height: 600px;
-`;
-const ExibeTitulo = styled.h3`
-	margin: 2%;
-	text-align: center;
-`;
+import DashboardSidenav from '../../../Components/Sidenav';
+import DashboardHeader from '../../../Components/Header';
 const FormCadastroFornecedor = styled.div`
 	margin-left: auto;
 	margin-right: auto;
@@ -86,32 +80,14 @@ const AtualizarFornecedor = () => {
 			apiFullSports
 				.get<IFornecedor>(`listar-fornecedor/${parametros.id}`)
 				.then((resposta) => {
-					setSpinner(false);
 					setCnpj(resposta.data.cnpj);
-				})
-				.catch((err) => {
-					console.log(err);
-					setMensagemErroBolean(true);
-					setMenssagemErro('Erro na requisição');
-				});
-
-			apiFullSports
-				.get<IFornecedor>(`listar-fornecedor/${parametros.id}`)
-				.then((resposta) => {
-					setSpinner(false);
 					setNomeEmpresa(resposta.data.nomeEmpresa);
-				})
-				.catch((err) => {
-					console.log(err);
-					setMensagemErroBolean(true);
-					setMenssagemErro('Erro na requisição');
-				});
-
-			apiFullSports
-				.get<IFornecedor>(`listar-fornecedor/${parametros.id}`)
-				.then((resposta) => {
-					setSpinner(false);
 					setCep(resposta.data.cep);
+					const enderecoSplit = resposta.data.endereco.split('-');
+					setComplemento(enderecoSplit[1]);
+					const numeroSlit = enderecoSplit[0].split(',');
+					setNumero(numeroSlit[numeroSlit.length - 1]);
+					setSpinner(false);
 				})
 				.catch((err) => {
 					console.log(err);
@@ -214,228 +190,218 @@ const AtualizarFornecedor = () => {
 	}
 	return (
 		<>
-			<Main>
-				<ExibeTitulo id="exibe-titulo" className="exibe-titulo">
-					Atualizar Fornecedor
-				</ExibeTitulo>
-				<FormCadastroFornecedor
-					id="form-fornecedor"
-					className="form=fornecedor"
-				>
-					<Box component={'form'} onSubmit={aoSubmeterForm}>
-						<Row2grid id="row-2-grid" className="row-1-grid">
-							<label className="col-form-label">CNPJ do Fornecedor</label>
-							<TextField
-								sx={{
-									boxSizing: 'border-box',
-									margin: '0 0 15px',
-									width: '100%',
-								}}
-								className="txt-form"
-								label="CNPJ"
-								id="cnpj"
-								type="text"
-								placeholder={'Digite o CNPJ do fornecedor'}
-								fullWidth
-								onChange={(evento) => setCnpj(evento.target.value)}
-								value={cnpj}
-							/>
-							<label className="col-form-label">Nome do Fornecedor</label>
-							<TextField
-								sx={{
-									boxSizing: 'border-box',
-									margin: '0 0 15px',
-									width: '100%',
-								}}
-								className="txt-form"
-								label="Nome Fornecedor"
-								id="nomeFornecedor"
-								type="text"
-								placeholder={'Digite o nome do fornecedor'}
-								fullWidth
-								onChange={(evento) => setNomeEmpresa(evento.target.value)}
-								value={nomeEmpresa}
-							/>
-							<label className="col-form-label">
-								Cep {carregandoCep && <p>buscando cep...</p>}
-								{carregandoCepMenssagem && (
-									<p id="menssagem-erro">cep invalido</p>
+			<div className="flex" key={'atualizar-admin-flex'}>
+				<DashboardSidenav key={'subMenu-atualizar-admin'} />
+				<div id="main" className="dashboard-body">
+					<DashboardHeader key={'Header-atualizar-admin'} />
+					<div className="form-card">
+						<div id="form-atualizar-fornecedor" className="form-atualizar">
+							<span className="form-title">Atualizar Fornecedor</span>
+							<form encType="multipart/form-data" onSubmit={aoSubmeterForm}>
+								<div id="row-grid" className="row-grid">
+									<label className="col-form-label">
+										CNPJ do Fornecedor
+										<TextField
+											sx={{
+												boxSizing: 'border-box',
+												margin: '0 0 15px',
+												width: '100%',
+											}}
+											className="txt-form"
+											id="cnpj"
+											type="text"
+											placeholder={'Digite o CNPJ do fornecedor'}
+											fullWidth
+											onChange={(evento) => setCnpj(evento.target.value)}
+											value={cnpj}
+										/>
+									</label>
+									<label className="col-form-label">
+										Nome do Fornecedor
+										<TextField
+											sx={{
+												boxSizing: 'border-box',
+												margin: '0 0 15px',
+												width: '100%',
+											}}
+											className="txt-form"
+											id="nomeFornecedor"
+											type="text"
+											placeholder={'Digite o nome do fornecedor'}
+											fullWidth
+											onChange={(evento) => setNomeEmpresa(evento.target.value)}
+											value={nomeEmpresa}
+										/>
+									</label>
+								</div>
+
+								<div id="row-grid" className="row-grid">
+									<label className="col-form-label">
+										Cep {carregandoCep && <p>buscando cep...</p>}
+										{carregandoCepMenssagem && (
+											<p id="menssagem-erro">cep invalido</p>
+										)}
+										<TextField
+											onChange={(evento) => setCep(evento.target.value)}
+											sx={{
+												boxSizing: 'border-box',
+												margin: '0 0 15px',
+												width: '100%',
+											}}
+											className="txt-form"
+											id="cep"
+											type="text"
+											placeholder={'00000-000'}
+											fullWidth
+											required
+											onBlur={buscaCep}
+											value={cep}
+										/>
+									</label>
+
+									<label className="col-form-label">
+										Rua
+										<TextField
+											onChange={(evento) => setRua(evento.target.value)}
+											sx={{
+												boxSizing: 'border-box',
+												margin: '0 0 15px',
+												width: '100%',
+											}}
+											className="txt-form"
+											id="rua"
+											type="text"
+											placeholder={'Digite sua rua'}
+											fullWidth
+											required
+											value={rua}
+										/>
+									</label>
+								</div>
+
+								<div id="row-grid" className="row-grid">
+									<label className="col-form-label">
+										Bairro
+										<TextField
+											onChange={(evento) => setBairro(evento.target.value)}
+											sx={{
+												boxSizing: 'border-box',
+												margin: '0 0 15px',
+												width: '100%',
+											}}
+											className="txt-form"
+											id="bairro"
+											type="text"
+											placeholder={'Digite seu Bairro'}
+											fullWidth
+											required
+											value={bairro}
+										/>
+									</label>
+									<label className="col-form-label">
+										Estado
+										<TextField
+											onChange={(evento) => setEstado(evento.target.value)}
+											sx={{
+												boxSizing: 'border-box',
+												margin: '0 0 15px',
+												width: '100%',
+											}}
+											className="txt-form"
+											id="estado"
+											type="text"
+											placeholder={'Digite seu estado'}
+											fullWidth
+											required
+											value={estado}
+										/>
+									</label>
+								</div>
+
+								<div id="row-grid" className="row-grid">
+									<label className="col-form-label">
+										Cidade
+										<TextField
+											onChange={(evento) => setCidade(evento.target.value)}
+											sx={{
+												boxSizing: 'border-box',
+												margin: '0 0 15px',
+												width: '100%',
+											}}
+											className="txt-form"
+											id="cidade"
+											type="text"
+											placeholder={'Digite sua Cidade'}
+											fullWidth
+											required
+											value={cidade}
+										/>
+									</label>
+									<label className="col-form-label">
+										Número
+										<TextField
+											onChange={(evento) => setNumero(evento.target.value)}
+											sx={{
+												boxSizing: 'border-box',
+												margin: '0 0 15px',
+												width: '100%',
+											}}
+											className="txt-form"
+											id="numero"
+											type="number"
+											fullWidth
+											required
+											value={parseInt(numero)}
+										/>
+									</label>
+								</div>
+
+								<div id="row-grid" className="row-grid">
+									<label className="col-form-label">
+										Complemento
+										<TextField
+											onChange={(evento) => setComplemento(evento.target.value)}
+											sx={{
+												boxSizing: 'border-box',
+												margin: '0 0 15px',
+												width: '100%',
+											}}
+											className="txt-form"
+											id="complemento"
+											type="text"
+											placeholder={'casa/apartamento'}
+											fullWidth
+											required
+											value={complemento}
+										/>
+									</label>
+								</div>
+								{spinner && <p>carregando...</p>}
+								{mensagemErroBolean && (
+									<span id="menssagem-erro">{menssagemErro}</span>
 								)}
-							</label>
-							<TextField
-								onChange={(evento) => setCep(evento.target.value)}
-								sx={{
-									boxSizing: 'border-box',
-									margin: '0 0 15px',
-									width: '100%',
-								}}
-								className="txt-form"
-								label="Cep"
-								id="cep"
-								type="text"
-								placeholder={'00000-000'}
-								fullWidth
-								required
-								onBlur={buscaCep}
-								value={cep}
-							/>
 
-							<label className="col-form-label">Rua</label>
-							<TextField
-								onChange={(evento) => setRua(evento.target.value)}
-								sx={{
-									boxSizing: 'border-box',
-									margin: '0 0 15px',
-									width: '100%',
-								}}
-								className="txt-form"
-								label="Rua"
-								id="rua"
-								type="text"
-								placeholder={'Digite sua rua'}
-								fullWidth
-								required
-								value={rua}
-							/>
-
-							<label className="col-form-label">Bairro</label>
-							<TextField
-								onChange={(evento) => setBairro(evento.target.value)}
-								sx={{
-									boxSizing: 'border-box',
-									margin: '0 0 15px',
-									width: '100%',
-								}}
-								className="txt-form"
-								label="Bairro"
-								id="bairro"
-								type="text"
-								placeholder={'Digite seu Bairro'}
-								fullWidth
-								required
-								value={bairro}
-							/>
-
-							<label className="col-form-label">Estado</label>
-							<TextField
-								onChange={(evento) => setEstado(evento.target.value)}
-								sx={{
-									boxSizing: 'border-box',
-									margin: '0 0 15px',
-									width: '100%',
-								}}
-								className="txt-form"
-								label="Estado"
-								id="estado"
-								type="text"
-								placeholder={'Digite seu estado'}
-								fullWidth
-								required
-								value={estado}
-							/>
-
-							<label className="col-form-label">Cidade</label>
-							<TextField
-								onChange={(evento) => setCidade(evento.target.value)}
-								sx={{
-									boxSizing: 'border-box',
-									margin: '0 0 15px',
-									width: '100%',
-								}}
-								className="txt-form"
-								label="Cidade"
-								id="cidade"
-								type="text"
-								placeholder={'Digite sua Cidade'}
-								fullWidth
-								required
-								value={cidade}
-							/>
-							<label className="col-form-label">Número</label>
-							<TextField
-								onChange={(evento) => setNumero(evento.target.value)}
-								sx={{
-									boxSizing: 'border-box',
-									margin: '0 0 15px',
-									width: '100%',
-								}}
-								className="txt-form"
-								label="Nº"
-								id="numero"
-								type="number"
-								fullWidth
-								required
-							/>
-
-							<label className="col-form-label">Complemento</label>
-							<TextField
-								onChange={(evento) => setComplemento(evento.target.value)}
-								sx={{
-									boxSizing: 'border-box',
-									margin: '0 0 15px',
-									width: '100%',
-								}}
-								className="txt-form"
-								label="Complemento"
-								id="complemento"
-								type="text"
-								placeholder={'casa/apartamento'}
-								fullWidth
-								required
-								value={complemento}
-							/>
-							{spinner && <p>carregando...</p>}
-							{mensagemErroBolean && (
-								<span id="menssagem-erro">{menssagemErro}</span>
-							)}
-						</Row2grid>
-						<BttCadClienteGrid
-							id="btt-cad-fornecedor-grid"
-							className="btt-cad-fornecedor-grid"
-						>
-							<Button
-								sx={{
-									justifyContent: 'center',
-									display: 'block',
-									height: '50px',
-									borderRadius: '5px',
-									color: '#fff',
-									fontSize: '14px',
-									backgroundColor: 'black',
-									':hover':
-										'backgroundColor: #313131, transform:translate(0.8s)',
-								}}
-								type="submit"
-								id="btn-cad-forms"
-								className="btn-cad-forms"
-							>
-								Atualizar Fornecedor
-							</Button>
-							<Button
-								onClick={() =>
-									(window.location.href = '/dashboard/consultar-fornecedores')
-								}
-								sx={{
-									justifyContent: 'center',
-									display: 'block',
-									height: '50px',
-									borderRadius: '5px',
-									color: '#fff',
-									fontSize: '14px',
-									backgroundColor: 'black',
-									':hover':
-										'backgroundColor: #313131, transform:translate(0.8s)',
-								}}
-								type="button"
-								id="btn-cad-forms"
-								className="btn-cad-forms"
-							>
-								Consulta de Fornecedores
-							</Button>
-						</BttCadClienteGrid>
-					</Box>
-				</FormCadastroFornecedor>
-			</Main>
+								<div className="btn-group">
+									<button className="btn-cad-forms hallow-btn" type="submit">
+										Atualizar Fornecedor
+									</button>
+									<button
+										onClick={() =>
+											(window.location.href =
+												'/dashboard/consultar-fornecedores')
+										}
+										type="button"
+										id="btn-cad-forms"
+										className="btn-cad-forms full-btn"
+									>
+										Consulta de Fornecedores
+									</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
 		</>
 	);
 };
