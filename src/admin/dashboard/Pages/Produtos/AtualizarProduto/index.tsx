@@ -130,7 +130,10 @@ const AtualizarProduto = () => {
 					setQuantImg(ArryIdImg.length);
 					setImagensID(ArryIdImg);
 				})
-				.catch((err) => console.log(err));
+				.catch((err) => {
+					console.log(err);
+					setSpinner(false);
+				});
 		}
 	}, [parametros]);
 	const cadastrarNovasFotos = async () => {
@@ -192,6 +195,7 @@ const AtualizarProduto = () => {
 	};
 	const deletarImagem = (DeletarImagem: Iimagem) => {
 		if (DeletarImagem._id) {
+			setSpinner(true);
 			return apiFullSports
 				.delete(`imagem/${DeletarImagem._id}/`)
 				.then((res) => {
@@ -213,10 +217,13 @@ const AtualizarProduto = () => {
 						})
 						.then((respostaProduct) => {
 							console.log(respostaProduct);
+							setSpinner(false);
+							alert('Imagem do produto deletada com sucesso ');
 							location.reload();
 						});
 				})
 				.catch((err) => {
+					setSpinner(false);
 					console.log(err);
 				});
 		}
@@ -659,13 +666,13 @@ const AtualizarProduto = () => {
 					</Box>
 					<div
 						style={{
-							paddingTop: '60%',
+							paddingTop: '30px',
 							justifyContent: 'center',
 							display: 'flex',
 							width: '100%',
 						}}
 					>
-						{spinner ? (
+						{!spinner ? (
 							<Button
 								variant="outlined"
 								sx={{ border: '2px solid' }}
