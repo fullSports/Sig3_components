@@ -5,6 +5,7 @@ import IProduto from '../../../../utils/interfaces/IProduto';
 import apiFullSports from '../../../../api/apiFullSports';
 import styled from 'styled-components';
 import SvgCarregando from '../../../../assets/icons/caarregando.svg';
+import SvgLoddingDarkMode from '../../../../assets/icons/SvgCarregandoDarkMode.svg';
 const BotaoNumber = styled.div`
 	background-color: #796969;
 	height: 20px;
@@ -27,13 +28,13 @@ const ThTabela = styled.th`
 	}
 `;
 const Botoes = styled.div`
-	margin-top: 3%;
-	display: grid;
+	padding-top: 2%;
+	display: flex;
 	justify-content: center;
 	grid-template-columns: repeat(2, 250px);
 	button {
-		padding: 3px;
-		border: 1px solid #000;
+		padding: 10px;
+		border: 1px solid #858282;
 		margin-left: 25px;
 		margin-right: 25px;
 		border-radius: 5px;
@@ -96,7 +97,8 @@ const CarrinhoDeCompra = () => {
 						<input
 							type="number"
 							value={quantidadeProd}
-							placeholder="Nº"
+							className="input-number-comprar-produto"
+							disabled
 							min="1"
 							max={categoria[obj].quantidade}
 							onChange={(e) => setQuantidadeProd(e.target.value)}
@@ -168,43 +170,51 @@ const CarrinhoDeCompra = () => {
 			return (
 				<>
 					<Cabecalho />
-
-					<div className="table-container">
+					<div id="main" className="page-body">
 						<div className="table-title">
-							<span className="consulta-titulo">Meu Carrinho</span>
-							<div className="panel-table">
-								<table className="table-consulta">
-									<thead>
-										<tr>
-											<th>Produto</th>
-											<th>Quantidade</th>
-											<th>Total do Pedido</th>
-										</tr>
-									</thead>
-									<tbody>
-										<MostraProduto />
-									</tbody>
-								</table>
-							</div>
-							<Botoes>
-								<button className="btn-exclui" onClick={cancelarPedido}>
-									Cancelar Pedido
-								</button>
-								<button className="btn-edit" onClick={realizarPedido}>
-									Realizar Pedido
-								</button>
-							</Botoes>
-							{spinner && (
-								<div style={{ display: 'flex', justifyContent: 'center' }}>
-									<img
-										src={SvgCarregando}
-										alt="imagem de spinner, carregando"
-									/>
+							<div className="table-container">
+								<div className="table-title">
+									<span className="consulta-titulo">Lista de Produtos</span>
 								</div>
-							)}
+								<div style={{ display: 'flex', justifyContent: 'center' }}>
+									<table className="table-consulta">
+										<thead>
+											<tr>
+												<th>Produto</th>
+												<th>Quantidade</th>
+												<th>Total do Pedido</th>
+											</tr>
+										</thead>
+										<tbody>
+											<MostraProduto />
+										</tbody>
+									</table>
+								</div>
+								<Botoes>
+									<button className="btn-exclui" onClick={cancelarPedido}>
+										Cancelar Pedido
+									</button>
+									<button className="btn-edit" onClick={realizarPedido}>
+										Realizar Pedido
+									</button>
+								</Botoes>
+								{spinner && (
+									<div id="contenner-lodding" className="contenner-logging">
+										<img
+											src={SvgCarregando}
+											className="svg-loddin-lingt"
+											alt="animação de carregando"
+										/>
+										<img
+											src={SvgLoddingDarkMode}
+											className="svg-loddin-dark-mode"
+											alt="animação de carregando"
+										/>
+									</div>
+								)}
+							</div>
 						</div>
 					</div>
-
 					<Footer />
 				</>
 			);

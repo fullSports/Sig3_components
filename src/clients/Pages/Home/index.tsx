@@ -18,6 +18,7 @@ import apiFullSports from '../../../api/apiFullSports';
 import tenisBanner from '../../../assets/images/banners/transparent-shoes-banner.png';
 import roupasBanner from '../../../assets/images/banners/transparent-clothes-banner.png';
 import SvgCarregando from '../../../assets/icons/caarregando.svg';
+import SvgLoddingDarkMode from '../../../assets/icons/SvgCarregandoDarkMode.svg';
 // const Grid = styled.div`
 // 	margin: 40px 10px 40px 40px;
 // 	display: grid;
@@ -59,8 +60,17 @@ const Home = () => {
 							<img src={roupasBanner} alt="" />
 						</div>
 						{spinner ? (
-							<div style={{ display: 'flex', justifyContent: 'center' }}>
-								<img src={SvgCarregando} alt="imagem de spinner, carregando" />
+							<div id="contenner-lodding" className="contenner-logging">
+								<img
+									src={SvgCarregando}
+									className="svg-loddin-lingt"
+									alt="animação de carregando"
+								/>
+								<img
+									src={SvgLoddingDarkMode}
+									className="svg-loddin-dark-mode"
+									alt="animação de carregando"
+								/>
 							</div>
 						) : (
 							/* <div className="cards-container overflow-x-auto"> */
@@ -101,7 +111,10 @@ const Home = () => {
 									);
 									const parcela = newPrecoProduto / 12;
 									const newParcela = parcela.toFixed(2);
-									if (item.categoriaProduto[obj].imagemProduto[0].url) {
+									if (
+										item.categoriaProduto[obj].imagemProduto.length > 0 &&
+										item.categoriaProduto[obj].imagemProduto[0].url
+									) {
 										return (
 											<VerticalCardProduct
 												key={item._id}

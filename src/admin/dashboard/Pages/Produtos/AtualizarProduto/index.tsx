@@ -6,7 +6,6 @@ import {
 	TextField,
 	FormControl,
 	Select,
-	InputLabel,
 	MenuItem,
 	Box,
 	Modal,
@@ -17,81 +16,11 @@ import IFornecedor from '../../../../../utils/interfaces/IFornecedor';
 import IProduto from '../../../../../utils/interfaces/IProduto';
 import Iimagem from '../../../../../utils/interfaces/Iimagem';
 import SvgCarregando from '../../../../../assets/icons/caarregando.svg';
-import './styles.css';
-const Main = styled.main`
-	width: 100%;
-	min-height: 600px;
-`;
-const ExibeTitulo = styled.div`
-	margin: 2%;
-	display: flex;
-	justify-content: center;
-	h3 {
-		margin-right: 2%;
-		font-size: 25px;
-	}
-`;
-const FormAtualizarProduto = styled.div`
-	margin-left: auto;
-	margin-right: auto;
-	margin-bottom: 20px;
-	margin-top: 20px;
-	box-shadow: 1px 1px 8px rgb(70, 70, 70, 0.2);
-	padding: 2%;
-	width: 40%;
-	height: auto;
-	font-size: 12pt;
-	border-radius: 10px;
-	@media screen and (max-width: 1144px) {
-		width: 90%;
-		height: auto;
-		font-size: 12px;
-		border-radius: 10px;
-	}
-`;
-const Row2grid = styled.div`
-	display: grid;
-	grid-template-columns: repeat(2, auto);
-	grid-auto-rows: minmax(auto, auto);
-	grid-gap: 5px;
-	border-radius: 20px;
-	width: auto;
-	height: auto;
-	margin: 1px;
-	.col-form-label {
-		font-size: 20px;
-	}
-	#imagemProduto {
-		box-sizing: border-box;
-		margin: 0 0 15px;
-		width: 100%;
-		padding: 15px;
-		border-radius: 4px;
-	}
-`;
-const BttCadPrdutoGrid = styled.div`
-	display: grid;
-	grid-template-columns: repeat(2, auto);
-	grid-auto-rows: minmax(auto, auto);
-	grid-gap: 2px;
-	#btn-cad-forms {
-		justify-content: center;
-		display: block;
-		height: 50px;
-		border-radius: 5px;
-		color: #fff;
-		font-size: 14px;
-		background-color: black;
-		:hover {
-			background-color: #313131;
-			text-decoration: 0.9s;
-		}
-	}
-`;
+import SvgLoddingDarkMode from '../../../../../assets/icons/SvgCarregandoDarkMode.svg';
+import DashboardSidenav from '../../../Components/Sidenav';
+import DashboardHeader from '../../../Components/Header';
 const CadatrarImagemLabel = styled.label`
 	cursor: pointer;
-	text-transform: uppercase;
-	color: #0b0b0b;
 	border: solid 1px #7b7777;
 	margin-top: 4%;
 	margin-bottom: 4%;
@@ -117,9 +46,7 @@ const CadastrarNovaFotoInpult = styled.label`
 const AtualizarProduto = () => {
 	const parametros = useParams();
 	const [listaFornecedores, setListaFornecedores] = useState<IFornecedor[]>([]);
-	const [fornecedorID, setFornecedorID] = useState<string | undefined>(
-		undefined
-	);
+	const [fornecedorID, setFornecedorID] = useState<IFornecedor | null>(null);
 	const [isLoading] = useState(false);
 	const [, setBusca] = useState('');
 	const [nomeProduto, setNomeProduto] = useState('');
@@ -183,7 +110,7 @@ const AtualizarProduto = () => {
 						| 'equipamento'
 						| 'suplemento'
 						| 'calcado';
-					setFornecedorID(categoria[obj].fornecedor._id);
+					setFornecedorID(categoria[obj].fornecedor);
 					setNomeProduto(categoria[obj].nome);
 					setSexo(categoria[obj].sexo);
 					setCategoriaProduto(obj);
@@ -203,7 +130,10 @@ const AtualizarProduto = () => {
 					setQuantImg(ArryIdImg.length);
 					setImagensID(ArryIdImg);
 				})
-				.catch((err) => console.log(err));
+				.catch((err) => {
+					console.log(err);
+					setSpinner(false);
+				});
 		}
 	}, [parametros]);
 	const cadastrarNovasFotos = async () => {
@@ -263,34 +193,61 @@ const AtualizarProduto = () => {
 			setbotaoCadastrarNovaFoto(true);
 		}
 	};
-	const deletarImagem = async (DeletarImagem: Iimagem) => {
-		if (DeletarImagem) {
-			await apiFullSports.delete(`imagem/${DeletarImagem._id}/`).then(() => {
-				window.location.reload();
-				setOpen(true);
-			});
+	const deletarImagem = (DeletarImagem: Iimagem) => {
+		if (DeletarImagem._id) {
+			setSpinner(true);
+			return apiFullSports
+				.delete(`imagem/${DeletarImagem._id}/`)
+				.then((res) => {
+					console.log(res.data);
+					const imgFilter = ImagensID.filter(
+						(value: unknown) => value !== DeletarImagem._id
+					);
+					apiFullSports
+						.request({
+							url: `atualizar-produto/${categoriaID}`,
+							method: 'PUT',
+							data: {
+								categoriaProduto: {
+									[categoriaProduto]: {
+										imagemProduto: imgFilter,
+									},
+								},
+							},
+						})
+						.then((respostaProduct) => {
+							console.log(respostaProduct);
+							setSpinner(false);
+							alert('Imagem do produto deletada com sucesso ');
+							location.reload();
+						});
+				})
+				.catch((err) => {
+					setSpinner(false);
+					console.log(err);
+				});
 		}
 	};
 	function EscreveImagens() {
 		return (
 			<>
 				{ImagemProduto?.map((item, index: number) => {
-					if (!item) {
-						return <> </>;
-					} else
+					if (item) {
 						return (
 							<div
-								style={{
-									margin: '1%',
-									width: '50%',
-									height: '10%',
-								}}
 								key={`Mostrar-Img-${index}`}
+								style={{
+									paddingRight: '10%',
+								}}
 							>
 								<img
 									src={item.url}
 									alt="imagem de produto"
 									key={`Mostrar-Img-${index}-${item._id}`}
+									style={{
+										borderRadius: '5%',
+										paddingBottom: '5%',
+									}}
 								/>
 								{!spinner && (
 									<Button
@@ -299,8 +256,6 @@ const AtualizarProduto = () => {
 										variant="outlined"
 										style={{
 											border: '2px solid alert',
-											margin: '1%',
-											width: '10%',
 										}}
 										className="vizualizacao-produto-editar-produto-buttao-excluir"
 									>
@@ -309,6 +264,7 @@ const AtualizarProduto = () => {
 								)}
 							</div>
 						);
+					}
 				})}
 			</>
 		);
@@ -349,7 +305,7 @@ const AtualizarProduto = () => {
 						categoriaProduto: {
 							[categoriaProduto]: {
 								nome: nomeProduto,
-								fornecedor: fornecedorID,
+								fornecedor: fornecedorID?._id,
 								cor: corProduto,
 								sexo,
 								tamanho: tamanhoNumber,
@@ -368,265 +324,256 @@ const AtualizarProduto = () => {
 	}
 	return (
 		<>
-			<Main>
-				<ExibeTitulo id="exibe-titulo" className="exibe-titulo">
-					Cadastrar Produto
-				</ExibeTitulo>
-				<FormAtualizarProduto
-					id="form-cadastro-produto"
-					className="form-cadastro-produto"
-				>
-					<form
-						action=""
-						method="post"
-						encType="multipart/form-data"
-						onSubmit={aoSubmit}
-					>
-						<Row2grid id="row-2-grid" className="row-1-grid">
-							<label className="col-form-label">CNPJ do Fornecedor</label>
-							<Autocomplete
-								openText="Abrir"
-								closeText="Fechar"
-								noOptionsText="Sem opções"
-								loadingText="Carregando..."
-								disablePortal
-								groupBy={(option) => option.firsLetter}
-								options={options}
-								loading={isLoading}
-								getOptionLabel={(option) =>
-									option.nomeEmpresa + ' - ' + option.cnpj
-								}
-								onInputChange={(_, newValue) => setBusca(newValue)}
-								onChange={(_, newValue) => {
-									setFornecedorID(newValue?._id);
-								}}
-								placeholder={'atualizar fornecedor'}
-								inputMode={'search'}
-								className="txt-form"
-								id="Auto-complete"
-								sx={{
-									boxSizing: 'border-box',
-									margin: '0 0 15px',
-									width: '100%',
-									textAlign: 'center',
-								}}
-								renderInput={(params) => (
-									<TextField
-										{...params}
-										id="Auto-complete"
-										label="Atualizar Fornecedor"
-									/>
-								)}
-							/>
+			<div className="flex">
+				<DashboardSidenav />
+				<div className="dashboard-body">
+					<div id="main" className="page-body">
+						<DashboardHeader />
+						<div className="form-card">
+							<div id="form-atualizar-produto" className="form-atualizar">
+								<span className="form-title">Atualizar Produto</span>
+								<form encType="multipart/form-data" onSubmit={aoSubmit}>
+									<div id="row-grid" className="row-grid">
+										<label className="col-form-label">
+											CNPJ do Fornecedor
+											<Autocomplete
+												openText="Abrir"
+												closeText="Fechar"
+												noOptionsText="Sem opções"
+												loadingText="Carregando..."
+												disablePortal
+												groupBy={(option) => option.nomeEmpresa}
+												options={options}
+												loading={isLoading}
+												getOptionLabel={(option) =>
+													option.nomeEmpresa + ' - ' + option.cnpj
+												}
+												onInputChange={(_, newValue) => setBusca(newValue)}
+												onChange={(_, newValue) => {
+													setFornecedorID(newValue);
+												}}
+												value={fornecedorID}
+												placeholder={'atualizar fornecedor'}
+												inputMode={'search'}
+												className="txt-form"
+												id="Auto-complete"
+												sx={{
+													boxSizing: 'border-box',
+													margin: '0 0 15px',
+													width: '100%',
+													textAlign: 'start',
+												}}
+												renderInput={(params) => (
+													<TextField
+														{...params}
+														sx={{
+															boxSizing: 'border-box',
+															margin: '0 0 15px',
+														}}
+														fullWidth
+														placeholder={'Pesquise o Fornecedor'}
+														id="Auto-complete"
+													/>
+												)}
+											/>
+										</label>
+									</div>
+									<div id="row-grid" className="row-grid">
+										<label className="col-form-label">
+											Nome do Produto
+											<TextField
+												sx={{
+													boxSizing: 'border-box',
+													margin: '0 0 15px',
+													width: '100%',
+												}}
+												className="txt-form"
+												id="nomeProduto"
+												type="text"
+												placeholder={'Digite o nome do produto'}
+												fullWidth
+												onChange={(evento) =>
+													setNomeProduto(evento.target.value)
+												}
+												value={nomeProduto}
+											/>
+										</label>
+										<label className="col-form-label">
+											Categoria do Produto
+											<FormControl fullWidth>
+												<Select
+													labelId="categoria-produto"
+													value={categoriaProduto}
+													onChange={(envento) =>
+														setCategoriaProduto(envento.target.value)
+													}
+													required
+												>
+													<MenuItem key={''} value={''}></MenuItem>
+													<MenuItem key={'roupa'} value={'roupa'}>
+														Roupas
+													</MenuItem>
+													<MenuItem key={'equipamento'} value={'equipamento'}>
+														Equipamento
+													</MenuItem>
+													<MenuItem key={'suplemento'} value={'suplemento'}>
+														Suplementos
+													</MenuItem>
+													<MenuItem key={'calcado'} value={'calcado'}>
+														Caçados
+													</MenuItem>
+												</Select>
+											</FormControl>
+										</label>
+									</div>
+									<div id="row-grid" className="row-grid">
+										<label className="col-form-label">
+											Sexo
+											<FormControl fullWidth margin="dense">
+												<Select
+													className="txt-form"
+													labelId="sexo"
+													sx={{
+														boxSizing: 'border-box',
+														margin: '0 0 15px',
+														width: '100%',
+													}}
+													value={sexo}
+													onChange={(evento) => setSexo(evento.target.value)}
+													required
+												>
+													<MenuItem key={''} value={''}></MenuItem>
+													<MenuItem key={'M'} value={'M'}>
+														Masculino
+													</MenuItem>
+													<MenuItem key={'F'} value={'F'}>
+														Feminino
+													</MenuItem>
+													<MenuItem key={'O'} value={'O'}>
+														Outros
+													</MenuItem>
+													<MenuItem key={'-'} value={'-'}>
+														Prefiro não dizer
+													</MenuItem>
+												</Select>
+											</FormControl>
+										</label>
+										<label className="col-form-label">
+											Cor do Produto
+											<TextField
+												sx={{
+													boxSizing: 'border-box',
+													margin: '0 0 15px',
+													width: '100%',
+												}}
+												className="txt-form"
+												id="corProduto"
+												type="text"
+												placeholder={'Digite o tipo a cor do produto'}
+												fullWidth
+												onChange={(evento) =>
+													setCorProduto(evento.target.value)
+												}
+												value={corProduto}
+											/>
+										</label>
+									</div>
+									<div id="row-grid" className="row-grid">
+										<label className="col-form-label">
+											Preço do Produto
+											<TextField
+												sx={{
+													boxSizing: 'border-box',
+													margin: '0 0 15px',
+													width: '100%',
+												}}
+												className="txt-form"
+												id="precoProduto"
+												name="precoProduto"
+												type="text"
+												placeholder={'Digite o preço do produto'}
+												fullWidth
+												onChange={(evento) => setPreco(evento.target.value)}
+												onBlur={(evento) => setPreco(evento.target.value)}
+												value={preco}
+											/>
+										</label>
+										<label className="col-form-label">
+											Quantidade de Produtos
+											<TextField
+												sx={{
+													boxSizing: 'border-box',
+													margin: '0 0 15px',
+													width: '100%',
+												}}
+												className="txt-form"
+												id="qtdProduto"
+												type="number"
+												placeholder={'Digite a quantidade de Produto'}
+												fullWidth
+												onChange={(evento) =>
+													setQuantidade(evento.target.value)
+												}
+												value={quantidade}
+											/>
+										</label>
+									</div>
+									<div id="row-grid" className="row-grid">
+										<label className="col-form-label">
+											Tamanho do Produto
+											<TextField
+												sx={{
+													boxSizing: 'border-box',
+													margin: '0 0 15px',
+													width: '100%',
+												}}
+												className="txt-form"
+												id="tamanho"
+												type="number"
+												placeholder={'Digite a quantidade o tamanho do produto'}
+												fullWidth
+												onChange={(evento) =>
+													setTamanhoProduto(evento.target.value)
+												}
+												value={tamanhoProduto}
+											/>
+										</label>
+										<label className="col-form-label">
+											Imagens do produto
+											<CadatrarImagemLabel
+												onClick={() => {
+													setOpen(true);
+												}}
+											>
+												Seleciolar fotos do produto...
+											</CadatrarImagemLabel>
+										</label>
+									</div>
+									{spinner && <p>carregando...</p>}
+									{mensagemErroBolean && (
+										<span id="menssagem-erro">{menssagemErro}</span>
+									)}
 
-							<label className="col-form-label">Nome do Produto</label>
-							<TextField
-								sx={{
-									boxSizing: 'border-box',
-									margin: '0 0 15px',
-									width: '100%',
-								}}
-								className="txt-form"
-								label="Nome do Produto"
-								id="nomeProduto"
-								type="text"
-								placeholder={'Digite o nome do produto'}
-								fullWidth
-								onChange={(evento) => setNomeProduto(evento.target.value)}
-								value={nomeProduto}
-							/>
-
-							<label className="col-form-label">Categoria do Produto</label>
-							<FormControl fullWidth margin="dense">
-								<InputLabel id="categoria-produto">Categoria</InputLabel>
-								<Select
-									className="text-form"
-									labelId="categoria-produto"
-									sx={{
-										boxSizing: 'border-box',
-										margin: '0 0 15px',
-										width: '100%',
-									}}
-									value={categoriaProduto}
-									onChange={(envento) =>
-										setCategoriaProduto(envento.target.value)
-									}
-								>
-									<MenuItem key={''} value={''}></MenuItem>
-									<MenuItem key={'roupa'} value={'roupa'}>
-										Roupas
-									</MenuItem>
-									<MenuItem key={'equipamento'} value={'equipamento'}>
-										Equipamento
-									</MenuItem>
-									<MenuItem key={'suplemento'} value={'suplemento'}>
-										Suplementos
-									</MenuItem>
-									<MenuItem key={'calcado'} value={'calcado'}>
-										Caçados
-									</MenuItem>
-								</Select>
-							</FormControl>
-
-							<label className="col-form-label">Sexo</label>
-							<FormControl fullWidth margin="dense">
-								<InputLabel id="sexo">Sexo</InputLabel>
-								<Select
-									className="txt-form"
-									labelId="sexo"
-									sx={{
-										boxSizing: 'border-box',
-										margin: '0 0 15px',
-										width: '100%',
-									}}
-									value={sexo}
-									onChange={(evento) => setSexo(evento.target.value)}
-									required
-								>
-									<MenuItem key={''} value={''}></MenuItem>
-									<MenuItem key={'M'} value={'M'}>
-										Masculino
-									</MenuItem>
-									<MenuItem key={'F'} value={'F'}>
-										Feminino
-									</MenuItem>
-									<MenuItem key={'O'} value={'O'}>
-										Outros
-									</MenuItem>
-									<MenuItem key={'-'} value={'-'}>
-										Prefiro não dizer
-									</MenuItem>
-								</Select>
-							</FormControl>
-
-							<label className="col-form-label">Cor do Produto</label>
-							<TextField
-								sx={{
-									boxSizing: 'border-box',
-									margin: '0 0 15px',
-									width: '100%',
-								}}
-								className="txt-form"
-								label="Cor do Produto"
-								id="corProduto"
-								type="text"
-								placeholder={'Digite o tipo a cor do produto'}
-								fullWidth
-								onChange={(evento) => setCorProduto(evento.target.value)}
-								value={corProduto}
-							/>
-
-							<label className="col-form-label">Preço do Produto</label>
-							<TextField
-								sx={{
-									boxSizing: 'border-box',
-									margin: '0 0 15px',
-									width: '100%',
-								}}
-								className="txt-form"
-								label="Preço do Produto"
-								id="precoProduto"
-								name="precoProduto"
-								type="text"
-								placeholder={'Digite o preço do produto'}
-								fullWidth
-								onChange={(evento) => setPreco(evento.target.value)}
-								value={preco}
-							/>
-							<label className="col-form-label">Quantidade de Produtos</label>
-							<TextField
-								sx={{
-									boxSizing: 'border-box',
-									margin: '0 0 15px',
-									width: '100%',
-								}}
-								className="txt-form"
-								label="quantidade"
-								id="qtdProduto"
-								type="number"
-								placeholder={'Digite a quantidade de Produto'}
-								fullWidth
-								onChange={(evento) => setQuantidade(evento.target.value)}
-								value={quantidade}
-							/>
-							<label className="col-form-label">Tamanho do Produto</label>
-							<TextField
-								sx={{
-									boxSizing: 'border-box',
-									margin: '0 0 15px',
-									width: '100%',
-								}}
-								className="txt-form"
-								label="tamanho"
-								id="tamanho"
-								type="number"
-								placeholder={'Digite a quantidade o tamanho do produto'}
-								fullWidth
-								onChange={(evento) => setTamanhoProduto(evento.target.value)}
-								value={tamanhoProduto}
-							/>
-							<label className="col-form-label">Imagens do produto</label>
-							<CadatrarImagemLabel
-								onClick={() => {
-									setOpen(true);
-								}}
-							>
-								Atualizar fotos do produto...
-							</CadatrarImagemLabel>
-
-							{spinner && <p>carregando...</p>}
-							{mensagemErroBolean && (
-								<span id="menssagem-erro">{menssagemErro}</span>
-							)}
-						</Row2grid>
-
-						<BttCadPrdutoGrid
-							id="btt-cad-cliente-grid"
-							className="btt-cad-cliente-grid"
-						>
-							<Button
-								sx={{
-									justifyContent: 'center',
-									display: 'block',
-									height: '50px',
-									borderRadius: '5px',
-									color: '#fff',
-									fontSize: '14px',
-									backgroundColor: 'black',
-									':hover':
-										'backgroundColor: #313131, transform:translate(0.8s)',
-								}}
-								type="submit"
-								id="btn-cad-forms"
-								className="btn-cad-forms"
-							>
-								atualizar Dados do Produto
-							</Button>
-							<Button
-								onClick={() =>
-									(window.location.href = '/dashboard/consultar-produtos')
-								}
-								sx={{
-									justifyContent: 'center',
-									display: 'block',
-									height: '50px',
-									borderRadius: '5px',
-									color: '#fff',
-									fontSize: '14px',
-									backgroundColor: 'black',
-									':hover':
-										'backgroundColor: #313131, transform:translate(0.8s)',
-								}}
-								type="button"
-								id="btn-cad-forms"
-								className="btn-cad-forms"
-							>
-								Consulta de Produtos
-							</Button>
-						</BttCadPrdutoGrid>
-					</form>
-				</FormAtualizarProduto>
-			</Main>
+									<div className="btn-group">
+										<button className="btn-cad-forms hallow-btn" type="submit">
+											atualizar Dados do Produto
+										</button>
+										<button
+											onClick={() =>
+												(window.location.href = '/dashboard/consultar-produtos')
+											}
+											type="button"
+											className="btn-cad-forms full-btn"
+										>
+											Consulta de Produtos
+										</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 			<Modal hideBackdrop open={open} onClose={handleClose} id="model">
 				<Box
 					component={'div'}
@@ -695,12 +642,16 @@ const AtualizarProduto = () => {
 						}}
 					>
 						{spinner && (
-							<div style={{ display: 'flex', justifyContent: 'center' }}>
+							<div id="contenner-lodding" className="contenner-logging">
 								<img
 									src={SvgCarregando}
-									width="100"
-									height="100"
-									alt="imagem de spinner, carregando"
+									className="svg-loddin-lingt"
+									alt="animação de carregando"
+								/>
+								<img
+									src={SvgLoddingDarkMode}
+									className="svg-loddin-dark-mode"
+									alt="animação de carregando"
 								/>
 							</div>
 						)}
@@ -712,10 +663,19 @@ const AtualizarProduto = () => {
 								Número Maximo de Imagens do Produto permitidas são 4
 							</p>
 						)}
+					</Box>
+					<div
+						style={{
+							paddingTop: '30px',
+							justifyContent: 'center',
+							display: 'flex',
+							width: '100%',
+						}}
+					>
 						{!spinner ? (
 							<Button
 								variant="outlined"
-								sx={{ border: '2px solid', margin: '1%', width: '100px' }}
+								sx={{ border: '2px solid' }}
 								onClick={handleClose}
 							>
 								Fechar
@@ -723,7 +683,7 @@ const AtualizarProduto = () => {
 						) : (
 							<></>
 						)}
-					</Box>
+					</div>
 				</Box>
 			</Modal>
 		</>
