@@ -48,7 +48,7 @@ const Footer = () => {
 			});
 	}
 	return (
-		<div className="footer-container">
+		<footer className="footer-container">
 			{isLogin && (
 				<div className="footer-news-sub">
 					<div className="news-sub-desc">
@@ -134,7 +134,7 @@ const Footer = () => {
 				Full Sports &copy;{new Date().getFullYear()} Todos os direitos
 				reservados.
 			</div>
-		</div>
+		</footer>
 	);
 };
 export default Footer;

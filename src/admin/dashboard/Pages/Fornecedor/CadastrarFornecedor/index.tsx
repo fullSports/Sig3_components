@@ -100,7 +100,7 @@ const CadastrarFornecedor = () => {
 				<div className="dashboard-body">
 					<DashboardHeader />
 					<div className="form-card">
-						<div className="form-cadastro-cliente">
+						<div className="form-cadastro">
 							<span className="form-title">Cadastro de Fornecedor</span>
 							<Box component={'form'} onSubmit={aoSubmit}>
 								<div id="row-grid" className="row-grid">
@@ -124,9 +124,7 @@ const CadastrarFornecedor = () => {
 										Nome do Fornecedor
 										<TextField
 											sx={{
-												boxSizing: 'border-box',
 												margin: '8px 0 15px',
-												width: '100%',
 											}}
 											className="txt-form"
 											id="nomeFornecedor"

@@ -4,10 +4,12 @@ import Cabecalho from '../../../Components/Menu/Header';
 import IPedido from '../../../../utils/interfaces/IPedido';
 import apiFullSports from '../../../../api/apiFullSports';
 import SvgCarregando from '../../../../assets/icons/caarregando.svg';
+import SvgLoddingDarkMode from '../../../../assets/icons/SvgCarregandoDarkMode.svg';
 const HistoricoPedidos = () => {
 	const [pedido, setPedido] = useState<IPedido[]>([]);
 	const [spinner, setSpinner] = useState(false);
 	const [spinnerPedido, setSpinnerPedido] = useState(false);
+	const [itemEscolhido, setItemEscolhido] = useState('');
 	const user = JSON.parse(localStorage.getItem('user') as string);
 	useEffect(() => {
 		setSpinner(true);
@@ -26,12 +28,15 @@ const HistoricoPedidos = () => {
 		setSpinnerPedido(true);
 		pedido.map((item) => {
 			if (item.cliente._id === user._id && item._id === _id) {
+				setItemEscolhido(item._id);
 				apiFullSports
 					.delete(`deletar-pedido/${item._id}`)
 					.then(() => {
-						alert('Pedido cancelado com sucesso');
-						location.reload();
 						setSpinnerPedido(false);
+						setTimeout(() => {
+							alert('Pedido cancelado com sucesso');
+							location.reload();
+						}, 100);
 					})
 					.catch((err) => {
 						console.log(err);
@@ -64,26 +69,41 @@ const HistoricoPedidos = () => {
 										</th>
 										<th>{item.quantidadePedido}</th>
 										<th>R$ {item.total.toFixed(2).replace('.', ',')}</th>
-										<button
-											className="btn-exclui"
-											onClick={() => cancelarPedido(item._id)}
-										>
-											Cancelar Pedido
-										</button>
-										{spinnerPedido ? (
-											<div
-												style={{ display: 'flex', justifyContent: 'center' }}
-											>
-												<img
-													src={SvgCarregando}
-													width="30"
-													height="30"
-													alt="imagem de spinner, carregando"
-												/>
-											</div>
-										) : (
-											<></>
-										)}
+										<th>
+											{!spinnerPedido && (
+												<button
+													style={{
+														padding: '10px',
+														backgroundColor: '#dbdbdb',
+														borderRadius: '10px',
+													}}
+													className="btn-exclui"
+													onClick={() => cancelarPedido(item._id)}
+												>
+													Cancelar Pedido
+												</button>
+											)}
+
+											{spinnerPedido && item._id == itemEscolhido ? (
+												<div
+													id="contenner-lodding"
+													className="contenner-logging"
+												>
+													<img
+														src={SvgCarregando}
+														className="svg-loddin-lingt"
+														alt="animação de carregando"
+													/>
+													<img
+														src={SvgLoddingDarkMode}
+														className="svg-loddin-dark-mode"
+														alt="animação de carregando"
+													/>
+												</div>
+											) : (
+												<></>
+											)}
+										</th>
 									</tr>
 								</>
 							);
@@ -100,29 +120,39 @@ const HistoricoPedidos = () => {
 			<Cabecalho />
 			<div className="table-container">
 				<div className="table-title">
-					<span className="consulta-titulo">Histórico de pedidos</span>
-					<div className="panel-table">
-						<table className="table-consulta">
-							<thead>
-								<tr>
-									<th>Produto</th>
-									<th>Quantidade</th>
-									<th>Total do Pedido</th>
-								</tr>
-							</thead>
-							<tbody>
-								{spinner ? (
-									<div style={{ display: 'flex', justifyContent: 'center' }}>
-										<img
-											src={SvgCarregando}
-											alt="imagem de spinner, carregando"
-										/>
-									</div>
-								) : (
-									<MostraProduto />
-								)}
-							</tbody>
-						</table>
+					<div className="table-container">
+						<div className="table-title">
+							<span className="consulta-titulo">Histórico de Pedidos</span>
+						</div>
+						<div style={{ display: 'flex', justifyContent: 'center' }}>
+							<table className="table-consulta">
+								<thead>
+									<tr>
+										<th>Produto</th>
+										<th>Quantidade</th>
+										<th>Total do Pedido</th>
+									</tr>
+								</thead>
+								<tbody>
+									{spinner ? (
+										<div id="contenner-lodding" className="contenner-logging">
+											<img
+												src={SvgCarregando}
+												className="svg-loddin-lingt"
+												alt="animação de carregando"
+											/>
+											<img
+												src={SvgLoddingDarkMode}
+												className="svg-loddin-dark-mode"
+												alt="animação de carregando"
+											/>
+										</div>
+									) : (
+										<MostraProduto />
+									)}
+								</tbody>
+							</table>
+						</div>
 					</div>
 				</div>
 			</div>

@@ -14,7 +14,6 @@ import apiFullSports from '../../../../../api/apiFullSports';
 import ApiCep from '../../../../../api/apiCep';
 import { useParams } from 'react-router-dom';
 import ICliente from '../../../../../utils/interfaces/ICliente';
-import './styles.css';
 import DashboardHeader from '../../../Components/Header';
 import DashboardSidenav from '../../../Components/Sidenav';
 import SinalMais from '../../../../../assets/icons/sinalMais.png';
@@ -95,12 +94,12 @@ const AtualizarAdministrador = () => {
 	const [spinner, setSpinner] = useState(false);
 	const [imagemId, setImagemID] = useState('');
 	const [imagemPerfilurl, setImagemPerfilurl] = useState('');
-
 	const [mensagemErroBolean, setMensagemErroBolean] = useState(false);
 	const [menssagemErro, setMenssagemErro] = useState('');
 	const [cadastrarNovaFoto, setCadastrarNovaFoto] = useState(false);
 	const [carregandoCep, setCarregandoCep] = useState(false);
 	const [carregandoCepMenssagem, setCarregandoCepMessagem] = useState(false);
+	const [nomePerfilPage, setNomePerfilPage] = useState('');
 	const [open, setOpen] = useState(false);
 	const handleOpen = () => {
 		setOpen(true);
@@ -115,9 +114,14 @@ const AtualizarAdministrador = () => {
 				.then((resposta) => {
 					setCpf(resposta.data.cpf);
 					setNome(resposta.data.nome);
+					setNomePerfilPage(resposta.data.nome);
 					setDataNascimento(resposta.data.dataNascimento);
 					setSexo(resposta.data.sexo);
 					setCep(resposta.data.cep);
+					const enderecoSplit = resposta.data.endereco.split('-');
+					setComplemento(enderecoSplit[1]);
+					const numeroSlit = enderecoSplit[0].split(',');
+					setNumero(numeroSlit[numeroSlit.length - 1]);
 					if (!resposta.data.imagemPerfil) {
 						setImagemID('');
 						setImagemPerfilurl('');
@@ -489,7 +493,7 @@ const AtualizarAdministrador = () => {
 					<div className="my-16">
 						<div className="profile-details-title">
 							<span className="exibe-titulo">
-								Atualizar dados de {nome} <IconePerfilPage />
+								Atualizar dados de {nomePerfilPage} <IconePerfilPage />
 							</span>
 						</div>
 						<div id="form-cadastro-cliente" className="form-cadastro-cliente">
@@ -705,6 +709,7 @@ const AtualizarAdministrador = () => {
 											type="number"
 											fullWidth
 											required
+											value={parseInt(numero)}
 										/>
 									</label>
 
@@ -723,6 +728,7 @@ const AtualizarAdministrador = () => {
 											placeholder={'casa/apartamento'}
 											fullWidth
 											required
+											value={complemento}
 										/>
 									</label>
 								</div>
