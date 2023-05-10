@@ -284,11 +284,6 @@ const ComprarProduto = () => {
 						</div>
 					)}
 					<Footer />
-					<img
-						src={SvgLiddingDarkMode}
-						className="svg-loddin-dark-mode"
-						alt="animação de carregando"
-					/>
 				</>
 			);
 		} else {
