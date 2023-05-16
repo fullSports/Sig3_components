@@ -13,6 +13,7 @@ import brandLogo from '../../../../assets/images/fullSportLogo.svg';
 import carrinhoIcon from '../../../../assets/icons/carrinho-icon.png';
 import suporteIcon from '../../../../assets/icons/help-icon.png';
 import contaIcon from '../../../../assets/icons/conta-icon.png';
+import { useState } from 'react';
 const Icone = styled.div`
 	background-color: #796969;
 	height: 27px;
@@ -43,6 +44,7 @@ const Cabecalho = () => {
 	const { theme, setTheme } = useTheme();
 	const user = JSON.parse(localStorage.getItem('user') as string);
 	const carrinho = JSON.parse(localStorage.getItem('carrinho') as string);
+	const [busca, setBusca] = useState('');
 	function openTeste() {
 		const sidebar = document.querySelector('.sidebar-header');
 		const isSideOpen = sidebar?.classList.contains('hideShow');
@@ -51,6 +53,10 @@ const Cabecalho = () => {
 			: sidebar?.classList.toggle('hideShow');
 	}
 
+	function aoSubmeterForm(event: React.FormEvent<HTMLFormElement>) {
+		event.preventDefault();
+		window.location.href = `/produtos/?busca=${busca}`;
+	}
 	function showToggleOpts() {
 		const toggleAcess = document.querySelector('.toggle-group');
 		const isDisplayed = toggleAcess?.classList.contains('hideShow');
@@ -204,18 +210,21 @@ const Cabecalho = () => {
 								<RiMenuFill size={30} />
 							</button>
 						</div>
-						<div className="header-search-bar">
-							<div className="search-bar">
-								<input
-									type="text"
-									className="search-input"
-									placeholder="O que você busca?"
-								/>
-								<button className="input-search-btn">
-									<BiSearch size={20} color={'#09080990'} />
-								</button>
+						<form onSubmit={aoSubmeterForm}>
+							<div className="header-search-bar">
+								<div className="search-bar">
+									<input
+										type="text"
+										className="search-input"
+										placeholder="O que você busca?"
+										onChange={(e) => setBusca(e.target.value)}
+									/>
+									<button className="input-search-btn" type={'submit'}>
+										<BiSearch size={20} color={'#09080990'} />
+									</button>
+								</div>
 							</div>
-						</div>
+						</form>
 						<div className="header-logo header-resp">
 							<a href="/">
 								<img

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { arrayNavItems } from '../../../../utils/NavItems';
 import { useTheme } from '../../../../utils/Hooks/useTheme';
 import Sidebar from '../Sidebar/index';
@@ -42,7 +43,7 @@ const HomeHeader = () => {
 	const { theme, setTheme } = useTheme();
 	const user = JSON.parse(localStorage.getItem('user') as string);
 	const carrinho = JSON.parse(localStorage.getItem('carrinho') as string);
-
+	const [busca, setBusca] = useState('');
 	function openTeste() {
 		const sidebar = document.querySelector('.header-side');
 		const isSideOpen = sidebar?.classList.contains('show-sidebar');
@@ -57,7 +58,10 @@ const HomeHeader = () => {
 			? toggleAcess?.classList.remove('hideShow')
 			: toggleAcess?.classList.toggle('hideShow');
 	}
-
+	function aoSubmeterForm(event: React.FormEvent<HTMLFormElement>) {
+		event.preventDefault();
+		window.location.href = `/produtos/?busca=${busca}`;
+	}
 	function MostrarImagemPerfil() {
 		if (user) {
 			if (user.imagemPerfil === null || user.imagemPerfil === undefined) {
@@ -233,12 +237,18 @@ const HomeHeader = () => {
 						<RiMenuFill />
 					</button>
 				</div>
-				<div className="searchbar-contaienr">
-					<input type="text" placeholder="O que você busca?" />
-					<button className="search-btn">
-						<BiSearch />
-					</button>
-				</div>
+				<form onSubmit={aoSubmeterForm}>
+					<div className="searchbar-contaienr">
+						<input
+							type="text"
+							placeholder="O que você busca?"
+							onChange={(e) => setBusca(e.target.value)}
+						/>
+						<button className="search-btn" type={'submit'}>
+							<BiSearch />
+						</button>
+					</div>
+				</form>
 				<div className="hide-header">
 					<ul className="menu-items">
 						{arrayNavItems.map((el) => {
