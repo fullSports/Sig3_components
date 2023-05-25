@@ -1,6 +1,9 @@
 import React from 'react';
 import './styles.css';
 import '../../../../styles.css';
+import apiFullSports from '../../../../api/apiFullSports';
+import IRecomendacao from '../../../../utils/interfaces/Recomendacaao/IRecomendacao';
+import IBuscaRecomendacao from '../../../../utils/interfaces/Recomendacaao/IBuscaaRecomendacao';
 interface Props {
 	src: string;
 	produtoName: string;
@@ -9,6 +12,7 @@ interface Props {
 	produtoId: string;
 	precoParcelado: string;
 	tamanho: number;
+	obj: 'calcado' | 'suplemento' | 'roupa' | 'equipamento';
 }
 // const VerticalCardProduct = () =>{
 const VerticalCardProduct: React.FC<Props> = ({
@@ -19,10 +23,49 @@ const VerticalCardProduct: React.FC<Props> = ({
 	produtoName,
 	PrecoAnterior,
 	PrecoAtual,
+	obj,
 }) => {
+	const AtualizaRecomendacao = (
+		categoria: 'calcado' | 'suplemento' | 'roupa' | 'equipamento',
+		produto: string | undefined
+	) => {
+		const user = JSON.parse(localStorage.getItem('user') as string);
+		if (user) {
+			return apiFullSports
+				.get<IRecomendacao[]>('listar-recomendacoes')
+				.then((resRecomendacao) => {
+					for (const recomendacao of resRecomendacao.data) {
+						if (recomendacao.user._id === user._id) {
+							apiFullSports
+								.put<IBuscaRecomendacao>(
+									`atualizar-recomendacao/${recomendacao._id}`,
+									{
+										[`click_${categoria}s`]:
+											recomendacao[`click_${categoria}s`] + 1,
+									}
+								)
+								.then(() => {
+									return (window.location.href = '/comprar-produto/' + produto);
+								})
+								.catch((err) => {
+									console.log(err);
+									return false;
+								});
+							break;
+						}
+					}
+				})
+				.catch((err) => {
+					console.log(err);
+				});
+		} else return (window.location.href = '/comprar-produto/' + produtoId);
+	};
 	return (
 		<div className="Vcard-product">
-			<a className="Vcard-link" href={`/comprar-produto/${produtoId}`}>
+			<a
+				className="Vcard-link"
+				onClick={() => AtualizaRecomendacao(obj, produtoId)}
+			>
 				<div className="card-cover">
 					<img src={src} alt="Imagem Teste" />
 				</div>

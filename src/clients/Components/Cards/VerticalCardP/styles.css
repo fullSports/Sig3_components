@@ -25,6 +25,7 @@
     sm:h-[325px] sm:w-[185px]
     md:h-[490px] md:w-[260px]
     lg:h-[490px] lg:w-[260px]
+    cursor-pointer
 
 }
 

@@ -132,7 +132,7 @@ const Footer = () => {
 			</div>
 			<div className="footer-bottom-line">
 				Full Sports &copy;{new Date().getFullYear()} Todos os direitos
-				reservados.
+				reservados, simulação estudantil.
 			</div>
 		</footer>
 	);

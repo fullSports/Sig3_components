@@ -16,7 +16,8 @@ import tenisBanner from '../../../assets/images/banners/transparent-shoes-banner
 import roupasBanner from '../../../assets/images/banners/transparent-clothes-banner.png';
 import SvgCarregando from '../../../assets/icons/caarregando.svg';
 import SvgLoddingDarkMode from '../../../assets/icons/SvgCarregandoDarkMode.svg';
-import IRecomendacao from '../../../utils/interfaces/IRecomendacao';
+import IRecomendacao from '../../../utils/interfaces/Recomendacaao/IRecomendacao';
+import IBuscaRecomendacao from '../../../utils/interfaces/Recomendacaao/IBuscaaRecomendacao';
 // const Grid = styled.div`
 // 	margin: 40px 10px 40px 40px;
 // 	display: grid;
@@ -33,49 +34,39 @@ const Home = () => {
 	const user = JSON.parse(localStorage.getItem('user') as string);
 	useEffect(() => {
 		setSpinner(true);
-		apiFullSports
-			.get<IProduto[]>('listar-produtos/')
-			.then((response) => {
-				if (user) {
-					apiFullSports
-						.get<IRecomendacao[]>('listar-recomendacoes')
-						.then((resRecomendacao) => {
-							for (const recomendacao of resRecomendacao.data) {
-								if (recomendacao.user._id === user._id) {
-									apiFullSports
-										.get<IProduto[]>(`recomendacao/${recomendacao._id}`)
-										.then((res) => {
-											setProdutosReomendados(res.data);
-
-											// const pordutoFilter = response.data.filter(
-											// 	(value, index) => {
-											// 		if (value && res.data[index]) {
-											// 			return value._id !== res.data[index]._id;
-											// 		}else return value
-											// 	}
-											// );
-											// console.log('EE');
-
-											setProdutos(response.data);
-										})
-										.catch((err) => console.log(err));
-									break;
-								}
-							}
-							setSpinner(false);
-						})
-						.catch((err) => {
-							console.log(err);
-						});
-				} else {
-					setProdutos(response.data);
+		if (user) {
+			apiFullSports
+				.get<IRecomendacao[]>('listar-recomendacoes')
+				.then((resRecomendacao) => {
+					for (const recomendacao of resRecomendacao.data) {
+						if (recomendacao.user._id === user._id) {
+							console.log(recomendacao.click_roupas);
+							apiFullSports
+								.get<IBuscaRecomendacao>(`recomendacao/${recomendacao._id}`)
+								.then((res) => {
+									setProdutos(res.data.producstRemains);
+									setProdutosReomendados(res.data.recommendations);
+									setSpinner(false);
+								})
+								.catch((err) => console.log(err));
+							break;
+						}
+					}
+				})
+				.catch((err) => {
+					console.log(err);
+				});
+		} else {
+			apiFullSports
+				.get<IProduto[]>('listar-produtos')
+				.then((res) => {
+					setProdutos(res.data);
 					setSpinner(false);
-				}
-			})
-			.catch((err) => {
-				console.log(err);
-			});
+				})
+				.catch((err) => console.log(err));
+		}
 	}, []);
+
 	return (
 		<>
 			<HomeHeader />
@@ -144,6 +135,7 @@ const Home = () => {
 																	item.categoriaProduto[obj].imagemProduto[0]
 																		.url
 																}
+																obj={obj}
 															/>
 														);
 													} else return <></>;
@@ -185,6 +177,7 @@ const Home = () => {
 														.replace('.', ',')}
 													src={item.categoriaProduto[obj].imagemProduto[0].url}
 													PrecoAnterior=""
+													obj={obj}
 												/>
 											);
 										} else return <></>;
