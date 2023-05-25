@@ -7,8 +7,17 @@
     @apply
     -z-50
     h-auto sm:h-auto md:h-[320px] lg:h-[320px]
+    mt-5
+    mb-20
 }
-
+.titulo-produto{
+    font-size: 26px;
+    @apply
+    flex
+    justify-center
+    font-bold
+   from-neutral-950
+}
 .product-banner{
     @apply
     w-fit
@@ -31,6 +40,7 @@
     md:grid-cols-3
     grid-cols-2 sm:grid-cols-3
 }
+
 /* .cards-container{
     @apply
     flex flex-row flex-nowrap

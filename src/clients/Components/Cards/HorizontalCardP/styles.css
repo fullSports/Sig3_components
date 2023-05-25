@@ -27,6 +27,7 @@
     dark:border-2 dark:border-white
     shadow rounded-lg
     flex
+    cursor-pointer
 }
 .Hcard-link{
     @apply flex

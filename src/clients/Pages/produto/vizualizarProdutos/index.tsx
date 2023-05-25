@@ -76,6 +76,7 @@ const VizualizacaoDeProdutos = () => {
 											produtoName={categoriaDeproduto[obj].nome}
 											PrecoAnterior={''}
 											PrecoAtual={categoriaDeproduto[obj].preco}
+											obj={obj}
 										/>
 									);
 								}
@@ -128,6 +129,7 @@ const VizualizacaoDeProdutos = () => {
 										produtoName={categoriaDeproduto[obj].nome}
 										PrecoAnterior={''}
 										PrecoAtual={categoriaDeproduto[obj].preco}
+										obj={obj}
 									/>
 								);
 							})}
@@ -179,6 +181,7 @@ const VizualizacaoDeProdutos = () => {
 										produtoName={categoriaDeproduto[obj].nome}
 										PrecoAnterior={''}
 										PrecoAtual={categoriaDeproduto[obj].preco}
+										obj={obj}
 									/>
 								);
 							})}
