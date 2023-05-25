@@ -46,6 +46,7 @@
     "rules": {
         "linebreak-style": "off",
         // Configure prettier
+        "react/prop-types": "off",
         "prettier/prettier": [
             "error",
             {
