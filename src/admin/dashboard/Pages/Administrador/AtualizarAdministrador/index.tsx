@@ -470,6 +470,7 @@ const AtualizarAdministrador = () => {
 					sexo,
 					cep,
 					endereco: `${rua},${numero} -${complemento}- ${estado}, ${cidade}, ${bairro}`,
+					imagemPerfil: imagemId,
 				})
 				.then(() => {
 					setSpinner(false);
