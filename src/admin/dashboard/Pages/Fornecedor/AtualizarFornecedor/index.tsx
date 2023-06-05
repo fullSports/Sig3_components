@@ -335,8 +335,8 @@ const AtualizarFornecedor = () => {
 									</button>
 									<button
 										onClick={() =>
-										(window.location.href =
-											'/dashboard/consultar-fornecedores')
+											(window.location.href =
+												'/dashboard/consultar-fornecedores')
 										}
 										type="button"
 										id="btn-cad-forms"

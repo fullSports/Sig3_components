@@ -14,8 +14,6 @@ import Cabecalho from '../../../Components/Menu/Header';
 import Footer from '../../../Components/Footer';
 import IRESRealizarLogin from '../../../../utils/interfaces/Res/IRESRealizarLogin';
 import IRESCastrarCliente from '../../../../utils/interfaces/Res/IRESCastrarCliente';
-import { AxiosError } from 'axios';
-
 const CadastroCliente = () => {
 	const [cpf, setCpf] = useState('');
 	const [nome, setNome] = useState('');
@@ -154,14 +152,14 @@ const CadastroCliente = () => {
 									console.log(err);
 									setSpinner(false);
 									setMensagemErroBolean(true);
-									setMenssagemErro('erro na requisição');
+									setMenssagemErro(err.response.data.message[0].toString());
 								});
 						})
 						.catch((err) => {
 							console.log(err);
 							setSpinner(false);
 							setMensagemErroBolean(true);
-							setMenssagemErro('erro na requisição');
+							setMenssagemErro(err.response.data.message[0].toString());
 						});
 				} else {
 					apiFullSports
@@ -201,7 +199,7 @@ const CadastroCliente = () => {
 							console.log(err);
 							setSpinner(false);
 							setMensagemErroBolean(true);
-							setMenssagemErro('erro na requisição');
+							setMenssagemErro(err.response.data.message[0].toString());
 						});
 				}
 			})

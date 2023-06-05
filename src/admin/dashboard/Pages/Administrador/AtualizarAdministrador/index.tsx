@@ -133,7 +133,7 @@ const AtualizarAdministrador = () => {
 				.catch((err) => {
 					console.log(err);
 					setMensagemErroBolean(true);
-					setMenssagemErro(err.response?.data.message[0].toString());
+					setMenssagemErro(err.response.data.message[0].toString());
 				});
 		}
 	}, [parametros]);
