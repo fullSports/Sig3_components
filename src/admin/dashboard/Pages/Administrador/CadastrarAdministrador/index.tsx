@@ -108,7 +108,7 @@ const CadastroAdministrador = () => {
 				.catch((err) => {
 					console.log(err);
 					setMensagemErroBolean(true);
-					setMenssagemErro('Erro na requisição');
+					setMenssagemErro(err.response?.data.message[0].toString());
 				});
 		}
 		apiFullSports
@@ -140,7 +140,7 @@ const CadastroAdministrador = () => {
 			.catch((err) => {
 				console.log(err);
 				setMensagemErroBolean(true);
-				setMenssagemErro('Erro na requisição');
+				setMenssagemErro(err.response?.data.message[0].toString());
 			});
 	}
 
