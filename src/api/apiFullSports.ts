@@ -5,12 +5,11 @@ setInterval(async () => {
 		clientID: String(process.env.REACT_APP_CLIENTID),
 		clientSecret: String(process.env.REACT_APP_CLIENSECRET),
 	});
-	console.log(teste.data.access_token);
 	sessionStorage.setItem('access_token', teste.data.access_token);
 }, 7200);
 
 const apiFullSports = axios.create({
-	baseURL: 'http://localhost:5000/',
+	baseURL: 'https://back-end-full-sports.vercel.app/',
 	headers: {
 		Authorization: `Bearer ${sessionStorage.getItem('access_token')}`,
 	},
