@@ -152,14 +152,22 @@ const CadastroCliente = () => {
 									console.log(err);
 									setSpinner(false);
 									setMensagemErroBolean(true);
-									setMenssagemErro(err.response.data.message[0].toString());
+									setMenssagemErro(
+										Array.isArray(err.response.data.message)
+											? err.response.data.message[0].toString()
+											: err.response.data.message
+									);
 								});
 						})
 						.catch((err) => {
 							console.log(err);
 							setSpinner(false);
 							setMensagemErroBolean(true);
-							setMenssagemErro(err.response.data.message[0].toString());
+							setMenssagemErro(
+								Array.isArray(err.response.data.message)
+									? err.response.data.message[0].toString()
+									: err.response.data.message
+							);
 						});
 				} else {
 					apiFullSports
@@ -199,7 +207,11 @@ const CadastroCliente = () => {
 							console.log(err);
 							setSpinner(false);
 							setMensagemErroBolean(true);
-							setMenssagemErro(err.response.data.message[0].toString());
+							setMenssagemErro(
+								Array.isArray(err.response.data.message)
+									? err.response.data.message[0].toString()
+									: err.response.data.message
+							);
 						});
 				}
 			})
@@ -207,7 +219,11 @@ const CadastroCliente = () => {
 				console.log(err);
 				setSpinner(false);
 				setMensagemErroBolean(true);
-				setMenssagemErro(err.response?.data.message[0].toString());
+				setMenssagemErro(
+					Array.isArray(err.response.data.message)
+						? err.response.data.message[0].toString()
+						: err.response.data.message
+				);
 			});
 	}
 	return (
