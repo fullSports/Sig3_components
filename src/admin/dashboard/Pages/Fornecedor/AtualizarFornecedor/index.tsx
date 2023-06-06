@@ -43,7 +43,7 @@ const AtualizarFornecedor = () => {
 					if (err.response.status === 400) {
 						setMenssagemErro(err.response.data.message[0]);
 					} else {
-						setMenssagemErro('erro naa requisição');
+						setMenssagemErro(err.response?.data.message[0].toString());
 					}
 				});
 		}

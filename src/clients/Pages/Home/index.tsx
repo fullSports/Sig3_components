@@ -36,13 +36,13 @@ const Home = () => {
 		setSpinner(true);
 		if (user) {
 			apiFullSports
-				.get<IRecomendacao[]>('listar-recomendacoes')
+				.get<IRecomendacao[]>('listar-recomendacoes', {})
 				.then((resRecomendacao) => {
 					for (const recomendacao of resRecomendacao.data) {
 						if (recomendacao.user._id === user._id) {
 							console.log(recomendacao.click_roupas);
 							apiFullSports
-								.get<IBuscaRecomendacao>(`recomendacao/${recomendacao._id}`)
+								.get<IBuscaRecomendacao>(`recomendacao/${recomendacao._id}`, {})
 								.then((res) => {
 									setProdutos(res.data.producstRemains);
 									setProdutosReomendados(res.data.recommendations);

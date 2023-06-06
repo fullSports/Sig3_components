@@ -14,7 +14,6 @@ import Cabecalho from '../../../Components/Menu/Header';
 import Footer from '../../../Components/Footer';
 import IRESRealizarLogin from '../../../../utils/interfaces/Res/IRESRealizarLogin';
 import IRESCastrarCliente from '../../../../utils/interfaces/Res/IRESCastrarCliente';
-
 const CadastroCliente = () => {
 	const [cpf, setCpf] = useState('');
 	const [nome, setNome] = useState('');
@@ -153,14 +152,22 @@ const CadastroCliente = () => {
 									console.log(err);
 									setSpinner(false);
 									setMensagemErroBolean(true);
-									setMenssagemErro('erro na requisição');
+									setMenssagemErro(
+										Array.isArray(err.response.data.message)
+											? err.response.data.message[0].toString()
+											: err.response.data.message
+									);
 								});
 						})
 						.catch((err) => {
 							console.log(err);
 							setSpinner(false);
 							setMensagemErroBolean(true);
-							setMenssagemErro('erro na requisição');
+							setMenssagemErro(
+								Array.isArray(err.response.data.message)
+									? err.response.data.message[0].toString()
+									: err.response.data.message
+							);
 						});
 				} else {
 					apiFullSports
@@ -200,7 +207,11 @@ const CadastroCliente = () => {
 							console.log(err);
 							setSpinner(false);
 							setMensagemErroBolean(true);
-							setMenssagemErro('erro na requisição');
+							setMenssagemErro(
+								Array.isArray(err.response.data.message)
+									? err.response.data.message[0].toString()
+									: err.response.data.message
+							);
 						});
 				}
 			})
@@ -208,7 +219,11 @@ const CadastroCliente = () => {
 				console.log(err);
 				setSpinner(false);
 				setMensagemErroBolean(true);
-				setMenssagemErro('erro na requisição');
+				setMenssagemErro(
+					Array.isArray(err.response.data.message)
+						? err.response.data.message[0].toString()
+						: err.response.data.message
+				);
 			});
 	}
 	return (
