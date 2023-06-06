@@ -1,12 +1,15 @@
 import axios from 'axios';
 //https://back-end-full-sports.vercel.app/
 setInterval(async () => {
-	const teste = await axios.post('http://localhost:5000/auth/login-app', {
-		clientID: String(process.env.REACT_APP_CLIENTID),
-		clientSecret: String(process.env.REACT_APP_CLIENSECRET),
-	});
+	const teste = await axios.post(
+		'https://back-end-full-sports.vercel.app/auth/login-app',
+		{
+			clientID: String(process.env.REACT_APP_CLIENTID),
+			clientSecret: String(process.env.REACT_APP_CLIENSECRET),
+		}
+	);
 	sessionStorage.setItem('access_token', teste.data.access_token);
-}, 7200);
+}, 7000);
 
 const apiFullSports = axios.create({
 	baseURL: 'https://back-end-full-sports.vercel.app/',
