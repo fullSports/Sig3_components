@@ -18,6 +18,7 @@ import SvgCarregando from '../../../assets/icons/caarregando.svg';
 import SvgLoddingDarkMode from '../../../assets/icons/SvgCarregandoDarkMode.svg';
 import IRecomendacao from '../../../utils/interfaces/Recomendacaao/IRecomendacao';
 import IBuscaRecomendacao from '../../../utils/interfaces/Recomendacaao/IBuscaaRecomendacao';
+import axios from 'axios';
 // const Grid = styled.div`
 // 	margin: 40px 10px 40px 40px;
 // 	display: grid;
@@ -34,37 +35,54 @@ const Home = () => {
 	const user = JSON.parse(localStorage.getItem('user') as string);
 	useEffect(() => {
 		setSpinner(true);
-		if (user) {
-			apiFullSports
-				.get<IRecomendacao[]>('listar-recomendacoes', {})
-				.then((resRecomendacao) => {
-					for (const recomendacao of resRecomendacao.data) {
-						if (recomendacao.user._id === user._id) {
-							console.log(recomendacao.click_roupas);
-							apiFullSports
-								.get<IBuscaRecomendacao>(`recomendacao/${recomendacao._id}`, {})
-								.then((res) => {
-									setProdutos(res.data.producstRemains);
-									setProdutosReomendados(res.data.recommendations);
-									setSpinner(false);
-								})
-								.catch((err) => console.log(err));
-							break;
+		const GetProduct = () => {
+			if (user) {
+				apiFullSports
+					.get<IRecomendacao[]>('listar-recomendacoes', {})
+					.then((resRecomendacao) => {
+						for (const recomendacao of resRecomendacao.data) {
+							if (recomendacao.user._id === user._id) {
+								console.log(recomendacao.click_roupas);
+								apiFullSports
+									.get<IBuscaRecomendacao>(
+										`recomendacao/${recomendacao._id}`,
+										{}
+									)
+									.then((res) => {
+										setProdutos(res.data.producstRemains);
+										setProdutosReomendados(res.data.recommendations);
+										setSpinner(false);
+									})
+									.catch((err) => console.log(err));
+								break;
+							}
 						}
-					}
-				})
-				.catch((err) => {
-					console.log(err);
-				});
-		} else {
-			apiFullSports
-				.get<IProduto[]>('listar-produtos')
-				.then((res) => {
-					setProdutos(res.data);
-					setSpinner(false);
-				})
-				.catch((err) => console.log(err));
-		}
+					})
+					.catch((err) => {
+						console.log(err);
+					});
+			} else {
+				apiFullSports
+					.get<IProduto[]>('listar-produtos')
+					.then((res) => {
+						setProdutos(res.data);
+						setSpinner(false);
+					})
+					.catch(async (err) => {
+						console.log(err);
+						await axios
+							.post('https://back-end-full-sports.vercel.app/auth/login-app', {
+								clientID: String(process.env.REACT_APP_CLIENTID),
+								clientSecret: String(process.env.REACT_APP_CLIENSECRET),
+							})
+							.then((res) => {
+								sessionStorage.setItem('access_token', res.data.access_token);
+								window.location.reload();
+							});
+					});
+			}
+		};
+		GetProduct();
 	}, []);
 
 	return (
