@@ -19,6 +19,7 @@ import SvgCarregando from '../../../../../assets/icons/caarregando.svg';
 import SvgLoddingDarkMode from '../../../../../assets/icons/SvgCarregandoDarkMode.svg';
 import DashboardSidenav from '../../../Components/Sidenav';
 import DashboardHeader from '../../../Components/Header';
+import UpdateToken from '../../../../../api/updateToken';
 const CadatrarImagemLabel = styled.label`
 	cursor: pointer;
 	border: solid 1px #7b7777;
@@ -99,7 +100,12 @@ const AtualizarProduto = () => {
 				.then((resposta) => {
 					setListaFornecedores(resposta.data);
 				})
-				.catch((err) => console.log(err));
+				.catch((err) => {
+					console.log(err);
+					if (err.response?.status === 401) {
+						UpdateToken();
+					}
+				});
 
 			apiFullSports
 				.get<IProduto>(`listar-produto/${parametros.id}`)
@@ -132,6 +138,9 @@ const AtualizarProduto = () => {
 				})
 				.catch((err) => {
 					console.log(err);
+					if (err.response?.status === 401) {
+						UpdateToken();
+					}
 					setSpinner(false);
 				});
 		}
@@ -184,6 +193,9 @@ const AtualizarProduto = () => {
 					})
 					.catch((err) => {
 						console.log(err);
+						if (err.response?.status === 401) {
+							UpdateToken();
+						}
 						setbotaoCadastrarNovaFoto(true);
 					});
 			}, 2000);
@@ -223,6 +235,9 @@ const AtualizarProduto = () => {
 						});
 				})
 				.catch((err) => {
+					if (err.response?.status === 401) {
+						UpdateToken();
+					}
 					setSpinner(false);
 					console.log(err);
 				});
@@ -319,7 +334,12 @@ const AtualizarProduto = () => {
 					setSpinner(false);
 					window.location.href = '/dashboard/consultar-produtos';
 				})
-				.catch((err) => console.log(err));
+				.catch((err) => {
+					console.log(err);
+					if (err.response?.status === 401) {
+						UpdateToken();
+					}
+				});
 		}
 	}
 	return (

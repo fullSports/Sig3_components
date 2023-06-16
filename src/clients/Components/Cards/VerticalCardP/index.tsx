@@ -4,6 +4,7 @@ import '../../../../styles.css';
 import apiFullSports from '../../../../api/apiFullSports';
 import IRecomendacao from '../../../../utils/interfaces/Recomendacaao/IRecomendacao';
 import IBuscaRecomendacao from '../../../../utils/interfaces/Recomendacaao/IBuscaaRecomendacao';
+import UpdateToken from '../../../../api/updateToken';
 interface Props {
 	src: string;
 	produtoName: string;
@@ -48,6 +49,9 @@ const VerticalCardProduct: React.FC<Props> = ({
 									return (window.location.href = '/comprar-produto/' + produto);
 								})
 								.catch((err) => {
+									if (err.response?.status === 401) {
+										UpdateToken();
+									}
 									console.log(err);
 									return false;
 								});
@@ -56,6 +60,9 @@ const VerticalCardProduct: React.FC<Props> = ({
 					}
 				})
 				.catch((err) => {
+					if (err.response?.status === 401) {
+						UpdateToken();
+					}
 					console.log(err);
 				});
 		} else return (window.location.href = '/comprar-produto/' + produtoId);

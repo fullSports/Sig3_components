@@ -18,6 +18,7 @@ import ICliente from '../../../../utils/interfaces/ICliente';
 import Cabecalho from '../../../Components/Menu/Header';
 import Footer from '../../../Components/Footer';
 import SinalMais from '../../../../assets/icons/sinalMais.png';
+import UpdateToken from '../../../../api/updateToken';
 
 const Icone = styled.div`
 	background-color: #a49898;
@@ -109,6 +110,7 @@ const AtualizarCliente = () => {
 	const handleClose = () => {
 		setOpen(false);
 	};
+
 	useEffect(() => {
 		if (parametros.id) {
 			if (user.login.isAdmin) {
@@ -117,32 +119,12 @@ const AtualizarCliente = () => {
 			}
 			apiFullSports
 				.get<ICliente>(`listar-cliente/${parametros.id}`)
-				.then((resposta) => setCpf(resposta.data.cpf))
-				.catch((err) => console.log(err));
-
-			apiFullSports
-				.get<ICliente>(`listar-cliente/${parametros.id}`)
-				.then((resposta) => setNome(resposta.data.nome))
-				.catch((err) => console.log(err));
-
-			apiFullSports
-				.get<ICliente>(`listar-cliente/${parametros.id}`)
-				.then((resposta) => setDataNascimento(resposta.data.dataNascimento))
-				.catch((err) => console.log(err));
-
-			apiFullSports
-				.get<ICliente>(`listar-cliente/${parametros.id}`)
-				.then((resposta) => setSexo(resposta.data.sexo))
-				.catch((err) => console.log(err));
-
-			apiFullSports
-				.get<ICliente>(`listar-cliente/${parametros.id}`)
-				.then((resposta) => setCep(resposta.data.cep))
-				.catch((err) => console.log(err));
-
-			apiFullSports
-				.get<ICliente>(`listar-cliente/${parametros.id}`)
 				.then((resposta) => {
+					setCpf(resposta.data.cpf);
+					setNome(resposta.data.nome);
+					setDataNascimento(resposta.data.dataNascimento);
+					setSexo(resposta.data.sexo);
+					setCep(resposta.data.cep);
 					if (
 						resposta.data.imagemPerfil === null ||
 						resposta.data.imagemPerfil === undefined
@@ -154,8 +136,12 @@ const AtualizarCliente = () => {
 						setImagemPerfilurl(resposta.data.imagemPerfil.url);
 					}
 				})
-
-				.catch((err) => console.log(err));
+				.catch((err) => {
+					console.log(err);
+					if (err.response?.status === 401) {
+						UpdateToken();
+					}
+				});
 		}
 	}, [parametros]);
 
@@ -202,11 +188,21 @@ const AtualizarCliente = () => {
 
 							window.location.reload();
 						})
-						.catch((erro) => console.log(erro));
+						.catch((err) => {
+							console.log(err);
+							if (err.response?.status === 401) {
+								UpdateToken();
+							}
+						});
 
 					// handleClose()
 				})
-				.catch((erro) => console.log(erro));
+				.catch((err) => {
+					console.log(err);
+					if (err.response?.status === 401) {
+						UpdateToken();
+					}
+				});
 		} else {
 			apiFullSports.delete(`imagem/${imagemId}`);
 			setSpinner(true);
@@ -243,21 +239,39 @@ const AtualizarCliente = () => {
 
 							window.location.reload();
 						})
-						.catch((erro) => console.log(erro));
+						.catch((err) => {
+							console.log(err);
+							if (err.response?.status === 401) {
+								UpdateToken();
+							}
+						});
 
 					// handleClose()
 				})
-				.catch((erro) => console.log(erro));
+				.catch((err) => {
+					console.log(err);
+					if (err.response?.status === 401) {
+						UpdateToken();
+					}
+				});
 		}
 	}
 
 	const deletarFoto = () => {
-		apiFullSports.delete(`imagem/${imagemId}`).then(() => {
-			setImagemID('');
-			setTimeout(function () {
-				window.location.reload();
-			}, 100);
-		});
+		apiFullSports
+			.delete(`imagem/${imagemId}`)
+			.then(() => {
+				setImagemID('');
+				setTimeout(function () {
+					window.location.reload();
+				}, 100);
+			})
+			.catch((err) => {
+				console.log(err);
+				if (err.response?.status === 401) {
+					UpdateToken();
+				}
+			});
 	};
 	function buscaCep() {
 		setCarregandoCep(true);
@@ -285,6 +299,9 @@ const AtualizarCliente = () => {
 					setCidade(evento.data.city);
 				})
 				.catch((err) => {
+					if (err.response?.status === 401) {
+						UpdateToken();
+					}
 					setCarregandoCep(false);
 					setCarregandoCepMessagem(true);
 					console.log(err);
@@ -480,7 +497,12 @@ const AtualizarCliente = () => {
 					// alert("cliente atualizado com suceeso");
 					window.location.href = '/';
 				})
-				.catch((erro) => console.log(erro));
+				.catch((err) => {
+					console.log(err);
+					if (err.response?.status === 401) {
+						UpdateToken();
+					}
+				});
 		}
 	}
 

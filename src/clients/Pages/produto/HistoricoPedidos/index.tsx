@@ -5,6 +5,7 @@ import IPedido from '../../../../utils/interfaces/IPedido';
 import apiFullSports from '../../../../api/apiFullSports';
 import SvgCarregando from '../../../../assets/icons/caarregando.svg';
 import SvgLoddingDarkMode from '../../../../assets/icons/SvgCarregandoDarkMode.svg';
+import UpdateToken from '../../../../api/updateToken';
 const HistoricoPedidos = () => {
 	const [pedido, setPedido] = useState<IPedido[]>([]);
 	const [spinner, setSpinner] = useState(false);
@@ -20,6 +21,9 @@ const HistoricoPedidos = () => {
 				setSpinner(false);
 			})
 			.catch((err) => {
+				if (err.response?.status === 401) {
+					UpdateToken();
+				}
 				setSpinner(false);
 				console.log(err);
 			});
@@ -39,6 +43,9 @@ const HistoricoPedidos = () => {
 						}, 100);
 					})
 					.catch((err) => {
+						if (err.response?.status === 401) {
+							UpdateToken();
+						}
 						console.log(err);
 						setSpinnerPedido(false);
 					});

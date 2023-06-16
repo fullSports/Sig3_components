@@ -5,6 +5,7 @@ import { click } from '@testing-library/user-event/dist/click';
 import apiFullSports from '../../../../api/apiFullSports';
 import IRecomendacao from '../../../../utils/interfaces/Recomendacaao/IRecomendacao';
 import IBuscaRecomendacao from '../../../../utils/interfaces/Recomendacaao/IBuscaaRecomendacao';
+import UpdateToken from '../../../../api/updateToken';
 interface Props extends React.HTMLProps<HTMLElement> {
 	nome: string | undefined;
 	preco: string | undefined;
@@ -47,6 +48,9 @@ const HorizontalCardProduct: React.FC<Props> = ({
 									return (window.location.href = '/comprar-produto/' + produto);
 								})
 								.catch((err) => {
+									if (err.response?.status === 401) {
+										UpdateToken();
+									}
 									console.log(err);
 									return false;
 								});
@@ -55,6 +59,9 @@ const HorizontalCardProduct: React.FC<Props> = ({
 					}
 				})
 				.catch((err) => {
+					if (err.response?.status === 401) {
+						UpdateToken();
+					}
 					console.log(err);
 				});
 		} else return (window.location.href = '/comprar-produto/' + produtoID);

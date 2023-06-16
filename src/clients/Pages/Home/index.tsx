@@ -18,7 +18,8 @@ import SvgCarregando from '../../../assets/icons/caarregando.svg';
 import SvgLoddingDarkMode from '../../../assets/icons/SvgCarregandoDarkMode.svg';
 import IRecomendacao from '../../../utils/interfaces/Recomendacaao/IRecomendacao';
 import IBuscaRecomendacao from '../../../utils/interfaces/Recomendacaao/IBuscaaRecomendacao';
-import axios from 'axios';
+import UpdateToken from '../../../api/updateToken';
+import { AxiosError } from 'axios';
 // const Grid = styled.div`
 // 	margin: 40px 10px 40px 40px;
 // 	display: grid;
@@ -53,22 +54,21 @@ const Home = () => {
 										setProdutosReomendados(res.data.recommendations);
 										setSpinner(false);
 									})
-									.catch((err) => console.log(err));
+									.catch((err) => {
+										console.log(err);
+										if (err.response?.status === 401) {
+											UpdateToken();
+										}
+									});
 								break;
 							}
 						}
 					})
-					.catch(async (err) => {
+					.catch(async (err: AxiosError) => {
 						console.log(err);
-						await axios
-							.post('https://back-end-full-sports.vercel.app/auth/login-app', {
-								clientID: String(process.env.REACT_APP_CLIENTID),
-								clientSecret: String(process.env.REACT_APP_CLIENSECRET),
-							})
-							.then((res) => {
-								sessionStorage.setItem('access_token', res.data.access_token);
-								window.location.reload();
-							});
+						if (err.response?.status === 401) {
+							UpdateToken();
+						}
 					});
 			} else {
 				apiFullSports
@@ -79,15 +79,7 @@ const Home = () => {
 					})
 					.catch(async (err) => {
 						console.log(err);
-						await axios
-							.post('https://back-end-full-sports.vercel.app/auth/login-app', {
-								clientID: String(process.env.REACT_APP_CLIENTID),
-								clientSecret: String(process.env.REACT_APP_CLIENSECRET),
-							})
-							.then((res) => {
-								sessionStorage.setItem('access_token', res.data.access_token);
-								window.location.reload();
-							});
+						UpdateToken();
 					});
 			}
 		};

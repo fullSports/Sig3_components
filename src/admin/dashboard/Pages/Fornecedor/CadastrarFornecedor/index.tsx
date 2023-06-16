@@ -5,6 +5,7 @@ import { TextField, Box } from '@mui/material';
 import ApiCep from '../../../../../api/apiCep';
 import DashboardSidenav from '../../../Components/Sidenav';
 import DashboardHeader from '../../../Components/Header';
+import UpdateToken from '../../../../../api/updateToken';
 
 const CadastrarFornecedor = () => {
 	const [cnpj, setCnpj] = useState('');
@@ -52,6 +53,9 @@ const CadastrarFornecedor = () => {
 			})
 			.catch((err) => {
 				console.log(err);
+				if (err.response?.status === 401) {
+					UpdateToken();
+				}
 				setSpinner(false);
 				setMensagemErroBolean(true);
 				if (err.response.status === 400) {
@@ -87,6 +91,9 @@ const CadastrarFornecedor = () => {
 					setCidade(evento.data.city);
 				})
 				.catch((err) => {
+					if (err.response?.status === 401) {
+						UpdateToken();
+					}
 					setCarregandoCep(false);
 					setCarregandoCepMessagem(true);
 					console.log(err);

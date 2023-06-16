@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { TextField, Box } from '@mui/material';
 import apiFullSports from '../api/apiFullSports';
+import UpdateToken from '../api/updateToken';
 
 const AutenticacaoAdmin = () => {
 	const [email, setEmail] = useState('');
@@ -45,6 +46,9 @@ const AutenticacaoAdmin = () => {
 				}
 			})
 			.catch((err) => {
+				if (err.response?.status === 401) {
+					UpdateToken();
+				}
 				console.log(err);
 				setSpinner(false);
 				setMensagemErroBolean(true);

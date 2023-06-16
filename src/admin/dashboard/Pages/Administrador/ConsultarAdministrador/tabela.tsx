@@ -4,6 +4,7 @@ import apiFullSports from '../../../../../api/apiFullSports';
 import styled from 'styled-components';
 import SvgCarregando from '../../../../../assets/icons/caarregando.svg';
 import SvgLiddingDarkMode from '../../../../../assets/icons/SvgCarregandoDarkMode.svg';
+import UpdateToken from '../../../../../api/updateToken';
 const Icone = styled.div`
 	background-color: #796969;
 	height: 50px;
@@ -38,6 +39,9 @@ const TabelaAdimistrador = () => {
 			})
 			.catch((err) => {
 				console.log(err);
+				if (err.response?.status === 401) {
+					UpdateToken();
+				}
 				setMensagemErroBolean(true);
 				setMenssagemErro(err.response?.data.message[0].toString());
 			});

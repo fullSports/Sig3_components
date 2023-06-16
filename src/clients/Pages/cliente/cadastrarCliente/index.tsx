@@ -14,6 +14,7 @@ import Cabecalho from '../../../Components/Menu/Header';
 import Footer from '../../../Components/Footer';
 import IRESRealizarLogin from '../../../../utils/interfaces/Res/IRESRealizarLogin';
 import IRESCastrarCliente from '../../../../utils/interfaces/Res/IRESCastrarCliente';
+import UpdateToken from '../../../../api/updateToken';
 const CadastroCliente = () => {
 	const [cpf, setCpf] = useState('');
 	const [nome, setNome] = useState('');
@@ -75,6 +76,9 @@ const CadastroCliente = () => {
 					setCidade(evento.data.city);
 				})
 				.catch((err) => {
+					if (err.response?.status === 401) {
+						UpdateToken();
+					}
 					setCarregandoCep(false);
 					setCarregandoCepMessagem(true);
 					console.log(err);
@@ -149,6 +153,9 @@ const CadastroCliente = () => {
 									window.location.href = '/login';
 								})
 								.catch((err) => {
+									if (err.response?.status === 401) {
+										UpdateToken();
+									}
 									console.log(err);
 									setSpinner(false);
 									setMensagemErroBolean(true);
@@ -160,6 +167,9 @@ const CadastroCliente = () => {
 								});
 						})
 						.catch((err) => {
+							if (err.response?.status === 401) {
+								UpdateToken();
+							}
 							console.log(err);
 							setSpinner(false);
 							setMensagemErroBolean(true);
@@ -205,6 +215,9 @@ const CadastroCliente = () => {
 						})
 						.catch((err) => {
 							console.log(err);
+							if (err.response?.status === 401) {
+								UpdateToken();
+							}
 							setSpinner(false);
 							setMensagemErroBolean(true);
 							setMenssagemErro(
@@ -217,6 +230,9 @@ const CadastroCliente = () => {
 			})
 			.catch((err) => {
 				console.log(err);
+				if (err.response?.status === 401) {
+					UpdateToken();
+				}
 				setSpinner(false);
 				setMensagemErroBolean(true);
 				setMenssagemErro(

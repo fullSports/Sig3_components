@@ -13,6 +13,7 @@ import {
 import apiFullSports from '../../../../../api/apiFullSports';
 import ApiCep from '../../../../../api/apiCep';
 import DashboardHeader from '../../../Components/Header';
+import UpdateToken from '../../../../../api/updateToken';
 
 const AtualizarImagemLabel = styled.label`
 	cursor: pointer;
@@ -80,6 +81,9 @@ const CadastroAdministrador = () => {
 					setCidade(evento.data.city);
 				})
 				.catch((err) => {
+					if (err.response?.status === 401) {
+						UpdateToken();
+					}
 					setCarregandoCep(false);
 					setCarregandoCepMessagem(true);
 					console.log(err);
@@ -107,6 +111,9 @@ const CadastroAdministrador = () => {
 				.then((reposta) => (ID = reposta.data.image._id))
 				.catch((err) => {
 					console.log(err);
+					if (err.response?.status === 401) {
+						UpdateToken();
+					}
 					setMensagemErroBolean(true);
 					setMenssagemErro(err.response?.data.message[0].toString());
 				});
@@ -138,6 +145,9 @@ const CadastroAdministrador = () => {
 				}
 			})
 			.catch((err) => {
+				if (err.response?.status === 401) {
+					UpdateToken();
+				}
 				console.log(err);
 				setMensagemErroBolean(true);
 				setMenssagemErro(err.response?.data.message[0].toString());

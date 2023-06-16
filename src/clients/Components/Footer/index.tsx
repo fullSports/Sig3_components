@@ -11,6 +11,7 @@ import './styles.css';
 import { useState, useEffect } from 'react';
 import apiFullSports from '../../../api/apiFullSports';
 import brandLogo from '../../../assets/images/fullSportLogo.svg';
+import UpdateToken from '../../../api/updateToken';
 const Footer = () => {
 	const [email, setEmail] = useState('');
 	const [isLogin, setIsLogin] = useState(true);
@@ -43,6 +44,9 @@ const Footer = () => {
 				}
 			})
 			.catch((err) => {
+				if (err.response?.status === 401) {
+					UpdateToken();
+				}
 				console.log(err);
 				window.location.href = '/cadastrar-cliente';
 			});

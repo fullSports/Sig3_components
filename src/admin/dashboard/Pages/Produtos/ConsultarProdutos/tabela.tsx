@@ -7,6 +7,7 @@ import { GoTrashcan } from 'react-icons/go';
 import { FiEdit } from 'react-icons/fi';
 import SvgCarregando from '../../../../../assets/icons/caarregando.svg';
 import SvgLoddingDarkMode from '../../../../../assets/icons/SvgCarregandoDarkMode.svg';
+import UpdateToken from '../../../../../api/updateToken';
 const TabelaProduto = () => {
 	const [open, setOpen] = useState(false);
 	const handleOpen = () => {
@@ -29,6 +30,9 @@ const TabelaProduto = () => {
 			})
 			.catch((err) => {
 				console.log(err);
+				if (err.response?.status === 401) {
+					UpdateToken();
+				}
 			});
 	}, []);
 
@@ -38,7 +42,12 @@ const TabelaProduto = () => {
 			.then(() => {
 				window.location.reload();
 			})
-			.catch((err) => console.log(err));
+			.catch((err) => {
+				console.log(err);
+				if (err.response?.status === 401) {
+					UpdateToken();
+				}
+			});
 	};
 
 	if (!categoriaParam) {

@@ -7,6 +7,7 @@ import Footer from '../../../Components/Footer';
 import Cabecalho from '../../../Components/Menu/Header';
 import SvgLodding from '../../../../assets/icons/caarregando.svg';
 import SvgLiddingDarkMode from '.././../../../assets/icons/SvgCarregandoDarkMode.svg';
+import UpdateToken from '../../../../api/updateToken';
 const ComprarProduto = () => {
 	const user = JSON.parse(localStorage.getItem('user') as string);
 	const parametro = useParams();
@@ -60,6 +61,9 @@ const ComprarProduto = () => {
 			})
 			.catch((err) => {
 				console.log(err);
+				if (err.response?.status === 401) {
+					UpdateToken();
+				}
 			});
 		setQuantidade('1');
 	}, [parametro, estiloImgProd1Array]);

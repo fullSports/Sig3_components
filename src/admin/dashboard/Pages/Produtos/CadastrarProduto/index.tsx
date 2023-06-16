@@ -14,6 +14,7 @@ import IRESCadastrarImagem from '../../../../../utils/interfaces/Res/IRESCadastr
 import IRESConsultarImagem from '../../../../../utils/interfaces/Res/IRESConsultarImagem';
 import SvgCarregando from '../../../../../assets/icons/caarregando.svg';
 import SvgLoddingDarkMode from '../../../../../assets/icons/SvgCarregandoDarkMode.svg';
+import UpdateToken from '../../../../../api/updateToken';
 const CadastrarProduto = () => {
 	const [listaFornecedores, setListaFornecedores] = useState<IFornecedor[]>([]);
 	const [fornecedorID, setFornecedorID] = useState<string | undefined>(
@@ -52,7 +53,12 @@ const CadastrarProduto = () => {
 			.then((resposta) => {
 				setListaFornecedores(resposta.data);
 			})
-			.catch((err) => console.log(err));
+			.catch((err) => {
+				console.log(err);
+				if (err.response?.status === 401) {
+					UpdateToken();
+				}
+			});
 		setCategoriaProduto('');
 		if (categoriaParam) {
 			setCategoriaProduto(categoriaParam.toString());
@@ -103,9 +109,19 @@ const CadastrarProduto = () => {
 							.then((response2: IRESConsultarImagem) => {
 								ImagensID.unshift(response2.data._id);
 							})
-							.catch((err) => console.log(err));
+							.catch((err) => {
+								console.log(err);
+								if (err.response?.status === 401) {
+									UpdateToken();
+								}
+							});
 					})
-					.catch((err) => console.log(err));
+					.catch((err) => {
+						console.log(err);
+						if (err.response?.status === 401) {
+							UpdateToken();
+						}
+					});
 			});
 		}
 
@@ -136,7 +152,12 @@ const CadastrarProduto = () => {
 						setSpinner(false);
 						window.location.href = '/dashboard/consultar-produtos';
 					})
-					.catch((err) => console.log(err));
+					.catch((err) => {
+						console.log(err);
+						if (err.response?.status === 401) {
+							UpdateToken();
+						}
+					});
 			}, 2000);
 		}
 	}

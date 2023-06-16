@@ -6,6 +6,7 @@ import Cabecalho from '../../../Components/Menu/Header';
 import Footer from '../../../Components/Footer';
 import SvgCarregando from '../../../../assets/icons/caarregando.svg';
 import SvgLoddingDarkMode from '../../../../assets/icons/SvgCarregandoDarkMode.svg';
+import UpdateToken from '../../../../api/updateToken';
 const VizualizacaoDeProdutos = () => {
 	const [produtos, setProdutos] = useState<IProduto[]>([]);
 	const [buscaProduto, setBuscaProduto] = useState<IProduto[]>([]);
@@ -21,7 +22,12 @@ const VizualizacaoDeProdutos = () => {
 				setProdutos(resposta.data);
 				setSpinner(false);
 			})
-			.catch((err) => console.log(err));
+			.catch((err) => {
+				console.log(err);
+				if (err.response?.status === 401) {
+					UpdateToken();
+				}
+			});
 		if (buscaParm) {
 			apiFullSports
 				.get<IProduto[]>(`/buscar-produto/${buscaParm}`)
@@ -29,7 +35,12 @@ const VizualizacaoDeProdutos = () => {
 					setBuscaProduto(res.data);
 					setSpinner(false);
 				})
-				.catch((err) => console.log(err));
+				.catch((err) => {
+					console.log(err);
+					if (err.response?.status === 401) {
+						UpdateToken();
+					}
+				});
 		}
 	}, []);
 

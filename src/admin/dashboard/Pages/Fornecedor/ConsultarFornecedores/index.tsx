@@ -9,6 +9,7 @@ import DashboardSidenav from '../../../Components/Sidenav';
 import DashboardHeader from '../../../Components/Header';
 import SvgCarregando from '../../../../../assets/icons/caarregando.svg';
 import SvgLoddingDarkMode from '../../../../../assets/icons/SvgCarregandoDarkMode.svg';
+import UpdateToken from '../../../../../api/updateToken';
 const ConsultarFornecedores = () => {
 	interface EsolherFornecedor {
 		_id: string;
@@ -40,6 +41,9 @@ const ConsultarFornecedores = () => {
 			})
 			.catch((err) => {
 				console.log(err);
+				if (err.response?.status === 401) {
+					UpdateToken();
+				}
 				setMensagemErroBolean(true);
 				setMenssagemErro('Erro ao buscar o cep');
 			});
@@ -56,6 +60,9 @@ const ConsultarFornecedores = () => {
 			})
 			.catch((err) => {
 				console.log(err);
+				if (err.response?.status === 401) {
+					UpdateToken();
+				}
 				setMensagemErroBolean(true);
 				setMenssagemErro('Erro ao buscar o cep');
 			});

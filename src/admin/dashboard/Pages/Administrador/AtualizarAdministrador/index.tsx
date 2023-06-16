@@ -17,6 +17,8 @@ import ICliente from '../../../../../utils/interfaces/ICliente';
 import DashboardHeader from '../../../Components/Header';
 import DashboardSidenav from '../../../Components/Sidenav';
 import SinalMais from '../../../../../assets/icons/sinalMais.png';
+import UpdateToken from '../../../../../api/updateToken';
+import { AxiosError } from 'axios';
 
 const Icone = styled.div`
 	background-color: #a49898;
@@ -133,7 +135,10 @@ const AtualizarAdministrador = () => {
 				.catch((err) => {
 					console.log(err);
 					setMensagemErroBolean(true);
-					setMenssagemErro(err.response.data.message[0].toString());
+					setMenssagemErro(err.response?.data.message[0].toString());
+					if (err.response?.status === 401) {
+						UpdateToken();
+					}
 				});
 		}
 	}, [parametros]);
@@ -180,9 +185,19 @@ const AtualizarAdministrador = () => {
 
 							window.location.reload();
 						})
-						.catch((erro) => console.log(erro));
+						.catch((err: AxiosError) => {
+							console.log(err);
+							if (err.response?.status === 401) {
+								UpdateToken();
+							}
+						});
 				})
-				.catch((erro) => console.log(erro));
+				.catch((err) => {
+					console.log(err);
+					if (err.response?.status === 401) {
+						UpdateToken();
+					}
+				});
 		} else {
 			apiFullSports
 				.delete(`imagem/${imagemId}`)
@@ -221,13 +236,27 @@ const AtualizarAdministrador = () => {
 
 									window.location.reload();
 								})
-								.catch((erro) => console.log(erro));
+								.catch((err) => {
+									console.log(err);
+									if (err.response?.status === 401) {
+										UpdateToken();
+									}
+								});
 						})
-						.catch((erro) => console.log(erro));
+						.catch((err) => {
+							console.log(err);
+							if (err.response?.status === 401) {
+								UpdateToken();
+							}
+						});
 				})
 				.catch((err) => {
 					console.log(err);
-					window.location.reload();
+					if (err.response?.status === 401) {
+						UpdateToken();
+					} else {
+						window.location.reload();
+					}
 				});
 		}
 	}
@@ -265,6 +294,9 @@ const AtualizarAdministrador = () => {
 					setCidade(evento.data.city);
 				})
 				.catch((err) => {
+					if (err.response?.status === 401) {
+						UpdateToken();
+					}
 					setCarregandoCep(false);
 					setCarregandoCepMessagem(true);
 					console.log(err);
@@ -478,6 +510,9 @@ const AtualizarAdministrador = () => {
 					window.location.href = '/dashboard/consultar-admin';
 				})
 				.catch((err) => {
+					if (err.response?.status === 401) {
+						UpdateToken();
+					}
 					setCarregandoCep(false);
 					setCarregandoCepMessagem(true);
 					console.log(err);

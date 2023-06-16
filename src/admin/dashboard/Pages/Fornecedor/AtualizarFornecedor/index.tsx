@@ -6,6 +6,7 @@ import ApiCep from '../../../../../api/apiCep';
 import IFornecedor from '../../../../../utils/interfaces/IFornecedor';
 import DashboardSidenav from '../../../Components/Sidenav';
 import DashboardHeader from '../../../Components/Header';
+import UpdateToken from '../../../../../api/updateToken';
 const AtualizarFornecedor = () => {
 	const parametros = useParams();
 	const [cnpj, setCnpj] = useState('');
@@ -39,6 +40,9 @@ const AtualizarFornecedor = () => {
 				})
 				.catch((err) => {
 					console.log(err);
+					if (err.response?.status === 401) {
+						UpdateToken();
+					}
 					setMensagemErroBolean(true);
 					if (err.response.status === 400) {
 						setMenssagemErro(err.response.data.message[0]);
@@ -74,6 +78,9 @@ const AtualizarFornecedor = () => {
 					setCidade(evento.data.city);
 				})
 				.catch((err) => {
+					if (err.response?.status === 401) {
+						UpdateToken();
+					}
 					console.log(err);
 					setMensagemErroBolean(true);
 					setMenssagemErro('Erro ao buscar o cep');
@@ -97,6 +104,9 @@ const AtualizarFornecedor = () => {
 				setCidade(evento.data.city);
 			})
 			.catch((err) => {
+				if (err.response?.status === 401) {
+					UpdateToken();
+				}
 				console.log(err);
 			});
 	}
@@ -118,7 +128,12 @@ const AtualizarFornecedor = () => {
 					// alert("Fornecedor atualizado com sucesso");
 					window.location.href = '/dashboard/consultar-fornecedores';
 				})
-				.catch((err) => console.log(err));
+				.catch((err) => {
+					console.log(err);
+					if (err.response?.status === 401) {
+						UpdateToken();
+					}
+				});
 		} else {
 			apiFullSports
 				.post('cadastrar-fornecedor/', {
@@ -133,7 +148,12 @@ const AtualizarFornecedor = () => {
 					// alert("Fornecedornovo cadastrado com sucesso");
 					window.open('/dashboard/consultar-fornecedores');
 				})
-				.catch((err) => console.log(err));
+				.catch((err) => {
+					console.log(err);
+					if (err.response?.status === 401) {
+						UpdateToken();
+					}
+				});
 		}
 	}
 	return (

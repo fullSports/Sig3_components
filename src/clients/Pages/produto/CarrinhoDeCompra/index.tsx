@@ -6,6 +6,7 @@ import apiFullSports from '../../../../api/apiFullSports';
 import styled from 'styled-components';
 import SvgCarregando from '../../../../assets/icons/caarregando.svg';
 import SvgLoddingDarkMode from '../../../../assets/icons/SvgCarregandoDarkMode.svg';
+import UpdateToken from '../../../../api/updateToken';
 const BotaoNumber = styled.div`
 	background-color: #796969;
 	height: 20px;
@@ -54,7 +55,12 @@ const CarrinhoDeCompra = () => {
 					setProduto(resposta.data);
 					setSpinner(false);
 				})
-				.catch((err) => console.log(err));
+				.catch((err) => {
+					console.log(err);
+					if (err.response?.status === 401) {
+						UpdateToken();
+					}
+				});
 			setQuantidadeProd(carrinho.pedido.quantidade);
 			setSpinner(false);
 		} else {
@@ -140,7 +146,12 @@ const CarrinhoDeCompra = () => {
 				localStorage.removeItem('carrinho');
 				window.location.href = '/historico-de-pedido';
 			})
-			.catch((err) => console.log(err));
+			.catch((err) => {
+				console.log(err);
+				if (err.response?.status === 401) {
+					UpdateToken();
+				}
+			});
 	}
 
 	if (!carrinho) {
