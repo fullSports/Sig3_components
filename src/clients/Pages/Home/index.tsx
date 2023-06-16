@@ -58,8 +58,17 @@ const Home = () => {
 							}
 						}
 					})
-					.catch((err) => {
+					.catch(async (err) => {
 						console.log(err);
+						await axios
+							.post('https://back-end-full-sports.vercel.app/auth/login-app', {
+								clientID: String(process.env.REACT_APP_CLIENTID),
+								clientSecret: String(process.env.REACT_APP_CLIENSECRET),
+							})
+							.then((res) => {
+								sessionStorage.setItem('access_token', res.data.access_token);
+								window.location.reload();
+							});
 					});
 			} else {
 				apiFullSports
