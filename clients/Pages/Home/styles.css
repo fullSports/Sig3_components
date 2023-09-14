@@ -1,0 +1,56 @@
+
+.Hcard-container .slick-track {
+    display: flex !important;
+}
+
+.Hcard-container{
+    @apply
+    -z-50
+    h-auto sm:h-auto md:h-[320px] lg:h-[320px]
+    mt-5
+    mb-20
+}
+.titulo-produto{
+    font-size: 26px;
+    @apply
+    flex
+    justify-center
+    font-bold
+   from-neutral-950
+}
+.product-banner{
+    @apply
+    w-fit
+    h-[400px]
+    relative
+    mr-auto ml-auto
+}
+.product-banner img{
+    @apply
+    w-full h-full object-cover
+}
+.produtos-grid-container-home{
+    @apply
+    flex
+    justify-items-center
+    xl:gap-8 lg:gap-6 md:gap-4 gap-2 sm:gap-3
+    grid grid-flow-row
+    xl:grid-cols-5
+    lg:grid-cols-4
+    md:grid-cols-3
+    grid-cols-2 sm:grid-cols-3
+}
+
+/* .cards-container{
+    @apply
+    flex flex-row flex-nowrap
+    scroll-smooth
+    
+    gap-4
+}
+
+.carousel-controls{
+    @apply
+    justify-center
+    flex gap-8
+} */
