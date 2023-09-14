@@ -1,0 +1,200 @@
+
+.toggleSidebar{
+    @apply
+    text-def_black dark:text-def_white
+}
+
+.hideShow{
+    @apply
+    invisible opacity-0 transition-transform ease-in-out
+}
+
+.header-top-barra{
+    @apply
+    absolute flex z-20
+    justify-end sm:justify-end md:justify-end lg:justify-between
+    w-full
+    px-12 py-5
+    text-def_white/60 font-Lato font-light
+    hover:bg-black/30 cursor-pointer
+    duration-300 transition-all
+}
+
+.home-barra-acess-props ul{
+    @apply flex gap-5
+}
+
+.home-barra-client-items ul,
+.home-barra-client-items ul li{
+    @apply flex gap-3
+}
+
+.home-barra-acess-props ul li,
+.home-barra-client-items ul li{
+    @apply
+    hover:text-def_white
+    text-txt_size_sm
+}
+
+.home-barra-client-items ul li img{
+    @apply w-[22px]
+}
+
+.header-transparent-cover{
+    @apply
+    absolute top-0 left-0 right-0 bottom-0
+    w-full h-full
+    bg-gradient-to-bl from-black to-transparent
+}
+
+.video-header{
+    @apply w-full h-[690px] relative
+}
+
+.video-header video{
+    @apply w-full h-full object-cover
+}
+
+.search-container{
+    @apply
+    absolute z-10
+    mt-20 flex w-full gap-2 items-center
+    justify-center sm:justify-center
+    lg:justify-between px-0 sm:px-0 md:px-12 py-8
+}
+
+.searchbar-contaienr {
+    @apply relative inline-block
+}
+
+.searchbar-contaienr input{
+    @apply
+    h-[40px] w-[80vw] sm:w-[80vw] lg:w-[30vw] bg-def_white/20
+    /* border-[.5px] border-transparent */
+    /* focus:border-def_white/50 */
+    focus:shadow-def_lg_shadow
+    outline-none
+    focus:placeholder:text-def_white
+    text-def_white
+    rounded px-4
+}
+
+.search-btn{
+    @apply
+    right-0 top-[1px] h-[40px]
+    text-txt_size_xl text-def_white
+    outline-none px-4 absolute 
+}
+
+.menu-items{
+    @apply
+    flex gap-10
+    uppercase
+    text-def_white/60 font-Lato
+    lg:text-sm xl:text-txt_size_nr
+    font-light
+}
+
+.menu-items a{
+    @apply hover:text-def_white
+}
+
+.header-desc{
+    @apply
+    absolute z-10
+    top-[25%] md:top-[22%] lg:top-[25%]
+    text-def_white font-Lato
+    flex w-full justify-between
+}
+
+.header-txt{
+    @apply
+    ml-12 sm:ml-12 md:ml-24 lg:ml-24
+}
+
+.txt-light{
+    @apply
+    block font-thin
+    text-[50px] sm:text-[50px] md:text-[62px]
+}
+
+.txt-bold{
+    @apply
+    text-[60px] sm:text-[60px] md:text-[72px]
+    font-black uppercase
+}
+@media screen and (max-width: 1144px) {
+.txt-bold{
+    @apply
+    text-[30px] sm:text-[30px]
+}
+}
+
+.header-brand-container{
+    @apply
+    bg-def_white
+    h-[90px] w-[90px] p-2
+    absolute left-auto right-0 mt-[202px] md:mt-[208px] lg:mt-[202px]
+    rounded-sm
+    flex items-center
+}
+
+.hide-header{
+    @apply
+    hidden sm:hidden md:hidden lg:block xl:block
+}
+
+.show-sidebar{
+    @apply
+    invisible opacity-0 transition-transform ease-in-out
+}
+
+.header-side{
+    @apply
+    transition-all ease-in-out
+     fixed 
+    bg-def_white
+    w-[320px] h-[170px] 
+    dark:bg-black
+    dark:border-[1px] dark:border-def_white
+    flex lg:hidden
+    z-30
+}
+
+.menu-toggle{
+    @apply
+    visible sm:visible md:visible lg:hidden
+    px-2
+}
+
+.menu-toggle button {
+    @apply
+    flex text-def_white/80 text-3xl
+}
+
+.hide{
+    @apply
+    hidden invisible opacity-0 
+    transition-all duration-300
+}
+
+.user-options-home{
+    @apply
+    absolute top-14
+    h-fit
+    right-44
+}
+
+.user-options-home ul{
+    @apply
+    block leading-7 absolute  w-[130px]
+}
+
+.user-options-home ul li{
+    @apply
+     text-def_dark_blue
+     bg-def_white
+     hover:text-def_dark_blue/80
+     hover:bg-zinc-200
+     px-4 py-2
+}

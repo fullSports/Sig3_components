@@ -1,0 +1,107 @@
+
+@media (max-width: 768px){
+    div.slick-slide{
+        width: 270px !important;
+        @apply
+        mx-2
+    }
+}
+@media (min-width: 769px){
+    div.slick-slide{
+        width: 360px !important;
+        @apply
+        mx-2
+        
+    }
+}
+
+.Hcard-product{
+    @apply
+    my-12
+    w-[270px] h-[175px]
+    sm:w-[270px] sm:h-[175px]
+    md:w-[360px] md:h-[200px]
+    lg:w-[360px] lg:h-[200px]
+    bg-def_white 
+    dark:bg-def_dark_blue/10
+    dark:border-2 dark:border-white
+    shadow rounded-lg
+    flex
+    cursor-pointer
+}
+.Hcard-link{
+    @apply flex
+}
+.Hcard-link span{
+    @apply
+    dark:text-def_cont_yellow
+}
+
+.Hcard-link:hover .card-product-parce{
+    @apply
+    dark:text-black
+}
+
+.Hcard-link:hover img{
+    @apply
+    scale-105 duration-200 transform 
+}
+
+.Hcard-cover{
+    @apply
+    w-[138px] h-auto
+    sm:w-[138px] sm:h-auto
+    md:w-[160px] md:h-auto
+    lg:w-[160px] lg:h-auto
+    rounded-l-md
+    overflow-hidden
+}
+
+.Hcard-cover img{
+    @apply
+    w-full h-full
+    object-cover
+}
+
+.Hcard-body{
+    @apply
+    font-Lato
+}
+
+.Hcard-product-spec{
+    @apply
+    mt-[12px] sm:mt-[12px] md:mt-[30px] lg:mt-[30px]
+    pl-2 sm:pl-2 md:pl-5 lg:pl-5
+    py-0 sm:py-0 md:py-4 lg:py-4
+}
+
+.Hcard-product-spec span{
+    @apply
+    block py-1 px-2
+}
+
+.card-product-parce{
+    @apply
+    text-txt_size_xsm
+}
+
+.card-product-name{
+    @apply
+    text-sm
+    sm:text-sm
+    md:text-txt_size_lg
+    lg:text-txt_size_lg
+}
+
+.card-old-price{
+    @apply
+    text-txt_size_xsm
+    sm:text-txt_size_xsm
+    md:text-txt_size_sm
+    lg:text-txt_size_sm
+}
+
+.card-product-parce{
+    @apply
+    ml-4 sm:ml-4 md:ml-20 lg:ml-20
+}
