@@ -12,9 +12,8 @@ setInterval(async () => {
 			clientSecret: String(process.env.REACT_APP_CLIENSECRET),
 		}
 	);
-	console.log('token atualizado');
 	sessionStorage.setItem('access_token', token.data.access_token);
-}, 170000);
+}, 7000);
 root.render(
 	<>
 		<ThemeContextProvider>
