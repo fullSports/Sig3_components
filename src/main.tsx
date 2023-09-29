@@ -9,8 +9,8 @@ setInterval(async () => {
   const token = await axios.post(
     'https://back-end-full-sports.vercel.app/auth/login-app',
     {
-      clientID: String(process.env.VITE_APP_CLIENTID),
-      clientSecret: String(process.env.VITE_APP_CLIENSECRET),
+      client_id: String(process.env.VITE_APP_CLIENTID),
+      client_secret: String(process.env.VITE_APP_CLIENSECRET),
     }
   );
   console.log('token atualizado');
