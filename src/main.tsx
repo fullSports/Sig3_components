@@ -1,6 +1,6 @@
 import { createRoot } from 'react-dom/client';
 import App from './App';
-import { ThemeContextProvider } from './utils/Hooks/useTheme';
+import { ThemeContextProvider } from './utils/Hooks/ThemeContext';
 import { Analytics } from '@vercel/analytics/react';
 import axios from 'axios';
 import React from 'react';

@@ -66,7 +66,7 @@ const ComprarProduto = () => {
 				}
 			});
 		setQuantidade('1');
-	}, [parametro, estiloImgProd1Array]);
+	}, [parametro, estiloImgProd1Array, produto?.categoriaProduto]);
 	function comprarItem(evento: React.FormEvent<HTMLFormElement>) {
 		evento.preventDefault();
 

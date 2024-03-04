@@ -64,6 +64,7 @@ const CarrinhoDeCompra = () => {
 			setQuantidadeProd(carrinho.pedido.quantidade);
 			setSpinner(false);
 		} else {
+			// eslint-disable-next-line react-hooks/exhaustive-deps
 			carrinho = null;
 			setSpinner(false);
 		}

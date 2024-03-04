@@ -42,7 +42,7 @@ const VizualizacaoDeProdutos = () => {
 					}
 				});
 		}
-	}, []);
+	}, [buscaParm]);
 
 	if (categoriaParam) {
 		return (

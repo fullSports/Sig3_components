@@ -3,7 +3,6 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
 import { sliderHorizontalCards } from '../../../utils/SliderSettings';
-// import styled from 'styled-components';
 import './styles.css';
 import '../../../styles.css';
 import Footer from '../../Components/Footer';
@@ -84,7 +83,7 @@ const Home = () => {
 			}
 		};
 		GetProduct();
-	}, []);
+	}, [user]);
 
 	return (
 		<>

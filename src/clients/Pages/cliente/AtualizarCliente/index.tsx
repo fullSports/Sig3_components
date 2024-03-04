@@ -143,7 +143,7 @@ const AtualizarCliente = () => {
 					}
 				});
 		}
-	}, [parametros]);
+	}, [parametros, user]);
 
 	const selecionarArquivo = (evento: React.ChangeEvent<HTMLInputElement>) => {
 		if (evento.target.files?.length) {

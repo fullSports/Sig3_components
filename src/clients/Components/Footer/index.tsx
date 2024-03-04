@@ -22,7 +22,7 @@ const Footer = () => {
 		} else {
 			setIsLogin(true);
 		}
-	}, []);
+	}, [user]);
 	function pesquisaEmail(evento: React.FormEvent<HTMLFormElement>) {
 		evento.preventDefault();
 		apiFullSports

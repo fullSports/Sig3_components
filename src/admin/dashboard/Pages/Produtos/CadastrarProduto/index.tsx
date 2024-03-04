@@ -65,7 +65,7 @@ const CadastrarProduto = () => {
 		} else {
 			setCategoriaProduto('');
 		}
-	}, []);
+	}, [categoriaParam]);
 	const options = listaFornecedores.map((item) => {
 		const firsLetter = item.nomeEmpresa[0].toLocaleUpperCase();
 		return {
